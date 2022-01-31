@@ -45,13 +45,13 @@ tags:
 - name: Full Node
   description: The full node RPC API is exposed by the full node, by default on port 8555. This port must not be exposed publicly for security concerns.
 paths:
-  /get_block_chain_state:
+  /get_blockchain_state:
     get:
       tags:
       - "Full Node"
       summary: "Retrieves a summary of the current state of the blockchain and full node."
-      description: ""
-      operationId: "get_block_chain_state"
+      description: "Retrieves a summary of the current state of the blockchain and full node."
+      operationId: "get_blockchain_state"
       responses:
         200:
           description: OK
@@ -63,9 +63,66 @@ paths:
                   blockchain_state:
                     $ref: "#/components/schemas/blockchain_state"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
-        400:
-          description: "Invalid status value"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_block_record:
+    get:
+      tags:
+      - "Full Node"
+      summary: "Retrieves a block record by header hash."
+      description: "Retrieves a block record by header hash."
+      operationId: "get_block_record"
+      requestBody:
+          required: true
+          description: the block's header_hash
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  header_hash:
+                    type: string        
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  block_record:
+                    $ref: "#/components/schemas/block_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_block_record_by_height:
+    get:
+      tags:
+      - "Full Node"
+      summary: "Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc)."
+      description: "Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc)."
+      operationId: "get_block_record_by_height"
+      requestBody:
+          required: true
+          description: the block height
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  height:
+                    type: integer
+                    format: uint32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  block_record:
+                    $ref: "#/components/schemas/block_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"                    
   /get_network_info:
     get:
       tags:
@@ -82,9 +139,6 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
-   
-        400:
-          description: "Invalid status value"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
