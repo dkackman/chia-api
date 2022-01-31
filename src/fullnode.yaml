@@ -13,7 +13,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers: 
   - url: https://localhost:8555
-    description: Full node https RPC
+    description: Full Node RPC
 security:
   - bearerAuth: []
 components:
@@ -31,7 +31,7 @@ components:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
 - name: Full Node
-  description: The full node RPC API is exposed by the full node, by default on port 8555. This port must not be exposed publicly for security concerns.
+  description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
 paths:
   /get_blockchain_state:
     post:
