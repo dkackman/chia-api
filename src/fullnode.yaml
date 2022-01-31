@@ -46,7 +46,7 @@ tags:
   description: The full node RPC API is exposed by the full node, by default on port 8555. This port must not be exposed publicly for security concerns.
 paths:
   /get_blockchain_state:
-    get:
+    post:
       tags:
       - "Full Node"
       summary: "Retrieves a summary of the current state of the blockchain and full node."
@@ -65,7 +65,7 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_record:
-    get:
+    post:
       tags:
       - "Full Node"
       summary: "Retrieves a block record by header hash."
@@ -94,7 +94,7 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_record_by_height:
-    get:
+    post:
       tags:
       - "Full Node"
       summary: "Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc)."
@@ -124,7 +124,7 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"                    
   /get_network_info:
-    get:
+    post:
       tags:
       - "Full Node"
       summary: "Retrieves some information about the current network."
