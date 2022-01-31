@@ -1,0 +1,12 @@
+plotter_info:
+  type: object
+  properties:
+    can_install:
+      type: boolean
+    display_name:
+      type: string
+    installed:
+      type: boolean
+    version:
+      type: string
+      format: nullable

@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  description: "The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. These are accessible via HTTP, WebSockets, or via client SDKs. The ports can be configured in ~/.chia/mainnet/config/config.yaml. The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication."
+  version: 1.2.11
+  title: chia RPC
+  termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
+  contact:
+    name: Chia Network
+    url: https://www.chia.net/
+    email: hello@chia.net
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers: 
+  - url: wss://localhost:55400
+    description: Daemon Websocket RPC
+security:
+  - bearerAuth: []
+components:
+  schemas:
+    plotter_info:
+      $ref: "./schemas/plotter_info.yaml#/plotter_info"
+    apiResponse:
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+  securitySchemes:
+    bearerAuth:
+      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+tags:
+- name: Plotter
+  description: Methods for creating plots and managing plotters
+- name: Daemon
+  description: Methods for for service management  
+paths:
+  /get_plotters:
+    post:
+      tags:
+      - Plotter
+      summary: Get info about installed and installable plotters.
+      description: Get info about installed and installable plotters.
+      operationId: get_plotters
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plotters:
+                    type: object
+                    additionalProperties:
+                      $ref: "#/components/schemas/plotter_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
+  /register_service:
+    post:
+      tags:
+      - Daemon
+      summary: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
+      description: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
+      operationId: register_service
+      requestBody:
+          required: true
+          description: The name to register. This is the name of the client application.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    type: string 
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+externalDocs:
+  description: Find out more about chia
+  url: http://chia.net
