@@ -1,5 +1,6 @@
 blockchain_state:
   type: object
+  description: The node's view of the blockchain.
   properties: 
     difficulty: 
       type: integer
@@ -11,6 +12,7 @@ blockchain_state:
       format: int32
     peak: 
       $ref: "./block_record.yaml#/block_record"
+      nullable: true
     space: 
       type: integer
       format: bigint

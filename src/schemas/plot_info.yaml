@@ -1,5 +1,6 @@
 plot_info:
   type: object
+  description: Info about a plot file
   properties:
     file_size:
       type: integer

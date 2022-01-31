@@ -1,5 +1,6 @@
 apiResponse:
   type: object
+  description: Success indicatior and optional error message included in all responses
   required:
     - success
   properties: 
