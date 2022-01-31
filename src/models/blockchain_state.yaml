@@ -1,0 +1,32 @@
+blockchain_state:
+  type: object
+  properties: 
+    difficulty: 
+      type: integer
+      format: uint64
+    genesis_challenge_initialized: 
+      type: boolean
+    mempool_size: 
+      type: integer
+      format: int32
+    peak: 
+      $ref: "./block_record.yaml#/block_record"
+    space: 
+      type: integer
+      format: bigint
+    sub_slot_iters: 
+      type: integer
+      format: uint64
+    sync: 
+      type: object
+      properties: 
+        sync_mode: 
+          type: boolean
+        sync_progress_height: 
+          type: integer
+          format: uint64
+        sync_tip_height: 
+          type: integer
+          format: uint64
+        synced: 
+          type: boolean

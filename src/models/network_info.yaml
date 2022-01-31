@@ -1,0 +1,7 @@
+network_info:
+  type: "object"
+  properties:
+    network_name:
+      type: "string"
+    network_prefix:
+      type: "string"
