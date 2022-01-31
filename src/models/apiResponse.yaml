@@ -1,0 +1,11 @@
+apiResponse:
+  type: object
+  required:
+    - success
+  properties: 
+    success: 
+      type: boolean
+      description: Success/failure indicator
+    error: 
+      type: string
+      description: Only present when success is false

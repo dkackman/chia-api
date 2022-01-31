@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  description: "The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. These are accessible via HTTP, WebSockets, or via client SDKs. The ports can be configured in ~/.chia/mainnet/config/config.yaml. The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication."
+  version: 1.2.11
+  title: chia RPC
+  termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
+  contact:
+    name: Chia Network
+    url: https://www.chia.net/
+    email: hello@chia.net
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers: 
+  - url: https://localhost:8560
+    description: Harvester https RPC
+security:
+  - bearerAuth: []
+components:
+  schemas:
+    apiResponse:
+      $ref: "./models/apiResponse.yaml#/apiResponse"
+  securitySchemes:
+    bearerAuth:
+      type: http # I think this needs to be 'mutualTLS' which is supported in OAS 3.1.0
+      scheme: mutual
+tags:
+- name: Harvester
+  description: Chia RPC, connects to a harvester and has methodsfor managing plot files and directories
+paths:
+  /delete_plot:
+    post:
+      tags:
+      - "Harvester"
+      summary: "Permanently delete a plot file."
+      description: "Permanently delete a plot file."
+      operationId: "delete_plot"
+      requestBody:
+          required: true
+          description: the file name of the plot
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filename:
+                    type: string      
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+externalDocs:
+  description: Find out more about chia
+  url: http://chia.net

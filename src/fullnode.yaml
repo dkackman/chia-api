@@ -13,9 +13,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 servers: 
   - url: https://localhost:8555
-    description: Full node REST
-  - url: wss://localhost:55400
-    description: Websocket daemon
+    description: Full node https RPC
 security:
   - bearerAuth: []
 components:
@@ -27,16 +25,7 @@ components:
     block_record:
       $ref: "./models/block_record.yaml#/block_record"
     apiResponse:
-      type: object
-      required:
-        - success
-      properties: 
-        success: 
-          type: boolean
-          description: Success/failure indicator
-        error: 
-          type: string
-          description: Only present when success is false
+      $ref: "./models/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
       type: http # I think this needs to be 'mutualTLS' which is supported in OAS 3.1.0
