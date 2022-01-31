@@ -18,6 +18,8 @@ security:
   - bearerAuth: []
 components:
   schemas:
+    plot_info:
+      $ref: "./schemas/plot_info.yaml#/plot_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -27,13 +29,42 @@ tags:
 - name: Harvester
   description: The harvester RPC API is exposed, by default, on port 8560 and contains methods for managing plot files and directories.
 paths:
+  /get_plots:
+    post:
+      tags:
+      - Harvester
+      summary: Get information about the plots the harvester knows about.
+      description: Get information about the plots the harvester knows about.
+      operationId: get_plots
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failed_to_open_filenames:
+                    type: array
+                    items:
+                      type: string
+                  not_found_filenames:
+                    type: array
+                    items:
+                      type: string
+                  plots:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/plot_info"                                 
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /delete_plot:
     post:
       tags:
-      - "Harvester"
+      - Harvester
       summary: "Permanently delete a plot file."
       description: "Permanently delete a plot file."
-      operationId: "delete_plot"
+      operationId: delete_plot
       requestBody:
           required: true
           description: the file name of the plot

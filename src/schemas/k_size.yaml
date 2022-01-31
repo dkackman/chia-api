@@ -1,0 +1,9 @@
+k_size:
+  type: integer
+  default: 32
+  enum:
+    - 25
+    - 32
+    - 33
+    - 34
+    - 35

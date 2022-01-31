@@ -1,0 +1,23 @@
+plot_info:
+  type: object
+  properties:
+    file_size:
+      type: integer
+      format: uint64
+    filename:
+      type: string
+    plot_id:
+      type: string
+    plot_public_key:
+      type: string
+      nullable: true
+    pool_contract_puzzle_hash:
+      type: string
+    pool_public_key:
+      type: string
+      nullable: true      
+    size:
+      $ref: "./k_size.yaml#/k_size"
+    time_modified:
+      type: number
+      format: double

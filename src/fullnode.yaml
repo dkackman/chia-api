@@ -36,10 +36,10 @@ paths:
   /get_blockchain_state:
     post:
       tags:
-      - "Full Node"
-      summary: "Retrieves a summary of the current state of the blockchain and full node."
-      description: "Retrieves a summary of the current state of the blockchain and full node."
-      operationId: "get_blockchain_state"
+      - Full Node
+      summary: Retrieves a summary of the current state of the blockchain and full node.
+      description: Retrieves a summary of the current state of the blockchain and full node.
+      operationId: get_blockchain_state
       responses:
         200:
           description: OK
@@ -55,10 +55,10 @@ paths:
   /get_block_record:
     post:
       tags:
-      - "Full Node"
-      summary: "Retrieves a block record by header hash."
-      description: "Retrieves a block record by header hash."
-      operationId: "get_block_record"
+      - Full Node
+      summary: Retrieves a block record by header hash.
+      description: Retrieves a block record by header hash.
+      operationId: get_block_record
       requestBody:
           required: true
           description: the block's header_hash
@@ -84,10 +84,10 @@ paths:
   /get_block_record_by_height:
     post:
       tags:
-      - "Full Node"
-      summary: "Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc)."
-      description: "Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc)."
-      operationId: "get_block_record_by_height"
+      - Full Node
+      summary: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
+      description: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
+      operationId: get_block_record_by_height
       requestBody:
           required: true
           description: the block height
@@ -114,8 +114,8 @@ paths:
   /get_network_info:
     post:
       tags:
-      - "Full Node"
-      summary: "Retrieves some information about the current network."
+      - Full Node
+      summary: Retrieves some information about the current network.
       operationId: get_network_info
       responses:
         200:
