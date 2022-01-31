@@ -18,6 +18,8 @@ security:
   - bearerAuth: []
 components:
   schemas:
+    k_size:
+      $ref: "./schemas/k_size.yaml#/k_size"  
     plot_info:
       $ref: "./schemas/plot_info.yaml#/plot_info"
     apiResponse:
@@ -62,8 +64,8 @@ paths:
     post:
       tags:
       - Harvester
-      summary: "Permanently delete a plot file."
-      description: "Permanently delete a plot file."
+      summary: Permanently delete a plot file.
+      description: Permanently delete a plot file.
       operationId: delete_plot
       requestBody:
           required: true
