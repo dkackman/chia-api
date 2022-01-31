@@ -24,6 +24,8 @@ components:
       $ref: "./models/network_info.yaml#/network_info"
     blockchain_state:
       $ref: "./models/blockchain_state.yaml#/blockchain_state"
+    block_record:
+      $ref: "./models/block_record.yaml#/block_record"
     apiResponse:
       type: object
       required:
