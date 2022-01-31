@@ -20,6 +20,10 @@ security:
   - bearerAuth: []
 components:
   schemas:
+    network_info:
+      $ref: "./models/network_info.yaml#/network_info"
+    blockchain_state:
+      $ref: "./models/blockchain_state.yaml#/blockchain_state"
     apiResponse:
       type: object
       required:
@@ -55,7 +59,7 @@ paths:
                 type: object
                 properties:
                   blockchain_state:
-                    $ref: "./models/blockchain_state.yaml#/blockchain_state"
+                    $ref: "#/components/schemas/blockchain_state"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"  
         400:
@@ -74,12 +78,9 @@ paths:
               schema:
                 type: object
                 allOf:
-                  - $ref: "./models/network_info.yaml#/network_info"
+                  - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
-              example:
-                network_name: "mainnet"
-                network_prefix: "xch"
-                success: true    
+   
         400:
           description: "Invalid status value"
 externalDocs:
