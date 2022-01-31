@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  description: "The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. These are accessible via HTTP, WebSockets, or via client SDKs. The ports can be configured in ~/.chia/mainnet/config/config.yaml. The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication."
+  version: 1.2.11
+  title: chia RPC
+  termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
+  contact:
+    name: Chia Network
+    url: https://www.chia.net/
+    email: hello@chia.net
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers: 
+  - url: https://localhost:8555
+    description: Full node REST
+  - url: wss://localhost:55400
+    description: Websocket daemon
+security:
+  - bearerAuth: []
+components:
+  schemas:
+    apiResponse:
+      type: object
+      required:
+        - success
+      properties: 
+        success: 
+          type: boolean
+          description: Success/failure indicator
+        error: 
+          type: string
+          description: Only present when success is false
+  securitySchemes:
+    bearerAuth:
+      type: http # I think this needs to be 'mutualTLS' which is supported in OAS 3.1.0
+      scheme: mutual
+tags:
+- name: Full Node
+  description: The full node RPC API is exposed by the full node, by default on port 8555. This port must not be exposed publicly for security concerns.
+paths:
+  /get_block_chain_state:
+    get:
+      tags:
+      - "Full Node"
+      summary: "Retrieves a summary of the current state of the blockchain and full node."
+      description: ""
+      operationId: "get_block_chain_state"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blockchain_state:
+                    $ref: "./models/blockchain_state.yaml#/blockchain_state"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
+        400:
+          description: "Invalid status value"
+  /get_network_info:
+    get:
+      tags:
+      - "Full Node"
+      summary: "Retrieves some information about the current network."
+      operationId: get_network_info
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "./models/network_info.yaml#/network_info"
+                  - $ref: "#/components/schemas/apiResponse"
+              example:
+                network_name: "mainnet"
+                network_prefix: "xch"
+                success: true    
+        400:
+          description: "Invalid status value"
+externalDocs:
+  description: Find out more about chia
+  url: http://chia.net
