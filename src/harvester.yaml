@@ -19,14 +19,13 @@ security:
 components:
   schemas:
     apiResponse:
-      $ref: "./models/apiResponse.yaml#/apiResponse"
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      type: http # I think this needs to be 'mutualTLS' which is supported in OAS 3.1.0
-      scheme: mutual
+      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
 - name: Harvester
-  description: Chia RPC, connects to a harvester and has methodsfor managing plot files and directories
+  description: The harvester RPC API is exposed by the harvester, by default on port 8560. COntains methods for managing plot files and directories
 paths:
   /delete_plot:
     post:

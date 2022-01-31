@@ -19,17 +19,16 @@ security:
 components:
   schemas:
     network_info:
-      $ref: "./models/network_info.yaml#/network_info"
+      $ref: "./schemas/network_info.yaml#/network_info"
     blockchain_state:
-      $ref: "./models/blockchain_state.yaml#/blockchain_state"
+      $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
-      $ref: "./models/block_record.yaml#/block_record"
+      $ref: "./schemas/block_record.yaml#/block_record"
     apiResponse:
-      $ref: "./models/apiResponse.yaml#/apiResponse"
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      type: http # I think this needs to be 'mutualTLS' which is supported in OAS 3.1.0
-      scheme: mutual
+      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
 - name: Full Node
   description: The full node RPC API is exposed by the full node, by default on port 8555. This port must not be exposed publicly for security concerns.
