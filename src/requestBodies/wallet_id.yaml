@@ -1,0 +1,11 @@
+wallet_id:
+  description: Request body with the Id of a wallet
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          wallet_id:
+            type: integer
+            format: uint32

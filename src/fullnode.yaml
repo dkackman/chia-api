@@ -121,7 +121,7 @@ paths:
       tags:
       - Full Node
       summary: Retrieves some information about the current network.
-      operationId: get_network_info
+      operationId: full_node_get_network_info
       requestBody:
         $ref: "#/components/requestBodies/empty"      
       responses:
