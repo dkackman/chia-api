@@ -1,0 +1,7 @@
+empty:
+  description: Empty request body
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object

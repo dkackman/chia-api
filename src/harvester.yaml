@@ -17,6 +17,9 @@ servers:
 security:
   - bearerAuth: []
 components:
+  requestBodies:
+    empty:
+      $ref: "./requestBodies/empty.yaml#/empty"
   schemas:
     k_size:
       $ref: "./schemas/k_size.yaml#/k_size"  
@@ -38,6 +41,8 @@ paths:
       summary: Get information about the plots the harvester knows about.
       description: Get information about the plots the harvester knows about.
       operationId: get_plots
+      requestBody:
+        $ref: "#/components/requestBodies/empty"      
       responses:
         200:
           description: OK

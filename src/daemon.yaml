@@ -17,6 +17,9 @@ servers:
 security:
   - bearerAuth: []
 components:
+  requestBodies:
+    empty:
+      $ref: "./requestBodies/empty.yaml#/empty"
   schemas:
     plotter_info:
       $ref: "./schemas/plotter_info.yaml#/plotter_info"
@@ -38,6 +41,8 @@ paths:
       summary: Get info about installed and installable plotters.
       description: Get info about installed and installable plotters.
       operationId: get_plotters
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK

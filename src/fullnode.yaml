@@ -17,6 +17,9 @@ servers:
 security:
   - bearerAuth: []
 components:
+  requestBodies:
+    empty:
+      $ref: "./requestBodies/empty.yaml#/empty"
   schemas:
     network_info:
       $ref: "./schemas/network_info.yaml#/network_info"
@@ -40,6 +43,8 @@ paths:
       summary: Retrieves a summary of the current state of the blockchain and full node.
       description: Retrieves a summary of the current state of the blockchain and full node.
       operationId: get_blockchain_state
+      requestBody:
+        $ref: "#/components/requestBodies/empty"      
       responses:
         200:
           description: OK
@@ -117,6 +122,8 @@ paths:
       - Full Node
       summary: Retrieves some information about the current network.
       operationId: get_network_info
+      requestBody:
+        $ref: "#/components/requestBodies/empty"      
       responses:
         200:
           description: OK
