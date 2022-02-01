@@ -42,7 +42,6 @@
           { name: "Full Node", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/fullnode.yaml" },
           { name: "Harvester", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/harvester.yaml" }
         ],
-
         url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/fullnode.yaml",
         dom_id: '#swagger-ui',
         deepLinking: true,
@@ -53,6 +52,7 @@
         ],
         queryConfigEnabled: true,
         layout: "StandaloneLayout",
+        requestSnippetsEnabled: true,
         requestInterceptor: intercept
       });
       // End Swagger UI call regioni
