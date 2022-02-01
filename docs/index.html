@@ -38,24 +38,44 @@
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         urls: [
-          { name: "FUll Node", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/fullnode.yaml" },
-          { name: "Harvester", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/harvester.yaml" },
-          { name: "Daemon", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/daemon.yaml" }          
+          { name: "Daemon", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/daemon.yaml" },
+          { name: "Full Node", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/fullnode.yaml" },
+          { name: "Harvester", url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/harvester.yaml" }
         ],
+
         url: "https://raw.githubusercontent.com/dkackman/chia-api/main/src/fullnode.yaml",
         dom_id: '#swagger-ui',
         deepLinking: true,
+        operationsSorter: "alpha",
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset
         ],
-
-        layout: "StandaloneLayout"
+        queryConfigEnabled: true,
+        layout: "StandaloneLayout",
+        requestInterceptor: intercept
       });
-      // End Swagger UI call region
+      // End Swagger UI call regioni
 
       window.ui = ui;
     };
+
+    function intercept(request) {
+      var cert_root = "daemon"; // defaults to daemon since that's the first in the list
+
+      // get the name of the spec, which govenrs the path to the TLS certs
+      const params = new URLSearchParams(window.location.search);
+      const primaryName = params.get("urls.primaryName");
+      if (primaryName !== null) {
+        cert_root = primaryName.toLowerCase().replace(" ", "_");
+      }
+
+      request.curlOptions = ["--insecure",
+        `--cert ~/.chia/mainnet/config/ssl/${cert_root}/private_${cert_root}.crt`,
+        `--key ~/.chia/mainnet/config/ssl/${cert_root}/private_${cert_root}.key`
+      ];
+      return request;
+    }
   </script>
 </body>
 
