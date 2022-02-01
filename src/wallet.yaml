@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  description: "The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. These are accessible via HTTP, WebSockets, or via client SDKs. The ports can be configured in ~/.chia/mainnet/config/config.yaml. The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication."
+  version: 1.2.11
+  title: Chia RPC
+  termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
+  contact:
+    name: Chia Network
+    url: https://www.chia.net/
+    email: hello@chia.net
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers: 
+  - url: https://localhost:9256
+    description: Wallet RPC
+security:
+  - bearerAuth: []
+components:
+  requestBodies:
+    empty:
+      $ref: "./requestBodies/empty.yaml#/empty"
+    wallet_id:
+      $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
+  schemas:
+    network_info:
+      $ref: "./schemas/network_info.yaml#/network_info"
+    apiResponse:
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+  securitySchemes:
+    bearerAuth:
+      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+tags:
+- name: Wallet
+  description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
+- name: Standard Wallet
+  description: Methods for standard wallet operations.  
+paths:
+  /get_wallet_balance:
+    post:
+      tags:
+      - Standard Wallet
+      summary: Get the balance of a specific wallet (in units of mojos).
+      description: Get the balance of a specific wallet (in units of mojos).
+      operationId: get_wallet_balance
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  confirmed_wallet_balance:
+                    type: integer
+                    format: uint64
+                  unconfirmed_wallet_balance:
+                    type: integer
+                    format: uint64
+                  spendable_balance:
+                    type: integer
+                    format: uint64
+                  pending_change:
+                    type: integer
+                    format: uint64
+                  max_send_amount:
+                    type: integer
+                    format: uint64
+                  unspent_coin_count:
+                    type: integer
+                    format: int32
+                  pending_coin_removal_count:
+                    type: integer
+                    format: int32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_network_info:
+    post:
+      tags:
+      - Wallet
+      summary: Retrieves some information about the current network.
+      operationId: wallet_get_network_info
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/network_info"
+                  - $ref: "#/components/schemas/apiResponse"
+externalDocs:
+  description: Find out more about chia
+  url: http://chia.net
