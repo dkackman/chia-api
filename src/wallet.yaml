@@ -25,6 +25,8 @@ components:
   schemas:
     network_info:
       $ref: "./schemas/network_info.yaml#/network_info"
+    wallet_balance:
+      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -53,27 +55,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  confirmed_wallet_balance:
-                    type: integer
-                    format: uint64
-                  unconfirmed_wallet_balance:
-                    type: integer
-                    format: uint64
-                  spendable_balance:
-                    type: integer
-                    format: uint64
-                  pending_change:
-                    type: integer
-                    format: uint64
-                  max_send_amount:
-                    type: integer
-                    format: uint64
-                  unspent_coin_count:
-                    type: integer
-                    format: int32
-                  pending_coin_removal_count:
-                    type: integer
-                    format: int32
+                  wallet_balance:
+                    $ref: "#/components/schemas/wallet_balance"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:

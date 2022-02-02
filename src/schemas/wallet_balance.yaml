@@ -1,0 +1,24 @@
+wallet_balance:
+  type: object
+  properties:
+    confirmed_wallet_balance:
+      type: integer
+      format: uint64
+    unconfirmed_wallet_balance:
+      type: integer
+      format: uint64
+    spendable_balance:
+      type: integer
+      format: uint64
+    pending_change:
+      type: integer
+      format: uint64
+    max_send_amount:
+      type: integer
+      format: uint64
+    unspent_coin_count:
+      type: integer
+      format: int32
+    pending_coin_removal_count:
+      type: integer
+      format: int32
