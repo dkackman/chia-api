@@ -1,0 +1,41 @@
+﻿pool_state_info:
+  type: object
+  properties:
+    authentication_token_timeout:
+      type: byte
+      nullable: true
+    current_difficulty:
+      type: integer
+      format: uint64
+      nullable: true
+    current_points:
+      type: integer
+      format: uint64
+    next_farmer_update:
+      type: number
+      format: double
+    next_pool_info_update:
+      type: number
+      format: double
+    p2_singleton_puzzle_hash:
+      type: string
+    points_acknowledged24h: 
+      type: array
+      items:
+        $ref: "./pool_point.yaml#/pool_point" 
+    points_acknowledged_since_start:
+      type: integer
+      format: uint64
+    points_found24h:
+      type: array
+      items:
+        $ref: "./pool_point.yaml#/pool_point"    
+    points_found_since_start:
+      type: integer
+      format: uint64
+    pool_config:
+      $ref: "./pool_wallet_config.yaml#/pool_wallet_config"
+    pool_errors24h:
+      type: array
+      items:
+        $ref: "./error_response.yaml#/error_response"

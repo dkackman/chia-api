@@ -20,6 +20,9 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"      
   schemas:
     blockchain_state:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"

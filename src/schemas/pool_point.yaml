@@ -1,0 +1,9 @@
+﻿pool_point:
+  type: object
+  properties:
+    time_found:
+      type: number
+      format: double
+    difficulty:
+      type: integer
+      format: uint64

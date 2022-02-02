@@ -20,7 +20,14 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"
   schemas:
+    harvester_info:
+      $ref: "./schemas/harvester_info.yaml#/harvester_info"
+    pool_state_info:
+      $ref: "./schemas/pool_state_info.yaml#/pool_state_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -30,6 +37,28 @@ tags:
 - name: Farmer
   description: The farmer RPC API is exposed, by default, on port 8559 and contains methods for managing the farmer.
 paths:
+  /set_reward_targets:
+    post:
+      tags:
+      - Farmer
+      summary: Set the farm and pool reward targets.
+      description: Set the farm and pool reward targets.
+      operationId: set_reward_targets
+      requestBody:
+        description: The updated targets
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                farmer_target:
+                  type: "string"
+                pool_target:
+                  type: "string"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"                
   /get_reward_targets:
     post:
       tags:
@@ -44,9 +73,11 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - search_for_private_key
               properties:
                 search_for_private_key:
-                  type: boolean                 
+                  type: boolean                  
       responses:
         200:
           description: OK
@@ -67,7 +98,108 @@ paths:
                   have_pool_sk:
                     type: "boolean"                    
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                                      
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvesters:
+    post:
+      tags:
+      - Farmer
+      summary: Get the list of harvesters.
+      description: Get the list of harvesters.
+      operationId: get_harvesters
+      requestBody:
+        $ref: "#/components/requestBodies/empty"              
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  harvesters:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/harvester_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_pool_login_link:
+    post:
+      tags:
+      - Farmer
+      summary: Get's the pool login link, if anys.
+      description: Get's the pool login link, if any.
+      operationId: get_pool_login_link
+      requestBody:
+        description: The id of the pool launcher
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+              properties:
+                launcher_id:
+                  type: string              
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  login_link:
+                    type: string
+                    format: url
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_pool_state:
+    post:
+      tags:
+      - Farmer
+      summary: Get's the state of the pool.
+      description: Get's the state of the pool.
+      operationId: get_pool_state
+      requestBody:
+        $ref: "#/components/requestBodies/empty"              
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pool_state:
+                    $ref: "#/components/schemas/pool_state_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /set_payout_instructions:
+    post:
+      tags:
+      - Farmer
+      summary: Set's a pool's payout instructions.
+      description: Set's a pool's payout instructions.
+      operationId: set_payout_instructions
+      requestBody:
+        description: The id of the pool launcher and payout instructions
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+                - payout_instructions
+              properties:
+                launcher_id:
+                  type: string
+                payout_instructions:
+                  type: string  
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net

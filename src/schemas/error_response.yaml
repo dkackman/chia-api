@@ -1,0 +1,8 @@
+﻿error_response:
+  type: object
+  properties:
+    error_code:
+      type: integer
+      format: uint16
+    error_message:
+      type: string

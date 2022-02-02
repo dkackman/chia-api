@@ -20,6 +20,9 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"      
   schemas:
     plotter_info:
       $ref: "./schemas/plotter_info.yaml#/plotter_info"
@@ -32,7 +35,7 @@ tags:
 - name: Plotter
   description: Methods for creating plots and managing plotters
 - name: Daemon
-  description: Methods for for service management  
+  description: Methods for service management  
 paths:
   /get_plotters:
     post:
@@ -76,11 +79,7 @@ paths:
                     type: string 
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net

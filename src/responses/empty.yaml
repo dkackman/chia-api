@@ -1,0 +1,7 @@
+empty:
+  description: OK response without return values
+  content:
+    application/json:
+      schema:
+        $ref: "../schemas/apiResponse.yaml#/apiResponse"
+  

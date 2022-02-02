@@ -1,0 +1,17 @@
+﻿pool_wallet_config:
+  type: object
+  properties:
+    launcher_id:
+      type: string
+    pool_url:
+      type: string
+    payout_instructions:
+      type: string
+    target_puzzle_hash:
+      type: string
+    p2_singleton_puzzle_hash:
+      type: string
+    owner_public_key:
+      type: string
+    authentication_public_key:
+      type: string

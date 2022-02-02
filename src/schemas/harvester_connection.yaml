@@ -1,0 +1,10 @@
+﻿harvester_connection:
+  type: object
+  properties:
+    host:
+      type: string
+    node_id:
+      type: string
+    port:
+      type: integer
+      format: int32

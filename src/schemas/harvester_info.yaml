@@ -1,0 +1,17 @@
+﻿harvester_info:
+  type: object
+  properties:
+    connection:
+      $ref: "./harvester_connection.yaml#/harvester_connection"  
+    failed_to_open_filenames:
+      type: array
+      items:
+        type: string
+    not_found_filenames:
+      type: array
+      items:
+        type: string
+    plots:
+      type: array
+      items:
+        $ref: "./plot_info.yaml#/plot_info"        

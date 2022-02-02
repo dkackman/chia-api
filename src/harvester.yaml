@@ -20,6 +20,9 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"      
   schemas:
     k_size:
       $ref: "./schemas/k_size.yaml#/k_size"  
@@ -53,11 +56,7 @@ paths:
                   type: string
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/empty"
   /remove_plot_directory:
     post:
       tags:
@@ -77,11 +76,7 @@ paths:
                   type: string
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"                
+          $ref: "#/components/responses/empty"               
   /get_plot_directories:
     post:
       tags:
@@ -116,11 +111,7 @@ paths:
         $ref: "#/components/requestBodies/empty"      
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"                  
+          $ref: "#/components/responses/empty"                
   /get_plots:
     post:
       tags:
@@ -173,11 +164,7 @@ paths:
                 filename: plot-k33-2021-06-12-03-55-1d5a2afe637578d6c9dfa04484854831012b678921a8dce5a8aee9c0fd3c1470.plot
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
