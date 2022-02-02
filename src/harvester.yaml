@@ -34,6 +34,93 @@ tags:
 - name: Harvester
   description: The harvester RPC API is exposed, by default, on port 8560 and contains methods for managing plot files and directories.
 paths:
+  /add_plot_directory:
+    post:
+      tags:
+      - Harvester
+      summary: Add a plot directory to the harvester configuration.
+      description: Add a plot directory to the harvester configuration.
+      operationId: add_plot_directory
+      requestBody:
+        description: The directory name to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_id:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /remove_plot_directory:
+    post:
+      tags:
+      - Harvester
+      summary: Removes a plot directory from the harveser configuration.
+      description: Removes a plot directory from the harveser configuration.
+      operationId: remove_plot_directory
+      requestBody:
+        description: The directory name to remove
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_id:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"                
+  /get_plot_directories:
+    post:
+      tags:
+      - Harvester
+      summary: Get the list of plot directories from the harvester configuration.
+      description: Get the list of plot directories from the harvester configuration.
+      operationId: get_plot_directories
+      requestBody:
+        $ref: "#/components/requestBodies/empty"      
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  directories:
+                    type: array
+                    items:
+                      type: string 
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /refresh_plots:
+    post:
+      tags:
+      - Harvester
+      summary: Refresh the list of plots.
+      description: Refresh the list of plots.
+      operationId: refresh_plots
+      requestBody:
+        $ref: "#/components/requestBodies/empty"      
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"                  
   /get_plots:
     post:
       tags:
