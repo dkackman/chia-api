@@ -21,8 +21,6 @@ components:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
   schemas:
-    network_info:
-      $ref: "./schemas/network_info.yaml#/network_info"
     blockchain_state:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
@@ -131,8 +129,15 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - network_name
+                  - network_prefix                  
+                properties:
+                  network_name:
+                    type: "string"
+                  network_prefix:
+                    type: "string" 
                 allOf:
-                  - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

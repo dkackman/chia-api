@@ -23,8 +23,6 @@ components:
     wallet_id:
       $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
   schemas:
-    network_info:
-      $ref: "./schemas/network_info.yaml#/network_info"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     apiResponse:
@@ -54,6 +52,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required: 
+                  - wallet_balance
                 properties:
                   wallet_balance:
                     $ref: "#/components/schemas/wallet_balance"
@@ -73,9 +73,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                required:
+                  - network_name
+                  - network_prefix                  
+                properties:
+                  network_name:
+                    type: "string"
+                  network_prefix:
+                    type: "string" 
                 allOf:
-                  - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

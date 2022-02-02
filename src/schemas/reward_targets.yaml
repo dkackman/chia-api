@@ -1,0 +1,7 @@
+reward_targets:
+  type: "object"
+  properties:
+    farmer_target:
+      type: "string"
+    pool_target:
+      type: "string"
