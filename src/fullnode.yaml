@@ -28,6 +28,8 @@ components:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
       $ref: "./schemas/block_record.yaml#/block_record"
+    connection_info:
+      $ref: "./schemas/connection_info.yaml#/connection_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -36,7 +38,84 @@ components:
 tags:
 - name: Full Node
   description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
+- name: Connections
+  description: Methods for managing connections.  
 paths:
+  /stop_node:
+    post:
+      tags:
+        - Connections
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: stop_node
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /open_connection:
+    post:
+      tags:
+        - Connections
+      summary: Add a connection to another node.
+      description: Add a connection to another node.
+      operationId: open_connection
+      requestBody:
+          required: true
+          description: the address of the connection
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ip:
+                    type: string
+                    format: ipaddress
+                  port:
+                    type: integer     
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /close_connection:
+    post:
+      tags:
+        - Connections
+      summary: Removes a connection.
+      description: Removes a connection.
+      operationId: close_connection
+      requestBody:
+          required: true
+          description: the node id of the connection
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  node_id:
+                    type: string 
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /get_connections:
+    post:
+      tags:
+        - Connections
+      summary: Retreive the list of connections.
+      description: Retreive the list of connections.
+      operationId: get_connections
+      requestBody:
+        $ref: "#/components/requestBodies/empty"    
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/connection_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:
     post:
       tags:

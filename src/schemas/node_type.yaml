@@ -1,0 +1,10 @@
+node_type:
+  type: integer
+  description: The type of nodes
+  enum:
+    - FULL_NODE
+    - HARVESTER
+    - FARMER
+    - TIMELORD
+    - INTRODUCER
+    - WALLET

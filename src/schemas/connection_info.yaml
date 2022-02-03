@@ -1,0 +1,42 @@
+﻿connection_info:
+  type: object
+  properties:
+    bytes_read:
+      type: integer
+      format: uint32
+      nullable: true
+    bytes_written:
+      type: integer
+      format: uint32
+      nullable: true
+    creation_time:
+      type: number
+      format: double
+    last_message_time:
+      type: number
+      format: double
+    local_port:
+      type: integer
+      format: int32
+    node_id:
+      type: string
+    peak_hash:
+      type: string
+    peak_height:
+      type: integer
+      format: uint64
+      nullable: true
+    peak_weight:
+      type: integer
+      format: uint64
+      nullable: true
+    peer_host:
+      type: string
+    peer_port:
+      type: integer
+      format: int32
+    peer_server_port:
+      type: integer
+      format: int32
+    type:
+      $ref: "./node_type.yaml#/node_type"
