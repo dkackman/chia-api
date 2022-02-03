@@ -41,7 +41,7 @@ tags:
 - name: Plotter
   description: Methods for creating plots and managing plotters
 - name: Daemon
-  description: Methods for service management  
+  description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.  
 paths:
   /register_service:
     post:
