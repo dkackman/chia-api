@@ -1,0 +1,49 @@
+﻿plotter_config:
+  type: object
+  properties:
+    delay:
+      type: integer
+      format: int32
+    parallel:
+      type: boolean
+    number:
+      type: integer
+      format: int32
+    size:
+      $ref: "./k_size.yaml#/k_size"
+    queue:
+      type: string
+    temp_dir:
+      type: string
+    temp_dir2:
+      type: string
+    destination_dir:
+      type: string
+    buffer:
+      type: integer
+      format: int32
+    buckets:
+      type: integer
+      format: int32
+    alt_fingerprint:
+      type: integer
+      format: uint32
+      nullable: true
+    pool_contract_address:
+      type: string
+    pool_public_key:
+      type: string
+    farmer_public_key:
+      type: string
+    memo:
+      type: string
+    no_bit_field:
+      type: boolean
+    num_threads:
+      type: integer
+      format: int32
+    exclude_final_dir:
+      type: boolean
+    override_k:
+      type: boolean
+      nullable: true

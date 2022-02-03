@@ -1,0 +1,10 @@
+service:
+  description: Request body with the name of a service
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          service:
+            type: string

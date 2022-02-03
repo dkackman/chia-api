@@ -20,12 +20,18 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+    service:
+      $ref: "./requestBodies/service.yaml#/service"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"      
+      $ref: "./responses/empty.yaml#/empty"
   schemas:
+    plotter_config:
+      $ref: "./schemas/plotter_config.yaml#/plotter_config"
     plotter_info:
       $ref: "./schemas/plotter_info.yaml#/plotter_info"
+    queued_plot_info:
+      $ref: "./schemas/queued_plot_info.yaml#/queued_plot_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -37,6 +43,108 @@ tags:
 - name: Daemon
   description: Methods for service management  
 paths:
+  /register_service:
+    post:
+      tags:
+      - Daemon
+      summary: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
+      description: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
+      operationId: register_service
+      requestBody:
+        $ref: "#/components/requestBodies/service"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  queue:
+                    type: array
+                    description: Only present when the registered service name is 'chia_plotter'
+                    items:
+                      $ref: "#/components/schemas/queued_plot_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /start_service:
+    post:
+      tags:
+      - Daemon
+      summary: Starts the named service.
+      description: Starts the named service.
+      operationId: start_service
+      requestBody:
+        $ref: "#/components/requestBodies/service"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"   
+  /stop_service:
+    post:
+      tags:
+      - Daemon
+      summary: Stops the named service.
+      description: Stops the named service.
+      operationId: stop_service
+      requestBody:
+        $ref: "#/components/requestBodies/service"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"          
+  /exit:
+    post:
+      tags:
+      - Daemon
+      summary: Tells the daemon at the RPC endpoint to exit.
+      description: Tells the daemon at the RPC endpoint to exit. There isn't a way to start the daemon remotely via RPC, so take care that you have access to the RPC host if needed.
+      operationId: exit
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /is_running:
+    post:
+      tags:
+      - Daemon
+      summary:  Determines if the named service is running.
+      description:  Determines if the named service is running.
+      operationId: is_running
+      requestBody:
+        $ref: "#/components/requestBodies/service"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_running:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_version:
+    post:
+      tags:
+      - Daemon
+      summary: Get the installed version of chia at the endpoint
+      description: Get the installed version of chia at the endpoint
+      operationId: get_version
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_plotters:
     post:
       tags:
@@ -59,27 +167,55 @@ paths:
                     additionalProperties:
                       $ref: "#/components/schemas/plotter_info"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
-  /register_service:
+                  - $ref: "#/components/schemas/apiResponse"
+  /start_plotting:
     post:
       tags:
-      - Daemon
-      summary: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
-      description: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
-      operationId: register_service
+      - Plotter
+      summary: Starts plotting.
+      description: Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.
+      operationId: start_plotting
       requestBody:
-          required: true
-          description: The name to register. This is the name of the client application.
+        description: Options for creating the plots
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plotter_config"
+      responses:
+        200:
+          description: OK
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  service:
-                    type: string 
+                  ids:
+                    type: array
+                    items:
+                      type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /stop_plotting:
+    post:
+      tags:
+      - Plotter
+      summary:  Stops the plot with the given id.
+      description:  Stops the plot with the given id.
+      operationId: stop_plotting
+      requestBody:
+        description: The id of the plot to stop
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
       responses:
         200:
-          $ref: "#/components/responses/empty"
+          $ref: "#/components/responses/empty"              
 externalDocs:
   description: Find out more about chia
   url: http://chia.net

@@ -1,0 +1,24 @@
+﻿queued_plot_info:
+  type: object
+  properties:
+    delay:
+      type: integer
+      format: int32
+    deleted:
+      type: boolean
+    error:
+      type: string
+    id:
+      type: string
+    log:
+      type: string
+    log_new:
+      type: string
+    parallel:
+      type: boolean
+    queue:
+      type: string
+    size:
+      $ref: "./k_size.yaml#/k_size"
+    state:
+      type: string
