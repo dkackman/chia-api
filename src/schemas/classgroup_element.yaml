@@ -1,0 +1,5 @@
+﻿classgroup_element:
+  type: object
+  properties:
+    data:
+      type: string

@@ -1,0 +1,15 @@
+﻿proof_of_space:
+  type: object
+  properties:
+    challenge:
+      type: string
+    public_pool_key:
+      type: string
+    pool_contract_puzzle_hash:
+      type: string
+    plot_public_key:
+      type: string
+    size:
+      $ref: "../schemas/k_size.yaml#/k_size"
+    proof:
+      type: string

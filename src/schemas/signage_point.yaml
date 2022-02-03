@@ -1,0 +1,11 @@
+﻿signage_point:
+  type: object
+  properties:
+    cc_vdf:
+      $ref: "./v_d_f_info.yaml#/v_d_f_info"
+    cc_proof:
+      $ref: "./v_d_f_proof.yaml#/v_d_f_proof"
+    rc_vdf:
+      $ref: "./v_d_f_info.yaml#/v_d_f_info"
+    rc_proof:
+      $ref: "./v_d_f_proof.yaml#/v_d_f_proof"

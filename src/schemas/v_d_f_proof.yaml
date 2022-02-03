@@ -1,0 +1,9 @@
+﻿v_d_f_proof:
+  type: object
+  properties:
+    witness_type:
+      type: byte
+    witness:
+      type: string
+    normalized_to_identity:
+      type: boolean

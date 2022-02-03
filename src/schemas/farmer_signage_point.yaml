@@ -1,0 +1,18 @@
+﻿farmer_signage_point:
+  type: object
+  properties:
+    challenge_chain_sp:
+      type: string
+    challenge_hash:
+      type: string
+    difficulty:
+      type: integer
+      format: uint64
+    reward_chain_sp:
+      type: string
+    signage_point_index:
+      type: byte
+    sub_slot_iters:
+      type: integer
+      format: uint64
+# not the same as signage_point - this is used by the farmer api get_signage_point(s)

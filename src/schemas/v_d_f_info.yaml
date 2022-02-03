@@ -1,0 +1,10 @@
+﻿v_d_f_info:
+  type: object
+  properties:
+    challenge:
+      type: string
+    number_of_iterations:
+      type: integer
+      format: uint64
+    output:
+      $ref: "./classgroup_element.yaml#/classgroup_element"
