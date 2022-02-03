@@ -22,9 +22,21 @@ components:
       $ref: "./requestBodies/empty.yaml#/empty"
     service:
       $ref: "./requestBodies/service.yaml#/service"
+    keychain_request:
+      description: The keychain options
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              kc_user:
+                type: string
+              kc_service:
+                type: string        
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "./responses/empty.yaml#/empty" 
   schemas:
     plotter_config:
       $ref: "./schemas/plotter_config.yaml#/plotter_config"
@@ -34,14 +46,23 @@ components:
       $ref: "./schemas/queued_plot_info.yaml#/queued_plot_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
+    private_key:
+      type: object
+      properties:
+        pk:
+          type: string
+        entropy:
+          type: string
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-- name: Plotter
-  description: Methods for creating plots and managing plotters
 - name: Daemon
   description: Methods for service management  
+- name: Key Ring
+  description: Methods for key management    
+- name: Plotter
+  description: Methods for creating plots and managing plotters
 paths:
   /register_service:
     post:
@@ -90,7 +111,19 @@ paths:
         $ref: "#/components/requestBodies/service"
       responses:
         200:
-          $ref: "#/components/responses/empty"          
+          $ref: "#/components/responses/empty"
+  /ping:
+    post:
+      tags:
+      - Daemon
+      summary: Ping the daemon.
+      description: Ping the daemon.
+      operationId: ping
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
   /exit:
     post:
       tags:
@@ -128,8 +161,8 @@ paths:
     post:
       tags:
       - Daemon
-      summary: Get the installed version of chia at the endpoint
-      description: Get the installed version of chia at the endpoint
+      summary: Get the installed version of chia at the endpoint.
+      description: Get the installed version of chia at the endpoint.
       operationId: get_version
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -145,6 +178,27 @@ paths:
                     type: string
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_status:
+    post:
+      tags:
+      - Daemon
+      summary: Indicator if the genesis block is intialized.
+      description: Indicator if the genesis block is intialized.
+      operationId: get_status
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  genesis_initialized:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"                                     
   /get_plotters:
     post:
       tags:
@@ -215,7 +269,318 @@ paths:
                   type: string
       responses:
         200:
-          $ref: "#/components/responses/empty"              
+          $ref: "#/components/responses/empty"
+  /is_keyring_locked:
+    post:
+      tags:
+      - Key Ring
+      summary: Returns whether the keyring is in a locked state.
+      description: Returns whether the keyring is in a locked state. If the keyring doesn't have a master passphrase set, or if a master passphrase is set and the cached passphrase is valid, the keyring is "unlocked".
+      operationId: is_keyring_locked
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_keyring_locked:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /keyring_status:
+    post:
+      tags:
+      - Key Ring
+      summary: Get detailed status of the key ring.
+      description: Get detailed status of the key ring.
+      operationId: keyring_status
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_keyring_locked:
+                    type: boolean
+                  passphrase_support_enabled: 
+                    type: boolean
+                  can_save_passphrase: 
+                    type: boolean
+                  user_passphrase_is_set:
+                    type: boolean
+                  needs_migration:
+                    type: boolean
+                  can_remove_legacy_keys:
+                    type: boolean
+                  can_set_passphrase_hint: 
+                    type: boolean
+                  passphrase_hint: 
+                    type: string
+                  passphrase_requirements: 
+                    type: object
+                    properties:
+                      is_optional:
+                        type: boolean
+                      min_length:
+                        type: integer                        
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /unlock_keyring:
+    post:
+      tags:
+      - Key Ring
+      summary: Unlock the keyring.
+      description: Unlock the keyring.
+      operationId: unlock_keyring
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /validate_keyring_passphrase:
+    post:
+      tags:
+      - Key Ring
+      summary: Test the validity of the passphrase.
+      description: Test the validity of the passphrase.
+      operationId: validate_keyring_passphrase
+      requestBody:
+        description: The passphrase
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /migrate_keyring:
+    post:
+      tags:
+      - Key Ring
+      summary: Migrate from key phrase to key ring.
+      description: Migrate from key phrase to key ring.
+      operationId: migrate_keyring
+      requestBody:
+        description: The migration options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                passphrase:
+                  type: string
+                passphrase_hint:
+                  type: string  
+                save_passphrase:
+                  type: boolean 
+                cleanup_legacy_keyring:
+                  type: boolean                                                     
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /set_keyring_passphrase:
+    post:
+      tags:
+      - Key Ring
+      summary: Update the key ring passphrase.
+      description: Update the key ring passphrase.
+      operationId: set_keyring_passphrase
+      requestBody:
+        description: The passphrase options
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_passphrase:
+                  type: string
+                passphrase_hint:
+                  type: string
+                new_passphrase:
+                  type: string                      
+                save_passphrase:
+                  type: boolean                                                  
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /remove_keyring_passphrase:
+    post:
+      tags:
+      - Key Ring
+      summary: Remove the key ring passphrase.
+      description: Remove the key ring passphrase.
+      operationId: remove_keyring_passphrase
+      requestBody:
+        description: The passphrase
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_passphrase:
+                  type: string
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /add_private_key:
+    post:
+      tags:
+      - Key Ring
+      summary: Adds a private key to the keychain.
+      description: Adds a private key to the keychain, with the given entropy and passphrase. The
+        keychain itself will store the public key, and the entropy bytes, but not the passphrase.
+      operationId: add_private_key
+      requestBody:
+        description: The private key
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mnemonic:
+                  type: string
+                passphrase:
+                  type: string
+                kc_user:
+                  type: string
+                kc_service:
+                  type: string                   
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /check_keys:
+    post:
+      tags:
+      - Key Ring
+      summary: Check the keys.
+      description: Check the keys.
+      operationId: check_keys
+      requestBody:
+        $ref: "#/components/requestBodies/keychain_request"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /delete_all_keys:
+    post:
+      tags:
+      - Key Ring
+      summary: Deletes all keys from the keychain.
+      description: Deletes all keys from the keychain.
+      operationId: delete_all_keys
+      requestBody:
+        $ref: "#/components/requestBodies/keychain_request"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /delete_key_by_fingerprint:
+    post:
+      tags:
+      - Key Ring
+      summary: Deletes all keys which have the given public key fingerprint.
+      description: Deletes all keys which have the given public key fingerprint.
+      operationId: delete_key_by_fingerprint
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fingerprint:
+                  type: integer
+                kc_user:
+                  type: string
+                kc_service:
+                  type: string                     
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /get_all_private_keys:
+    post:
+      tags:
+      - Key Ring
+      summary: Returns all private keys which can be retrieved, with the given passphrases.
+      description: Returns all private keys which can be retrieved, with the given passphrases.
+        A tuple of key, and entropy bytes (i.e. mnemonic) is returned for each key.
+      operationId: get_all_private_keys
+      requestBody:      
+        $ref: "#/components/requestBodies/keychain_request"                
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:                
+                  $ref: "#/components/schemas/private_key"                       
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
+  /get_first_private_key:
+    post:
+      tags:
+      - Key Ring
+      summary: Returns the first key in the keychain that has one of the passed in passphrases.
+      description: Returns the first key in the keychain that has one of the passed in passphrases.
+      operationId: get_first_private_key
+      requestBody:      
+        $ref: "#/components/requestBodies/keychain_request"                
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/private_key"                       
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
+  /get_key_for_fingerprint:
+    post:
+      tags:
+      - Key Ring
+      summary: Locates and returns a private key matching the provided fingerprint.
+      description: Locates and returns a private key matching the provided fingerprint.
+      operationId: get_key_for_fingerprint
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fingerprint:
+                  type: integer
+                kc_user:
+                  type: string
+                kc_service:
+                  type: string                  
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/private_key"                       
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
