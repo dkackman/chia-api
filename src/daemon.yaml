@@ -47,7 +47,7 @@ paths:
     post:
       tags:
       - Daemon
-      summary: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
+      summary: Registers this daemon to receive messages.
       description: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
       operationId: register_service
       requestBody:

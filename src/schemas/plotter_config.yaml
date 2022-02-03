@@ -6,13 +6,16 @@
       format: int32
     parallel:
       type: boolean
+      default: false      
     number:
       type: integer
       format: int32
+      default: 1      
     size:
       $ref: "./k_size.yaml#/k_size"
     queue:
       type: string
+      default: "default"      
     temp_dir:
       type: string
     temp_dir2:
@@ -22,9 +25,11 @@
     buffer:
       type: integer
       format: int32
+      default: 4608      
     buckets:
       type: integer
       format: int32
+      default: 128      
     alt_fingerprint:
       type: integer
       format: uint32
@@ -39,11 +44,15 @@
       type: string
     no_bit_field:
       type: boolean
+      default: false      
     num_threads:
       type: integer
       format: int32
+      default: 2      
     exclude_final_dir:
       type: boolean
+      default: false      
     override_k:
       type: boolean
+      default: false
       nullable: true
