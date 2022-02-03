@@ -22,6 +22,9 @@ components:
       $ref: "./requestBodies/empty.yaml#/empty"
     wallet_id:
       $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"    
   schemas:
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"

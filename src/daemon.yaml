@@ -60,11 +60,11 @@ components:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
 - name: Daemon
-  description: Methods for service management  
-- name: Key Ring
-  description: Methods for key management    
+  description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.  
 - name: Plotter
-  description: Methods for creating plots and managing plotters
+  description: Methods for creating plos and managing plotters.
+- name: Key Ring
+  description: Methods for manaing keys and the keyring
 paths:
   /register_service:
     post:

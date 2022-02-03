@@ -91,7 +91,7 @@ paths:
     post:
       tags:
       - Full Node
-      summary: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
+      summary: Retrieves a block record by height.
       description: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
       operationId: get_block_record_by_height
       requestBody:
