@@ -5,6 +5,8 @@ wallet_id:
     application/json:
       schema:
         type: object
+        required:
+          - wallet_id
         properties:
           wallet_id:
             type: integer

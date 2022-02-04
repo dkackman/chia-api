@@ -5,6 +5,8 @@ service:
     application/json:
       schema:
         type: object
+        required:
+          - service
         properties:
           service:
             type: string

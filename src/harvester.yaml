@@ -51,8 +51,10 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - dirname
               properties:
-                wallet_id:
+                dirname:
                   type: string
       responses:
         200:
@@ -71,8 +73,10 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - dirname
               properties:
-                wallet_id:
+                dirname:
                   type: string
       responses:
         200:
@@ -157,6 +161,8 @@ paths:
             application/json:
               schema:
                 type: object
+                required:
+                  - filename
                 properties:
                   filename:
                     type: string

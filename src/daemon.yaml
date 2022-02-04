@@ -50,6 +50,32 @@ components:
           type: string
         kc_service:
           type: string
+    keyring_status:
+      type: object
+      properties:
+        is_keyring_locked:
+          type: boolean
+        passphrase_support_enabled:
+          type: boolean
+        can_save_passphrase:
+          type: boolean
+        user_passphrase_is_set:
+          type: boolean
+        needs_migration:
+          type: boolean
+        can_remove_legacy_keys:
+          type: boolean
+        can_set_passphrase_hint:
+          type: boolean
+        passphrase_hint:
+          type: string
+        passphrase_requirements:
+          type: object
+          properties:
+            is_optional:
+              type: boolean
+            min_length:
+              type: integer
     private_key:
       type: object
       properties:
@@ -268,6 +294,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - id
               properties:
                 id:
                   type: string
@@ -311,31 +339,8 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  is_keyring_locked:
-                    type: boolean
-                  passphrase_support_enabled:
-                    type: boolean
-                  can_save_passphrase:
-                    type: boolean
-                  user_passphrase_is_set:
-                    type: boolean
-                  needs_migration:
-                    type: boolean
-                  can_remove_legacy_keys:
-                    type: boolean
-                  can_set_passphrase_hint:
-                    type: boolean
-                  passphrase_hint:
-                    type: string
-                  passphrase_requirements:
-                    type: object
-                    properties:
-                      is_optional:
-                        type: boolean
-                      min_length:
-                        type: integer
                 allOf:
+                  - $ref: "#/components/schemas/keyring_status"
                   - $ref: "#/components/schemas/apiResponse"
   /unlock_keyring:
     post:
@@ -361,8 +366,8 @@ paths:
     post:
       tags:
         - Key Ring
-      summary: Test the validity of the passphrase.
-      description: Test the validity of the passphrase.
+      summary: Test the validity of a passphrase.
+      description: Test the validity of a passphrase.
       operationId: validate_keyring_passphrase
       requestBody:
         description: The passphrase
@@ -391,6 +396,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - passphrase
+                - passphrase_hint
               properties:
                 passphrase:
                   type: string
@@ -417,12 +425,14 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - new_passphrase
               properties:
                 current_passphrase:
                   type: string
-                passphrase_hint:
-                  type: string
                 new_passphrase:
+                  type: string
+                passphrase_hint:
                   type: string
                 save_passphrase:
                   type: boolean
@@ -443,6 +453,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - current_passphrase
               properties:
                 current_passphrase:
                   type: string
@@ -467,6 +479,9 @@ paths:
               allOf:
                 - $ref: "#/components/schemas/key_ring_options"
                 - type: object
+                  required:
+                    - mnemonic
+                    - passphrase
                   properties:
                     mnemonic:
                       type: string
@@ -515,6 +530,8 @@ paths:
               allOf:
                 - $ref: "#/components/schemas/key_ring_options"
                 - type: object
+                  required:
+                    - fingerprint
                   properties:
                     fingerprint:
                       type: integer
@@ -562,8 +579,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/private_key"
+                type: object
                 allOf:
+                  - $ref: "#/components/schemas/private_key"
                   - $ref: "#/components/schemas/apiResponse"
   /get_key_for_fingerprint:
     post:
@@ -581,6 +599,8 @@ paths:
               allOf:
                 - $ref: "#/components/schemas/key_ring_options"
                 - type: object
+                  required:
+                    - fingerprint
                   properties:
                     fingerprint:
                       type: integer
@@ -591,8 +611,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/private_key"
+                type: object
                 allOf:
+                  - $ref: "#/components/schemas/private_key"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

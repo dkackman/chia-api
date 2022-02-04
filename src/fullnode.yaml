@@ -69,6 +69,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - ip
+                - port
               properties:
                 ip:
                   type: string
@@ -92,6 +95,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+               - node_id
               properties:
                 node_id:
                   type: string
@@ -156,6 +161,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - header_hash
               properties:
                 header_hash:
                   type: string
@@ -185,6 +192,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - height
               properties:
                 height:
                   type: integer
