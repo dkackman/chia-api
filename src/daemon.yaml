@@ -11,7 +11,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-servers: 
+servers:
   - url: wss://localhost:55400
     description: Daemon Websocket RPC
 security:
@@ -31,7 +31,7 @@ components:
             $ref: "#/components/schemas/key_ring_options"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty" 
+      $ref: "./responses/empty.yaml#/empty"
   schemas:
     plotter_config:
       $ref: "./schemas/plotter_config.yaml#/plotter_config"
@@ -47,7 +47,7 @@ components:
         kc_user:
           type: string
         kc_service:
-          type: string    
+          type: string
     private_key:
       type: object
       properties:
@@ -59,17 +59,17 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-- name: Daemon
-  description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.  
-- name: Plotter
-  description: Methods for creating plos and managing plotters.
-- name: Key Ring
-  description: Methods for manaing keys and the keyring
+  - name: Daemon
+    description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.
+  - name: Plotter
+    description: Methods for creating plos and managing plotters.
+  - name: Key Ring
+    description: Methods for manaing keys and the keyring
 paths:
   /register_service:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Registers this daemon to receive messages.
       description: Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.
       operationId: register_service
@@ -93,7 +93,7 @@ paths:
   /start_service:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Starts the named service.
       description: Starts the named service.
       operationId: start_service
@@ -101,11 +101,11 @@ paths:
         $ref: "#/components/requestBodies/service"
       responses:
         200:
-          $ref: "#/components/responses/empty"   
+          $ref: "#/components/responses/empty"
   /stop_service:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Stops the named service.
       description: Stops the named service.
       operationId: stop_service
@@ -117,7 +117,7 @@ paths:
   /ping:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Ping the daemon.
       description: Ping the daemon.
       operationId: ping
@@ -129,7 +129,7 @@ paths:
   /exit:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Tells the daemon at the RPC endpoint to exit.
       description: Tells the daemon at the RPC endpoint to exit. There isn't a way to start the daemon remotely via RPC, so take care that you have access to the RPC host if needed.
       operationId: exit
@@ -141,9 +141,9 @@ paths:
   /is_running:
     post:
       tags:
-      - Daemon
-      summary:  Determines if the named service is running.
-      description:  Determines if the named service is running.
+        - Daemon
+      summary: Determines if the named service is running.
+      description: Determines if the named service is running.
       operationId: is_running
       requestBody:
         $ref: "#/components/requestBodies/service"
@@ -162,7 +162,7 @@ paths:
   /get_version:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Get the installed version of chia at the endpoint.
       description: Get the installed version of chia at the endpoint.
       operationId: get_version
@@ -183,7 +183,7 @@ paths:
   /get_status:
     post:
       tags:
-      - Daemon
+        - Daemon
       summary: Indicator if the genesis block is intialized.
       description: Indicator if the genesis block is intialized.
       operationId: get_status
@@ -200,11 +200,11 @@ paths:
                   genesis_initialized:
                     type: boolean
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                                     
+                  - $ref: "#/components/schemas/apiResponse"
   /get_plotters:
     post:
       tags:
-      - Plotter
+        - Plotter
       summary: Get info about installed and installable plotters.
       description: Get info about installed and installable plotters.
       operationId: get_plotters
@@ -227,7 +227,7 @@ paths:
   /start_plotting:
     post:
       tags:
-      - Plotter
+        - Plotter
       summary: Starts plotting.
       description: Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.
       operationId: start_plotting
@@ -255,9 +255,9 @@ paths:
   /stop_plotting:
     post:
       tags:
-      - Plotter
-      summary:  Stops the plot with the given id.
-      description:  Stops the plot with the given id.
+        - Plotter
+      summary: Stops the plot with the given id.
+      description: Stops the plot with the given id.
       operationId: stop_plotting
       requestBody:
         description: The id of the plot to stop
@@ -275,7 +275,7 @@ paths:
   /is_keyring_locked:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Returns whether the keyring is in a locked state.
       description: Returns whether the keyring is in a locked state. If the keyring doesn't have a master passphrase set, or if a master passphrase is set and the cached passphrase is valid, the keyring is "unlocked".
       operationId: is_keyring_locked
@@ -296,7 +296,7 @@ paths:
   /keyring_status:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Get detailed status of the key ring.
       description: Get detailed status of the key ring.
       operationId: keyring_status
@@ -312,9 +312,9 @@ paths:
                 properties:
                   is_keyring_locked:
                     type: boolean
-                  passphrase_support_enabled: 
+                  passphrase_support_enabled:
                     type: boolean
-                  can_save_passphrase: 
+                  can_save_passphrase:
                     type: boolean
                   user_passphrase_is_set:
                     type: boolean
@@ -322,23 +322,23 @@ paths:
                     type: boolean
                   can_remove_legacy_keys:
                     type: boolean
-                  can_set_passphrase_hint: 
+                  can_set_passphrase_hint:
                     type: boolean
-                  passphrase_hint: 
+                  passphrase_hint:
                     type: string
-                  passphrase_requirements: 
+                  passphrase_requirements:
                     type: object
                     properties:
                       is_optional:
                         type: boolean
                       min_length:
-                        type: integer                        
+                        type: integer
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /unlock_keyring:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Unlock the keyring.
       description: Unlock the keyring.
       operationId: unlock_keyring
@@ -350,7 +350,7 @@ paths:
   /validate_keyring_passphrase:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Test the validity of the passphrase.
       description: Test the validity of the passphrase.
       operationId: validate_keyring_passphrase
@@ -370,7 +370,7 @@ paths:
   /migrate_keyring:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Migrate from key phrase to key ring.
       description: Migrate from key phrase to key ring.
       operationId: migrate_keyring
@@ -385,18 +385,18 @@ paths:
                 passphrase:
                   type: string
                 passphrase_hint:
-                  type: string  
+                  type: string
                 save_passphrase:
-                  type: boolean 
+                  type: boolean
                 cleanup_legacy_keyring:
-                  type: boolean                                                     
+                  type: boolean
       responses:
         200:
           $ref: "#/components/responses/empty"
   /set_keyring_passphrase:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Update the key ring passphrase.
       description: Update the key ring passphrase.
       operationId: set_keyring_passphrase
@@ -413,16 +413,16 @@ paths:
                 passphrase_hint:
                   type: string
                 new_passphrase:
-                  type: string                      
+                  type: string
                 save_passphrase:
-                  type: boolean                                                  
+                  type: boolean
       responses:
         200:
           $ref: "#/components/responses/empty"
   /remove_keyring_passphrase:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Remove the key ring passphrase.
       description: Remove the key ring passphrase.
       operationId: remove_keyring_passphrase
@@ -442,9 +442,10 @@ paths:
   /add_private_key:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Adds a private key to the keychain.
-      description: Adds a private key to the keychain, with the given entropy and passphrase. The
+      description:
+        Adds a private key to the keychain, with the given entropy and passphrase. The
         keychain itself will store the public key, and the entropy bytes, but not the passphrase.
       operationId: add_private_key
       requestBody:
@@ -460,14 +461,14 @@ paths:
                     mnemonic:
                       type: string
                     passphrase:
-                      type: string                               
+                      type: string
       responses:
         200:
           $ref: "#/components/responses/empty"
   /check_keys:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Check the keys.
       description: Check the keys.
       operationId: check_keys
@@ -479,7 +480,7 @@ paths:
   /delete_all_keys:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Deletes all keys from the keychain.
       description: Deletes all keys from the keychain.
       operationId: delete_all_keys
@@ -491,7 +492,7 @@ paths:
   /delete_key_by_fingerprint:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Deletes all keys which have the given public key fingerprint.
       description: Deletes all keys which have the given public key fingerprint.
       operationId: delete_key_by_fingerprint
@@ -506,20 +507,21 @@ paths:
                 - type: object
                   properties:
                     fingerprint:
-                      type: integer                                    
+                      type: integer
       responses:
         200:
           $ref: "#/components/responses/empty"
   /get_all_private_keys:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Returns all private keys which can be retrieved, with the given passphrases.
-      description: Returns all private keys which can be retrieved, with the given passphrases.
+      description:
+        Returns all private keys which can be retrieved, with the given passphrases.
         A tuple of key, and entropy bytes (i.e. mnemonic) is returned for each key.
       operationId: get_all_private_keys
-      requestBody:      
-        $ref: "#/components/requestBodies/keychain_request"                
+      requestBody:
+        $ref: "#/components/requestBodies/keychain_request"
       responses:
         200:
           description: OK
@@ -527,32 +529,32 @@ paths:
             application/json:
               schema:
                 type: array
-                items:                
-                  $ref: "#/components/schemas/private_key"                       
+                items:
+                  $ref: "#/components/schemas/private_key"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
+                  - $ref: "#/components/schemas/apiResponse"
   /get_first_private_key:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Returns the first key in the keychain that has one of the passed in passphrases.
       description: Returns the first key in the keychain that has one of the passed in passphrases.
       operationId: get_first_private_key
-      requestBody:      
-        $ref: "#/components/requestBodies/keychain_request"                
+      requestBody:
+        $ref: "#/components/requestBodies/keychain_request"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/private_key"                       
+                $ref: "#/components/schemas/private_key"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
+                  - $ref: "#/components/schemas/apiResponse"
   /get_key_for_fingerprint:
     post:
       tags:
-      - Key Ring
+        - Key Ring
       summary: Locates and returns a private key matching the provided fingerprint.
       description: Locates and returns a private key matching the provided fingerprint.
       operationId: get_key_for_fingerprint
@@ -567,16 +569,16 @@ paths:
                 - type: object
                   properties:
                     fingerprint:
-                      type: integer              
+                      type: integer
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/private_key"                       
+                $ref: "#/components/schemas/private_key"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
