@@ -1,10 +1,12 @@
 ﻿pool_wallet_config:
   type: object
+  description: This is what goes into the user's config file, to communicate between the wallet and the farmer processes.
   properties:
     launcher_id:
       type: string
     pool_url:
       type: string
+      format: url
     payout_instructions:
       type: string
     target_puzzle_hash:

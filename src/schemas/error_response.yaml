@@ -1,5 +1,6 @@
 ﻿error_response:
   type: object
+  description: Response in error case for all endpoints of the pool protocol
   properties:
     error_code:
       type: integer

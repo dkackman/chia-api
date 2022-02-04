@@ -1,5 +1,6 @@
 ﻿farmer_signage_point:
   type: object
+  description: The farmer api's defintion of a signage point. Not the same as signage_point.
   properties:
     challenge_chain_sp:
       type: string

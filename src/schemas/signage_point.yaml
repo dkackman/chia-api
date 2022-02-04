@@ -2,10 +2,10 @@
   type: object
   properties:
     cc_vdf:
-      $ref: "./v_d_f_info.yaml#/v_d_f_info"
+      $ref: "./vdf_info.yaml#/vdf_info"
     cc_proof:
-      $ref: "./v_d_f_proof.yaml#/v_d_f_proof"
+      $ref: "./vdf_proof.yaml#/vdf_proof"
     rc_vdf:
-      $ref: "./v_d_f_info.yaml#/v_d_f_info"
+      $ref: "./vdf_info.yaml#/vdf_info"
     rc_proof:
-      $ref: "./v_d_f_proof.yaml#/v_d_f_proof"
+      $ref: "./vdf_proof.yaml#/vdf_proof"

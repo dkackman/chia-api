@@ -33,6 +33,8 @@ components:
     empty:
       $ref: "./responses/empty.yaml#/empty"
   schemas:
+    k_size:
+      $ref: "./schemas/k_size.yaml#/k_size"
     plotter_config:
       $ref: "./schemas/plotter_config.yaml#/plotter_config"
     plotter_info:

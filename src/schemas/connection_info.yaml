@@ -1,5 +1,6 @@
 ﻿connection_info:
   type: object
+  description: Chia's representation of a connection from node to node.
   properties:
     bytes_read:
       type: integer

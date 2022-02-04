@@ -1,5 +1,6 @@
 ﻿queued_plot_info:
   type: object
+  description: An entry in the plot queue.
   properties:
     delay:
       type: integer
