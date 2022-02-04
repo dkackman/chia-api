@@ -1,10 +1,17 @@
 node_type:
   type: integer
-  description: The type of nodes
   enum:
-    - FULL_NODE
-    - HARVESTER
-    - FARMER
-    - TIMELORD
-    - INTRODUCER
-    - WALLET
+    - 1 #FULL_NODE
+    - 2 #HARVESTER
+    - 3 #FARMER
+    - 4 #TIMELORD
+    - 5 #INTRODUCER
+    - 6 #WALLET
+  description: >-
+    The type of node:
+      * 1 FULL_NODE
+      * 2 HARVESTER
+      * 3 FARMER
+      * 4 TIMELORD
+      * 5 INTRODUCER
+      * 6 WALLET

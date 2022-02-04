@@ -30,6 +30,8 @@ components:
       $ref: "./schemas/block_record.yaml#/block_record"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
+    node_type:
+      $ref: "./schemas/node_type.yaml#/node_type"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
