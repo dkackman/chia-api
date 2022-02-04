@@ -343,7 +343,15 @@ paths:
       description: Unlock the keyring.
       operationId: unlock_keyring
       requestBody:
-        $ref: "#/components/requestBodies/empty"
+        description: Key ring key
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
       responses:
         200:
           $ref: "#/components/responses/empty"
@@ -508,6 +516,7 @@ paths:
                   properties:
                     fingerprint:
                       type: integer
+                      format: uint32
       responses:
         200:
           $ref: "#/components/responses/empty"
@@ -570,6 +579,7 @@ paths:
                   properties:
                     fingerprint:
                       type: integer
+                      format: uint32
       responses:
         200:
           description: OK
