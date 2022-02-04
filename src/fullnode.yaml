@@ -42,6 +42,12 @@ tags:
     description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
   - name: Connections
     description: Methods for managing connections.
+  - name: Blocks
+    description: Methods for managing blocks.
+  - name: Coins
+    description: Methods for managing coins.
+  - name: Mempool
+    description: Get information about the mempool.
 paths:
   /stop_node:
     post:
@@ -96,7 +102,7 @@ paths:
             schema:
               type: object
               required:
-               - node_id
+                - node_id
               properties:
                 node_id:
                   type: string
@@ -126,31 +132,10 @@ paths:
                       $ref: "#/components/schemas/connection_info"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
-  /get_blockchain_state:
-    post:
-      tags:
-        - Full Node
-      summary: Retrieves a summary of the current state of the blockchain and full node.
-      description: Retrieves a summary of the current state of the blockchain and full node.
-      operationId: get_blockchain_state
-      requestBody:
-        $ref: "#/components/requestBodies/empty"
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  blockchain_state:
-                    $ref: "#/components/schemas/blockchain_state"
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
   /get_block_record:
     post:
       tags:
-        - Full Node
+        - Blocks
       summary: Retrieves a block record by header hash.
       description: Retrieves a block record by header hash.
       operationId: get_block_record
@@ -181,7 +166,7 @@ paths:
   /get_block_record_by_height:
     post:
       tags:
-        - Full Node
+        - Blocks
       summary: Retrieves a block record by height.
       description: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
       operationId: get_block_record_by_height
@@ -210,6 +195,27 @@ paths:
                     $ref: "#/components/schemas/block_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_blockchain_state:
+    post:
+      tags:
+        - Full Node
+      summary: Retrieves a summary of the current state of the blockchain and full node.
+      description: Retrieves a summary of the current state of the blockchain and full node.
+      operationId: get_blockchain_state
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blockchain_state:
+                    $ref: "#/components/schemas/blockchain_state"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
     post:
       tags:
@@ -230,9 +236,43 @@ paths:
                   - network_prefix
                 properties:
                   network_name:
-                    type: "string"
+                    type: string
                   network_prefix:
-                    type: "string"
+                    type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_network_space:
+    post:
+      tags:
+        - Full Node
+      summary: Retrieves an estimate of total space validating the chain between two block header hashes.
+      operationId: get_network_space
+      requestBody:
+        required: true
+        description: The block header hashes
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - newer_block_header_hash
+                - older_block_header_hash
+              properties:
+                newer_block_header_hash:
+                  type: string
+                older_block_header_hash:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  space:
+                    type: integer
+                    format: bigint
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
