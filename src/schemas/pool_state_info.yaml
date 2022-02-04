@@ -19,17 +19,17 @@
       format: double
     p2_singleton_puzzle_hash:
       type: string
-    points_acknowledged24h: 
+    points_acknowledged24h:
       type: array
       items:
-        $ref: "./pool_point.yaml#/pool_point" 
+        $ref: "./pool_point.yaml#/pool_point"
     points_acknowledged_since_start:
       type: integer
       format: uint64
     points_found24h:
       type: array
       items:
-        $ref: "./pool_point.yaml#/pool_point"    
+        $ref: "./pool_point.yaml#/pool_point"
     points_found_since_start:
       type: integer
       format: uint64

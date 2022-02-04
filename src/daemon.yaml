@@ -64,7 +64,7 @@ tags:
   - name: Plotter
     description: Methods for creating plos and managing plotters.
   - name: Key Ring
-    description: Methods for manaing keys and the keyring
+    description: Methods for managing keys and the keyring.
 paths:
   /register_service:
     post:
@@ -537,9 +537,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/private_key"
+                type: object
+                properties:
+                  private_keys:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/private_key"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_first_private_key:

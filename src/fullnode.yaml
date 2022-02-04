@@ -11,7 +11,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-servers: 
+servers:
   - url: https://localhost:8555
     description: Full Node RPC
 security:
@@ -22,7 +22,7 @@ components:
       $ref: "./requestBodies/empty.yaml#/empty"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"      
+      $ref: "./responses/empty.yaml#/empty"
   schemas:
     blockchain_state:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
@@ -38,10 +38,10 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-- name: Full Node
-  description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
-- name: Connections
-  description: Methods for managing connections.  
+  - name: Full Node
+    description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
+  - name: Connections
+    description: Methods for managing connections.
 paths:
   /stop_node:
     post:
@@ -63,18 +63,18 @@ paths:
       description: Add a connection to another node.
       operationId: open_connection
       requestBody:
-          required: true
-          description: the address of the connection
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ip:
-                    type: string
-                    format: ipaddress
-                  port:
-                    type: integer     
+        required: true
+        description: the address of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ip:
+                  type: string
+                  format: ipaddress
+                port:
+                  type: integer
       responses:
         200:
           $ref: "#/components/responses/empty"
@@ -86,15 +86,15 @@ paths:
       description: Removes a connection.
       operationId: close_connection
       requestBody:
-          required: true
-          description: the node id of the connection
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  node_id:
-                    type: string 
+        required: true
+        description: the node id of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                node_id:
+                  type: string
       responses:
         200:
           $ref: "#/components/responses/empty"
@@ -106,27 +106,30 @@ paths:
       description: Retreive the list of connections.
       operationId: get_connections
       requestBody:
-        $ref: "#/components/requestBodies/empty"    
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/connection_info"
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/connection_info"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:
     post:
       tags:
-      - Full Node
+        - Full Node
       summary: Retrieves a summary of the current state of the blockchain and full node.
       description: Retrieves a summary of the current state of the blockchain and full node.
       operationId: get_blockchain_state
       requestBody:
-        $ref: "#/components/requestBodies/empty"      
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
@@ -142,20 +145,20 @@ paths:
   /get_block_record:
     post:
       tags:
-      - Full Node
+        - Full Node
       summary: Retrieves a block record by header hash.
       description: Retrieves a block record by header hash.
       operationId: get_block_record
       requestBody:
-          required: true
-          description: the block's header_hash
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  header_hash:
-                    type: string        
+        required: true
+        description: the block's header_hash
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                header_hash:
+                  type: string
       responses:
         200:
           description: OK
@@ -171,21 +174,21 @@ paths:
   /get_block_record_by_height:
     post:
       tags:
-      - Full Node
+        - Full Node
       summary: Retrieves a block record by height.
       description: Retrieves a block record by height (assuming the height <= peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).
       operationId: get_block_record_by_height
       requestBody:
-          required: true
-          description: the block height
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  height:
-                    type: integer
-                    format: uint32
+        required: true
+        description: the block height
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                height:
+                  type: integer
+                  format: uint32
       responses:
         200:
           description: OK
@@ -197,15 +200,15 @@ paths:
                   block_record:
                     $ref: "#/components/schemas/block_record"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                    
+                  - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
     post:
       tags:
-      - Full Node
+        - Full Node
       summary: Retrieves some information about the current network.
       operationId: full_node_get_network_info
       requestBody:
-        $ref: "#/components/requestBodies/empty"      
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
@@ -215,12 +218,12 @@ paths:
                 type: object
                 required:
                   - network_name
-                  - network_prefix                  
+                  - network_prefix
                 properties:
                   network_name:
                     type: "string"
                   network_prefix:
-                    type: "string" 
+                    type: "string"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
