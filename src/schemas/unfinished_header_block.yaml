@@ -1,0 +1,19 @@
+﻿unfinished_header_block:
+  type: object
+  properties:
+    finished_sub_slots:
+      type: array
+      items:
+        $ref: "./end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle"
+    reward_chain_block:
+      $ref: "./reward_chain_block_unfinished.yaml#/reward_chain_block_unfinished"
+    challenge_chain_sp_proof:
+      $ref: "./vdf_proof.yaml#/vdf_proof"
+    reward_chain_sp_proof:
+      $ref: "./vdf_proof.yaml#/vdf_proof"
+    foliage:
+      $ref: "./foliage.yaml#/foliage"
+    foliage_transaction_block:
+      $ref: "./foliage_transaction_block.yaml#/foliage_transaction_block"
+    transactions_filter:
+      type: string

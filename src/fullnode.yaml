@@ -31,24 +31,24 @@ components:
               - header_hash
             properties:
               header_hash:
-                type: string    
+                type: string
     start_end:
-        required: true
-        description: Start and end heights
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - start
-                - end
-              properties:
-                start:
-                  type: integer
-                  format: uint32
-                end:
-                  type: integer
-                  format: uint32    
+      required: true
+      description: Start and end heights
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - start
+              - end
+            properties:
+              start:
+                type: integer
+                format: uint32
+              end:
+                type: integer
+                format: uint32
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
@@ -65,6 +65,8 @@ components:
       $ref: "./schemas/mempool_item.yaml#/mempool_item"
     node_type:
       $ref: "./schemas/node_type.yaml#/node_type"
+    unfinished_header_block:
+      $ref: "./schemas/unfinished_header_block.yaml#/unfinished_header_block"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -284,7 +286,30 @@ paths:
                     items:
                       $ref: "#/components/schemas/full_block"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_unfinished_block_headers:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves unfinished block headers.
+      description: Retrieves unfinished block headers.
+      operationId: get_unfinished_block_headers
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  headers:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/unfinished_header_block"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:
     post:
       tags:

@@ -1,0 +1,20 @@
+﻿reward_chain_block_unfinished:
+  type: object
+  properties:
+    total_iters:
+      type: integer
+      format: bigint
+    signage_point_index:
+      type: byte
+    pos_ss_cc_challenge_hash:
+      type: string
+    proof_of_space:
+      $ref: "./proof_of_space.yaml#/proof_of_space"
+    challenge_chain_sp_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    challenge_chain_sp_signature:
+      type: string
+    reward_chain_sp_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    reward_chain_sp_signature:
+      type: string
