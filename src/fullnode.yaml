@@ -30,6 +30,8 @@ components:
       $ref: "./schemas/block_record.yaml#/block_record"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
+    full_block:
+      $ref: "./schemas/full_block.yaml#/full_block"
     mempool_item:
       $ref: "./schemas/mempool_item.yaml#/mempool_item"
     node_type:
@@ -202,7 +204,7 @@ paths:
                     items:
                       $ref: "#/components/schemas/block_record"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
   /get_block_record_by_height:
     post:
       tags:
@@ -233,6 +235,37 @@ paths:
                 properties:
                   block_record:
                     $ref: "#/components/schemas/block_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_block:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves a block by header hash.
+      description: Retrieves a block by header hash.
+      operationId: get_block
+      requestBody:
+        required: true
+        description: The block's header_hash
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - header_hash
+              properties:
+                header_hash:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  block:
+                    $ref: "#/components/schemas/full_block"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:

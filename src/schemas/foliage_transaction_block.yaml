@@ -1,0 +1,16 @@
+﻿foliage_transaction_block:
+  type: object
+  properties:
+    prev_transaction_block_hash:
+      type: string
+    timestamp:
+      type: integer
+      format: uint64
+    filter_hash:
+      type: string
+    additions_root:
+      type: string
+    removals_root:
+      type: string
+    transactions_info_hash:
+      type: string

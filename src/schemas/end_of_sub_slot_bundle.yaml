@@ -1,0 +1,11 @@
+﻿end_of_sub_slot_bundle:
+  type: object
+  properties:
+    challenge_chain:
+      $ref: "./challenge_chain_sub_slot.yaml#/challenge_chain_sub_slot"
+    infused_challenge_chain:
+      $ref: "./infused_challenge_chain_sub_slot.yaml#/infused_challenge_chain_sub_slot"
+    reward_chain:
+      $ref: "./reward_chain_sub_slot.yaml#/reward_chain_sub_slot"
+    proofs:
+      $ref: "./sub_slot_proofs.yaml#/sub_slot_proofs"

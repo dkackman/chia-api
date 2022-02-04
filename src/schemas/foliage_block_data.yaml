@@ -1,0 +1,13 @@
+﻿foliage_block_data:
+  type: object
+  properties:
+    unfinished_reward_block_hash:
+      type: string
+    pool_target:
+      $ref: "./pool_target.yaml#/pool_target"
+    pool_signature:
+      type: string
+    farmer_reward_puzzle_hash:
+      type: string
+    extension_data:
+      type: string

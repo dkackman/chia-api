@@ -1,0 +1,15 @@
+﻿foliage:
+  type: object
+  properties:
+    prev_block_hash:
+      type: string
+    reward_block_hash:
+      type: string
+    foliage_block_data:
+      $ref: "./foliage_block_data.yaml#/foliage_block_data"
+    foliage_block_data_signature:
+      type: string
+    foliage_transaction_block_hash:
+      type: string
+    foliage_transaction_block_signature:
+      type: string

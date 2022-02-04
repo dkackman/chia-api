@@ -1,0 +1,9 @@
+﻿sub_slot_proofs:
+  type: object
+  properties:
+    challenge_chain_slot_proof:
+      $ref: "./vdf_proof.yaml#/vdf_proof"
+    infused_challenge_chain_slot_proof:
+      $ref: "./vdf_proof.yaml#/vdf_proof"
+    reward_chain_slot_proof:
+      $ref: "./vdf_proof.yaml#/vdf_proof"

@@ -2,7 +2,8 @@
   type: object
   properties:
     authentication_token_timeout:
-      type: byte
+      type: integer
+      format: uint8
       nullable: true
     current_difficulty:
       type: integer

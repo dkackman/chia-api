@@ -1,0 +1,8 @@
+﻿pool_target:
+  type: object
+  properties:
+    puzzle_hash:
+      type: string
+    max_height:
+      type: integer
+      format: uint32

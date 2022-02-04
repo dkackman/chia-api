@@ -1,0 +1,35 @@
+﻿reward_chain_block:
+  type: object
+  properties:
+    weight:
+      type: integer
+      format: bigint
+    height:
+      type: integer
+      format: uint32
+    total_iters:
+      type: integer
+      format: bigint
+    signage_point_index:
+      type: integer
+      format: uint8
+    pos_ss_cc_challenge_hash:
+      type: string
+    proof_of_space:
+      $ref: "./proof_of_space.yaml#/proof_of_space"
+    challenge_chain_sp_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    challenge_chain_sp_signature:
+      type: string
+    challenge_chain_ip_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    reward_chain_sp_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    reward_chain_sp_signature:
+      type: string
+    reward_chain_ip_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    infused_challenge_chain_ip_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    is_transaction_block:
+      type: boolean

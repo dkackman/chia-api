@@ -12,7 +12,8 @@
     reward_chain_sp:
       type: string
     signage_point_index:
-      type: byte
+      type: integer
+      format: uint8
     sub_slot_iters:
       type: integer
       format: uint64

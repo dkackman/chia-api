@@ -1,0 +1,12 @@
+﻿reward_chain_sub_slot:
+  type: object
+  properties:
+    end_of_slot_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"
+    challenge_chain_sub_slot_hash:
+      type: string
+    infused_challenge_chain_sub_slot_hash:
+      type: string
+    deficit:
+      type: integer
+      format: uint8

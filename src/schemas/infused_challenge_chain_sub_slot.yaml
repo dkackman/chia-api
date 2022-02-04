@@ -1,0 +1,5 @@
+﻿infused_challenge_chain_sub_slot:
+  type: object
+  properties:
+    infused_challenge_chain_end_of_slot_vdf:
+      $ref: "./vdf_info.yaml#/vdf_info"

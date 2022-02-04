@@ -1,0 +1,19 @@
+﻿transactions_info:
+  type: object
+  properties:
+    generator_root:
+      type: string
+    generator_refs_root:
+      type: string
+    aggregated_signature:
+      type: string
+    fees:
+      type: integer
+      format: uint64
+    cost:
+      type: integer
+      format: uint64
+    reward_claims_incorporated:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"

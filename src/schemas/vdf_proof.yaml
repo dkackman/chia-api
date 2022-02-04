@@ -2,7 +2,8 @@
   type: object
   properties:
     witness_type:
-      type: byte
+      type: integer
+      format: uint8
     witness:
       type: string
     normalized_to_identity:
