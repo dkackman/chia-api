@@ -20,6 +20,35 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
+    header_hash:
+      required: true
+      description: the block's header_hash
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - header_hash
+            properties:
+              header_hash:
+                type: string    
+    start_end:
+        required: true
+        description: Start and end heights
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - start
+                - end
+              properties:
+                start:
+                  type: integer
+                  format: uint32
+                end:
+                  type: integer
+                  format: uint32    
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
@@ -144,17 +173,7 @@ paths:
       description: Retrieves a block record by header hash.
       operationId: get_block_record
       requestBody:
-        required: true
-        description: the block's header_hash
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - header_hash
-              properties:
-                header_hash:
-                  type: string
+        $ref: "#/components/requestBodies/header_hash"
       responses:
         200:
           description: OK
@@ -175,22 +194,7 @@ paths:
       description: Retrieves block records in a range
       operationId: get_block_records
       requestBody:
-        required: true
-        description: Start and end heights
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - start
-                - end
-              properties:
-                start:
-                  type: integer
-                  format: uint32
-                end:
-                  type: integer
-                  format: uint32
+        $ref: "#/components/requestBodies/start_end"
       responses:
         200:
           description: OK
@@ -245,17 +249,7 @@ paths:
       description: Retrieves a block by header hash.
       operationId: get_block
       requestBody:
-        required: true
-        description: The block's header_hash
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - header_hash
-              properties:
-                header_hash:
-                  type: string
+        $ref: "#/components/requestBodies/header_hash"
       responses:
         200:
           description: OK
@@ -268,6 +262,29 @@ paths:
                     $ref: "#/components/schemas/full_block"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_blocks:
+    post:
+      tags:
+        - Blocks
+      summary: Get the blocks between a start and end height.
+      description: Get the blocks between a start and end height
+      operationId: get_blocks
+      requestBody:
+        $ref: "#/components/requestBodies/start_end"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blocks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/full_block"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"                  
   /get_blockchain_state:
     post:
       tags:
