@@ -30,6 +30,8 @@ components:
       $ref: "./schemas/block_record.yaml#/block_record"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
+    mempool_item:
+      $ref: "./schemas/mempool_item.yaml#/mempool_item"
     node_type:
       $ref: "./schemas/node_type.yaml#/node_type"
     apiResponse:
@@ -273,6 +275,81 @@ paths:
                   space:
                     type: integer
                     format: bigint
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_all_mempool_tx_ids:
+    post:
+      tags:
+        - Mempool
+      summary: Returns a list of all transaction IDs (spend bundle hashes) in the mempool.
+      operationId: get_all_mempool_tx_ids
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tx_ids:
+                    type: array
+                    items:
+                      type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_all_mempool_items:
+    post:
+      tags:
+        - Mempool
+      summary: Returns all items in the mempool.
+      operationId: get_all_mempool_items
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mempool_items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/mempool_item"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_mempool_item_by_tx_id:
+    post:
+      tags:
+        - Mempool
+      summary: Returns a specific item from the mempool.
+      operationId: get_mempool_item_by_tx_id
+      requestBody:
+        required: true
+        description: The tx id.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tx_id
+              properties:
+                tx_id:
+                  type: string
+                  format: hex
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mempool_item:
+                    $ref: "#/components/schemas/mempool_item"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:

@@ -1,0 +1,9 @@
+﻿condition_with_args:
+  type: object
+  properties:
+    opcode:
+      type: string
+    vars:
+      type: array
+      items:
+        type: string

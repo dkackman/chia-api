@@ -1,0 +1,25 @@
+﻿mempool_item:
+  type: object
+  properties:
+    spend_bundle:
+      $ref: "./spend_bundle.yaml#/spend_bundle"
+    fee:
+      type: integer
+      format: uint64
+    n_p_c_result:
+      $ref: "./npc_result.yaml#/npc_result"
+    cost:
+      type: integer
+      format: uint64
+    spend_budndle_name:
+      type: string
+    additions:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    removals:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    program:
+      type: string

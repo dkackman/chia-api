@@ -1,0 +1,11 @@
+﻿npc:
+  type: object
+  properties:
+    coin_name:
+      type: string
+    puzzle_hash:
+      type: string
+    conditions:
+      type: array
+      items:
+        $ref: "./condition.yaml#/condition"

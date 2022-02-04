@@ -1,0 +1,9 @@
+﻿coin_spend:
+  type: object
+  properties:
+    coin:
+      $ref: "./coin.yaml#/coin"
+    puzzle_reveal:
+      type: string
+    solution:
+      type: string

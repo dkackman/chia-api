@@ -1,0 +1,10 @@
+﻿coin:
+  type: object
+  properties:
+    parent_coin_info:
+      type: string
+    puzzle_hash:
+      type: string
+    amount:
+      type: integer
+      format: uint64

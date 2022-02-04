@@ -1,0 +1,9 @@
+﻿spend_bundle:
+  type: object
+  properties:
+    aggregated_signature:
+      type: string
+    coin_spends:
+      type: array
+      items:
+        $ref: "./coin_spend.yaml#/coin_spend"

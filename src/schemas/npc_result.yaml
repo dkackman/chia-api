@@ -1,0 +1,14 @@
+﻿npc_result:
+  type: object
+  properties:
+    error:
+      type: integer
+      format: uint16
+      nullable: true
+    npc_list:
+      type: array
+      items:
+        $ref: "./npc.yaml#/npc"
+    clvm_cost:
+      type: integer
+      format: uint64
