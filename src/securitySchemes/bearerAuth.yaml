@@ -1,7 +1,4 @@
 bearerAuth:
   type: http # this needs to be 'mutualTLS' which is supported in OAS 3.1.0 but tooling is lagging
   scheme: mutual
-  default: Chia uses mutualTLS bearerAuth where client and server share TLS keys.
-  externalDocs:
-    url: https://github.com/Chia-Network/chia-blockchain/wiki/Farming-on-many-machines#setup-steps
-    description: More information 
+  description: Chia uses mutualTLS bearerAuth where client and server share TLS keys.
