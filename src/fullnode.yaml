@@ -165,6 +165,44 @@ paths:
                     $ref: "#/components/schemas/block_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_block_records:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves block records in a range.
+      description: Retrieves block records in a range
+      operationId: get_block_records
+      requestBody:
+        required: true
+        description: Start and end heights
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - start
+                - end
+              properties:
+                start:
+                  type: integer
+                  format: uint32
+                end:
+                  type: integer
+                  format: uint32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  block_records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/block_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"                  
   /get_block_record_by_height:
     post:
       tags:
