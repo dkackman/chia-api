@@ -4,55 +4,86 @@
     delay:
       type: integer
       format: int32
+      description: The number of seconds to delay before beginning the plotting.
     parallel:
       type: boolean
-      default: false      
-    number:
+      default: false
+    n:
       type: integer
       format: int32
-      default: 1      
-    size:
+      default: 1
+      description: The number of plots that will be made, in sequence.
+    k:
       $ref: "./k_size.yaml#/k_size"
     queue:
       type: string
-      default: "default"      
-    temp_dir:
+      default: "default"
+    t:
       type: string
-    temp_dir2:
+      description: >
+        Define the temporary directory for plot creation. This is where Plotting 
+        Phase 1 (Forward Propagation) and Phase 2 (Backpropagation) both occur. 
+        The -t dir requires the largest working space: normally about 2.5 times the size of the final plot.
+    t2:
       type: string
-    destination_dir:
+      description: Define a secondary temporary directory for plot creation. This is where Plotting Phase 3 (Compression) and Phase 4 (Checkpoints) occur.
+    d:
       type: string
-    buffer:
+      description:
+        Define the final location for plot(s). Of course, -d should have enough free space as the final size of the
+        plot. This directory is automatically added to your ~/.chia/VERSION/config/config.yaml file.
+    b:
       type: integer
       format: int32
-      default: 4608      
-    buckets:
+      default: 4608
+      description:
+        Define memory/RAM usage. Default is 4608 (4.6 GiB). More RAM will marginally increase speed of plot creation.
+        Please bear in mind that this is what is allocated to the plotting algorithm alone. Code, container, libraries etc.
+        will require additional RAM from your system.
+    u:
       type: integer
       format: int32
-      default: 128      
-    alt_fingerprint:
+      default: 128
+      description:
+        More buckets require less RAM but more random seeks to disk. With spinning disks
+        you want less buckets and with NVMe more buckets. There is no significant benefit from using smaller buckets - just use 128
+    a:
       type: integer
       format: uint32
       nullable: true
-    pool_contract_address:
+      description:
+        This is the key Fingerprint used to select both the Farmer and Pool Public Keys to use.
+        Utilize this when you want to select one key out of several in your keychain.
+    c:
       type: string
-    pool_public_key:
+      description: The pool contract address.
+    p:
       type: string
-    farmer_public_key:
+      description: This is your "Pool Public Key". Utilise this when you want to
+        create plots on other machines for which you do not want to give full chia account access.
+    f:
       type: string
+      description:
+        This is your "Farmer Public Key". Utilise this when you want to create plots on other
+        machines for which you do not want to give full chia account access
     memo:
       type: string
-    no_bit_field:
+    e:
       type: boolean
-      default: false      
-    num_threads:
+      default: false
+      description: Setting to true will disable the bitfield plotting algorithm,
+        and revert back to the older b17 plotting style. After 1.0.4 it's better to use bitfield for most cases
+    r:
       type: integer
       format: int32
-      default: 2      
-    exclude_final_dir:
+      default: 2
+      description: The number of threads to devote to each plot.
+    x:
       type: boolean
-      default: false      
-    override_k:
+      default: false
+      description: Skips adding [final dir] to harvester for farming.
+    overrideK:
       type: boolean
       default: false
       nullable: true
+      description: Only needed when k is set to 25
