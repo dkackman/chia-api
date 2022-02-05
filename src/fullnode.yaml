@@ -32,6 +32,7 @@ components:
             properties:
               header_hash:
                 type: string
+                format: hex                
     start_end:
       required: true
       description: Start and end heights
@@ -52,6 +53,19 @@ components:
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
+    coin_records:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              coin_records:
+                type: array
+                items:
+                  $ref: "#/components/schemas/coin_record"
+            allOf:
+              - $ref: "#/components/schemas/apiResponse"                  
   schemas:
     blockchain_state:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
@@ -376,10 +390,12 @@ paths:
                   properties:
                     sp_hash:
                       type: string
+                      format: hex                      
                 - type: object
                   properties:
                     challenge_hash:
                       type: string
+                      format: hex
       responses:
         200:
           description: OK
@@ -471,8 +487,10 @@ paths:
               properties:
                 newer_block_header_hash:
                   type: string
+                  format: hex                  
                 older_block_header_hash:
                   type: string
+                  format: hex
       responses:
         200:
           description: OK
@@ -506,6 +524,7 @@ paths:
                     type: array
                     items:
                       type: string
+                      format: hex
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_all_mempool_items:
@@ -584,18 +603,7 @@ paths:
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  coin_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/coin_records"
   /get_coin_records_by_puzzle_hashes:
     post:
       tags:
@@ -621,18 +629,7 @@ paths:
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  coin_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/coin_records"
   /get_coin_record_by_name:
     post:
       tags:
@@ -689,18 +686,7 @@ paths:
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  coin_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/coin_records"
   /get_coin_records_by_parent_ids:
     post:
       tags:
@@ -726,18 +712,7 @@ paths:
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  coin_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/coin_records"
   /get_puzzle_and_solution:
     post:
       tags:
