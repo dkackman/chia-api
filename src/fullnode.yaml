@@ -546,6 +546,47 @@ paths:
                     $ref: "#/components/schemas/mempool_item"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_coin_records_by_puzzle_hash:
+    post:
+      tags:
+        - Coins
+      summary: Retrieves the coins for a given puzzlehash, by default returns unspent coins.
+      operationId: get_coin_records_by_puzzle_hash
+      requestBody:
+        required: true
+        description: The puzzle_hash.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - puzzle_hash
+              properties:
+                puzzle_hash:
+                  type: string
+                  format: hex
+                start_height:
+                  type: integer
+                  format: uint32
+                end_height:
+                  type: integer
+                  format: uint32
+                include_spent_coins:
+                  type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coin_records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/coin_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
