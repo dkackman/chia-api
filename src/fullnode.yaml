@@ -59,6 +59,17 @@ components:
       $ref: "./schemas/block_record.yaml#/block_record"
     coin_record:
       $ref: "./schemas/coin_record.yaml#/coin_record"
+    coin_search_options:
+      type: object
+      properties:
+        start_height:
+          type: integer
+          format: uint32
+        end_height:
+          type: integer
+          format: uint32
+        include_spent_coins:
+          type: boolean
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     full_block:
@@ -565,14 +576,8 @@ paths:
                 puzzle_hash:
                   type: string
                   format: hex
-                start_height:
-                  type: integer
-                  format: uint32
-                end_height:
-                  type: integer
-                  format: uint32
-                include_spent_coins:
-                  type: boolean
+              allOf:
+                - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
           description: OK
@@ -608,14 +613,8 @@ paths:
                   items:
                     type: string
                     format: hex
-                start_height:
-                  type: integer
-                  format: uint32
-                end_height:
-                  type: integer
-                  format: uint32
-                include_spent_coins:
-                  type: boolean
+              allOf:
+                - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
           description: OK
@@ -660,7 +659,44 @@ paths:
                   coin_record:
                     $ref: "#/components/schemas/coin_record"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_coin_records_by_names:
+    post:
+      tags:
+        - Coins
+      summary: Retrieves the coins for given coin IDs, by default returns unspent coins.
+      operationId: get_coin_records_by_names
+      requestBody:
+        required: true
+        description: The coin names.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - names
+              properties:
+                names:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+              allOf:
+                - $ref: "#/components/schemas/coin_search_options"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coin_records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/coin_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
