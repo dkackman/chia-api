@@ -70,6 +70,8 @@ components:
           format: uint32
         include_spent_coins:
           type: boolean
+    coin_spend:
+      $ref: "./schemas/coin_spend.yaml#/coin_spend"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     full_block:
@@ -732,6 +734,41 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/coin_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_puzzle_and_solution:
+    post:
+      tags:
+        - Coins
+      summary: Retrieves a coin solution.
+      operationId: get_puzzle_and_solution
+      requestBody:
+        required: true
+        description: The coin id and height
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+                - height
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+                height:
+                  type: integer
+                  format: uint32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coin_solution:
+                    $ref: "#/components/schemas/coin_spend"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
