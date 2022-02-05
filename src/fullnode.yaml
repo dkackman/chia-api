@@ -697,6 +697,43 @@ paths:
                       $ref: "#/components/schemas/coin_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_coin_records_by_parent_ids:
+    post:
+      tags:
+        - Coins
+      summary: Retrieves the coins for given parent coin IDs, by default returns unspent coins.
+      operationId: get_coin_records_by_parent_ids
+      requestBody:
+        required: true
+        description: The parent ids.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - parent_ids
+              properties:
+                parent_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+              allOf:
+                - $ref: "#/components/schemas/coin_search_options"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coin_records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/coin_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
