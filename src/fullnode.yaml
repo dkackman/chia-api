@@ -630,6 +630,37 @@ paths:
                       $ref: "#/components/schemas/coin_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_coin_record_by_name:
+    post:
+      tags:
+        - Coins
+      summary: Retrieves a coin record by it's name.
+      operationId: get_coin_record_by_name
+      requestBody:
+        required: true
+        description: The coin name.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  format: hex
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coin_record:
+                    $ref: "#/components/schemas/coin_record"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"                  
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
