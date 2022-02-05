@@ -63,10 +63,14 @@ components:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     full_block:
       $ref: "./schemas/full_block.yaml#/full_block"
+    end_of_sub_slot_bundle:
+      $ref: "./schemas/end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle"
     mempool_item:
       $ref: "./schemas/mempool_item.yaml#/mempool_item"
     node_type:
       $ref: "./schemas/node_type.yaml#/node_type"
+    signage_point:
+      $ref: "./schemas/signage_point.yaml#/signage_point"
     unfinished_header_block:
       $ref: "./schemas/unfinished_header_block.yaml#/unfinished_header_block"
     apiResponse:
@@ -338,6 +342,54 @@ paths:
                     items:
                       $ref: "#/components/schemas/coin_record"
                 allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_recent_signage_point_or_eos:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves a recent signage point or end of slot.
+      description: Retrieves a recent signage point or end of slot.
+      operationId: get_recent_signage_point_or_eos
+      requestBody:
+        required: true
+        description: The signage point hash or challenge hash. If both are present sp_hash takes precedence.
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    sp_hash:
+                      type: string
+                - type: object
+                  properties:
+                    challenge_hash:
+                      type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    description: Type returned when a sp_hash is provided in the request
+                    properties:
+                      signage_point:
+                        $ref: "#/components/schemas/signage_point"
+                  - type: object
+                    description: Type returned when a challenge_hash is provided in the request
+                    properties:
+                      eos:
+                        $ref: "#/components/schemas/end_of_sub_slot_bundle"
+                allOf:
+                  - type: object
+                    properties:
+                      time_received:
+                        type: number
+                        format: double
+                      reverted:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:
     post:
