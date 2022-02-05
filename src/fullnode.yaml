@@ -84,6 +84,8 @@ components:
       $ref: "./schemas/node_type.yaml#/node_type"
     signage_point:
       $ref: "./schemas/signage_point.yaml#/signage_point"
+    spend_bundle:
+      $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
     unfinished_header_block:
       $ref: "./schemas/unfinished_header_block.yaml#/unfinished_header_block"
     apiResponse:
@@ -769,6 +771,36 @@ paths:
                 properties:
                   coin_solution:
                     $ref: "#/components/schemas/coin_spend"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /push_tx:
+    post:
+      tags:
+        - Coins
+      summary: Pushes a transaction / spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      operationId: push_tx
+      requestBody:
+        required: true
+        description: The spend bundle
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spend_bundle
+              properties:
+                spend_bundle:
+                  $ref: "#/components/schemas/spend_bundle"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
