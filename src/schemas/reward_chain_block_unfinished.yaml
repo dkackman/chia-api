@@ -5,7 +5,8 @@
       type: integer
       format: bigint
     signage_point_index:
-      type: byte
+      type: integer
+      format: uint8
     pos_ss_cc_challenge_hash:
       type: string
     proof_of_space:

@@ -57,6 +57,8 @@ components:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
       $ref: "./schemas/block_record.yaml#/block_record"
+    coin_record:
+      $ref: "./schemas/coin_record.yaml#/coin_record"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     full_block:
@@ -308,6 +310,33 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/unfinished_header_block"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_additions_and_removals:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves the additions and removals for a certain block.
+      description: Retrieves the additions and removals (state transitions) for a certain block. Returns coin records for each addition and removal.
+      operationId: get_additions_and_removals
+      requestBody:
+        $ref: "#/components/requestBodies/header_hash"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  additions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/coin_record"
+                  removals:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/coin_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_blockchain_state:
