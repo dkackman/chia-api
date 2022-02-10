@@ -112,6 +112,18 @@ paths:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
         200:
+          $ref: "#/components/responses/fingerprint"  
+  /get_logged_in_fingerprint:
+    post:
+      tags:
+        - Wallet
+      summary: Retrieves the logged in fingerprint.
+      description: Retrieves the logged in fingerprint.
+      operationId: get_logged_in_fingerprint
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
           $ref: "#/components/responses/fingerprint"
 externalDocs:
   description: Find out more about chia
