@@ -203,6 +203,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/mnemonic"
+  /add_key:
+    post:
+      tags:
+        - Key Management
+      summary: Generates a new mnemonic phrase.
+      description: Generates a new mnemonic phrase.
+      operationId: add_key
+      requestBody:
+        description: The mnemonic phrase.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/mnemonic"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: The fingerprint of the new key.
+                properties:
+                  private_key:
+                    type: object
+                    properties:
+                      fingerprint:
+                        type: integer
+                        format: uint32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
