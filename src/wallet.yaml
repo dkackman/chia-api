@@ -46,6 +46,8 @@ components:
       $ref: "./schemas/network_info.yaml#/network_info"
     private_key:
       $ref: "./schemas/private_key.yaml#/private_key"
+    spend_bundle:
+      $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     apiResponse:
@@ -333,6 +335,27 @@ paths:
                     format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /push_tx:
+    post:
+      tags:
+        - Wallet Node
+      summary: Pushes a transaction / spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      operationId: wallet_push_tx
+      requestBody:
+        required: true
+        description: The spend bundle
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spend_bundle
+              properties:
+                spend_bundle:
+                  $ref: "#/components/schemas/spend_bundle"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
