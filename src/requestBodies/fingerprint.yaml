@@ -1,0 +1,13 @@
+fingerprint:
+  description: Request body with a wallet fingerprint.
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - fingerprint
+        properties:
+          fingerprint:
+            type: integer
+            format: uint32
