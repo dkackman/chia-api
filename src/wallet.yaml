@@ -234,6 +234,29 @@ paths:
                         format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /delete_key:
+    post:
+      tags:
+        - Key Management
+      summary: Deletes all keys which have the given public key fingerprint.
+      description: Deletes all keys which have the given public key fingerprint.
+      operationId: delete_key
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
