@@ -44,6 +44,8 @@ components:
       $ref: "./schemas/network_info.yaml#/network_info"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
+    private_key:
+      $ref: "./schemas/private_key.yaml#/private_key"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -149,6 +151,38 @@ paths:
                     properties:
                       keyring_is_locked:
                         type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_private_key:
+    post:
+      tags:
+        - Key Management
+      summary: Retrieves the private key by fingerprint.
+      description: Retrieves the private key by fingerprint.
+      operationId: get_private_key
+      requestBody:
+        $ref: "#/components/requestBodies/fingerprint"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    description: Return type if the private key is found.
+                    properties:
+                      private_key:
+                        $ref: "#/components/schemas/private_key"
+                  - type: object
+                    description: Return type if the privte key is not found.
+                    properties:
+                      private_key:
+                        type: object
+                        properties:
+                          fingerprint:
+                            type: integer
+                            format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:

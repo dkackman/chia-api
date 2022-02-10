@@ -1,0 +1,20 @@
+private_key:
+  type: object
+  properties:
+    fingerprint:
+      type: integer
+      format: uint32
+    sk:
+      type: string
+      format: hex
+    pk: 
+      type: string
+      format: hex
+    farmer_pk: 
+      type: string
+      format: hex
+    pool_pk: 
+      type: string
+      format: hex
+    seed: 
+      type: string
