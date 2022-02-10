@@ -242,21 +242,38 @@ paths:
       description: Deletes all keys which have the given public key fingerprint.
       operationId: delete_key
       requestBody:
-        description: The fingerprint
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - fingerprint
-              properties:
-                fingerprint:
-                  type: integer
-                  format: uint32
+        $ref: "#/components/requestBodies/fingerprint"
       responses:
         200:
           $ref: "#/components/responses/empty"
+  /check_delete_key:
+    post:
+      tags:
+        - Key Management
+      summary: Determines if it is safe to delete a private key.
+      description: Determines if it is safe to delete a private key. Returns whether it is used for farming, pooling, or has a balance.
+      operationId: check_delete_key
+      requestBody:
+        $ref: "#/components/requestBodies/fingerprint"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fingerprint:
+                    type: integer
+                    format: uint32
+                  used_for_farmer_rewards:
+                    type: boolean
+                  used_for_pool_rewards:
+                    type: boolean
+                  wallet_balance:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
