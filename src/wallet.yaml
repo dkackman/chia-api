@@ -286,6 +286,53 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/empty"
+  /get_sync_status:
+    post:
+      tags:
+        - Wallet Node
+      summary: Retreives the sync status of the wallet.
+      description: Retreives the sync status of the wallet.
+      operationId: get_sync_status
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  synced:
+                    type: boolean
+                  syncing:
+                    type: boolean
+                  genesis_initialized:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_height_info:
+    post:
+      tags:
+        - Wallet Node
+      summary: Retreives the sync height of the wallet.
+      description: Retreives the sync height of the wallet.
+      operationId: get_height_info
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  height:
+                    type: integer
+                    format: uint32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
