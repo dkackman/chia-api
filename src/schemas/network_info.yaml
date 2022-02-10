@@ -1,0 +1,11 @@
+network_info:
+  type: object
+  description: Basic information about the current network.
+  required:
+    - network_name
+    - network_prefix
+  properties:
+    network_name:
+      type: "string"
+    network_prefix:
+      type: "string"
