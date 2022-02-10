@@ -125,6 +125,35 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/fingerprint"
+  /get_public_keys:
+    post:
+      tags:
+        - Wallet
+      summary: Retrieves all public keys on the node.
+      description: Retrieves all public keys on the node.
+      operationId: get_public_keys
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    properties:
+                      public_key_fingerprints:
+                        type: array
+                        items:
+                          type: integer
+                          format: uint32
+                  - type: object
+                    properties:
+                      keyring_is_locked:
+                        type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
