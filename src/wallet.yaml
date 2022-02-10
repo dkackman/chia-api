@@ -40,12 +40,14 @@ components:
             allOf:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
+    mnemonic:
+      $ref: "./schemas/mnemonic.yaml#/mnemonic"
     network_info:
       $ref: "./schemas/network_info.yaml#/network_info"
-    wallet_balance:
-      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     private_key:
       $ref: "./schemas/private_key.yaml#/private_key"
+    wallet_balance:
+      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -185,6 +187,22 @@ paths:
                             format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /generate_mnemonic:
+    post:
+      tags:
+        - Key Management
+      summary: Generates a new mnemonic phrase.
+      description: Generates a new mnemonic phrase.
+      operationId: generate_mnemonic
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/mnemonic"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net

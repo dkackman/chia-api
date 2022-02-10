@@ -1,0 +1,7 @@
+mnemonic:
+  description: 24 words of entropy.
+  type: array
+  items:
+    type: string
+  minItems: 24
+  maxItems: 24
