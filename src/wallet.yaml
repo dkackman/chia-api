@@ -48,15 +48,17 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-  - name: Wallet
+  - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
-  - name: Standard Wallet
-    description: Methods for standard wallet operations.
+  - name: Wallet
+    description: Methods for shared wallet operations.
+  - name: Key Management
+    description: Methods for managing keys.
 paths:
   /get_wallet_balance:
     post:
       tags:
-        - Standard Wallet
+        - Wallet
       summary: Get the balance of a specific wallet.
       description: Get the balance of a specific wallet (in units of mojos).
       operationId: get_wallet_balance
@@ -79,7 +81,7 @@ paths:
   /get_network_info:
     post:
       tags:
-        - Wallet
+        - Wallet Node
       summary: Retrieves some information about the current network.
       description: Retrieves some information about the current network.
       operationId: wallet_get_network_info
@@ -104,7 +106,7 @@ paths:
   /log_in:
     post:
       tags:
-        - Wallet
+        - Key Management
       summary: Logs in the wallet with a specific key.
       description: Logs in the wallet with a specific key.
       operationId: log_in
@@ -112,11 +114,11 @@ paths:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
         200:
-          $ref: "#/components/responses/fingerprint"  
+          $ref: "#/components/responses/fingerprint"
   /get_logged_in_fingerprint:
     post:
       tags:
-        - Wallet
+        - Key Management
       summary: Retrieves the logged in fingerprint.
       description: Retrieves the logged in fingerprint.
       operationId: get_logged_in_fingerprint
@@ -128,7 +130,7 @@ paths:
   /get_public_keys:
     post:
       tags:
-        - Wallet
+        - Key Management
       summary: Retrieves all public keys on the node.
       description: Retrieves all public keys on the node.
       operationId: get_public_keys
