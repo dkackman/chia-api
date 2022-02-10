@@ -508,7 +508,7 @@ paths:
         - Key Ring
       summary: Deletes all keys from the keychain.
       description: Deletes all keys from the keychain.
-      operationId: delete_all_keys
+      operationId: daemon_delete_all_keys
       requestBody:
         $ref: "#/components/requestBodies/keychain_request"
       responses:

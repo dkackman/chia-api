@@ -274,6 +274,18 @@ paths:
                     type: boolean
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /delete_all_keys:
+    post:
+      tags:
+        - Key Management
+      summary: Deletes all keys from the keychain.
+      description: Deletes all keys from the keychain.
+      operationId: wallet_delete_all_keys
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
