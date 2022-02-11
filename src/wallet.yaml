@@ -50,6 +50,10 @@ components:
       $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
+    wallet_info:
+      $ref: "./schemas/wallet_info.yaml#/wallet_info"
+    wallet_type:
+      $ref: "./schemas/wallet_type.yaml#/wallet_type"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -62,6 +66,8 @@ tags:
     description: Methods for shared wallet operations.
   - name: Key Management
     description: Methods for managing keys.
+  - name: Wallet Management
+    description: Methods for creating and managing wallets.
 paths:
   /get_wallet_balance:
     post:
@@ -339,7 +345,7 @@ paths:
     post:
       tags:
         - Wallet Node
-      summary: Pushes a transaction / spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      summary: Pushes a transaction / spend bundle to the mempool and blockchain.
       operationId: wallet_push_tx
       requestBody:
         required: true
@@ -356,6 +362,28 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/empty"
+  /get_wallets:
+    post:
+      tags:
+        - Wallet Management
+      summary: Retreives all of the wallets on the node.
+      operationId: get_wallets
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallets:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/wallet_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net
