@@ -1,0 +1,15 @@
+announcement:
+  type: object
+  required:
+    - coin_id
+    - message
+  properties:
+    coin_id:
+      type: string
+      format: hex
+    message:
+      type: string
+      format: hex
+    morph_bytes:
+      type: string
+      format: hex

@@ -1,0 +1,16 @@
+amount_with_puzzlehash:
+  type: object
+  required:
+    - amount
+    - puzzle_hash
+  properties:
+    amount:
+      type: integer
+      format: uint64
+    puzzle_hash:
+      type: string
+      format: hex
+    memos:
+      type: array
+      items:
+        type: string

@@ -42,6 +42,10 @@ components:
             allOf:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
+    amount_with_puzzlehash:
+      $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
+    announcement:
+      $ref: "./schemas/announcement.yaml#/announcement"
     coin:
       $ref: "./schemas/coin.yaml#/coin"
     mnemonic:
@@ -79,6 +83,49 @@ tags:
   - name: Wallet Management
     description: Methods for creating and managing wallets.
 paths:
+  /create_signed_transaction:
+    post:
+      tags:
+        - Wallet
+      summary: Creates and signs a transaction.
+      description: Creates and signs a transaction.
+      operationId: create_signed_transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - additions
+              properties:
+                additions:
+                  type: array
+                  items: 
+                    $ref: "#/components/schemas/amount_with_puzzlehash"
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                coin_announcements:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/announcement"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /send_transaction:
     post:
       tags:
