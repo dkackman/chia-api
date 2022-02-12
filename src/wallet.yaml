@@ -118,14 +118,61 @@ paths:
             application/json:
               schema:
                 type: object
-                required:
-                  - wallet_balance
                 properties:
                   transaction:
                     $ref: "#/components/schemas/transaction_record"
                   transaction_id:
                     type: string
                     format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_transactions:
+    post:
+      tags:
+        - Wallet
+      summary: Retreive a list of trnsactions from a wallet.
+      description: Retreive a list of trnsactions from a wallet.
+      operationId: get_transactions
+      requestBody:
+        description: Request body with the Id of a wallet
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                start:
+                  type: integer
+                  format: uint32
+                  default: 0
+                end:
+                  type: integer
+                  format: uint32
+                  default: 50
+                sort_key:
+                  type: string
+                reverse:
+                  type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/transaction_record"
+                  wallet_id:
+                    type: integer
+                    format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
