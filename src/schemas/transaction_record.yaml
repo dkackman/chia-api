@@ -1,0 +1,70 @@
+transaction_record:
+  type: object
+  description: Used for storing transaction data and status in wallets.
+  properties:
+    confirmed_at_height:
+      type: integer
+      format: uint32
+    created_at_time:
+      type: integer
+      format: uint64
+    to_puzzle_hash:
+      type: string
+      format: hex
+    amount:
+      type: integer
+      format: uint64
+    fee_amount:
+      type: integer
+      format: uint64
+    confirmed:
+      type: boolean
+    sent:
+      type: integer
+      format: uint32
+    spend_bundle:
+      $ref: "./spend_bundle.yaml#/spend_bundle"
+    additions:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    removals:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    wallet_id:
+      type: integer
+      format: uint32
+    sent_to:
+      type: array
+      description:
+        Represents the list of peers that we sent the transaction to, whether each one
+        included it in the mempool, and what the error message (if any) was
+      items:
+        type: object
+        properties:
+          allOf:
+            - type: string
+            - type: integer
+              format: uint8
+            - type: string
+    trade_id:
+      type: string
+      format: hex
+    type:
+      $ref: "./transaction_type.yaml#/transaction_type"
+    name:
+      type: string
+      format: hex
+    memos:
+      type: array
+      items:
+        type: object
+        properties:
+          allOf:
+            - type: string
+              format: hex
+            - type: array
+              items:
+                type: string
+                format: hex

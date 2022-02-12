@@ -1,0 +1,18 @@
+transaction_type:
+  type: integer
+  format: uint8
+  enum:
+    - 0 # INCOMING_TX
+    - 1 # OUTGOING_TX
+    - 2 # COINBASE_REWARD
+    - 3 # FEE_REWARD
+    - 4 # INCOMING_TRADE
+    - 5 # OUTGOING_TRADE
+  description: >-
+    The type of transaction:
+      * 0 INCOMING_TX
+      * 1 OUTGOING_TX
+      * 2 COINBASE_REWARD
+      * 3 FEE_REWARD
+      * 4 INCOMING_TRADE
+      * 5 OUTGOING_TRADE

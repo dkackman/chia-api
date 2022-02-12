@@ -1,0 +1,29 @@
+pool_state:
+  type: object
+  description: >-
+    `PoolState` is a type that is serialized to the blockchain to track the state of the user's pool singleton
+    `target_puzzle_hash` is either the pool address, or the self-pooling address that pool rewards will be paid to.
+    `target_puzzle_hash` is NOT the p2_singleton puzzle that block rewards are sent to.
+    The `p2_singleton` address is the initial address, and the `target_puzzle_hash` is the final destination.
+    `relative_lock_height` is zero when in SELF_POOLING state
+  properties:
+    version:
+      type: integer
+      format: uint8
+    state:
+      $ref: "./pool_singleton_state.yaml#/pool_singleton_state"
+    target_puzzle_hash:
+      type: string
+      format: hex
+      description: ->
+        A puzzle_hash we pay to. When self-farming, this is a main wallet address
+        When farming-to-pool, the pool sends this to the farmer during pool protocol setup
+    owner_pubkey:
+      type: string
+      format: hex
+    pool_url:
+      type: string
+      format: url
+    relative_lock_height:
+      type: integer
+      format: uint32

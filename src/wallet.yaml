@@ -40,16 +40,24 @@ components:
             allOf:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
+    coin:
+      $ref: "./schemas/coin.yaml#/coin"
     mnemonic:
       $ref: "./schemas/mnemonic.yaml#/mnemonic"
     network_info:
       $ref: "./schemas/network_info.yaml#/network_info"
+    pool_state:
+      $ref: "./schemas/pool_state.yaml#/pool_state"
     private_key:
       $ref: "./schemas/private_key.yaml#/private_key"
     spend_bundle:
       $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
+    transaction_record:
+      $ref: "./schemas/transaction_record.yaml#/transaction_record"
+    transaction_type:
+      $ref: "./schemas/transaction_type.yaml#/transaction_type"
     wallet_info:
       $ref: "./schemas/wallet_info.yaml#/wallet_info"
     wallet_type:
@@ -382,6 +390,219 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/wallet_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /create_new_wallet:
+    post:
+      tags:
+        - Wallet Management
+      summary: Creates a new wallet.
+      operationId: create_new_wallet
+      requestBody:
+        required: true
+        description: Details of the wallet to create.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_type
+                - amount
+              properties:
+                wallet_type:
+                  type: string
+                  description: The type of wallet to create.
+                  enum:
+                    - cat_wallet
+                    - rl_wallet
+                    - did_wallet
+                    - pool_wallet
+                name:
+                  type: string
+                  description: User supplied name for the wallet. Will defualt if not provided.
+                amount:
+                  type: integer
+                  format: uint64
+                  description: The amount of mojo to deposit in the new wallet.
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                  description: The transaction fee amount in mojo.
+              oneOf:
+                - type: object
+                  description: Details needed to create a cat_wallet.
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                        - new
+                        - existing
+                    asset_id:
+                      type: string
+                - type: object
+                  description: Details needed to create a rl_wallet.
+                  required:
+                    - rl_type
+                  properties:
+                    rl_type:
+                      type: string
+                      description: The type of RL Wallet to create.
+                      enum:
+                        - admin
+                        - user
+                    interval:
+                      type: integer
+                      format: uint64
+                      description: Rate interval - needed for admin creation only.
+                    limit:
+                      type: integer
+                      format: uint64
+                      description: Rate linit - needed for admin creation only.
+                    pubkey:
+                      type: string
+                      format: hex
+                      description: Public key - needed for admin creation only.
+                - type: object
+                  description: Details needed to create a did_wallet.
+                  required:
+                    - did_type
+                  properties:
+                    did_type:
+                      type: string
+                      description: The type of DId wallet to create.
+                      enum:
+                        - new
+                        - recovery
+                  oneOf:
+                    - type: object
+                      description: Details needed for creating a new RId wallet.
+                      properties:
+                        backup_dids:
+                          type: array
+                          items:
+                            type: string
+                            format: hex
+                        num_of_backup_ids_needed:
+                          type: integer
+                          format: uint64
+                    - type: object
+                      description: Details needed to create a recovery DId wallet.
+                      properties:
+                        filename:
+                          type: string
+                - type: object
+                  description: Details needed to create a pool_wallet.
+                  required:
+                    - mode
+                  properties:
+                    mode:
+                      type: string
+                      description: The pooling mode.
+                      enum:
+                        - new
+                        - recovery
+                  oneOf:
+                    - type: object
+                      description: Details needed for creating a new pool wallet.
+                      required:
+                        - initial_target_state
+                      properties:
+                        initial_target_state:
+                          $ref: "#/components/schemas/pool_state"
+                        p2_singleton_delayed_ph:
+                          type: string
+                          format: hex
+                        p2_singleton_delay_time:
+                          type: integer
+                          format: uint64
+                    - $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: object
+                    description: Response when a CAT wallet is created.
+                    properties:
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      asset_id:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                  - type: object
+                    description: Resposne when a RL wallet is created.
+                    properties:
+                      id:
+                        type: integer
+                        format: uint32
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      origin:
+                        $ref: "#/components/schemas/coin"
+                      pubkey:
+                        type: string
+                        format: hex
+                  - type: object
+                    description: Resposne when a new DId wallet is created.
+                    properties:
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      my_did:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                  - type: object
+                    description: Resposne when a recovery DId wallet is created.
+                    properties:
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      my_did:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      coin_name:
+                        type: string
+                        format: hex
+                      coin_list:
+                        $ref: "#/components/schemas/coin"
+                      newpuzhash:
+                        type: string
+                        format: hex
+                      pubkey:
+                        type: string
+                        format: hex
+                      backup_dids:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                      num_verifications_required:
+                        type: integer
+                        format: uint64
+                  - type: object
+                    description: Resposne when a new pool wallet is created.
+                    properties:
+                      total_fee:
+                        type: integer
+                        format: uint64
+                      transaction:
+                        $ref: "#/components/schemas/transaction_record"
+                      launcher_id:
+                        type: string
+                        format: hex
+                      p2_singleton_puzzle_hash:
+                        type: string
+                        format: hex
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
