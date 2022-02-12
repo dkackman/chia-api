@@ -79,6 +79,55 @@ tags:
   - name: Wallet Management
     description: Methods for creating and managing wallets.
 paths:
+  /send_transaction:
+    post:
+      tags:
+        - Wallet
+      summary: Sends an amount of mojo from then given wallet to the given address.
+      description: Sends an amount of mojo from then given wallet to the given address.
+      operationId: send_transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - amount
+                - address
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                amount:
+                  type: integer
+                  format: uint64
+                address:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                memos:
+                  type: array
+                  items: 
+                    type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_wallet_balance:
     post:
       tags:
