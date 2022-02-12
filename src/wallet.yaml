@@ -134,7 +134,6 @@ paths:
       description: Retreives a list of trnsactions from a wallet.
       operationId: get_transactions
       requestBody:
-        description: Request body with the Id of a wallet
         required: true
         content:
           application/json:
@@ -195,6 +194,43 @@ paths:
                   count:
                     type: integer
                   wallet_id:
+                    type: integer
+                    format: uint32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_next_address:
+    post:
+      tags:
+        - Wallet
+      summary: Returns a new address.
+      description: Returns a new address.
+      operationId: get_next_address
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                new_address:
+                  type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet_id:
+                    type: integer
+                    format: uint32
+                  address:
                     type: string
                     format: hex
                 allOf:
