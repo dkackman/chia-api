@@ -83,8 +83,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Get the balance of a specific wallet.
-      description: Get the balance of a specific wallet (in units of mojos).
+      summary: Retreives the balance of a specific wallet.
+      description: Retreives the balance of a specific wallet (in units of mojos).
       operationId: get_wallet_balance
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -106,8 +106,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Get a specific transaction.
-      description: Get a specific transaction.
+      summary: Retreives a specific transaction.
+      description: Retreives a specific transaction.
       operationId: get_transaction
       requestBody:
         $ref: "#/components/requestBodies/transaction_id"
@@ -130,8 +130,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreive a list of trnsactions from a wallet.
-      description: Retreive a list of trnsactions from a wallet.
+      summary: Retreives a list of trnsactions from a wallet.
+      description: Retreives a list of trnsactions from a wallet.
       operationId: get_transactions
       requestBody:
         description: Request body with the Id of a wallet
@@ -173,6 +173,30 @@ paths:
                   wallet_id:
                     type: integer
                     format: uint32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_transaction_count:
+    post:
+      tags:
+        - Wallet
+      summary: Retreives the number of transactions for a wallet.
+      description: Retreives the number of transactions for a wallet.
+      operationId: get_transaction_count
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  wallet_id:
+                    type: string
+                    format: hex
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
