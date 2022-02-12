@@ -39,11 +39,12 @@ transaction_record:
       type: array
       description:
         Represents the list of peers that we sent the transaction to, whether each one
-        included it in the mempool, and what the error message (if any) was
+        included it in the mempool, and what the error message (if any) was.
+        List[Tuple[str, uint8, Optional[str]]]
       items:
         type: object
         properties:
-          allOf:
+          anyOf:
             - type: string
             - type: integer
               format: uint8
@@ -58,10 +59,11 @@ transaction_record:
       format: hex
     memos:
       type: array
+      description: List[Tuple[bytes32, List[bytes]]]
       items:
         type: object
         properties:
-          allOf:
+          anyOf:
             - type: string
               format: hex
             - type: array
