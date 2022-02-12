@@ -20,10 +20,12 @@ components:
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
-    wallet_id:
-      $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
     fingerprint:
       $ref: "./requestBodies/fingerprint.yaml#/fingerprint"
+    wallet_id:
+      $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
+    transaction_id:
+      $ref: "./requestBodies/transaction_id.yaml#/transaction_id"
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
@@ -98,6 +100,32 @@ paths:
                 properties:
                   wallet_balance:
                     $ref: "#/components/schemas/wallet_balance"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_transaction:
+    post:
+      tags:
+        - Wallet
+      summary: Get a specific transaction.
+      description: Get a specific transaction.
+      operationId: get_transaction
+      requestBody:
+        $ref: "#/components/requestBodies/transaction_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - wallet_balance
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
