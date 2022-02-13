@@ -86,7 +86,88 @@ tags:
     description: Methods for managing keys.
   - name: Wallet Management
     description: Methods for creating and managing wallets.
+  - name: Rate Limited Wallet
+    description: Methods for creating and managing wallets.
 paths:
+  /rl_set_user_info:
+    post:
+      tags:
+        - Rate Limited Wallet
+      summary: Sets user info on a rate limited wallet.
+      description: Sets user info on a rate limited wallet.
+      operationId: rl_set_user_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                interval:
+                  type: integer
+                  format: uint64
+                limit:
+                  type: integer
+                  format: uint64
+                admin_pubkey:
+                  type: string
+                  format: hex
+                origin:
+                  type: object
+                  properties:
+                    parent_coin_info:
+                      type: string
+                      format: hex
+                    puzzle_hash:
+                      type: string
+                      format: hex
+                    amount:
+                      type: integer
+                      format: uint64
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
+  /send_clawback_transaction:
+    post:
+      tags:
+        - Rate Limted Wallet
+      summary: Sends a clawback transaction.
+      description: Sends a clawback transaction.
+      operationId: send_clawback_transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - fee
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                fee:
+                  type: integer
+                  format: uint64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /create_signed_transaction:
     post:
       tags:
@@ -249,12 +330,7 @@ paths:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/empty"
   /get_transaction:
     post:
       tags:
