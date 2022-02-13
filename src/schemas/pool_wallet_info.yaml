@@ -1,0 +1,28 @@
+﻿pool_wallet_info:
+  type: object
+  description:
+    Internal Pool Wallet state, not destined for the blockchain. This can be completely derived with
+    the Singleton's CoinSpends list, or with the information from the WalletPoolStore.
+  properties:
+    current:
+      $ref: "./pool_state.yaml#/pool_state"
+    target:
+      $ref: "./pool_state.yaml#/pool_state"
+    launcher_coin:
+      $ref: "./coin.yaml#/coin"
+    launcher_id:
+      type: string
+      format: hex
+    p2_singleton_puzzle_hash:
+      type: string
+      format: hex
+    current_inner:
+      type: string
+      descriptoion: inner puzzle in current singleton, not revealed yet
+    tip_singleton_coin_id:
+      type: string
+      format: hex
+    singleton_block_height:
+      description: Block height that current PoolState is from
+      type: integer
+      format: uint32

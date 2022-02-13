@@ -70,6 +70,8 @@ components:
       $ref: "./schemas/network_info.yaml#/network_info"
     pool_state:
       $ref: "./schemas/pool_state.yaml#/pool_state"
+    pool_wallet_info:
+      $ref: "./schemas/pool_wallet_info.yaml#/pool_wallet_info"
     private_key:
       $ref: "./schemas/private_key.yaml#/private_key"
     spend_bundle:
@@ -188,6 +190,42 @@ paths:
                   total_fee:
                     type: integer
                     format: uint64
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /pw_absorb_rewards:
+    post:
+      tags:
+        - Pool Wallet
+      summary: Perform a sweep of the p2_singleton rewards controlled by the pool wallet singleton.
+      description: Perform a sweep of the p2_singleton rewards controlled by the pool wallet singleton.
+      operationId: pw_absorb_rewards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                fee:
+                  type: integer
+                  format: uint64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  state:
+                    $ref: "#/components/schemas/pool_wallet_info"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /add_rate_limited_funds:
