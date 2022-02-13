@@ -48,6 +48,8 @@ components:
       $ref: "./schemas/announcement.yaml#/announcement"
     coin:
       $ref: "./schemas/coin.yaml#/coin"
+    farmer_rewards:
+      $ref: "./schemas/farmer_rewards.yaml#/farmer_rewards"
     mnemonic:
       $ref: "./schemas/mnemonic.yaml#/mnemonic"
     network_info:
@@ -233,23 +235,24 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  farmed_amount:
-                    type: integer
-                    format: uint64
-                  pool_reward_amount:
-                    type: integer
-                    format: uint64
-                  farmer_reward_amount:
-                    type: integer
-                    format: uint64
-                  fee_amount:
-                    type: integer
-                    format: uint64
-                  last_height_farmed:
-                    type: integer
-                    format: uint64
+                allOf:
+                  - $ref: "#/components/schemas/farmer_rewards"
+                  - $ref: "#/components/schemas/apiResponse"
+  /delete_unconfirmed_transactions:
+    post:
+      tags:
+        - Wallet
+      summary: Delete all unconfirmed transactions for a given wallet.
+      description: Delete all unconfirmed transactions for a given wallet.
+      operationId: delete_unconfirmed_transactions
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /get_transaction:

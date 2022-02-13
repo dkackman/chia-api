@@ -1,0 +1,18 @@
+farmer_rewards:
+  type: object
+  properties:
+    farmed_amount:
+      type: integer
+      format: uint64
+    pool_reward_amount:
+      type: integer
+      format: uint64
+    farmer_reward_amount:
+      type: integer
+      format: uint64
+    fee_amount:
+      type: integer
+      format: uint64
+    last_height_farmed:
+      type: integer
+      format: uint64
