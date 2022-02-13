@@ -163,7 +163,7 @@ paths:
   /send_clawback_transaction:
     post:
       tags:
-        - Rate Limted Wallet
+        - Rate Limited Wallet
       summary: Sends a clawback transaction.
       description: Sends a clawback transaction.
       operationId: send_clawback_transaction
