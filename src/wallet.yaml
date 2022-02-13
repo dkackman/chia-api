@@ -109,6 +109,39 @@ tags:
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
 paths:
+  /cat_asset_id_to_name:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Gets the name and wallet id assocaited with an asset id.
+      description: Gets the name and wallet id assocaited with an asset id.
+      operationId: cat_asset_id_to_name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - asset_id
+              properties:
+                asset_id:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet_id:
+                    type: integer
+                    format: uint32
+                  name:
+                    type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /cat_get_asset_id:
     post:
       tags:
