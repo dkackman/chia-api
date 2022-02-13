@@ -41,6 +41,20 @@ components:
                 format: uint32
             allOf:
               - $ref: "#/components/schemas/apiResponse"
+    transaction_record:
+      description: OK response with a transaction record and a transaction id.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              transaction:
+                $ref: "#/components/schemas/transaction_record"
+              transaction_id:
+                type: string
+                format: hex
+            allOf:
+              - $ref: "#/components/schemas/apiResponse"
   schemas:
     amount_with_puzzlehash:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
@@ -138,7 +152,7 @@ paths:
                     type: integer
                     format: uint64
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"  
+                  - $ref: "#/components/schemas/apiResponse"
   /add_rate_limited_funds:
     post:
       tags:
@@ -235,19 +249,7 @@ paths:
                   format: uint64
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  transaction_id:
-                    type: string
-                    format: hex
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/transaction_record"
   /create_signed_transaction:
     post:
       tags:
@@ -309,19 +311,7 @@ paths:
                     type: string
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  transaction_id:
-                    type: string
-                    format: hex
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/transaction_record"
   /send_transaction_multi:
     post:
       tags:
@@ -345,19 +335,7 @@ paths:
                 - $ref: "#/components/schemas/transaction_input"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  transaction_id:
-                    type: string
-                    format: hex
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/transaction_record"
   /get_wallet_balance:
     post:
       tags:
@@ -422,19 +400,7 @@ paths:
         $ref: "#/components/requestBodies/transaction_id"
       responses:
         200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  transaction_id:
-                    type: string
-                    format: hex
-                allOf:
-                  - $ref: "#/components/schemas/apiResponse"
+          $ref: "#/components/responses/transaction_record"
   /get_transactions:
     post:
       tags:
