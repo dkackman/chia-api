@@ -1,0 +1,25 @@
+transaction_input:
+  type: object
+  required:
+    - additions
+  properties:
+    additions:
+      type: array
+      items:
+        $ref: "./amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
+    fee:
+      type: integer
+      format: uint64
+      default: 0
+    coins:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    coin_announcements:
+      type: array
+      items:
+        $ref: "./announcement.yaml#/announcement"
+    puzzle_announcements:
+      type: array
+      items:
+        $ref: "./announcement.yaml#/announcement"

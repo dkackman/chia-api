@@ -58,12 +58,14 @@ components:
       $ref: "./schemas/private_key.yaml#/private_key"
     spend_bundle:
       $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
-    wallet_balance:
-      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
+    transaction_input:
+      $ref: "./schemas/transaction_input.yaml#/transaction_input"
     transaction_record:
       $ref: "./schemas/transaction_record.yaml#/transaction_record"
     transaction_type:
       $ref: "./schemas/transaction_type.yaml#/transaction_type"
+    wallet_balance:
+      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     wallet_info:
       $ref: "./schemas/wallet_info.yaml#/wallet_info"
     wallet_type:
@@ -95,22 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - additions
-              properties:
-                additions:
-                  type: array
-                  items: 
-                    $ref: "#/components/schemas/amount_with_puzzlehash"
-                fee:
-                  type: integer
-                  format: uint64
-                  default: 0
-                coin_announcements:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/announcement"
+              $ref: "#/components/schemas/transaction_input"
       responses:
         200:
           description: OK
@@ -119,11 +106,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  transaction:
+                  signed_tx:
                     $ref: "#/components/schemas/transaction_record"
-                  transaction_id:
-                    type: string
-                    format: hex
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /send_transaction:
@@ -158,8 +142,44 @@ paths:
                   format: uint64
                 memos:
                   type: array
-                  items: 
+                  items:
                     type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /send_transaction_multi:
+    post:
+      tags:
+        - Wallet
+      summary: Sends multiple transactions from then given wallet.
+      description: Sends multiple transactions from then given wallet.
+      operationId: send_transaction_multi
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+              allOf:
+                - $ref: "#/components/schemas/transaction_input"
       responses:
         200:
           description: OK
