@@ -228,6 +228,31 @@ paths:
                     $ref: "#/components/schemas/pool_wallet_info"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /pw_status:
+    post:
+      tags:
+        - Pool Wallet
+      summary: Return the complete state of the given Pool wallet.
+      description: Return the complete state of the given Pool wallet.
+      operationId: pw_status
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unconfirmed_transactions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/transaction_record"
+                  state:
+                    $ref: "#/components/schemas/pool_wallet_info"
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /add_rate_limited_funds:
     post:
       tags:
