@@ -110,14 +110,14 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-  - name: Full Node
-    description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
-  - name: Connections
-    description: Methods for managing connections.
   - name: Blocks
     description: Methods for managing blocks.
   - name: Coins
     description: Methods for managing coins.
+  - name: Connections
+    description: Methods for managing connections.
+  - name: Full Node
+    description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
   - name: Mempool
     description: Get information about the mempool.
 paths:

@@ -89,10 +89,10 @@ components:
 tags:
   - name: Daemon
     description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.
-  - name: Plotter
-    description: Methods for creating plos and managing plotters.
   - name: Key Ring
     description: Methods for managing keys and the keyring.
+  - name: Plotter
+    description: Methods for creating plos and managing plotters.
 paths:
   /register_service:
     post:
