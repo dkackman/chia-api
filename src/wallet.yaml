@@ -87,8 +87,58 @@ tags:
   - name: Wallet Management
     description: Methods for creating and managing wallets.
   - name: Rate Limited Wallet
-    description: Methods for creating and managing wallets.
+    description: Rate limited wallet api.
+  - name: Pool Wallet
+    description: Pool wallet api.
 paths:
+  /pw_join_pool:
+    post:
+      tags:
+        - Pool Wallet
+      summary: Joins the given wallet to a pool.
+      description: Joins the given wallet to a pool.
+      operationId: pw_join_pool
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - pool_url
+                - relative_lock_height
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                target_puzzlehash:
+                  type: string
+                  format: hex
+                pool_url:
+                  type: string
+                  format: url
+                relative_lock_height:
+                  type: integer
+                  format: uint32
+                fee:
+                  type: integer
+                  format: uint64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  total_fee:
+                    type: integer
+                    format: uint64
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"  
   /add_rate_limited_funds:
     post:
       tags:
