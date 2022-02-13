@@ -89,6 +89,36 @@ tags:
   - name: Rate Limited Wallet
     description: Methods for creating and managing wallets.
 paths:
+  /add_rate_limited_funds:
+    post:
+      tags:
+        - Rate Limted Wallet
+      summary: Adds rate limited funds.
+      description: Adds rate limited funds.
+      operationId: add_rate_limited_funds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - amount
+                - fee
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                amount:
+                  type: integer
+                  format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
   /rl_set_user_info:
     post:
       tags:
