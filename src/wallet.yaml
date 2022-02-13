@@ -92,7 +92,7 @@ paths:
   /add_rate_limited_funds:
     post:
       tags:
-        - Rate Limted Wallet
+        - Rate Limited Wallet
       summary: Adds rate limited funds.
       description: Adds rate limited funds.
       operationId: add_rate_limited_funds
