@@ -218,6 +218,40 @@ paths:
                     $ref: "#/components/schemas/wallet_balance"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_farmed_amount:
+    post:
+      tags:
+        - Wallet
+      summary: Retreives the amount farmed.
+      description: Retreives the amount farmed.
+      operationId: get_farmed_amount
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  farmed_amount:
+                    type: integer
+                    format: uint64
+                  pool_reward_amount:
+                    type: integer
+                    format: uint64
+                  farmer_reward_amount:
+                    type: integer
+                    format: uint64
+                  fee_amount:
+                    type: integer
+                    format: uint64
+                  last_height_farmed:
+                    type: integer
+                    format: uint64
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_transaction:
     post:
       tags:
