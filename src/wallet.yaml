@@ -168,6 +168,34 @@ paths:
                         type: integer
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /cancel_offer:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Cancels an offer.
+      description: Cancels an offer.
+      operationId: cancel_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - trade_id
+              properties:
+                trade_id:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                secure:
+                  type: boolean
+      responses:
+        200:
+          $ref: "#/components/responses/empty"
   /get_offer:
     post:
       tags:
