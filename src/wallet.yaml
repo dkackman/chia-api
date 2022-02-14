@@ -113,6 +113,36 @@ tags:
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
 paths:
+  /did_get_recovery_list:
+    post:
+      tags:
+        - DID Wallet
+      summary: Retreives the recovery list for a given DID wallet.
+      description: Retreives the recovery list for a given DID wallet.
+      operationId: did_get_recovery_list
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet_id:
+                    type: integer
+                    format: uint32
+                  recover_list:
+                    type: array
+                    items:
+                      type: string
+                      format: hex
+                  num_required:
+                    type: integer
+                    format: uint64
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /did_get_did:
     post:
       tags:
