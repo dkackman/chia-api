@@ -1,0 +1,17 @@
+trade_status:
+  type: integer
+  enum:
+    - 0 # PENDING_ACCEPT
+    - 1 # PENDING_CONFIRM
+    - 2 # PENDING_CANCEL
+    - 3 # CANCELLED
+    - 4 # CONFIRMED
+    - 5 # FAILED
+  description: >-
+    The status of a trade:
+    * 0 PENDING_ACCEPT
+    * 1 PENDING_CONFIRM
+    * 2 PENDING_CANCEL
+    * 3 CANCELLED
+    * 4 CONFIRMED
+    * 5 FAILED

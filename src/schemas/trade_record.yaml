@@ -1,0 +1,46 @@
+trade_record:
+  type: object
+  description: Used for storing transaction data and status in wallets.
+  properties:
+    confirmed_at_height:
+      type: integer
+      format: uint32
+    accepted_at_time:
+      type: integer
+      format: uint64
+      nullable: true
+    created_at_time:
+      type: integer
+      format: uint64
+    is_my_offer:
+      type: boolean
+    sent:
+      type: integer
+      format: uint32
+    offer:
+      type: string
+    taken_offer:
+      type: string
+    coins_of_interest:
+      type: array
+      items:
+        $ref: "./coin.yaml#/coin"
+    trade_id:
+      type: string
+      format: hex
+    status:
+      $ref: "./trade_status.yaml#/trade_status"
+    sent_to:
+      type: array
+      description:
+        Represents the list of peers that we sent the transaction to, whether each one
+        included it in the mempool, and what the error message (if any) was.
+        List[Tuple[str, uint8, Optional[str]]]
+      items:
+        type: object
+        properties:
+          anyOf:
+            - type: string
+            - type: integer
+              format: uint8
+            - type: string
