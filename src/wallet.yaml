@@ -168,6 +168,34 @@ paths:
                         type: integer
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_cat_list:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Retreives the list of CATs.
+      description: Retreives the list of CATs.
+      operationId: get_cat_list
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cat_list:
+                    type: array
+                    description: dict_values[str, dict[str, str]]
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: object
+                        additionalProperties:
+                          type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /cancel_offer:
     post:
       tags:
@@ -183,6 +211,7 @@ paths:
               type: object
               required:
                 - trade_id
+                - secure
               properties:
                 trade_id:
                   type: string
