@@ -111,6 +111,37 @@ tags:
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
 paths:
+  /check_offer_validity:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Checks the validity of an offer.
+      description: Checks the validity of an offer.
+      operationId: check_offer_validity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - offer
+              properties:
+                offer:
+                  type: string
+                  format: hex
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /get_offer_summary:
     post:
       tags:
