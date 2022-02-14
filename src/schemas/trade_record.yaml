@@ -39,8 +39,8 @@ trade_record:
       items:
         type: object
         properties:
-          anyOf:
-            - type: string
-            - type: integer
-              format: uint8
-            - type: string
+        anyOf:
+          - type: string
+          - type: integer
+            format: uint8
+          - type: string

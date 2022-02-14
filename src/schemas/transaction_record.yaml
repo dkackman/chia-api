@@ -63,10 +63,10 @@ transaction_record:
       items:
         type: object
         properties:
-          anyOf:
-            - type: string
+        anyOf:
+          - type: string
+            format: hex
+          - type: array
+            items:
+              type: string
               format: hex
-            - type: array
-              items:
-                type: string
-                format: hex
