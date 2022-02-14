@@ -113,6 +113,53 @@ tags:
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
 paths:
+  /did_create_attest:
+    post:
+      tags:
+        - DID Wallet
+      summary: Creates an attestation file for the given DID wallet.
+      description: Creates an attestation file for the given DID wallet.
+      operationId: did_create_attest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - coin_name
+                - pubkey
+                - puzhash
+                - filename
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                coin_name:
+                  type: string
+                  format: hex
+                pubkey:
+                  type: string
+                  format: hex
+                puzhash:
+                  type: string
+                  format: hex
+                filename:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pubkey:
+                    type: string
+                    format: hex
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /did_get_pubkey:
     post:
       tags:
