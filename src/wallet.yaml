@@ -98,6 +98,8 @@ components:
 tags:
   - name: Coloured Coin Wallet
     description: Coloured coins, trades, and offers.
+  - name: DID Wallet
+    description: Distributed Identity wallet.
   - name: Key Management
     description: Methods for managing keys.
   - name: Pool Wallet
