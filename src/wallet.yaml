@@ -142,6 +142,89 @@ paths:
                     $ref: "#/components/schemas/trade_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /get_offer:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Retreives an offer.
+      description: Retreives an offer.
+      operationId: get_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - offer
+              properties:
+                offer:
+                  type: string
+                  format: hex
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trade_record:
+                    $ref: "#/components/schemas/trade_record"
+                  offer:
+                    type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_offers:
+    post:
+      tags:
+        - Coloured Coin Wallet
+      summary: Retreives offers.
+      description: Retreives offers.
+      operationId: get_offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start:
+                  type: integer
+                  default: 0
+                end:
+                  type: integer
+                  default: 10
+                exclude_my_offers:
+                  type: boolean
+                exclude_taken_offers:
+                  type: boolean
+                include_completed:
+                  type: boolean
+                sort_key:
+                  type: string
+                reverse:
+                  type: boolean
+                file_contents:
+                  type: boolean
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  trade_records:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/trade_record"
+                  offers:
+                    type: array
+                    items:
+                      type: string
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /check_offer_validity:
     post:
       tags:
