@@ -113,6 +113,41 @@ tags:
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
 paths:
+  /did_create_backup_file:
+    post:
+      tags:
+        - DID Wallet
+      summary: Creates a backup file for the given DID wallet.
+      description: Creates a backup file for the given DID wallet.
+      operationId: did_create_backup_file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - filename
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                filename:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  wallet_id:
+                    type: integer
+                    format: uint32
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
   /did_get_information_needed_for_recovery:
     post:
       tags:
