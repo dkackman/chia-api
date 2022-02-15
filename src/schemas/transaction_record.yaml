@@ -43,12 +43,11 @@ transaction_record:
         List[Tuple[str, uint8, Optional[str]]]
       items:
         type: object
-        properties:
-          anyOf:
-            - type: string
-            - type: integer
-              format: uint8
-            - type: string
+        anyOf:
+          - type: string
+          - type: integer
+            format: uint8
+          - type: string
     trade_id:
       type: string
       format: hex
@@ -62,7 +61,6 @@ transaction_record:
       description: List[Tuple[bytes32, List[bytes]]]
       items:
         type: object
-        properties:
         anyOf:
           - type: string
             format: hex
