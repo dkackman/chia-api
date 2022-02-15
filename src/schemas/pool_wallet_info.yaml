@@ -18,7 +18,7 @@
       format: hex
     current_inner:
       type: string
-      descriptoion: inner puzzle in current singleton, not revealed yet
+      description: inner puzzle in current singleton, not revealed yet
     tip_singleton_coin_id:
       type: string
       format: hex
