@@ -34,26 +34,26 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              fingerprint:
-                type: integer
-                format: uint32
             allOf:
+              - type: object
+                properties:
+                  fingerprint:
+                    type: integer
+                    format: uint32
               - $ref: "#/components/schemas/apiResponse"
     transaction_record:
       description: OK response with a transaction record and a transaction id.
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              transaction:
-                $ref: "#/components/schemas/transaction_record"
-              transaction_id:
-                type: string
-                format: hex
             allOf:
+              - type: object
+                properties:
+                  transaction:
+                    $ref: "#/components/schemas/transaction_record"
+                  transaction_id:
+                    type: string
+                    format: hex
               - $ref: "#/components/schemas/apiResponse"
   schemas:
     amount_with_puzzlehash:
@@ -141,12 +141,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_information_needed_for_recovery:
     post:
@@ -163,24 +163,24 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  my_did:
-                    type: string
-                  coin_name:
-                    type: string
-                  newpuzhash:
-                    type: string
-                  pubkey:
-                    type: string
-                  backup_dids:
-                    type: array
-                    items:
-                      type: string
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      my_did:
+                        type: string
+                      coin_name:
+                        type: string
+                      newpuzhash:
+                        type: string
+                      pubkey:
+                        type: string
+                      backup_dids:
+                        type: array
+                        items:
+                          type: string
                   - $ref: "#/components/schemas/apiResponse"
   /did_create_attest:
     post:
@@ -222,12 +222,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  pubkey:
-                    type: string
-                    format: hex
                 allOf:
+                  - type: object
+                    properties:
+                      pubkey:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_pubkey:
     post:
@@ -244,12 +244,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  pubkey:
-                    type: string
-                    format: hex
                 allOf:
+                  - type: object
+                    properties:
+                      pubkey:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /did_recovery_spend:
     post:
@@ -287,15 +287,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  reason:
-                    type: string
-                    description: >-
-                      The optional reason that the spend failed:
-                        if len(request["attest_filenames"]) < wallet.did_info.num_of_backup_ids_needed:
-                          return {"success": False, "reason": "insufficient messages"}
                 allOf:
+                  - type: object
+                    properties:
+                      reason:
+                        type: string
+                        description: >-
+                          The optional reason that the spend failed:
+                            if len(request["attest_filenames"]) < wallet.did_info.num_of_backup_ids_needed:
+                              return {"success": False, "reason": "insufficient messages"}
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_recovery_list:
     post:
@@ -312,20 +312,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  recover_list:
-                    type: array
-                    items:
-                      type: string
-                      format: hex
-                  num_required:
-                    type: integer
-                    format: uint64
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      recover_list:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                      num_required:
+                        type: integer
+                        format: uint64
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_did:
     post:
@@ -342,16 +342,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  my_did:
-                    type: string
-                  coin_id:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      my_did:
+                        type: string
+                      coin_id:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /did_update_recovery_ids:
     post:
@@ -408,11 +408,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  trade_record:
-                    $ref: "#/components/schemas/trade_record"
                 allOf:
+                  - type: object
+                    properties:
+                      trade_record:
+                        $ref: "#/components/schemas/trade_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_offers_count:
     post:
@@ -429,16 +429,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  total:
-                    type: object
-                    properties:
-                      my_offers_count:
-                        type: integer
-                      taken_offers_count:
-                        type: integer
                 allOf:
+                  - type: object
+                    properties:
+                      total:
+                        type: object
+                        properties:
+                          my_offers_count:
+                            type: integer
+                          taken_offers_count:
+                            type: integer
                   - $ref: "#/components/schemas/apiResponse"
   /get_cat_list:
     post:
@@ -455,18 +455,18 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  cat_list:
-                    type: array
-                    description: dict_values[str, dict[str, str]]
-                    items:
-                      type: object
-                      additionalProperties:
-                        type: object
-                        additionalProperties:
-                          type: string
                 allOf:
+                  - type: object
+                    properties:
+                      cat_list:
+                        type: array
+                        description: dict_values[str, dict[str, str]]
+                        items:
+                          type: object
+                          additionalProperties:
+                            type: object
+                            additionalProperties:
+                              type: string
                   - $ref: "#/components/schemas/apiResponse"
   /cancel_offer:
     post:
@@ -522,13 +522,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  trade_record:
-                    $ref: "#/components/schemas/trade_record"
-                  offer:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      trade_record:
+                        $ref: "#/components/schemas/trade_record"
+                      offer:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /get_offers:
     post:
@@ -568,17 +568,17 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  trade_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/trade_record"
-                  offers:
-                    type: array
-                    items:
-                      type: string
                 allOf:
+                  - type: object
+                    properties:
+                      trade_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/trade_record"
+                      offers:
+                        type: array
+                        items:
+                          type: string
                   - $ref: "#/components/schemas/apiResponse"
   /check_offer_validity:
     post:
@@ -605,11 +605,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  valid:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      valid:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /get_offer_summary:
     post:
@@ -636,20 +636,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  summary:
-                    type: object
-                    properties:
-                      offered:
-                        type: object
-                        additionalProperties:
-                          type: integer
-                      requested:
-                        type: object
-                        additionalProperties:
-                          type: integer
                 allOf:
+                  - type: object
+                    properties:
+                      summary:
+                        type: object
+                        properties:
+                          offered:
+                            type: object
+                            additionalProperties:
+                              type: integer
+                          requested:
+                            type: object
+                            additionalProperties:
+                              type: integer
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
@@ -684,13 +684,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  offer:
-                    type: string
-                  trade_record:
-                    $ref: "#/components/schemas/trade_record"
                 allOf:
+                  - type: object
+                    properties:
+                      offer:
+                        type: string
+                      trade_record:
+                        $ref: "#/components/schemas/trade_record"
                   - $ref: "#/components/schemas/apiResponse"
   /cat_asset_id_to_name:
     post:
@@ -716,14 +716,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  name:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      name:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /cat_get_asset_id:
     post:
@@ -740,14 +740,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  asset_id:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      asset_id:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /cat_spend:
     post:
@@ -817,12 +817,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /cat_get_name:
     post:
@@ -839,14 +839,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  name:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      name:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /pw_join_pool:
     post:
@@ -887,14 +887,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  total_fee:
-                    type: integer
-                    format: uint64
                 allOf:
+                  - type: object
+                    properties:
+                      transaction:
+                        $ref: "#/components/schemas/transaction_record"
+                      total_fee:
+                        type: integer
+                        format: uint64
                   - $ref: "#/components/schemas/apiResponse"
   /pw_self_pool:
     post:
@@ -924,14 +924,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  total_fee:
-                    type: integer
-                    format: uint64
                 allOf:
+                  - type: object
+                    properties:
+                      transaction:
+                        $ref: "#/components/schemas/transaction_record"
+                      total_fee:
+                        type: integer
+                        format: uint64
                   - $ref: "#/components/schemas/apiResponse"
   /pw_absorb_rewards:
     post:
@@ -961,13 +961,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  transaction:
-                    $ref: "#/components/schemas/transaction_record"
-                  state:
-                    $ref: "#/components/schemas/pool_wallet_info"
                 allOf:
+                  - type: object
+                    properties:
+                      transaction:
+                        $ref: "#/components/schemas/transaction_record"
+                      state:
+                        $ref: "#/components/schemas/pool_wallet_info"
                   - $ref: "#/components/schemas/apiResponse"
   /pw_status:
     post:
@@ -984,15 +984,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  unconfirmed_transactions:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/transaction_record"
-                  state:
-                    $ref: "#/components/schemas/pool_wallet_info"
                 allOf:
+                  - type: object
+                    properties:
+                      unconfirmed_transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      state:
+                        $ref: "#/components/schemas/pool_wallet_info"
                   - $ref: "#/components/schemas/apiResponse"
   /add_rate_limited_funds:
     post:
@@ -1110,11 +1110,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  signed_tx:
-                    $ref: "#/components/schemas/transaction_record"
                 allOf:
+                  - type: object
+                    properties:
+                      signed_tx:
+                        $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /send_transaction:
     post:
@@ -1165,14 +1165,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - wallet_id
-              properties:
-                wallet_id:
-                  type: integer
-                  format: uint32
               allOf:
+                - type: object
+                  required:
+                    - wallet_id
+                  properties:
+                    wallet_id:
+                      type: integer
+                      format: uint32
                 - $ref: "#/components/schemas/transaction_input"
       responses:
         200:
@@ -1192,13 +1192,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - wallet_balance
-                properties:
-                  wallet_balance:
-                    $ref: "#/components/schemas/wallet_balance"
                 allOf:
+                  - type: object
+                    required:
+                      - wallet_balance
+                    properties:
+                      wallet_balance:
+                        $ref: "#/components/schemas/wallet_balance"
                   - $ref: "#/components/schemas/apiResponse"
   /get_farmed_amount:
     post:
@@ -1279,16 +1279,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  transactions:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/transaction_record"
-                  wallet_id:
-                    type: integer
-                    format: uint32
                 allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      wallet_id:
+                        type: integer
+                        format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /get_transaction_count:
     post:
@@ -1305,14 +1305,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                  wallet_id:
-                    type: integer
-                    format: uint32
                 allOf:
+                  - type: object
+                    properties:
+                      count:
+                        type: integer
+                      wallet_id:
+                        type: integer
+                        format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /get_next_address:
     post:
@@ -1341,15 +1341,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallet_id:
-                    type: integer
-                    format: uint32
-                  address:
-                    type: string
-                    format: hex
                 allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      address:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
     post:
@@ -1490,16 +1490,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: The fingerprint of the new key.
-                properties:
-                  private_key:
-                    type: object
-                    properties:
-                      fingerprint:
-                        type: integer
-                        format: uint32
                 allOf:
+                  - type: object
+                    description: The fingerprint of the new key.
+                    properties:
+                      private_key:
+                        type: object
+                        properties:
+                          fingerprint:
+                            type: integer
+                            format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /delete_key:
     post:
@@ -1528,18 +1528,18 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  fingerprint:
-                    type: integer
-                    format: uint32
-                  used_for_farmer_rewards:
-                    type: boolean
-                  used_for_pool_rewards:
-                    type: boolean
-                  wallet_balance:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      fingerprint:
+                        type: integer
+                        format: uint32
+                      used_for_farmer_rewards:
+                        type: boolean
+                      used_for_pool_rewards:
+                        type: boolean
+                      wallet_balance:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /delete_all_keys:
     post:
@@ -1568,15 +1568,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  synced:
-                    type: boolean
-                  syncing:
-                    type: boolean
-                  genesis_initialized:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      synced:
+                        type: boolean
+                      syncing:
+                        type: boolean
+                      genesis_initialized:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /get_height_info:
     post:
@@ -1593,12 +1593,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  height:
-                    type: integer
-                    format: uint32
                 allOf:
+                  - type: object
+                    properties:
+                      height:
+                        type: integer
+                        format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /push_tx:
     post:
@@ -1635,13 +1635,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  wallets:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/wallet_info"
                 allOf:
+                  - type: object
+                    properties:
+                      wallets:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/wallet_info"
                   - $ref: "#/components/schemas/apiResponse"
   /create_new_wallet:
     post:

@@ -109,14 +109,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  queue:
-                    type: array
-                    description: Only present when the registered service name is 'chia_plotter'
-                    items:
-                      $ref: "#/components/schemas/queued_plot_info"
                 allOf:
+                  - type: object
+                    properties:
+                      queue:
+                        type: array
+                        description: Only present when the registered service name is 'chia_plotter'
+                        items:
+                          $ref: "#/components/schemas/queued_plot_info"
                   - $ref: "#/components/schemas/apiResponse"
   /start_service:
     post:
@@ -181,11 +181,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  is_running:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      is_running:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /get_version:
     post:
@@ -202,11 +202,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  version:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      version:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /get_status:
     post:
@@ -223,11 +223,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  genesis_initialized:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      genesis_initialized:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /get_plotters:
     post:
@@ -244,13 +244,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  plotters:
-                    type: object
-                    additionalProperties:
-                      $ref: "#/components/schemas/plotter_info"
                 allOf:
+                  - type: object
+                    properties:
+                      plotters:
+                        type: object
+                        additionalProperties:
+                          $ref: "#/components/schemas/plotter_info"
                   - $ref: "#/components/schemas/apiResponse"
   /start_plotting:
     post:
@@ -272,13 +272,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ids:
-                    type: array
-                    items:
-                      type: string
                 allOf:
+                  - type: object
+                    properties:
+                      ids:
+                        type: array
+                        items:
+                          type: string
                   - $ref: "#/components/schemas/apiResponse"
   /stop_plotting:
     post:
@@ -317,11 +317,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  is_keyring_locked:
-                    type: boolean
                 allOf:
+                  - type: object
+                    properties:
+                      is_keyring_locked:
+                        type: boolean
                   - $ref: "#/components/schemas/apiResponse"
   /keyring_status:
     post:
@@ -338,7 +338,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 allOf:
                   - $ref: "#/components/schemas/keyring_status"
                   - $ref: "#/components/schemas/apiResponse"
@@ -556,13 +555,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  private_keys:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/private_key"
                 allOf:
+                  - type: object
+                    properties:
+                      private_keys:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/private_key"
                   - $ref: "#/components/schemas/apiResponse"
   /get_first_private_key:
     post:

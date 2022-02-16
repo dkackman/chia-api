@@ -11,7 +11,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-servers: 
+servers:
   - url: https://localhost:8559
     description: Farmer RPC
 security:
@@ -37,11 +37,11 @@ components:
       properties:
         signage_point:
           $ref: "#/components/schemas/farmer_signage_point"
-        proofs: 
-          # i haven't found this populated in the wild so this is based by examining the python 
+        proofs:
+          # i haven't found this populated in the wild so this is based by examining the python
           # probably wrong but based off of this in farmer.py - line 105
-            # Keep track of harvester plot identifier (str), target sp index, and PoSpace for each challenge
-            # self.proofs_of_space: Dict[bytes32, List[Tuple[str, ProofOfSpace]]] = {}
+          # Keep track of harvester plot identifier (str), target sp index, and PoSpace for each challenge
+          # self.proofs_of_space: Dict[bytes32, List[Tuple[str, ProofOfSpace]]] = {}
           type: array
           # tuple is better supported in opanapi 3.1.0
           # https://stackoverflow.com/questions/57464633/how-to-define-a-json-array-with-concrete-item-definition-for-every-index-i-e-a
@@ -50,20 +50,20 @@ components:
               - type: string
               - $ref: "#/components/schemas/proof_of_space"
             minItems: 2
-            maxItems: 2    
+            maxItems: 2
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-- name: Farmer
-  description: The farmer RPC API is exposed, by default, on port 8559 and contains methods for managing the farmer.
+  - name: Farmer
+    description: The farmer RPC API is exposed, by default, on port 8559 and contains methods for managing the farmer.
 paths:
   /set_reward_targets:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Set the farm and pool reward targets.
       description: Set the farm and pool reward targets.
       operationId: set_reward_targets
@@ -81,11 +81,11 @@ paths:
                   type: "string"
       responses:
         200:
-          $ref: "#/components/responses/empty"                
+          $ref: "#/components/responses/empty"
   /get_reward_targets:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Get the farm and pool reward targets.
       description: Get the farm and pool reward targets.
       operationId: get_reward_targets
@@ -100,56 +100,56 @@ paths:
                 - search_for_private_key
               properties:
                 search_for_private_key:
-                  type: boolean                  
+                  type: boolean
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - farmer_target
-                  - pool_target
-                properties:
-                  farmer_target:
-                    type: "string"
-                  pool_target:
-                    type: "string"
-                  have_farmer_sk:
-                    type: "boolean"
-                  have_pool_sk:
-                    type: "boolean"                    
                 allOf:
+                  - type: object
+                    required:
+                      - farmer_target
+                      - pool_target
+                    properties:
+                      farmer_target:
+                        type: "string"
+                      pool_target:
+                        type: "string"
+                      have_farmer_sk:
+                        type: "boolean"
+                      have_pool_sk:
+                        type: "boolean"
                   - $ref: "#/components/schemas/apiResponse"
   /get_harvesters:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Get the list of harvesters.
       description: Get the list of harvesters.
       operationId: get_harvesters
       requestBody:
-        $ref: "#/components/requestBodies/empty"              
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  harvesters:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/harvester_info"
                 allOf:
+                  - type: object
+                    properties:
+                      harvesters:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/harvester_info"
                   - $ref: "#/components/schemas/apiResponse"
   /get_pool_login_link:
     post:
       tags:
-      - Farmer
-      summary: Get's the pool login link, if anys.
+        - Farmer
+      summary: Get's the pool login link, if any.
       description: Get's the pool login link, if any.
       operationId: get_pool_login_link
       requestBody:
@@ -163,45 +163,45 @@ paths:
                 - launcher_id
               properties:
                 launcher_id:
-                  type: string              
+                  type: string
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  login_link:
-                    type: string
-                    format: url
                 allOf:
+                  - type: object
+                    properties:
+                      login_link:
+                        type: string
+                        format: url
                   - $ref: "#/components/schemas/apiResponse"
   /get_pool_state:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Get's the state of the pool.
       description: Get's the state of the pool.
       operationId: get_pool_state
       requestBody:
-        $ref: "#/components/requestBodies/empty"              
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  pool_state:
-                    $ref: "#/components/schemas/pool_state_info"
                 allOf:
+                  - type: object
+                    properties:
+                      pool_state:
+                        $ref: "#/components/schemas/pool_state_info"
                   - $ref: "#/components/schemas/apiResponse"
   /set_payout_instructions:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Set's a pool's payout instructions.
       description: Set's a pool's payout instructions.
       operationId: set_payout_instructions
@@ -219,14 +219,14 @@ paths:
                 launcher_id:
                   type: string
                 payout_instructions:
-                  type: string  
+                  type: string
       responses:
         200:
           $ref: "#/components/responses/empty"
   /get_signage_point:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Get's a signage point by hash.
       description: Get's a signage point by hash.
       operationId: get_signage_point
@@ -248,13 +248,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/signage_point_bundle"
                 allOf:
+                  - $ref: "#/components/schemas/signage_point_bundle"
                   - $ref: "#/components/schemas/apiResponse"
   /get_signage_points:
     post:
       tags:
-      - Farmer
+        - Farmer
       summary: Get signage points.
       description: Get signage points.
       operationId: get_signage_points
@@ -266,14 +266,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  signage_points:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/signage_point_bundle"
                 allOf:
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - type: object
+                    properties:
+                      signage_points:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/signage_point_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: http://chia.net

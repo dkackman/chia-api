@@ -196,13 +196,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  connections:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/connection_info"
                 allOf:
+                  - type: object
+                    properties:
+                      connections:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/connection_info"
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_record:
     post:
@@ -219,11 +219,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  block_record:
-                    $ref: "#/components/schemas/block_record"
                 allOf:
+                  - type: object
+                    properties:
+                      block_record:
+                        $ref: "#/components/schemas/block_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_records:
     post:
@@ -240,13 +240,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  block_records:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/block_record"
                 allOf:
+                  - type: object
+                    properties:
+                      block_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/block_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_record_by_height:
     post:
@@ -274,11 +274,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  block_record:
-                    $ref: "#/components/schemas/block_record"
                 allOf:
+                  - type: object
+                    properties:
+                      block_record:
+                        $ref: "#/components/schemas/block_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_block:
     post:
@@ -295,11 +295,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  block:
-                    $ref: "#/components/schemas/full_block"
                 allOf:
+                  - type: object
+                    properties:
+                      block:
+                        $ref: "#/components/schemas/full_block"
                   - $ref: "#/components/schemas/apiResponse"
   /get_blocks:
     post:
@@ -316,13 +316,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  blocks:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/full_block"
                 allOf:
+                  - type: object
+                    properties:
+                      blocks:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/full_block"
                   - $ref: "#/components/schemas/apiResponse"
   /get_unfinished_block_headers:
     post:
@@ -339,13 +339,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  headers:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/unfinished_header_block"
                 allOf:
+                  - type: object
+                    properties:
+                      headers:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/unfinished_header_block"
                   - $ref: "#/components/schemas/apiResponse"
   /get_additions_and_removals:
     post:
@@ -362,17 +362,17 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  additions:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
-                  removals:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/coin_record"
                 allOf:
+                  - type: object
+                    properties:
+                      additions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_record"
+                      removals:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_recent_signage_point_or_eos:
     post:
@@ -439,11 +439,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  blockchain_state:
-                    $ref: "#/components/schemas/blockchain_state"
                 allOf:
+                  - type: object
+                    properties:
+                      blockchain_state:
+                        $ref: "#/components/schemas/blockchain_state"
                   - $ref: "#/components/schemas/apiResponse"
   /get_network_info:
     post:
@@ -491,12 +491,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  space:
-                    type: integer
-                    format: bigint
                 allOf:
+                  - type: object
+                    properties:
+                      space:
+                        type: integer
+                        format: bigint
                   - $ref: "#/components/schemas/apiResponse"
   /get_all_mempool_tx_ids:
     post:
@@ -512,14 +512,14 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  tx_ids:
-                    type: array
-                    items:
-                      type: string
-                      format: hex
                 allOf:
+                  - type: object
+                    properties:
+                      tx_ids:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /get_all_mempool_items:
     post:
@@ -535,13 +535,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  mempool_items:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/mempool_item"
                 allOf:
+                  - type: object
+                    properties:
+                      mempool_items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/mempool_item"
                   - $ref: "#/components/schemas/apiResponse"
   /get_mempool_item_by_tx_id:
     post:
@@ -568,11 +568,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  mempool_item:
-                    $ref: "#/components/schemas/mempool_item"
                 allOf:
+                  - type: object
+                    properties:
+                      mempool_item:
+                        $ref: "#/components/schemas/mempool_item"
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_puzzle_hash:
     post:
@@ -586,14 +586,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - puzzle_hash
-              properties:
-                puzzle_hash:
-                  type: string
-                  format: hex
               allOf:
+                - type: object
+                  required:
+                    - puzzle_hash
+                  properties:
+                    puzzle_hash:
+                      type: string
+                      format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
@@ -610,16 +610,16 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - puzzle_hashes
-              properties:
-                puzzle_hashes:
-                  type: array
-                  items:
-                    type: string
-                    format: hex
               allOf:
+                - type: object
+                  required:
+                    - puzzle_hashes
+                  properties:
+                    puzzle_hashes:
+                      type: array
+                      items:
+                        type: string
+                        format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
@@ -649,11 +649,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coin_record:
-                    $ref: "#/components/schemas/coin_record"
                 allOf:
+                  - type: object
+                    properties:
+                      coin_record:
+                        $ref: "#/components/schemas/coin_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_names:
     post:
@@ -667,16 +667,16 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - names
-              properties:
-                names:
-                  type: array
-                  items:
-                    type: string
-                    format: hex
               allOf:
+                - type: object
+                  required:
+                    - names
+                  properties:
+                    names:
+                      type: array
+                      items:
+                        type: string
+                        format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
@@ -693,16 +693,16 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - parent_ids
-              properties:
-                parent_ids:
-                  type: array
-                  items:
-                    type: string
-                    format: hex
               allOf:
+                - type: object
+                  required:
+                    - parent_ids
+                  properties:
+                    parent_ids:
+                      type: array
+                      items:
+                        type: string
+                        format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
         200:
@@ -736,11 +736,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  coin_solution:
-                    $ref: "#/components/schemas/coin_spend"
                 allOf:
+                  - type: object
+                    properties:
+                      coin_solution:
+                        $ref: "#/components/schemas/coin_spend"
                   - $ref: "#/components/schemas/apiResponse"
   /push_tx:
     post:
@@ -766,11 +766,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
                 allOf:
+                  - type: object
+                    properties:
+                      status:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

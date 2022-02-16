@@ -11,7 +11,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-servers: 
+servers:
   - url: https://localhost:8560
     description: Harvester RPC
 security:
@@ -22,10 +22,10 @@ components:
       $ref: "./requestBodies/empty.yaml#/empty"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"      
+      $ref: "./responses/empty.yaml#/empty"
   schemas:
     k_size:
-      $ref: "./schemas/k_size.yaml#/k_size"  
+      $ref: "./schemas/k_size.yaml#/k_size"
     plot_info:
       $ref: "./schemas/plot_info.yaml#/plot_info"
     apiResponse:
@@ -34,13 +34,13 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-- name: Harvester
-  description: The harvester RPC API is exposed, by default, on port 8560 and contains methods for managing plot files and directories.
+  - name: Harvester
+    description: The harvester RPC API is exposed, by default, on port 8560 and contains methods for managing plot files and directories.
 paths:
   /add_plot_directory:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Add a plot directory to the harvester configuration.
       description: Add a plot directory to the harvester configuration.
       operationId: add_plot_directory
@@ -62,7 +62,7 @@ paths:
   /remove_plot_directory:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Removes a plot directory from the harveser configuration.
       description: Removes a plot directory from the harveser configuration.
       operationId: remove_plot_directory
@@ -80,94 +80,94 @@ paths:
                   type: string
       responses:
         200:
-          $ref: "#/components/responses/empty"               
+          $ref: "#/components/responses/empty"
   /get_plot_directories:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Get the list of plot directories from the harvester configuration.
       description: Get the list of plot directories from the harvester configuration.
       operationId: get_plot_directories
       requestBody:
-        $ref: "#/components/requestBodies/empty"      
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  directories:
-                    type: array
-                    items:
-                      type: string 
                 allOf:
+                  - type: object
+                    properties:
+                      directories:
+                        type: array
+                        items:
+                          type: string
                   - $ref: "#/components/schemas/apiResponse"
   /refresh_plots:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Refresh the list of plots.
       description: Refresh the list of plots.
       operationId: refresh_plots
       requestBody:
-        $ref: "#/components/requestBodies/empty"      
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
-          $ref: "#/components/responses/empty"                
+          $ref: "#/components/responses/empty"
   /get_plots:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Get information about the plots the harvester knows about.
       description: Get information about the plots the harvester knows about.
       operationId: get_plots
       requestBody:
-        $ref: "#/components/requestBodies/empty"      
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  failed_to_open_filenames:
-                    type: array
-                    items:
-                      type: string
-                  not_found_filenames:
-                    type: array
-                    items:
-                      type: string
-                  plots:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/plot_info"                                 
                 allOf:
+                  - type: object
+                    properties:
+                      failed_to_open_filenames:
+                        type: array
+                        items:
+                          type: string
+                      not_found_filenames:
+                        type: array
+                        items:
+                          type: string
+                      plots:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/plot_info"
                   - $ref: "#/components/schemas/apiResponse"
   /delete_plot:
     post:
       tags:
-      - Harvester
+        - Harvester
       summary: Permanently delete a plot file.
       description: Permanently delete a plot file.
       operationId: delete_plot
       requestBody:
-          required: true
-          description: the file name of the plot
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - filename
-                properties:
-                  filename:
-                    type: string
-              example:
-                filename: plot-k33-2021-06-12-03-55-1d5a2afe637578d6c9dfa04484854831012b678921a8dce5a8aee9c0fd3c1470.plot
+        required: true
+        description: the file name of the plot
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filename
+              properties:
+                filename:
+                  type: string
+            example:
+              filename: plot-k33-2021-06-12-03-55-1d5a2afe637578d6c9dfa04484854831012b678921a8dce5a8aee9c0fd3c1470.plot
       responses:
         200:
           $ref: "#/components/responses/empty"
