@@ -1,0 +1,1 @@
+Copy-Item -Path ./build/site/* -Destination ./docs/static/ -Force
