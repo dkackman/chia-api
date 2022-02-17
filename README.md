@@ -5,4 +5,4 @@ An experimental [OpanAPI](https://www.openapis.org/) description of [chia](https
 
 View current spec:
  - [In the swagger UI](https://dkackman.github.io/chia-api/?urls.primaryName=Full%20Node)
- - [As a staically generated site](https://dkackman.github.io/chia-api/static/)
+ - [As a statically generated site](https://dkackman.github.io/chia-api/static/)
