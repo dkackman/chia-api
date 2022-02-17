@@ -9,7 +9,8 @@ mkdir ./build/tmp
 
 foreach ($file in $files)
 {
-    java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o .\build\tmp\$file
+    java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o .\build\tmp\$file `
+    -t tools/templates/
 }
 
 mkdir ./build/site
