@@ -1,6 +1,6 @@
 k_size:
   type: integer
-  description: Definaes the size of a plot. 25 is used for testing only.
+  description: Defines the size of a plot. 25 is used for testing only.
     https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes
   default: 32
   enum:
