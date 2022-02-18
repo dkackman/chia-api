@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chia RPC</title>
+  <title>Chia RPC - wallet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -2745,25 +2745,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-cancelOffer-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-cancelOffer-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-cancelOffer-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cancel_offer"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cancel_offer" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-cancelOffer-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3083,25 +3075,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catAssetIdToName-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-catAssetIdToName-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cat_asset_id_to_name"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cat_asset_id_to_name" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-catAssetIdToName-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3421,25 +3405,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-catGetAssetId-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetAssetId-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-catGetAssetId-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cat_get_asset_id"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cat_get_asset_id" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-catGetAssetId-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3767,25 +3743,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-catGetName-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catGetName-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-catGetName-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cat_get_name"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cat_get_name" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-catGetName-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4113,25 +4081,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-catSetName-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSetName-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-catSetName-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cat_set_name"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cat_set_name" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-catSetName-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4452,25 +4412,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-catSpend-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-catSpend-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-catSpend-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/cat_spend"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/cat_spend" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-catSpend-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4791,25 +4743,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-checkOfferValidity-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-checkOfferValidity-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/check_offer_validity"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/check_offer_validity" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-checkOfferValidity-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5129,25 +5073,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-createOfferForIds-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-createOfferForIds-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-createOfferForIds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/create_offer_for_ids"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/create_offer_for_ids" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-createOfferForIds-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5467,25 +5403,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-getCatList-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getCatList-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-getCatList-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_cat_list"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_cat_list" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-getCatList-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5806,25 +5734,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-getOffer-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffer-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-getOffer-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_offer"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_offer" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-getOffer-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6144,25 +6064,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-getOfferSummary-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOfferSummary-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-getOfferSummary-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_offer_summary"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_offer_summary" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-getOfferSummary-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6482,25 +6394,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-getOffers-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffers-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-getOffers-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_offers"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_offers" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-getOffers-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6820,25 +6724,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-getOffersCount-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-getOffersCount-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-getOffersCount-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_offers_count"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_offers_count" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-getOffersCount-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7159,25 +7055,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-ColouredCoinWallet-takeOffer-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-java">Java</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-ColouredCoinWallet-takeOffer-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-ColouredCoinWallet-takeOffer-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/take_offer"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/take_offer" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ColouredCoinWallet-takeOffer-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7500,25 +7388,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didCreateAttest-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didCreateAttest-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didCreateAttest-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateAttest-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didCreateAttest-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_create_attest"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_create_attest" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didCreateAttest-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7838,25 +7718,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didCreateBackupFile-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didCreateBackupFile-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didCreateBackupFile-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_create_backup_file"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_create_backup_file" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didCreateBackupFile-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8176,25 +8048,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didGetDid-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetDid-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetDid-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetDid-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didGetDid-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_get_did"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_get_did" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didGetDid-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8522,25 +8386,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetInformationNeededForRecovery-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didGetInformationNeededForRecovery-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_get_information_needed_for_recovery"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_get_information_needed_for_recovery" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didGetInformationNeededForRecovery-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8868,25 +8724,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didGetPubkey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetPubkey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetPubkey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetPubkey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didGetPubkey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_get_pubkey"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_get_pubkey" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didGetPubkey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9214,25 +9062,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didGetRecoveryList-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didGetRecoveryList-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didGetRecoveryList-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_get_recovery_list"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_get_recovery_list" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didGetRecoveryList-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9560,25 +9400,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didRecoverySpend-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didRecoverySpend-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didRecoverySpend-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_recovery_spend"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_recovery_spend" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didRecoverySpend-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9898,25 +9730,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-java">Java</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-DIDWallet-didUpdateRecoveryIds-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-DIDWallet-didUpdateRecoveryIds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/did_update_recovery_ids"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/did_update_recovery_ids" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-DIDWallet-didUpdateRecoveryIds-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -10239,25 +10063,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-addKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-addKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-addKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-addKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-addKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/add_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/add_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-addKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -10578,25 +10394,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-checkDeleteKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-checkDeleteKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-checkDeleteKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/check_delete_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/check_delete_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-checkDeleteKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -10924,25 +10732,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-deleteKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-deleteKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-deleteKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-deleteKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-deleteKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/delete_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/delete_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-deleteKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -11270,25 +11070,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-generateMnemonic-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-generateMnemonic-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-generateMnemonic-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-generateMnemonic-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-generateMnemonic-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/generate_mnemonic"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/generate_mnemonic" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-generateMnemonic-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -11609,25 +11401,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-getLoggedInFingerprint-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getLoggedInFingerprint-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-getLoggedInFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_logged_in_fingerprint"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_logged_in_fingerprint" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-getLoggedInFingerprint-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -11948,25 +11732,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-getPrivateKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getPrivateKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getPrivateKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPrivateKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-getPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_private_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_private_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-getPrivateKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -12294,25 +12070,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-getPublicKeys-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getPublicKeys-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-getPublicKeys-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-getPublicKeys-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-getPublicKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_public_keys"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_public_keys" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-getPublicKeys-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -12633,25 +12401,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-logIn-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-logIn-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-logIn-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-logIn-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-logIn-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/log_in"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/log_in" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-logIn-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -12979,25 +12739,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyManagement-walletDeleteAllKeys-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyManagement-walletDeleteAllKeys-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyManagement-walletDeleteAllKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/delete_all_keys"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/delete_all_keys" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyManagement-walletDeleteAllKeys-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -13321,25 +13073,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-PoolWallet-pwAbsorbRewards-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwAbsorbRewards-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PoolWallet-pwAbsorbRewards-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/pw_absorb_rewards"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/pw_absorb_rewards" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PoolWallet-pwAbsorbRewards-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -13659,25 +13403,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-PoolWallet-pwJoinPool-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwJoinPool-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwJoinPool-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwJoinPool-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PoolWallet-pwJoinPool-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/pw_join_pool"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/pw_join_pool" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PoolWallet-pwJoinPool-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -13997,25 +13733,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-PoolWallet-pwSelfPool-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwSelfPool-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwSelfPool-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwSelfPool-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PoolWallet-pwSelfPool-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/pw_self_pool"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/pw_self_pool" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PoolWallet-pwSelfPool-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -14335,25 +14063,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-PoolWallet-pwStatus-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-java">Java</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwStatus-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-PoolWallet-pwStatus-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-PoolWallet-pwStatus-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-PoolWallet-pwStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/pw_status"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/pw_status" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-PoolWallet-pwStatus-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -14684,25 +14404,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-java">Java</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-addRateLimitedFunds-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-RateLimitedWallet-addRateLimitedFunds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/add_rate_limited_funds"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/add_rate_limited_funds" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-RateLimitedWallet-addRateLimitedFunds-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -15022,25 +14734,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-rlSetUserInfo-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-RateLimitedWallet-rlSetUserInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/rl_set_user_info"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/rl_set_user_info" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-RateLimitedWallet-rlSetUserInfo-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -15360,25 +15064,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-java">Java</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-RateLimitedWallet-sendClawbackTransaction-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-RateLimitedWallet-sendClawbackTransaction-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/send_clawback_transaction"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/send_clawback_transaction" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-RateLimitedWallet-sendClawbackTransaction-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -15701,25 +15397,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-createSignedTransaction-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-createSignedTransaction-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-createSignedTransaction-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-createSignedTransaction-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-createSignedTransaction-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/create_signed_transaction"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/create_signed_transaction" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-createSignedTransaction-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -16039,25 +15727,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-deleteUnconfirmedTransactions-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-deleteUnconfirmedTransactions-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/delete_unconfirmed_transactions"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/delete_unconfirmed_transactions" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-deleteUnconfirmedTransactions-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -16385,25 +16065,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getFarmedAmount-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getFarmedAmount-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getFarmedAmount-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getFarmedAmount-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getFarmedAmount-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_farmed_amount"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_farmed_amount" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getFarmedAmount-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -16724,25 +16396,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getNextAddress-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getNextAddress-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getNextAddress-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getNextAddress-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getNextAddress-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_next_address"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_next_address" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getNextAddress-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -17062,25 +16726,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getTransaction-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransaction-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransaction-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransaction-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getTransaction-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_transaction"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_transaction" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getTransaction-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -17408,25 +17064,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getTransactionCount-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransactionCount-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransactionCount-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactionCount-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getTransactionCount-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_transaction_count"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_transaction_count" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getTransactionCount-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -17754,25 +17402,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getTransactions-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransactions-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getTransactions-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getTransactions-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getTransactions-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_transactions"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_transactions" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getTransactions-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -18092,25 +17732,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-getWalletBalance-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getWalletBalance-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-getWalletBalance-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-getWalletBalance-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-getWalletBalance-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_wallet_balance"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_wallet_balance" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-getWalletBalance-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -18438,25 +18070,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-sendTransaction-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-sendTransaction-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-sendTransaction-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransaction-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-sendTransaction-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/send_transaction"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/send_transaction" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-sendTransaction-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -18776,25 +18400,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Wallet-sendTransactionMulti-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-sendTransactionMulti-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Wallet-sendTransactionMulti-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Wallet-sendTransactionMulti-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Wallet-sendTransactionMulti-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/send_transaction_multi"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/send_transaction_multi" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Wallet-sendTransactionMulti-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -19117,25 +18733,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletManagement-createNewWallet-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletManagement-createNewWallet-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletManagement-createNewWallet-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletManagement-createNewWallet-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletManagement-createNewWallet-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/create_new_wallet"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/create_new_wallet" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletManagement-createNewWallet-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -19456,25 +19064,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletManagement-getWallets-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletManagement-getWallets-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletManagement-getWallets-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletManagement-getWallets-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletManagement-getWallets-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_wallets"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_wallets" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletManagement-getWallets-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -19798,25 +19398,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletNode-getHeightInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-getHeightInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-getHeightInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletNode-getHeightInfo-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletNode-getHeightInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_height_info"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_height_info" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletNode-getHeightInfo-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -20137,25 +19729,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletNode-getSyncStatus-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-getSyncStatus-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-getSyncStatus-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletNode-getSyncStatus-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletNode-getSyncStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_sync_status"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_sync_status" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletNode-getSyncStatus-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -20476,25 +20060,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletNode-walletGetNetworkInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletGetNetworkInfo-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletNode-walletGetNetworkInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/get_network_info"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_network_info" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletNode-walletGetNetworkInfo-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -20815,25 +20391,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-WalletNode-walletPushTx-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-java">Java</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-walletPushTx-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-WalletNode-walletPushTx-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-WalletNode-walletPushTx-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-WalletNode-walletPushTx-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:9256/push_tx"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/push_tx" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WalletNode-walletPushTx-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

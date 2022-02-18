@@ -1,1 +1,0 @@
-java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/farmer.yaml -o ./ -t tools/templates/

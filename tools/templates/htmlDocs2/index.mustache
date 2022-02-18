@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Don!</title>
+  <title>{{{appName}}} - {{{endpoint}}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -114,7 +114,12 @@
     var defs = {}
         {{#models}}
         {{#model}}
-        defs["{{name}}"] = {{{modelJson}}};
+            {{#isComposedModel}}
+            defs["{{name}}"] = {};
+            {{/isComposedModel}}
+            {{^isComposedModel}}
+            defs["{{name}}"] = {{{modelJson}}};
+            {{/isComposedModel}}
         {{/model}}
     {{/models}}
   </script>
@@ -172,6 +177,8 @@
                 <section id="api-{{baseName}}">
                   <h1>{{baseName}}</h1>
                   {{#operation}}
+                  {{#contents}}
+                  {{#@first}}
                     <div id="api-{{baseName}}-{{nickname}}">
                       <article id="api-{{baseName}}-{{nickname}}-0" data-group="User" data-name="{{nickname}}" data-version="0">
                         <div class="pull-left">
@@ -190,21 +197,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-{{baseName}}-{{nickname}}-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-java">Java</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-{{baseName}}-{{nickname}}-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-{{baseName}}-{{nickname}}-0-curl">
-                            <pre class="prettyprint"><code class="language-bsh">curl -X {{vendorExtensions.x-codegen-httpMethodUpperCase}}{{#authMethods}}{{#isApiKey}}{{#isKeyInHeader}} -H "{{keyParamName}}: [[apiKey]]"{{/isKeyInHeader}}{{/isApiKey}}{{#isBasic}}{{#hasProduces}} -H "Accept: {{#produces}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/produces}}"{{/hasProduces}}{{#hasConsumes}} -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} -H "Authorization: Basic [[basicHash]]"{{/isBasic}}{{/authMethods}} "{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^-first}}&{{/-first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X {{vendorExtensions.x-codegen-httpMethodUpperCase}} \
+--insecure --cert ~/.chia/mainnet/config/ssl/{{{endpoint}}}/private_{{{endpoint}}}.crt --key ~/.chia/mainnet/config/ssl/{{{endpoint}}}/private_{{{endpoint}}}.key {{#hasProduces}}\
+-H "Accept: {{#produces}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/produces}}"{{/hasProduces}}{{#hasConsumes}} \
+-H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
+"{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^@first}}&{{/@first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-java">
                             <pre class="prettyprint"><code class="language-java">{{>sample_java}}</code></pre>
@@ -324,7 +327,7 @@
 
                                 {{#examples}}
                                   <li class="">
-                                    <a data-toggle="tab" href="#responses-{{nickname}}-{{code}}-example">Response Example</a>
+                                    <a data-toggle="tab" href="#responses-{{nickname}}-{{code}}-example-{{@index}}">Response Example</a>
                                   </li>
                                 {{/examples}}
                               {{/schema}}
@@ -342,11 +345,12 @@
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {{{jsonSchema}}};
-                                        var schema = schemaWrapper.schema;
+                                        var schema = schemaWrapper.content["{{extensions.x-content-type}}"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
                                         } else {
-                                          schemaWrapper.definitions = defs;
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
                                           $RefParser.dereference(schemaWrapper).catch(function(err) {
                                             console.log(err);
                                           });
@@ -364,7 +368,7 @@
                                   <input id='responses-{{nickname}}-{{code}}-schema-data' type='hidden' value=''></input>
                                 </div>
                                 {{#examples}}
-                                  <div class="tab-pane" id="responses-{{nickname}}-{{code}}-example">
+                                  <div class="tab-pane" id="responses-{{nickname}}-{{code}}-example-{{@index}}">
                                       <pre class="prettyprint"><code class="json">{{example}}</code></pre>
                                 </div>
                                 {{/examples}}
@@ -395,6 +399,8 @@
                         </article>
                       </div>
                       <hr>
+                    {{/@first}}
+                    {{/contents}}
                     {{/operation}}
                   </section>
                 {{/operations}}
@@ -434,7 +440,8 @@
   {{>js_webfontloader}}
   <script>
     var schemaWrapper = {};
-    schemaWrapper.definitions = defs;
+    schemaWrapper.components = {};
+    schemaWrapper.components.schemas = Object.assign({}, defs);
     defsParser = new $RefParser();
     defsParser.dereference(schemaWrapper).catch(function(err) {
       console.log(err);

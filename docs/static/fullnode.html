@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chia RPC</title>
+  <title>Chia RPC - fullnode</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -2147,25 +2147,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getAdditionsAndRemovals-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getAdditionsAndRemovals-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getAdditionsAndRemovals-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_additions_and_removals"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_additions_and_removals" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getAdditionsAndRemovals-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2493,25 +2485,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getBlock-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlock-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlock-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlock-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlock-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlock-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getBlock-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_block"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_block" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getBlock-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2839,25 +2823,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getBlockRecord-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecord-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecord-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecord-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getBlockRecord-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_block_record"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_block_record" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getBlockRecord-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3185,25 +3161,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getBlockRecordByHeight-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecordByHeight-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getBlockRecordByHeight-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_block_record_by_height"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_block_record_by_height" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getBlockRecordByHeight-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3524,25 +3492,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getBlockRecords-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecords-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlockRecords-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlockRecords-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getBlockRecords-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_block_records"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_block_records" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getBlockRecords-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3874,25 +3834,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getBlocks-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlocks-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getBlocks-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getBlocks-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getBlocks-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_blocks"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_blocks" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getBlocks-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4224,25 +4176,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getRecentSignagePointOrEos-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getRecentSignagePointOrEos-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getRecentSignagePointOrEos-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_recent_signage_point_or_eos"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_recent_signage_point_or_eos" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getRecentSignagePointOrEos-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4563,25 +4507,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Blocks-getUnfinishedBlockHeaders-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Blocks-getUnfinishedBlockHeaders-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_unfinished_block_headers"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_unfinished_block_headers" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Blocks-getUnfinishedBlockHeaders-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4905,25 +4841,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getCoinRecordByName-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordByName-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordByName-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordByName-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getCoinRecordByName-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_coin_record_by_name"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_coin_record_by_name" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getCoinRecordByName-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5244,25 +5172,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getCoinRecordsByNames-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByNames-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getCoinRecordsByNames-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_coin_records_by_names"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_coin_records_by_names" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getCoinRecordsByNames-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5583,25 +5503,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getCoinRecordsByParentIds-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByParentIds-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getCoinRecordsByParentIds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_coin_records_by_parent_ids"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_coin_records_by_parent_ids" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getCoinRecordsByParentIds-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5922,25 +5834,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHash-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getCoinRecordsByPuzzleHash-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_coin_records_by_puzzle_hash"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_coin_records_by_puzzle_hash" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getCoinRecordsByPuzzleHash-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6261,25 +6165,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getCoinRecordsByPuzzleHashes-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getCoinRecordsByPuzzleHashes-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_coin_records_by_puzzle_hashes"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_coin_records_by_puzzle_hashes" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getCoinRecordsByPuzzleHashes-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6600,25 +6496,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-getPuzzleAndSolution-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-getPuzzleAndSolution-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-getPuzzleAndSolution-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_puzzle_and_solution"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_puzzle_and_solution" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-getPuzzleAndSolution-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6939,25 +6827,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Coins-pushTx-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Coins-pushTx-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Coins-pushTx-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Coins-pushTx-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Coins-pushTx-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Coins-pushTx-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Coins-pushTx-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/push_tx"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/push_tx" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Coins-pushTx-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7281,25 +7161,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Connections-closeConnection-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Connections-closeConnection-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Connections-closeConnection-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Connections-closeConnection-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Connections-closeConnection-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Connections-closeConnection-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Connections-closeConnection-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/close_connection"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/close_connection" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Connections-closeConnection-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7620,25 +7492,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Connections-getConnections-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Connections-getConnections-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Connections-getConnections-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Connections-getConnections-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Connections-getConnections-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Connections-getConnections-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Connections-getConnections-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_connections"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_connections" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Connections-getConnections-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7959,25 +7823,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Connections-openConnection-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Connections-openConnection-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Connections-openConnection-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Connections-openConnection-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Connections-openConnection-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Connections-openConnection-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Connections-openConnection-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/open_connection"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/open_connection" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Connections-openConnection-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8298,25 +8154,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Connections-stopNode-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Connections-stopNode-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Connections-stopNode-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Connections-stopNode-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Connections-stopNode-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Connections-stopNode-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Connections-stopNode-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/stop_node"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/stop_node" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Connections-stopNode-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8640,25 +8488,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-java">Java</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-FullNode-fullNodeGetNetworkInfo-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-FullNode-fullNodeGetNetworkInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_network_info"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_network_info" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-FullNode-fullNodeGetNetworkInfo-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8979,25 +8819,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-FullNode-getBlockchainState-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-java">Java</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-getBlockchainState-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-getBlockchainState-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-FullNode-getBlockchainState-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-FullNode-getBlockchainState-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_blockchain_state"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_blockchain_state" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-FullNode-getBlockchainState-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9318,25 +9150,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-FullNode-getNetworkSpace-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-java">Java</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-getNetworkSpace-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-FullNode-getNetworkSpace-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-FullNode-getNetworkSpace-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-FullNode-getNetworkSpace-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_network_space"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_network_space" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-FullNode-getNetworkSpace-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9660,25 +9484,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Mempool-getAllMempoolItems-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getAllMempoolItems-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getAllMempoolItems-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolItems-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Mempool-getAllMempoolItems-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_all_mempool_items"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_all_mempool_items" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Mempool-getAllMempoolItems-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9999,25 +9815,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Mempool-getAllMempoolTxIds-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Mempool-getAllMempoolTxIds-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Mempool-getAllMempoolTxIds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_all_mempool_tx_ids"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_all_mempool_tx_ids" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Mempool-getAllMempoolTxIds-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -10338,25 +10146,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Mempool-getMempoolItemByTxId-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Mempool-getMempoolItemByTxId-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Mempool-getMempoolItemByTxId-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8555/get_mempool_item_by_tx_id"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.crt --key ~/.chia/mainnet/config/ssl/fullnode/private_fullnode.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_mempool_item_by_tx_id" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Mempool-getMempoolItemByTxId-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

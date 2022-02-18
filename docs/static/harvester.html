@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chia RPC</title>
+  <title>Chia RPC - harvester</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -887,25 +887,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-addPlotDirectory-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-addPlotDirectory-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-addPlotDirectory-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-addPlotDirectory-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-addPlotDirectory-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/add_plot_directory"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/add_plot_directory" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-addPlotDirectory-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1226,25 +1218,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-deletePlot-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-deletePlot-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-deletePlot-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-deletePlot-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-deletePlot-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/delete_plot"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/delete_plot" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-deletePlot-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1580,25 +1564,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-getPlotDirectories-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-getPlotDirectories-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-getPlotDirectories-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlotDirectories-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-getPlotDirectories-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/get_plot_directories"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/get_plot_directories" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-getPlotDirectories-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1919,25 +1895,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-getPlots-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-getPlots-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-getPlots-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-getPlots-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-getPlots-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-getPlots-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-getPlots-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/get_plots"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/get_plots" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-getPlots-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2258,25 +2226,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-refreshPlots-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-refreshPlots-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-refreshPlots-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-refreshPlots-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-refreshPlots-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/refresh_plots"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/refresh_plots" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-refreshPlots-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2597,25 +2557,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Harvester-removePlotDirectory-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-removePlotDirectory-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Harvester-removePlotDirectory-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Harvester-removePlotDirectory-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Harvester-removePlotDirectory-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8560/remove_plot_directory"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/remove_plot_directory" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Harvester-removePlotDirectory-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

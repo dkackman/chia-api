@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chia RPC</title>
+  <title>Chia RPC - farmer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -899,8 +899,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Definaes the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "enum" : [ 25, 32, 33, 34, 35 ],
-  "default" : 32
+  "default" : 32,
+  "enum" : [ 25, 32, 33, 34, 35 ]
 };
             defs["OneOfsignage_point_bundleProofsItems"] = {};
             defs["plot_info"] = {
@@ -1183,25 +1183,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getHarvesters-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getHarvesters-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getHarvesters-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getHarvesters-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getHarvesters-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_harvesters"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvesters" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getHarvesters-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1522,25 +1514,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getPoolLoginLink-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getPoolLoginLink-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getPoolLoginLink-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolLoginLink-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getPoolLoginLink-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_pool_login_link"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_pool_login_link" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getPoolLoginLink-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1861,25 +1845,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getPoolState-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getPoolState-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getPoolState-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getPoolState-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getPoolState-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_pool_state"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_pool_state" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getPoolState-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2200,25 +2176,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getRewardTargets-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getRewardTargets-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getRewardTargets-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getRewardTargets-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getRewardTargets-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_reward_targets"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_reward_targets" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getRewardTargets-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2539,25 +2507,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getSignagePoint-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getSignagePoint-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getSignagePoint-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoint-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getSignagePoint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_signage_point"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_signage_point" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getSignagePoint-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2878,25 +2838,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-getSignagePoints-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getSignagePoints-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-getSignagePoints-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-getSignagePoints-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-getSignagePoints-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/get_signage_points"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_signage_points" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-getSignagePoints-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3217,25 +3169,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-setPayoutInstructions-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-setPayoutInstructions-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-setPayoutInstructions-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-setPayoutInstructions-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-setPayoutInstructions-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/set_payout_instructions"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/set_payout_instructions" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-setPayoutInstructions-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3556,25 +3500,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Farmer-setRewardTargets-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-setRewardTargets-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Farmer-setRewardTargets-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Farmer-setRewardTargets-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Farmer-setRewardTargets-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"https://localhost:8559/set_reward_targets"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt --key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/set_reward_targets" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Farmer-setRewardTargets-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

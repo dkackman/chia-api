@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chia RPC</title>
+  <title>Chia RPC - daemon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
@@ -1296,25 +1296,17 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-exit-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-exit-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-exit-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-exit-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-exit-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-exit-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-exit-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/exit"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/exit" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-exit-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1635,25 +1627,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-getStatus-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-getStatus-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-getStatus-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-getStatus-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-getStatus-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-getStatus-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-getStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_status"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_status" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-getStatus-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1974,25 +1958,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-getVersion-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-getVersion-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-getVersion-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-getVersion-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-getVersion-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-getVersion-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-getVersion-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_version"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_version" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-getVersion-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2313,25 +2289,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-isRunning-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-isRunning-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-isRunning-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-isRunning-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-isRunning-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-isRunning-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-isRunning-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/is_running"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/is_running" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-isRunning-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2658,25 +2626,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-ping-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-ping-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-ping-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-ping-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-ping-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-ping-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-ping-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/ping"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/ping" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-ping-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2997,25 +2957,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-registerService-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-registerService-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-registerService-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-registerService-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-registerService-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-registerService-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-registerService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/register_service"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/register_service" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-registerService-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3342,25 +3294,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-startService-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-startService-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-startService-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-startService-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-startService-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-startService-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-startService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/start_service"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/start_service" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-startService-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3687,25 +3631,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Daemon-stopService-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-stopService-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Daemon-stopService-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Daemon-stopService-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Daemon-stopService-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Daemon-stopService-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-stopService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/stop_service"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/stop_service" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Daemon-stopService-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4035,25 +3971,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-addPrivateKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-addPrivateKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-addPrivateKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-addPrivateKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-addPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/add_private_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/add_private_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-addPrivateKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4374,25 +4302,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-checkKeys-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-checkKeys-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-checkKeys-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-checkKeys-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-checkKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/check_keys"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/check_keys" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-checkKeys-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4713,25 +4633,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-daemonDeleteAllKeys-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-daemonDeleteAllKeys-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-daemonDeleteAllKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/delete_all_keys"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/delete_all_keys" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-daemonDeleteAllKeys-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5052,25 +4964,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-deleteKeyByFingerprint-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-deleteKeyByFingerprint-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-deleteKeyByFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/delete_key_by_fingerprint"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/delete_key_by_fingerprint" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-deleteKeyByFingerprint-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5391,25 +5295,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-getAllPrivateKeys-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getAllPrivateKeys-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getAllPrivateKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_all_private_keys"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_all_private_keys" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-getAllPrivateKeys-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -5730,25 +5626,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-getFirstPrivateKey-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getFirstPrivateKey-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getFirstPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_first_private_key"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_first_private_key" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-getFirstPrivateKey-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6069,25 +5957,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-getKeyForFingerprint-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-getKeyForFingerprint-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getKeyForFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_key_for_fingerprint"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_key_for_fingerprint" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-getKeyForFingerprint-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6408,25 +6288,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-isKeyringLocked-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-isKeyringLocked-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-isKeyringLocked-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-isKeyringLocked-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-isKeyringLocked-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/is_keyring_locked"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/is_keyring_locked" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-isKeyringLocked-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -6747,25 +6619,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-keyringStatus-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-keyringStatus-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-keyringStatus-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-keyringStatus-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-keyringStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/keyring_status"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/keyring_status" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-keyringStatus-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7086,25 +6950,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-migrateKeyring-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-migrateKeyring-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-migrateKeyring-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-migrateKeyring-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-migrateKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/migrate_keyring"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/migrate_keyring" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-migrateKeyring-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7425,25 +7281,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-removeKeyringPassphrase-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-removeKeyringPassphrase-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-removeKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/remove_keyring_passphrase"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/remove_keyring_passphrase" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-removeKeyringPassphrase-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -7764,25 +7612,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-setKeyringPassphrase-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-setKeyringPassphrase-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-setKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/set_keyring_passphrase"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/set_keyring_passphrase" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-setKeyringPassphrase-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8103,25 +7943,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-unlockKeyring-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-unlockKeyring-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-unlockKeyring-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-unlockKeyring-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-unlockKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/unlock_keyring"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/unlock_keyring" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-unlockKeyring-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8442,25 +8274,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-KeyRing-validateKeyringPassphrase-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-java">Java</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-KeyRing-validateKeyringPassphrase-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-validateKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/validate_keyring_passphrase"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/validate_keyring_passphrase" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-KeyRing-validateKeyringPassphrase-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -8784,25 +8608,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Plotter-getPlotters-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-getPlotters-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-getPlotters-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Plotter-getPlotters-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-getPlotters-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/get_plotters"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/get_plotters" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Plotter-getPlotters-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9123,25 +8939,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Plotter-startPlotting-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-startPlotting-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-startPlotting-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Plotter-startPlotting-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-startPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/start_plotting"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/start_plotting" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Plotter-startPlotting-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -9462,25 +9270,17 @@ except ApiException as e:
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-Plotter-stopPlotting-0-curl">Curl</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-java">Java</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-android">Android</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-stopPlotting-0-groovy">Groovy</a></li>-->
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-objc">Obj-C</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-javascript">JavaScript</a></li>
-                          <!--<li class=""><a href="#examples-Plotter-stopPlotting-0-angular">Angular</a></li>-->
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-csharp">C#</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-php">PHP</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-perl">Perl</a></li>
-                          <li class=""><a href="#examples-Plotter-stopPlotting-0-python">Python</a></li>
+
                         </ul>
 
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-stopPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
- -H "Authorization: Basic [[basicHash]]"\
--H "Accept: application/json"\
--H "Content-Type: application/json"\
-"wss://localhost:55400/stop_plotting"</code></pre>
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+--insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"wss://localhost:55400/stop_plotting" \
+-d "{}"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Plotter-stopPlotting-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;

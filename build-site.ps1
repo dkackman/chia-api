@@ -9,8 +9,9 @@ mkdir ./build/tmp
 
 foreach ($file in $files)
 {
+    $shortFile = [IO.Path]::GetFileNameWithoutExtension($file)
     java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o .\build\tmp\$file `
-    -t tools/templates/
+    -t tools/templates/htmlDocs2 --additional-properties endpoint=$shortFile
 }
 
 mkdir ./build/site

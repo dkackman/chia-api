@@ -20,7 +20,7 @@
                     </div>
                 {{/description}}
             </div>
-            {{#isEnum}}
+            {{#is this 'enum'}}
                 {{#vendorExtensions.x-eumFormatted}}
                     <div class="inner enums" id="{{nickname}}_{{paramName}}_enum">
                         <span class="inner">
@@ -28,7 +28,7 @@
                         </span>
                     </div>
                 {{/vendorExtensions.x-eumFormatted}}
-            {{/isEnum}}
+            {{/is}}
             {{#required}}
                 <div class="inner required">
                     Required
