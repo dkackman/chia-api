@@ -162,7 +162,7 @@
         </div>
         <div id="header">
           <div id="api-_">
-            <h2 id="welcome-to-apidoc">API and SDK Documentation</h2>
+            <h2 id="welcome-to-apidoc">API Documentation</h2>
             {{#version}}
               <div class="app-desc">Version: {{{version}}}</div>
             {{/version}}
@@ -193,7 +193,7 @@
                         <br />
                         <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code><span class="pln">{{path}}</span></code></pre>
                         <p>
-                          <h3>Usage and SDK Samples</h3>
+                          <h3>Usage and Samples</h3>
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-{{baseName}}-{{nickname}}-0-curl">Curl</a></li>
@@ -208,46 +208,6 @@
 -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
 "{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^@first}}&{{/@first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}" \
 -d "{}"</code></pre>
-                          </div>
-                          <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-java">
-                            <pre class="prettyprint"><code class="language-java">{{>sample_java}}</code></pre>
-                          </div>
-
-                          <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-android">
-                            <pre class="prettyprint"><code class="language-java">{{>sample_android}}</code></pre>
-                          </div>
-  <!--
-  <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-groovy">
-  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-  </div> -->
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">{{>sample_objc}}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-javascript">
-                              <pre class="prettyprint"><code class="language-js">{{>sample_js}}</code></pre>
-                            </div>
-
-                            <!--<div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-angular">
-              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-            </div>-->
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-csharp">
-                              <pre class="prettyprint"><code class="language-cs">{{>sample_csharp}}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-php">
-                              <pre class="prettyprint"><code class="language-php">{{>sample_php}}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-perl">
-                              <pre class="prettyprint"><code class="language-perl">{{>sample_perl}}</code></pre>
-                            </div>
-
-                            <div class="tab-pane" id="examples-{{baseName}}-{{nickname}}-0-python">
-                              <pre class="prettyprint"><code class="language-python">{{>sample_python}}</code></pre>
-                            </div>
-                          </div>
-
                           <h2>Parameters</h2>
 
                           {{#hasPathParams}}
