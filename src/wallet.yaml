@@ -152,8 +152,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retreives the information needed for the given DID wallet.
-      description: Retreives the information needed for the given DID wallet.
+      summary: Retreives the recovery information needed for the given DID wallet.
+      description: Retreives the recovery information needed for the given DID wallet.
       operationId: did_get_information_needed_for_recovery
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
