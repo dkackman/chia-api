@@ -1726,7 +1726,7 @@ paths:
                         - recovery
                   oneOf:
                     - type: object
-                      description: Details needed for creating a new RId wallet.
+                      description: Details needed for creating a new DID wallet.
                       properties:
                         backup_dids:
                           type: array
@@ -1737,7 +1737,7 @@ paths:
                           type: integer
                           format: uint64
                     - type: object
-                      description: Details needed to create a recovery DId wallet.
+                      description: Details needed to create a recovery DID wallet.
                       properties:
                         filename:
                           type: string
@@ -1850,4 +1850,4 @@ paths:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
-  url: http://chia.net
+  url: https://chia.net

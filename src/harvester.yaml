@@ -173,4 +173,4 @@ paths:
           $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
-  url: http://chia.net
+  url: https://chia.net

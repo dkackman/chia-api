@@ -276,4 +276,4 @@ paths:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
-  url: http://chia.net
+  url: https://chia.net
