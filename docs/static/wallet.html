@@ -873,7 +873,7 @@
   }
 };
             defs["create_new_wallet_body"] = {
-  "required" : [ "amount", "wallet_type" ],
+  "required" : [ "wallet_type" ],
   "type" : "object",
   "properties" : {
     "wallet_type" : {
@@ -979,29 +979,20 @@
         "type" : "string",
         "description" : "The pooling mode.",
         "enum" : [ "new", "recovery" ]
+      },
+      "initial_target_state" : {
+        "$ref" : "#/components/schemas/pool_state"
+      },
+      "p2_singleton_delayed_ph" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "p2_singleton_delay_time" : {
+        "type" : "integer",
+        "format" : "uint64"
       }
     },
-    "description" : "Details needed to create a pool_wallet.",
-    "oneOf" : [ {
-      "required" : [ "initial_target_state" ],
-      "type" : "object",
-      "properties" : {
-        "initial_target_state" : {
-          "$ref" : "#/components/schemas/pool_state"
-        },
-        "p2_singleton_delayed_ph" : {
-          "type" : "string",
-          "format" : "hex"
-        },
-        "p2_singleton_delay_time" : {
-          "type" : "integer",
-          "format" : "uint64"
-        }
-      },
-      "description" : "Details needed for creating a new pool wallet."
-    }, {
-      "$ref" : "#/components/requestBodies/empty"
-    } ]
+    "description" : "Details needed to create a pool_wallet."
   } ]
 };
             defs["create_offer_for_ids_body"] = {

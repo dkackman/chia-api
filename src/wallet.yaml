@@ -1658,7 +1658,6 @@ paths:
               type: object
               required:
                 - wallet_type
-                - amount
               properties:
                 wallet_type:
                   type: string
@@ -1753,21 +1752,14 @@ paths:
                       enum:
                         - new
                         - recovery
-                  oneOf:
-                    - type: object
-                      description: Details needed for creating a new pool wallet.
-                      required:
-                        - initial_target_state
-                      properties:
-                        initial_target_state:
-                          $ref: "#/components/schemas/pool_state"
-                        p2_singleton_delayed_ph:
-                          type: string
-                          format: hex
-                        p2_singleton_delay_time:
-                          type: integer
-                          format: uint64
-                    - $ref: "#/components/requestBodies/empty"
+                    initial_target_state:
+                      $ref: "#/components/schemas/pool_state"
+                    p2_singleton_delayed_ph:
+                      type: string
+                      format: hex
+                    p2_singleton_delay_time:
+                      type: integer
+                      format: uint64
       responses:
         200:
           description: OK
