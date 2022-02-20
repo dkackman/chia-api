@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>{{{appName}}} - {{{endpoint}}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8" />
+  <meta name="description" content="RPC documentation for the chia blockchain {{{endpoint}}} service"/>
   {{>js_jquery}}
   {{>js_prettify}}
   {{>js_bootstrap}}
@@ -129,19 +130,15 @@
       <div id="sidenav" class="span2">
         <nav id="scrollingNav">
           <ul class="sidenav nav nav-list">
-            <!-- Logo Area -->
-              <!--<div style="width: 80%; background-color: #4c8eca; color: white; padding: 20px; text-align: center; margin-bottom: 20px; ">
-
-              API Docs 2
-
+              <div style="width: 80%; background-color: white; color: white; padding: 20px; text-align: center; margin-bottom: 20px; ">
+                <img src="./images/chia-logo.svg" alt="chia logo">
               </div>
-            -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
             {{#apiInfo}}
               {{#apis}}
                 {{#operations}}
-                  <li class="nav-header" data-group="{{baseName}}"><a href="#api-{{baseName}}">API Methods - {{baseName}}</a></li>
+                  <li class="nav-header" data-group="{{baseName}}"><a href="#api-{{baseName}}">{{baseName}}</a></li>
                   {{#operation}}
                     <li data-group="{{baseName}}" data-name="{{nickname}}" class="">
                       <a href="#api-{{baseName}}-{{nickname}}">{{nickname}}</a>
@@ -197,7 +194,6 @@
                         </p>
                         <ul class="nav nav-tabs nav-tabs-examples">
                           <li class="active"><a href="#examples-{{baseName}}-{{nickname}}-0-curl">Curl</a></li>
-
                         </ul>
 
                         <div class="tab-content">
