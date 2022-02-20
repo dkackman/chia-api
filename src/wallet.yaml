@@ -1669,7 +1669,7 @@ paths:
                     - pool_wallet
                 name:
                   type: string
-                  description: User supplied name for the wallet. Will defualt if not provided.
+                  description: User supplied name for the wallet. Will default if not provided.
                 amount:
                   type: integer
                   format: uint64
@@ -1779,7 +1779,7 @@ paths:
                         type: integer
                         format: uint32
                   - type: object
-                    description: Resposne when a RL wallet is created.
+                    description: Response when a RL wallet is created.
                     properties:
                       id:
                         type: integer
@@ -1792,7 +1792,7 @@ paths:
                         type: string
                         format: hex
                   - type: object
-                    description: Resposne when a new DId wallet is created.
+                    description: Response when a new DId wallet is created.
                     properties:
                       type:
                         $ref: "#/components/schemas/wallet_type"
@@ -1803,7 +1803,7 @@ paths:
                         type: integer
                         format: uint32
                   - type: object
-                    description: Resposne when a recovery DId wallet is created.
+                    description: Response when a recovery DId wallet is created.
                     properties:
                       type:
                         $ref: "#/components/schemas/wallet_type"
@@ -1833,7 +1833,7 @@ paths:
                         type: integer
                         format: uint64
                   - type: object
-                    description: Resposne when a new pool wallet is created.
+                    description: Response when a new pool wallet is created.
                     properties:
                       total_fee:
                         type: integer
