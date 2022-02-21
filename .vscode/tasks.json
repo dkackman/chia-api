@@ -6,7 +6,7 @@
         { 
             "label": "build",
             "type": "shell",
-            "command": "./publish.ps1",
+            "command": "./build1.ps1",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

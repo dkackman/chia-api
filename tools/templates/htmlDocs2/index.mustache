@@ -95,19 +95,21 @@
       <div id="sidenav" class="col-md-2">
         <nav id="scrollingNav" class="navbar navbar-light bg-light px-3">
           <ul class="sidenav nav nav-pills">
-            <a  class="navbar-brand" href="index.html" id="home-link">
-              <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
-                <img src="./images/chia-logo.svg" alt="chia logo">
-              </div>
+            <a class="navbar-brand" href="index.html" id="home-link">
+              <img class="img-fluid" src="./images/chia-logo.svg" alt="chia logo">
             </a>
-            <li class="nav-fixed nav-header active nav-item" data-group="_"><a class="nav-link" href="#api-_">API Summary</a></li>
+            <li class="nav-fixed nav-header active nav-item" data-group="_">
+              <a class="nav-link" href="#api-_">API Summary</a>
+            </li>
             {{#apiInfo}}
               {{#apis}}
                 {{#operations}}
-                  <li class="nav-header nav-item" data-group="{{baseName}}"><a class="nav-link" href="#api-{{baseName}}">{{baseName}}</a></li>
+                  <li class="nav-header nav-item" data-group="{{baseName}}">
+                    <a class="nav-link" href="#api-{{baseName}}">{{baseName}}</a>
+                  </li>
                   {{#operation}}
-                    <li class="nav-item" data-group="{{baseName}}" data-name="{{nickname}}" class="">
-                      <a class="nav-link" href="#api-{{baseName}}-{{nickname}}">{{nickname}}</a>
+                    <li class="nav-item" data-group="{{baseName}}" data-name="{{nickname}}">
+                      <a class="nav-link link-secondary" href="#api-{{baseName}}-{{nickname}}">{{nickname}}</a>
                     </li>
                   {{/operation}}
                 {{/operations}}

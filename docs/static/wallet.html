@@ -483,12 +483,12 @@
     font-family: sans-serif;
     font-weight: 700;
     font-size: 16px;
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
   .sidenav > li.nav-header.active > a {
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
@@ -498,8 +498,7 @@
   }
   
   .sidenav > li > a:hover {
-    background-color: #ffffff;
-    color: black;
+    filter: brightness(125%);
   }
   
   .sidenav > li.has-modifications a {
@@ -2453,181 +2452,197 @@
       <div id="sidenav" class="col-md-2">
         <nav id="scrollingNav" class="navbar navbar-light bg-light px-3">
           <ul class="sidenav nav nav-pills">
-            <a  class="navbar-brand" href="index.html" id="home-link">
-              <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
-                <img src="./images/chia-logo.svg" alt="chia logo">
-              </div>
+            <a class="navbar-brand" href="index.html" id="home-link">
+              <img class="img-fluid" src="./images/chia-logo.svg" alt="chia logo">
             </a>
-            <li class="nav-fixed nav-header active nav-item" data-group="_"><a class="nav-link" href="#api-_">API Summary</a></li>
-                  <li class="nav-header nav-item" data-group="ColouredCoinWallet"><a class="nav-link" href="#api-ColouredCoinWallet">ColouredCoinWallet</a></li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="cancelOffer" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-cancelOffer">cancelOffer</a>
+            <li class="nav-fixed nav-header active nav-item" data-group="_">
+              <a class="nav-link" href="#api-_">API Summary</a>
+            </li>
+                  <li class="nav-header nav-item" data-group="ColouredCoinWallet">
+                    <a class="nav-link" href="#api-ColouredCoinWallet">ColouredCoinWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="cancelOffer">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-cancelOffer">cancelOffer</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catAssetIdToName" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-catAssetIdToName">catAssetIdToName</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catAssetIdToName">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-catAssetIdToName">catAssetIdToName</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catGetAssetId" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-catGetAssetId">catGetAssetId</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catGetAssetId">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-catGetAssetId">catGetAssetId</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catGetName" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-catGetName">catGetName</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catGetName">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-catGetName">catGetName</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catSetName" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-catSetName">catSetName</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catSetName">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-catSetName">catSetName</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catSpend" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-catSpend">catSpend</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="catSpend">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-catSpend">catSpend</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="checkOfferValidity" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-checkOfferValidity">checkOfferValidity</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="checkOfferValidity">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-checkOfferValidity">checkOfferValidity</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="createOfferForIds" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-createOfferForIds">createOfferForIds</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="createOfferForIds">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-createOfferForIds">createOfferForIds</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getCatList" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-getCatList">getCatList</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getCatList">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getCatList">getCatList</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffer" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-getOffer">getOffer</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffer">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOffer">getOffer</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOfferSummary" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-getOfferSummary">getOfferSummary</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOfferSummary">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOfferSummary">getOfferSummary</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffers" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-getOffers">getOffers</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffers">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOffers">getOffers</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffersCount" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-getOffersCount">getOffersCount</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffersCount">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOffersCount">getOffersCount</a>
                     </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="takeOffer" class="">
-                      <a class="nav-link" href="#api-ColouredCoinWallet-takeOffer">takeOffer</a>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="takeOffer">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-takeOffer">takeOffer</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="DIDWallet"><a class="nav-link" href="#api-DIDWallet">DIDWallet</a></li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didCreateAttest" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didCreateAttest">didCreateAttest</a>
+                  <li class="nav-header nav-item" data-group="DIDWallet">
+                    <a class="nav-link" href="#api-DIDWallet">DIDWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didCreateAttest">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didCreateAttest">didCreateAttest</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didCreateBackupFile" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didCreateBackupFile">didCreateBackupFile</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didCreateBackupFile">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didCreateBackupFile">didCreateBackupFile</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didGetDid" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didGetDid">didGetDid</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didGetDid">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didGetDid">didGetDid</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didGetInformationNeededForRecovery" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didGetInformationNeededForRecovery">didGetInformationNeededForRecovery</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didGetInformationNeededForRecovery">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didGetInformationNeededForRecovery">didGetInformationNeededForRecovery</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didGetPubkey" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didGetPubkey">didGetPubkey</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didGetPubkey">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didGetPubkey">didGetPubkey</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didGetRecoveryList" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didGetRecoveryList">didGetRecoveryList</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didGetRecoveryList">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didGetRecoveryList">didGetRecoveryList</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didRecoverySpend" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didRecoverySpend">didRecoverySpend</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didRecoverySpend">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didRecoverySpend">didRecoverySpend</a>
                     </li>
-                    <li class="nav-item" data-group="DIDWallet" data-name="didUpdateRecoveryIds" class="">
-                      <a class="nav-link" href="#api-DIDWallet-didUpdateRecoveryIds">didUpdateRecoveryIds</a>
+                    <li class="nav-item" data-group="DIDWallet" data-name="didUpdateRecoveryIds">
+                      <a class="nav-link link-secondary" href="#api-DIDWallet-didUpdateRecoveryIds">didUpdateRecoveryIds</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="KeyManagement"><a class="nav-link" href="#api-KeyManagement">KeyManagement</a></li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="addKey" class="">
-                      <a class="nav-link" href="#api-KeyManagement-addKey">addKey</a>
+                  <li class="nav-header nav-item" data-group="KeyManagement">
+                    <a class="nav-link" href="#api-KeyManagement">KeyManagement</a>
+                  </li>
+                    <li class="nav-item" data-group="KeyManagement" data-name="addKey">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-addKey">addKey</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="checkDeleteKey" class="">
-                      <a class="nav-link" href="#api-KeyManagement-checkDeleteKey">checkDeleteKey</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="checkDeleteKey">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-checkDeleteKey">checkDeleteKey</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="deleteKey" class="">
-                      <a class="nav-link" href="#api-KeyManagement-deleteKey">deleteKey</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="deleteKey">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-deleteKey">deleteKey</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="generateMnemonic" class="">
-                      <a class="nav-link" href="#api-KeyManagement-generateMnemonic">generateMnemonic</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="generateMnemonic">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-generateMnemonic">generateMnemonic</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="getLoggedInFingerprint" class="">
-                      <a class="nav-link" href="#api-KeyManagement-getLoggedInFingerprint">getLoggedInFingerprint</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="getLoggedInFingerprint">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-getLoggedInFingerprint">getLoggedInFingerprint</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="getPrivateKey" class="">
-                      <a class="nav-link" href="#api-KeyManagement-getPrivateKey">getPrivateKey</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="getPrivateKey">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-getPrivateKey">getPrivateKey</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="getPublicKeys" class="">
-                      <a class="nav-link" href="#api-KeyManagement-getPublicKeys">getPublicKeys</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="getPublicKeys">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-getPublicKeys">getPublicKeys</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="logIn" class="">
-                      <a class="nav-link" href="#api-KeyManagement-logIn">logIn</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="logIn">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-logIn">logIn</a>
                     </li>
-                    <li class="nav-item" data-group="KeyManagement" data-name="walletDeleteAllKeys" class="">
-                      <a class="nav-link" href="#api-KeyManagement-walletDeleteAllKeys">walletDeleteAllKeys</a>
+                    <li class="nav-item" data-group="KeyManagement" data-name="walletDeleteAllKeys">
+                      <a class="nav-link link-secondary" href="#api-KeyManagement-walletDeleteAllKeys">walletDeleteAllKeys</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="PoolWallet"><a class="nav-link" href="#api-PoolWallet">PoolWallet</a></li>
-                    <li class="nav-item" data-group="PoolWallet" data-name="pwAbsorbRewards" class="">
-                      <a class="nav-link" href="#api-PoolWallet-pwAbsorbRewards">pwAbsorbRewards</a>
+                  <li class="nav-header nav-item" data-group="PoolWallet">
+                    <a class="nav-link" href="#api-PoolWallet">PoolWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="PoolWallet" data-name="pwAbsorbRewards">
+                      <a class="nav-link link-secondary" href="#api-PoolWallet-pwAbsorbRewards">pwAbsorbRewards</a>
                     </li>
-                    <li class="nav-item" data-group="PoolWallet" data-name="pwJoinPool" class="">
-                      <a class="nav-link" href="#api-PoolWallet-pwJoinPool">pwJoinPool</a>
+                    <li class="nav-item" data-group="PoolWallet" data-name="pwJoinPool">
+                      <a class="nav-link link-secondary" href="#api-PoolWallet-pwJoinPool">pwJoinPool</a>
                     </li>
-                    <li class="nav-item" data-group="PoolWallet" data-name="pwSelfPool" class="">
-                      <a class="nav-link" href="#api-PoolWallet-pwSelfPool">pwSelfPool</a>
+                    <li class="nav-item" data-group="PoolWallet" data-name="pwSelfPool">
+                      <a class="nav-link link-secondary" href="#api-PoolWallet-pwSelfPool">pwSelfPool</a>
                     </li>
-                    <li class="nav-item" data-group="PoolWallet" data-name="pwStatus" class="">
-                      <a class="nav-link" href="#api-PoolWallet-pwStatus">pwStatus</a>
+                    <li class="nav-item" data-group="PoolWallet" data-name="pwStatus">
+                      <a class="nav-link link-secondary" href="#api-PoolWallet-pwStatus">pwStatus</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="RateLimitedWallet"><a class="nav-link" href="#api-RateLimitedWallet">RateLimitedWallet</a></li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="addRateLimitedFunds" class="">
-                      <a class="nav-link" href="#api-RateLimitedWallet-addRateLimitedFunds">addRateLimitedFunds</a>
+                  <li class="nav-header nav-item" data-group="RateLimitedWallet">
+                    <a class="nav-link" href="#api-RateLimitedWallet">RateLimitedWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="RateLimitedWallet" data-name="addRateLimitedFunds">
+                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-addRateLimitedFunds">addRateLimitedFunds</a>
                     </li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="rlSetUserInfo" class="">
-                      <a class="nav-link" href="#api-RateLimitedWallet-rlSetUserInfo">rlSetUserInfo</a>
+                    <li class="nav-item" data-group="RateLimitedWallet" data-name="rlSetUserInfo">
+                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-rlSetUserInfo">rlSetUserInfo</a>
                     </li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="sendClawbackTransaction" class="">
-                      <a class="nav-link" href="#api-RateLimitedWallet-sendClawbackTransaction">sendClawbackTransaction</a>
+                    <li class="nav-item" data-group="RateLimitedWallet" data-name="sendClawbackTransaction">
+                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-sendClawbackTransaction">sendClawbackTransaction</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="Wallet"><a class="nav-link" href="#api-Wallet">Wallet</a></li>
-                    <li class="nav-item" data-group="Wallet" data-name="createSignedTransaction" class="">
-                      <a class="nav-link" href="#api-Wallet-createSignedTransaction">createSignedTransaction</a>
+                  <li class="nav-header nav-item" data-group="Wallet">
+                    <a class="nav-link" href="#api-Wallet">Wallet</a>
+                  </li>
+                    <li class="nav-item" data-group="Wallet" data-name="createSignedTransaction">
+                      <a class="nav-link link-secondary" href="#api-Wallet-createSignedTransaction">createSignedTransaction</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="deleteUnconfirmedTransactions" class="">
-                      <a class="nav-link" href="#api-Wallet-deleteUnconfirmedTransactions">deleteUnconfirmedTransactions</a>
+                    <li class="nav-item" data-group="Wallet" data-name="deleteUnconfirmedTransactions">
+                      <a class="nav-link link-secondary" href="#api-Wallet-deleteUnconfirmedTransactions">deleteUnconfirmedTransactions</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getFarmedAmount" class="">
-                      <a class="nav-link" href="#api-Wallet-getFarmedAmount">getFarmedAmount</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getFarmedAmount">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getFarmedAmount">getFarmedAmount</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getNextAddress" class="">
-                      <a class="nav-link" href="#api-Wallet-getNextAddress">getNextAddress</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getNextAddress">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getNextAddress">getNextAddress</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getTransaction" class="">
-                      <a class="nav-link" href="#api-Wallet-getTransaction">getTransaction</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getTransaction">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getTransaction">getTransaction</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getTransactionCount" class="">
-                      <a class="nav-link" href="#api-Wallet-getTransactionCount">getTransactionCount</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getTransactionCount">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getTransactionCount">getTransactionCount</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getTransactions" class="">
-                      <a class="nav-link" href="#api-Wallet-getTransactions">getTransactions</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getTransactions">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getTransactions">getTransactions</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="getWalletBalance" class="">
-                      <a class="nav-link" href="#api-Wallet-getWalletBalance">getWalletBalance</a>
+                    <li class="nav-item" data-group="Wallet" data-name="getWalletBalance">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getWalletBalance">getWalletBalance</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="sendTransaction" class="">
-                      <a class="nav-link" href="#api-Wallet-sendTransaction">sendTransaction</a>
+                    <li class="nav-item" data-group="Wallet" data-name="sendTransaction">
+                      <a class="nav-link link-secondary" href="#api-Wallet-sendTransaction">sendTransaction</a>
                     </li>
-                    <li class="nav-item" data-group="Wallet" data-name="sendTransactionMulti" class="">
-                      <a class="nav-link" href="#api-Wallet-sendTransactionMulti">sendTransactionMulti</a>
+                    <li class="nav-item" data-group="Wallet" data-name="sendTransactionMulti">
+                      <a class="nav-link link-secondary" href="#api-Wallet-sendTransactionMulti">sendTransactionMulti</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="WalletManagement"><a class="nav-link" href="#api-WalletManagement">WalletManagement</a></li>
-                    <li class="nav-item" data-group="WalletManagement" data-name="createNewWallet" class="">
-                      <a class="nav-link" href="#api-WalletManagement-createNewWallet">createNewWallet</a>
+                  <li class="nav-header nav-item" data-group="WalletManagement">
+                    <a class="nav-link" href="#api-WalletManagement">WalletManagement</a>
+                  </li>
+                    <li class="nav-item" data-group="WalletManagement" data-name="createNewWallet">
+                      <a class="nav-link link-secondary" href="#api-WalletManagement-createNewWallet">createNewWallet</a>
                     </li>
-                    <li class="nav-item" data-group="WalletManagement" data-name="getWallets" class="">
-                      <a class="nav-link" href="#api-WalletManagement-getWallets">getWallets</a>
+                    <li class="nav-item" data-group="WalletManagement" data-name="getWallets">
+                      <a class="nav-link link-secondary" href="#api-WalletManagement-getWallets">getWallets</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="WalletNode"><a class="nav-link" href="#api-WalletNode">WalletNode</a></li>
-                    <li class="nav-item" data-group="WalletNode" data-name="getHeightInfo" class="">
-                      <a class="nav-link" href="#api-WalletNode-getHeightInfo">getHeightInfo</a>
+                  <li class="nav-header nav-item" data-group="WalletNode">
+                    <a class="nav-link" href="#api-WalletNode">WalletNode</a>
+                  </li>
+                    <li class="nav-item" data-group="WalletNode" data-name="getHeightInfo">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-getHeightInfo">getHeightInfo</a>
                     </li>
-                    <li class="nav-item" data-group="WalletNode" data-name="getSyncStatus" class="">
-                      <a class="nav-link" href="#api-WalletNode-getSyncStatus">getSyncStatus</a>
+                    <li class="nav-item" data-group="WalletNode" data-name="getSyncStatus">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-getSyncStatus">getSyncStatus</a>
                     </li>
-                    <li class="nav-item" data-group="WalletNode" data-name="walletGetNetworkInfo" class="">
-                      <a class="nav-link" href="#api-WalletNode-walletGetNetworkInfo">walletGetNetworkInfo</a>
+                    <li class="nav-item" data-group="WalletNode" data-name="walletGetNetworkInfo">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-walletGetNetworkInfo">walletGetNetworkInfo</a>
                     </li>
-                    <li class="nav-item" data-group="WalletNode" data-name="walletPushTx" class="">
-                      <a class="nav-link" href="#api-WalletNode-walletPushTx">walletPushTx</a>
+                    <li class="nav-item" data-group="WalletNode" data-name="walletPushTx">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-walletPushTx">walletPushTx</a>
                     </li>
           </ul>
         </nav>

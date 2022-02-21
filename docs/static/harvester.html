@@ -483,12 +483,12 @@
     font-family: sans-serif;
     font-weight: 700;
     font-size: 16px;
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
   .sidenav > li.nav-header.active > a {
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
@@ -498,8 +498,7 @@
   }
   
   .sidenav > li > a:hover {
-    background-color: #ffffff;
-    color: black;
+    filter: brightness(125%);
   }
   
   .sidenav > li.has-modifications a {
@@ -755,30 +754,32 @@
       <div id="sidenav" class="col-md-2">
         <nav id="scrollingNav" class="navbar navbar-light bg-light px-3">
           <ul class="sidenav nav nav-pills">
-            <a  class="navbar-brand" href="index.html" id="home-link">
-              <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
-                <img src="./images/chia-logo.svg" alt="chia logo">
-              </div>
+            <a class="navbar-brand" href="index.html" id="home-link">
+              <img class="img-fluid" src="./images/chia-logo.svg" alt="chia logo">
             </a>
-            <li class="nav-fixed nav-header active nav-item" data-group="_"><a class="nav-link" href="#api-_">API Summary</a></li>
-                  <li class="nav-header nav-item" data-group="Harvester"><a class="nav-link" href="#api-Harvester">Harvester</a></li>
-                    <li class="nav-item" data-group="Harvester" data-name="addPlotDirectory" class="">
-                      <a class="nav-link" href="#api-Harvester-addPlotDirectory">addPlotDirectory</a>
+            <li class="nav-fixed nav-header active nav-item" data-group="_">
+              <a class="nav-link" href="#api-_">API Summary</a>
+            </li>
+                  <li class="nav-header nav-item" data-group="Harvester">
+                    <a class="nav-link" href="#api-Harvester">Harvester</a>
+                  </li>
+                    <li class="nav-item" data-group="Harvester" data-name="addPlotDirectory">
+                      <a class="nav-link link-secondary" href="#api-Harvester-addPlotDirectory">addPlotDirectory</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="deletePlot" class="">
-                      <a class="nav-link" href="#api-Harvester-deletePlot">deletePlot</a>
+                    <li class="nav-item" data-group="Harvester" data-name="deletePlot">
+                      <a class="nav-link link-secondary" href="#api-Harvester-deletePlot">deletePlot</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="getPlotDirectories" class="">
-                      <a class="nav-link" href="#api-Harvester-getPlotDirectories">getPlotDirectories</a>
+                    <li class="nav-item" data-group="Harvester" data-name="getPlotDirectories">
+                      <a class="nav-link link-secondary" href="#api-Harvester-getPlotDirectories">getPlotDirectories</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="getPlots" class="">
-                      <a class="nav-link" href="#api-Harvester-getPlots">getPlots</a>
+                    <li class="nav-item" data-group="Harvester" data-name="getPlots">
+                      <a class="nav-link link-secondary" href="#api-Harvester-getPlots">getPlots</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="refreshPlots" class="">
-                      <a class="nav-link" href="#api-Harvester-refreshPlots">refreshPlots</a>
+                    <li class="nav-item" data-group="Harvester" data-name="refreshPlots">
+                      <a class="nav-link link-secondary" href="#api-Harvester-refreshPlots">refreshPlots</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="removePlotDirectory" class="">
-                      <a class="nav-link" href="#api-Harvester-removePlotDirectory">removePlotDirectory</a>
+                    <li class="nav-item" data-group="Harvester" data-name="removePlotDirectory">
+                      <a class="nav-link link-secondary" href="#api-Harvester-removePlotDirectory">removePlotDirectory</a>
                     </li>
           </ul>
         </nav>

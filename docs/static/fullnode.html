@@ -483,12 +483,12 @@
     font-family: sans-serif;
     font-weight: 700;
     font-size: 16px;
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
   .sidenav > li.nav-header.active > a {
-    background-color: #4c8eca;
+    background-color: #3AAC59;
     color: #fff;
   }
   
@@ -498,8 +498,7 @@
   }
   
   .sidenav > li > a:hover {
-    background-color: #ffffff;
-    color: black;
+    filter: brightness(125%);
   }
   
   .sidenav > li.has-modifications a {
@@ -1954,91 +1953,101 @@
       <div id="sidenav" class="col-md-2">
         <nav id="scrollingNav" class="navbar navbar-light bg-light px-3">
           <ul class="sidenav nav nav-pills">
-            <a  class="navbar-brand" href="index.html" id="home-link">
-              <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
-                <img src="./images/chia-logo.svg" alt="chia logo">
-              </div>
+            <a class="navbar-brand" href="index.html" id="home-link">
+              <img class="img-fluid" src="./images/chia-logo.svg" alt="chia logo">
             </a>
-            <li class="nav-fixed nav-header active nav-item" data-group="_"><a class="nav-link" href="#api-_">API Summary</a></li>
-                  <li class="nav-header nav-item" data-group="Blocks"><a class="nav-link" href="#api-Blocks">Blocks</a></li>
-                    <li class="nav-item" data-group="Blocks" data-name="getAdditionsAndRemovals" class="">
-                      <a class="nav-link" href="#api-Blocks-getAdditionsAndRemovals">getAdditionsAndRemovals</a>
+            <li class="nav-fixed nav-header active nav-item" data-group="_">
+              <a class="nav-link" href="#api-_">API Summary</a>
+            </li>
+                  <li class="nav-header nav-item" data-group="Blocks">
+                    <a class="nav-link" href="#api-Blocks">Blocks</a>
+                  </li>
+                    <li class="nav-item" data-group="Blocks" data-name="getAdditionsAndRemovals">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getAdditionsAndRemovals">getAdditionsAndRemovals</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getBlock" class="">
-                      <a class="nav-link" href="#api-Blocks-getBlock">getBlock</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlock">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlock">getBlock</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecord" class="">
-                      <a class="nav-link" href="#api-Blocks-getBlockRecord">getBlockRecord</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecord">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlockRecord">getBlockRecord</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecordByHeight" class="">
-                      <a class="nav-link" href="#api-Blocks-getBlockRecordByHeight">getBlockRecordByHeight</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecordByHeight">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlockRecordByHeight">getBlockRecordByHeight</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecords" class="">
-                      <a class="nav-link" href="#api-Blocks-getBlockRecords">getBlockRecords</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlockRecords">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlockRecords">getBlockRecords</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getBlocks" class="">
-                      <a class="nav-link" href="#api-Blocks-getBlocks">getBlocks</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlocks">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlocks">getBlocks</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getRecentSignagePointOrEos" class="">
-                      <a class="nav-link" href="#api-Blocks-getRecentSignagePointOrEos">getRecentSignagePointOrEos</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getRecentSignagePointOrEos">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getRecentSignagePointOrEos">getRecentSignagePointOrEos</a>
                     </li>
-                    <li class="nav-item" data-group="Blocks" data-name="getUnfinishedBlockHeaders" class="">
-                      <a class="nav-link" href="#api-Blocks-getUnfinishedBlockHeaders">getUnfinishedBlockHeaders</a>
+                    <li class="nav-item" data-group="Blocks" data-name="getUnfinishedBlockHeaders">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getUnfinishedBlockHeaders">getUnfinishedBlockHeaders</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="Coins"><a class="nav-link" href="#api-Coins">Coins</a></li>
-                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordByName" class="">
-                      <a class="nav-link" href="#api-Coins-getCoinRecordByName">getCoinRecordByName</a>
+                  <li class="nav-header nav-item" data-group="Coins">
+                    <a class="nav-link" href="#api-Coins">Coins</a>
+                  </li>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordByName">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordByName">getCoinRecordByName</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByNames" class="">
-                      <a class="nav-link" href="#api-Coins-getCoinRecordsByNames">getCoinRecordsByNames</a>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByNames">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByNames">getCoinRecordsByNames</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByParentIds" class="">
-                      <a class="nav-link" href="#api-Coins-getCoinRecordsByParentIds">getCoinRecordsByParentIds</a>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByParentIds">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByParentIds">getCoinRecordsByParentIds</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByPuzzleHash" class="">
-                      <a class="nav-link" href="#api-Coins-getCoinRecordsByPuzzleHash">getCoinRecordsByPuzzleHash</a>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByPuzzleHash">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByPuzzleHash">getCoinRecordsByPuzzleHash</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByPuzzleHashes" class="">
-                      <a class="nav-link" href="#api-Coins-getCoinRecordsByPuzzleHashes">getCoinRecordsByPuzzleHashes</a>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByPuzzleHashes">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByPuzzleHashes">getCoinRecordsByPuzzleHashes</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="getPuzzleAndSolution" class="">
-                      <a class="nav-link" href="#api-Coins-getPuzzleAndSolution">getPuzzleAndSolution</a>
+                    <li class="nav-item" data-group="Coins" data-name="getPuzzleAndSolution">
+                      <a class="nav-link link-secondary" href="#api-Coins-getPuzzleAndSolution">getPuzzleAndSolution</a>
                     </li>
-                    <li class="nav-item" data-group="Coins" data-name="pushTx" class="">
-                      <a class="nav-link" href="#api-Coins-pushTx">pushTx</a>
+                    <li class="nav-item" data-group="Coins" data-name="pushTx">
+                      <a class="nav-link link-secondary" href="#api-Coins-pushTx">pushTx</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="Connections"><a class="nav-link" href="#api-Connections">Connections</a></li>
-                    <li class="nav-item" data-group="Connections" data-name="closeConnection" class="">
-                      <a class="nav-link" href="#api-Connections-closeConnection">closeConnection</a>
+                  <li class="nav-header nav-item" data-group="Connections">
+                    <a class="nav-link" href="#api-Connections">Connections</a>
+                  </li>
+                    <li class="nav-item" data-group="Connections" data-name="closeConnection">
+                      <a class="nav-link link-secondary" href="#api-Connections-closeConnection">closeConnection</a>
                     </li>
-                    <li class="nav-item" data-group="Connections" data-name="getConnections" class="">
-                      <a class="nav-link" href="#api-Connections-getConnections">getConnections</a>
+                    <li class="nav-item" data-group="Connections" data-name="getConnections">
+                      <a class="nav-link link-secondary" href="#api-Connections-getConnections">getConnections</a>
                     </li>
-                    <li class="nav-item" data-group="Connections" data-name="openConnection" class="">
-                      <a class="nav-link" href="#api-Connections-openConnection">openConnection</a>
+                    <li class="nav-item" data-group="Connections" data-name="openConnection">
+                      <a class="nav-link link-secondary" href="#api-Connections-openConnection">openConnection</a>
                     </li>
-                    <li class="nav-item" data-group="Connections" data-name="stopNode" class="">
-                      <a class="nav-link" href="#api-Connections-stopNode">stopNode</a>
+                    <li class="nav-item" data-group="Connections" data-name="stopNode">
+                      <a class="nav-link link-secondary" href="#api-Connections-stopNode">stopNode</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="FullNode"><a class="nav-link" href="#api-FullNode">FullNode</a></li>
-                    <li class="nav-item" data-group="FullNode" data-name="fullNodeGetNetworkInfo" class="">
-                      <a class="nav-link" href="#api-FullNode-fullNodeGetNetworkInfo">fullNodeGetNetworkInfo</a>
+                  <li class="nav-header nav-item" data-group="FullNode">
+                    <a class="nav-link" href="#api-FullNode">FullNode</a>
+                  </li>
+                    <li class="nav-item" data-group="FullNode" data-name="fullNodeGetNetworkInfo">
+                      <a class="nav-link link-secondary" href="#api-FullNode-fullNodeGetNetworkInfo">fullNodeGetNetworkInfo</a>
                     </li>
-                    <li class="nav-item" data-group="FullNode" data-name="getBlockchainState" class="">
-                      <a class="nav-link" href="#api-FullNode-getBlockchainState">getBlockchainState</a>
+                    <li class="nav-item" data-group="FullNode" data-name="getBlockchainState">
+                      <a class="nav-link link-secondary" href="#api-FullNode-getBlockchainState">getBlockchainState</a>
                     </li>
-                    <li class="nav-item" data-group="FullNode" data-name="getNetworkSpace" class="">
-                      <a class="nav-link" href="#api-FullNode-getNetworkSpace">getNetworkSpace</a>
+                    <li class="nav-item" data-group="FullNode" data-name="getNetworkSpace">
+                      <a class="nav-link link-secondary" href="#api-FullNode-getNetworkSpace">getNetworkSpace</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="Mempool"><a class="nav-link" href="#api-Mempool">Mempool</a></li>
-                    <li class="nav-item" data-group="Mempool" data-name="getAllMempoolItems" class="">
-                      <a class="nav-link" href="#api-Mempool-getAllMempoolItems">getAllMempoolItems</a>
+                  <li class="nav-header nav-item" data-group="Mempool">
+                    <a class="nav-link" href="#api-Mempool">Mempool</a>
+                  </li>
+                    <li class="nav-item" data-group="Mempool" data-name="getAllMempoolItems">
+                      <a class="nav-link link-secondary" href="#api-Mempool-getAllMempoolItems">getAllMempoolItems</a>
                     </li>
-                    <li class="nav-item" data-group="Mempool" data-name="getAllMempoolTxIds" class="">
-                      <a class="nav-link" href="#api-Mempool-getAllMempoolTxIds">getAllMempoolTxIds</a>
+                    <li class="nav-item" data-group="Mempool" data-name="getAllMempoolTxIds">
+                      <a class="nav-link link-secondary" href="#api-Mempool-getAllMempoolTxIds">getAllMempoolTxIds</a>
                     </li>
-                    <li class="nav-item" data-group="Mempool" data-name="getMempoolItemByTxId" class="">
-                      <a class="nav-link" href="#api-Mempool-getMempoolItemByTxId">getMempoolItemByTxId</a>
+                    <li class="nav-item" data-group="Mempool" data-name="getMempoolItemByTxId">
+                      <a class="nav-link link-secondary" href="#api-Mempool-getMempoolItemByTxId">getMempoolItemByTxId</a>
                     </li>
           </ul>
         </nav>
