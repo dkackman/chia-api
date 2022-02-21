@@ -305,14 +305,15 @@ var JSONSchemaView = (function () {
         var _this3 = this;
 
         var innerAllOf = element.querySelector('.inner.' + type);
-
-        this.schema[type].forEach(function (schema) {
-          var inner = document.createElement('div');
-          inner.classList.add('inner');
-          var view = new JSONSchemaView(schema, _this3.open - 1);
-          inner.appendChild(view.render());
-          innerAllOf.appendChild(inner);
-        });
+        if (innerAllOf) {
+          this.schema[type].forEach(function (schema) {
+            var inner = document.createElement('div');
+            inner.classList.add('inner');
+            var view = new JSONSchemaView(schema, _this3.open - 1);
+            inner.appendChild(view.render());
+            innerAllOf.appendChild(inner);
+          });
+        }
       }
     }
   }]);
