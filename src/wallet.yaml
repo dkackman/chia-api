@@ -1708,7 +1708,7 @@ paths:
                     limit:
                       type: integer
                       format: uint64
-                      description: Rate linit - needed for admin creation only.
+                      description: Rate limit - needed for admin creation only.
                     pubkey:
                       type: string
                       format: hex
@@ -1720,7 +1720,7 @@ paths:
                   properties:
                     did_type:
                       type: string
-                      description: The type of DId wallet to create.
+                      description: The type of DID wallet to create.
                       enum:
                         - new
                         - recovery
@@ -1792,7 +1792,7 @@ paths:
                         type: string
                         format: hex
                   - type: object
-                    description: Response when a new DId wallet is created.
+                    description: Response when a new DID wallet is created.
                     properties:
                       type:
                         $ref: "#/components/schemas/wallet_type"
@@ -1803,7 +1803,7 @@ paths:
                         type: integer
                         format: uint32
                   - type: object
-                    description: Response when a recovery DId wallet is created.
+                    description: Response when a recovery DID wallet is created.
                     properties:
                       type:
                         $ref: "#/components/schemas/wallet_type"

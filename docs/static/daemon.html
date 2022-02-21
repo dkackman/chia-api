@@ -115,11 +115,13 @@
 
       // Content-Scroll on Navigation click.
       $('.sidenav').find('a').on('click', function(e) {
-          e.preventDefault();
-          var id = $(this).attr('href');
-          if ($(id).length > 0)
-              $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);
-          window.location.hash = $(this).attr('href');
+          if ($(this).attr('id') !== 'home-link') { // allow the logo link to exit page
+            var id = $(this).attr('href');
+            e.preventDefault();
+            if ($(id).length > 0)
+                $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);
+            window.location.hash = $(this).attr('href');
+          }
       });
 
       // Quickjump on Pageload to hash position.
@@ -1171,11 +1173,11 @@
       <div id="sidenav" class="span2">
         <nav id="scrollingNav">
           <ul class="sidenav nav nav-list">
-              <a href="index.html">
-                <div style="width: 80%; background-color: white; color: white; padding: 20px; text-align: center; margin-bottom: 20px; ">
-                  <img src="./images/chia-logo.svg" alt="chia logo">
-                </div>
-              </a>
+            <a href="index.html" id="home-link">
+              <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
+                <img src="./images/chia-logo.svg" alt="chia logo">
+              </div>
+            </a>
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Daemon"><a href="#api-Daemon">Daemon</a></li>
