@@ -10,7 +10,6 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   {{>js_prettify}}
-  {{>js_bootstrap}}
   {{>marked}}
   <script>
     $( document ).ready(function() {
@@ -61,44 +60,6 @@
         });
       }
 
-      // Bootstrap Scrollspy
-      $(this).scrollspy({ target: '#scrollingNav', offset: 18 });
-
-      // Content-Scroll on Navigation click.
-      $('.sidenav').find('a').on('click', function(e) {
-          if ($(this).attr('id') !== 'home-link') { // allow the logo link to exit page
-            var id = $(this).attr('href');
-            e.preventDefault();
-            if ($(id).length > 0)
-                $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 400);
-            window.location.hash = $(this).attr('href');
-          }
-      });
-
-      // Quickjump on Pageload to hash position.
-      if(window.location.hash) {
-          var id = window.location.hash;
-          if ($(id).length > 0)
-              $('html,body').animate({ scrollTop: parseInt($(id).offset().top) }, 0);
-      }
-
-
-      function initDynamic() {
-        // tabs
-        $('.nav-tabs-examples a').click(function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-
-
-        $('.nav-tabs-examples').find('a:first').tab('show');
-
-        // call scrollspy refresh method
-        $(window).scrollspy('refresh');
-      }
-
-      initDynamic();
-
       // Pre- / Code-Format
       prettyPrint();
 
@@ -106,13 +67,14 @@
       processMarked();
     });
   </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <style type="text/css">
-  {{>css_bootstrap}}
   {{>css_prettify}}
   {{>styles}}
   </style>
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#scrollingNav">
   <script>
     // Script section to load models into a JS Var
     var defs = {}
@@ -130,23 +92,22 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <div id="sidenav" class="span2">
-        <nav id="scrollingNav">
-          <ul class="sidenav nav nav-list">
-            <a href="index.html" id="home-link">
+      <div id="sidenav" class="col-md-2">
+        <nav id="scrollingNav" class="navbar navbar-light bg-light px-3">
+          <ul class="sidenav nav nav-pills">
+            <a  class="navbar-brand" href="index.html" id="home-link">
               <div style="width: 80%; background-color: #f5f5f5; color: white;  text-align: center; margin-bottom: 20px; ">
                 <img src="./images/chia-logo.svg" alt="chia logo">
               </div>
             </a>
-            <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
-
+            <li class="nav-fixed nav-header active nav-item" data-group="_"><a class="nav-link" href="#api-_">API Summary</a></li>
             {{#apiInfo}}
               {{#apis}}
                 {{#operations}}
-                  <li class="nav-header" data-group="{{baseName}}"><a href="#api-{{baseName}}">{{baseName}}</a></li>
+                  <li class="nav-header nav-item" data-group="{{baseName}}"><a class="nav-link" href="#api-{{baseName}}">{{baseName}}</a></li>
                   {{#operation}}
-                    <li data-group="{{baseName}}" data-name="{{nickname}}" class="">
-                      <a href="#api-{{baseName}}-{{nickname}}">{{nickname}}</a>
+                    <li class="nav-item" data-group="{{baseName}}" data-name="{{nickname}}" class="">
+                      <a class="nav-link" href="#api-{{baseName}}-{{nickname}}">{{nickname}}</a>
                     </li>
                   {{/operation}}
                 {{/operations}}
@@ -187,20 +148,15 @@
                           <h1>{{nickname}}</h1>
                           <p>{{summary}}</p>
                         </div>
-                        <div class="pull-right"></div>
-                        <div class="clearfix"></div>
-                        <p></p>
-                        <p class="marked">{{notes}}</p>
-                        <p></p>
-                        <br />
+                        <p class="marked">{{notes}}</p>                    
+                        <p class="http-method" data-type="{{httpMethod}}">{{httpMethod}}</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code><span class="pln">{{path}}</span></code></pre>
-                        <p>
-                          <h3>Usage and Samples</h3>
-                        </p>
+                        
+                          <h3>Usage</h3>
+                        
                         <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><a href="#examples-{{baseName}}-{{nickname}}-0-curl">Curl</a></li>
+                          <li class="active"><span href="#examples-{{baseName}}-{{nickname}}-0-curl">Curl</span></li>
                         </ul>
-
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-{{baseName}}-{{nickname}}-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X {{vendorExtensions.x-codegen-httpMethodUpperCase}} \
@@ -359,7 +315,6 @@
                           {{/responses}}
                         </article>
                       </div>
-                      <hr>
                     {{/@first}}
                     {{/contents}}
                     {{/operation}}
@@ -386,12 +341,14 @@
               {{/licenseUrl}}
             </div>
           </div>
-{{^hideGenerationTimestamp}}          <div id="generator">
+{{^hideGenerationTimestamp}}          
+          <div id="generator">
             <div class="content">
               Generated {{generatedDate}}
             </div>
           </div>
-{{/hideGenerationTimestamp}}      </div>
+{{/hideGenerationTimestamp}}      
+        </div>
     </div>
   </div>
   {{>js_jsonformatter}}
@@ -407,12 +364,6 @@
     defsParser.dereference(schemaWrapper).catch(function(err) {
       console.log(err);
     });
-  </script>
-  <script>
-  $(document).ready(function () {
-    $('.nav-tabs-examples').find('a:first').tab('show');
-    $(this).scrollspy({ target: '#scrollingNav', offset: 18 });
-  });
   </script>
 </body>
 </html>

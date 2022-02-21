@@ -8,6 +8,7 @@
 }
 body {
   min-width: 980px;
+  position:relative;
 }
 
 body, p, a, div, th, td {
@@ -54,7 +55,7 @@ h2 {
 
 section {
   border-top: 1px solid #ebebeb;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 
 section h1 {
@@ -186,15 +187,9 @@ pre.language-json {
 }
 
 pre.language-html {
-  margin: 40px 0 20px 0;
+  margin: 0px 0 20px 0;
 }
-
-pre.language-html:before {
-  content: attr(data-type);
-  position: absolute;
-  top: -30px;
-  left: 0;
-  font-family: "Source Sans Pro", sans-serif;
+p.http-method {
   font-weight: 600;
   font-size: 15px;
   display: inline-block;
@@ -203,21 +198,22 @@ pre.language-html:before {
   text-transform: uppercase;
   background-color: #3387CC;
   color: #ffffff;
+  margin: 0 0 1px 0;
 }
 
-pre.language-html[data-type="get"]:before {
+p.http-method[data-type="get"] {
   background-color: green;
 }
 
-pre.language-html[data-type="put"]:before {
+p.http-method[data-type="put"] {
   background-color: #e5c500;
 }
 
-pre.language-html[data-type="post"]:before {
+p.http-method[data-type="post"] {
   background-color: #4070ec;
 }
 
-pre.language-html[data-type="delete"]:before {
+p.http-method[data-type="delete"] {
   background-color: #ed0039;
 }
 
@@ -290,9 +286,6 @@ pre code.sample-request-response-json {
   color: #fff;
 }
 
-
-00427D
-
 .sidenav > .active > a {
   position: relative;
   z-index: 2;
@@ -300,6 +293,7 @@ pre code.sample-request-response-json {
 
 .sidenav > li > a:hover {
   background-color: #ffffff;
+  color: black;
 }
 
 .sidenav > li.has-modifications a {
