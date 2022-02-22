@@ -423,6 +423,10 @@
     background-color: #ed0039;
   }
   
+  p.http-method[data-type="websocket"] {
+    background-color: red;
+  }
+  
   pre.language-api .str {
     color: #ffffff;
   }
@@ -833,8 +837,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "enum" : [ 25, 32, 33, 34, 35 ],
-  "default" : 32
+  "default" : 32,
+  "enum" : [ 25, 32, 33, 34, 35 ]
 };
             defs["OneOfsignage_point_bundleProofsItems"] = {};
             defs["plot_info"] = {
@@ -1104,7 +1108,7 @@
                           <h1>getHarvesters</h1>
                           <p>Get the list of harvesters.</p>
                         </div>
-                        <p class="marked">Get the list of harvesters.</p>                    
+                        <p class="marked">Get the list of harvesters.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvesters</span></code></pre>
                         
@@ -1226,7 +1230,7 @@
                           <h1>getPoolLoginLink</h1>
                           <p>Get&#x27;s the pool login link, if any.</p>
                         </div>
-                        <p class="marked">Get&#x27;s the pool login link, if any.</p>                    
+                        <p class="marked">Get&#x27;s the pool login link, if any.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_pool_login_link</span></code></pre>
                         
@@ -1348,7 +1352,7 @@
                           <h1>getPoolState</h1>
                           <p>Get&#x27;s the state of the pool.</p>
                         </div>
-                        <p class="marked">Get&#x27;s the state of the pool.</p>                    
+                        <p class="marked">Get&#x27;s the state of the pool.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_pool_state</span></code></pre>
                         
@@ -1470,7 +1474,7 @@
                           <h1>getRewardTargets</h1>
                           <p>Get the farm and pool reward targets.</p>
                         </div>
-                        <p class="marked">Get the farm and pool reward targets.</p>                    
+                        <p class="marked">Get the farm and pool reward targets.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_reward_targets</span></code></pre>
                         
@@ -1592,7 +1596,7 @@
                           <h1>getSignagePoint</h1>
                           <p>Get&#x27;s a signage point by hash.</p>
                         </div>
-                        <p class="marked">Get&#x27;s a signage point by hash.</p>                    
+                        <p class="marked">Get&#x27;s a signage point by hash.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_signage_point</span></code></pre>
                         
@@ -1714,7 +1718,7 @@
                           <h1>getSignagePoints</h1>
                           <p>Get signage points.</p>
                         </div>
-                        <p class="marked">Get signage points.</p>                    
+                        <p class="marked">Get signage points.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_signage_points</span></code></pre>
                         
@@ -1836,7 +1840,7 @@
                           <h1>setPayoutInstructions</h1>
                           <p>Set&#x27;s a pool&#x27;s payout instructions.</p>
                         </div>
-                        <p class="marked">Set&#x27;s a pool&#x27;s payout instructions.</p>                    
+                        <p class="marked">Set&#x27;s a pool&#x27;s payout instructions.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_payout_instructions</span></code></pre>
                         
@@ -1958,7 +1962,7 @@
                           <h1>setRewardTargets</h1>
                           <p>Set the farm and pool reward targets.</p>
                         </div>
-                        <p class="marked">Set the farm and pool reward targets.</p>                    
+                        <p class="marked">Set the farm and pool reward targets.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_reward_targets</span></code></pre>
                         

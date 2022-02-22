@@ -150,7 +150,10 @@
                           <h1>{{nickname}}</h1>
                           <p>{{summary}}</p>
                         </div>
-                        <p class="marked">{{notes}}</p>                    
+                        <p class="marked">{{notes}}</p>            
+                        {{#if websocket}}
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        {{else}}        
                         <p class="http-method" data-type="{{httpMethod}}">{{httpMethod}}</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code><span class="pln">{{path}}</span></code></pre>
                         
@@ -164,6 +167,7 @@
 -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
 "{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^@first}}&{{/@first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}" \
 -d "{}"</code></pre>
+                          {{/if}}
                           <h2>Parameters</h2>
 
                           {{#hasPathParams}}

@@ -423,6 +423,10 @@
     background-color: #ed0039;
   }
   
+  p.http-method[data-type="websocket"] {
+    background-color: red;
+  }
+  
   pre.language-api .str {
     color: #ffffff;
   }
@@ -2076,7 +2080,7 @@
                           <h1>getAdditionsAndRemovals</h1>
                           <p>Retrieves the additions and removals for a certain block.</p>
                         </div>
-                        <p class="marked">Retrieves the additions and removals (state transitions) for a certain block. Returns coin records for each addition and removal.</p>                    
+                        <p class="marked">Retrieves the additions and removals (state transitions) for a certain block. Returns coin records for each addition and removal.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_additions_and_removals</span></code></pre>
                         
@@ -2205,7 +2209,7 @@
                           <h1>getBlock</h1>
                           <p>Retrieves a block by header hash.</p>
                         </div>
-                        <p class="marked">Retrieves a block by header hash.</p>                    
+                        <p class="marked">Retrieves a block by header hash.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_block</span></code></pre>
                         
@@ -2334,7 +2338,7 @@
                           <h1>getBlockRecord</h1>
                           <p>Retrieves a block record by header hash.</p>
                         </div>
-                        <p class="marked">Retrieves a block record by header hash.</p>                    
+                        <p class="marked">Retrieves a block record by header hash.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_block_record</span></code></pre>
                         
@@ -2463,7 +2467,7 @@
                           <h1>getBlockRecordByHeight</h1>
                           <p>Retrieves a block record by height.</p>
                         </div>
-                        <p class="marked">Retrieves a block record by height (assuming the height &lt;&#x3D; peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).</p>                    
+                        <p class="marked">Retrieves a block record by height (assuming the height &lt;&#x3D; peak height). Note that not all blocks will have all fields set here (depending on transaction block, finishing sub epoch, etc).</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_block_record_by_height</span></code></pre>
                         
@@ -2585,7 +2589,7 @@
                           <h1>getBlockRecords</h1>
                           <p>Retrieves block records in a range.</p>
                         </div>
-                        <p class="marked">Retrieves block records in a range</p>                    
+                        <p class="marked">Retrieves block records in a range</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_block_records</span></code></pre>
                         
@@ -2718,7 +2722,7 @@
                           <h1>getBlocks</h1>
                           <p>Get the blocks between a start and end height.</p>
                         </div>
-                        <p class="marked">Get the blocks between a start and end height</p>                    
+                        <p class="marked">Get the blocks between a start and end height</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_blocks</span></code></pre>
                         
@@ -2851,7 +2855,7 @@
                           <h1>getRecentSignagePointOrEos</h1>
                           <p>Retrieves a recent signage point or end of slot.</p>
                         </div>
-                        <p class="marked">Retrieves a recent signage point or end of slot.</p>                    
+                        <p class="marked">Retrieves a recent signage point or end of slot.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_recent_signage_point_or_eos</span></code></pre>
                         
@@ -2973,7 +2977,7 @@
                           <h1>getUnfinishedBlockHeaders</h1>
                           <p>Retrieves unfinished block headers.</p>
                         </div>
-                        <p class="marked">Retrieves unfinished block headers.</p>                    
+                        <p class="marked">Retrieves unfinished block headers.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_unfinished_block_headers</span></code></pre>
                         
@@ -3098,7 +3102,7 @@
                           <h1>getCoinRecordByName</h1>
                           <p>Retrieves a coin record by it&#x27;s name.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_record_by_name</span></code></pre>
                         
@@ -3220,7 +3224,7 @@
                           <h1>getCoinRecordsByNames</h1>
                           <p>Retrieves the coins for given coin IDs, by default returns unspent coins.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records_by_names</span></code></pre>
                         
@@ -3342,7 +3346,7 @@
                           <h1>getCoinRecordsByParentIds</h1>
                           <p>Retrieves the coins for given parent coin IDs, by default returns unspent coins.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records_by_parent_ids</span></code></pre>
                         
@@ -3464,7 +3468,7 @@
                           <h1>getCoinRecordsByPuzzleHash</h1>
                           <p>Retrieves the coins for a given puzzlehash, by default returns unspent coins.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records_by_puzzle_hash</span></code></pre>
                         
@@ -3586,7 +3590,7 @@
                           <h1>getCoinRecordsByPuzzleHashes</h1>
                           <p>Retrieves the coins for a given puzzlehashes, by default returns unspent coins.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records_by_puzzle_hashes</span></code></pre>
                         
@@ -3708,7 +3712,7 @@
                           <h1>getPuzzleAndSolution</h1>
                           <p>Retrieves a coin solution.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_puzzle_and_solution</span></code></pre>
                         
@@ -3830,7 +3834,7 @@
                           <h1>pushTx</h1>
                           <p>Pushes a transaction / spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/push_tx</span></code></pre>
                         
@@ -3955,7 +3959,7 @@
                           <h1>closeConnection</h1>
                           <p>Removes a connection.</p>
                         </div>
-                        <p class="marked">Removes a connection.</p>                    
+                        <p class="marked">Removes a connection.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/close_connection</span></code></pre>
                         
@@ -4077,7 +4081,7 @@
                           <h1>getConnections</h1>
                           <p>Retreive the list of connections.</p>
                         </div>
-                        <p class="marked">Retreive the list of connections.</p>                    
+                        <p class="marked">Retreive the list of connections.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_connections</span></code></pre>
                         
@@ -4199,7 +4203,7 @@
                           <h1>openConnection</h1>
                           <p>Add a connection to another node.</p>
                         </div>
-                        <p class="marked">Add a connection to another node.</p>                    
+                        <p class="marked">Add a connection to another node.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/open_connection</span></code></pre>
                         
@@ -4321,7 +4325,7 @@
                           <h1>stopNode</h1>
                           <p>Stop the node.</p>
                         </div>
-                        <p class="marked">Stop the node.</p>                    
+                        <p class="marked">Stop the node.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_node</span></code></pre>
                         
@@ -4446,7 +4450,7 @@
                           <h1>fullNodeGetNetworkInfo</h1>
                           <p>Retrieves some information about the current network.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_network_info</span></code></pre>
                         
@@ -4568,7 +4572,7 @@
                           <h1>getBlockchainState</h1>
                           <p>Retrieves a summary of the current state of the blockchain and full node.</p>
                         </div>
-                        <p class="marked">Retrieves a summary of the current state of the blockchain and full node.</p>                    
+                        <p class="marked">Retrieves a summary of the current state of the blockchain and full node.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_blockchain_state</span></code></pre>
                         
@@ -4690,7 +4694,7 @@
                           <h1>getNetworkSpace</h1>
                           <p>Retrieves an estimate of total space validating the chain between two block header hashes.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_network_space</span></code></pre>
                         
@@ -4815,7 +4819,7 @@
                           <h1>getAllMempoolItems</h1>
                           <p>Returns all items in the mempool.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_all_mempool_items</span></code></pre>
                         
@@ -4937,7 +4941,7 @@
                           <h1>getAllMempoolTxIds</h1>
                           <p>Returns a list of all transaction IDs (spend bundle hashes) in the mempool.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_all_mempool_tx_ids</span></code></pre>
                         
@@ -5059,7 +5063,7 @@
                           <h1>getMempoolItemByTxId</h1>
                           <p>Returns a specific item from the mempool.</p>
                         </div>
-                        <p class="marked"></p>                    
+                        <p class="marked"></p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_mempool_item_by_tx_id</span></code></pre>
                         

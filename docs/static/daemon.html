@@ -423,6 +423,10 @@
     background-color: #ed0039;
   }
   
+  p.http-method[data-type="websocket"] {
+    background-color: red;
+  }
+  
   pre.language-api .str {
     color: #ffffff;
   }
@@ -1246,20 +1250,8 @@
                           <h1>exit</h1>
                           <p>Tells the daemon at the RPC endpoint to exit.</p>
                         </div>
-                        <p class="marked">Tells the daemon at the RPC endpoint to exit. There isn&#x27;t a way to start the daemon remotely via RPC, so take care that you have access to the RPC host if needed.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/exit</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-exit-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/exit" \
--d "{}"</code></pre>
+                        <p class="marked">Tells the daemon at the RPC endpoint to exit. There isn&#x27;t a way to start the daemon remotely via RPC, so take care that you have access to the RPC host if needed.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1368,20 +1360,8 @@
                           <h1>getStatus</h1>
                           <p>Indicator if the genesis block is intialized.</p>
                         </div>
-                        <p class="marked">Indicator if the genesis block is intialized.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_status</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-getStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_status" \
--d "{}"</code></pre>
+                        <p class="marked">Indicator if the genesis block is intialized.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1490,20 +1470,8 @@
                           <h1>getVersion</h1>
                           <p>Get the installed version of chia at the endpoint.</p>
                         </div>
-                        <p class="marked">Get the installed version of chia at the endpoint.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_version</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-getVersion-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_version" \
--d "{}"</code></pre>
+                        <p class="marked">Get the installed version of chia at the endpoint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1612,20 +1580,8 @@
                           <h1>isRunning</h1>
                           <p>Determines if the named service is running.</p>
                         </div>
-                        <p class="marked">Determines if the named service is running.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/is_running</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-isRunning-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/is_running" \
--d "{}"</code></pre>
+                        <p class="marked">Determines if the named service is running.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1740,20 +1696,8 @@
                           <h1>ping</h1>
                           <p>Ping the daemon.</p>
                         </div>
-                        <p class="marked">Ping the daemon.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/ping</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-ping-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/ping" \
--d "{}"</code></pre>
+                        <p class="marked">Ping the daemon.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1862,20 +1806,8 @@
                           <h1>registerService</h1>
                           <p>Registers this daemon to receive messages.</p>
                         </div>
-                        <p class="marked">Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/register_service</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-registerService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/register_service" \
--d "{}"</code></pre>
+                        <p class="marked">Registers this daemon to receive messages. This is needed to receive responses from services other than the daemon.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -1990,20 +1922,8 @@
                           <h1>startService</h1>
                           <p>Starts the named service.</p>
                         </div>
-                        <p class="marked">Starts the named service.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/start_service</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-startService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/start_service" \
--d "{}"</code></pre>
+                        <p class="marked">Starts the named service.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2118,20 +2038,8 @@
                           <h1>stopService</h1>
                           <p>Stops the named service.</p>
                         </div>
-                        <p class="marked">Stops the named service.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_service</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Daemon-stopService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/stop_service" \
--d "{}"</code></pre>
+                        <p class="marked">Stops the named service.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2249,20 +2157,8 @@
                           <h1>addPrivateKey</h1>
                           <p>Adds a private key to the keychain.</p>
                         </div>
-                        <p class="marked">Adds a private key to the keychain, with the given entropy and passphrase. The keychain itself will store the public key, and the entropy bytes, but not the passphrase.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/add_private_key</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-addPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/add_private_key" \
--d "{}"</code></pre>
+                        <p class="marked">Adds a private key to the keychain, with the given entropy and passphrase. The keychain itself will store the public key, and the entropy bytes, but not the passphrase.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2371,20 +2267,8 @@
                           <h1>checkKeys</h1>
                           <p>Check the keys.</p>
                         </div>
-                        <p class="marked">Check the keys.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/check_keys</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-checkKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/check_keys" \
--d "{}"</code></pre>
+                        <p class="marked">Check the keys.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2493,20 +2377,8 @@
                           <h1>daemonDeleteAllKeys</h1>
                           <p>Deletes all keys from the keychain.</p>
                         </div>
-                        <p class="marked">Deletes all keys from the keychain.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/delete_all_keys</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-daemonDeleteAllKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/delete_all_keys" \
--d "{}"</code></pre>
+                        <p class="marked">Deletes all keys from the keychain.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2615,20 +2487,8 @@
                           <h1>deleteKeyByFingerprint</h1>
                           <p>Deletes all keys which have the given public key fingerprint.</p>
                         </div>
-                        <p class="marked">Deletes all keys which have the given public key fingerprint.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/delete_key_by_fingerprint</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-deleteKeyByFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/delete_key_by_fingerprint" \
--d "{}"</code></pre>
+                        <p class="marked">Deletes all keys which have the given public key fingerprint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2737,20 +2597,8 @@
                           <h1>getAllPrivateKeys</h1>
                           <p>Returns all private keys which can be retrieved, with the given passphrases.</p>
                         </div>
-                        <p class="marked">Returns all private keys which can be retrieved, with the given passphrases. A tuple of key, and entropy bytes (i.e. mnemonic) is returned for each key.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_all_private_keys</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-getAllPrivateKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_all_private_keys" \
--d "{}"</code></pre>
+                        <p class="marked">Returns all private keys which can be retrieved, with the given passphrases. A tuple of key, and entropy bytes (i.e. mnemonic) is returned for each key.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2859,20 +2707,8 @@
                           <h1>getFirstPrivateKey</h1>
                           <p>Returns the first key in the keychain that has one of the passed in passphrases.</p>
                         </div>
-                        <p class="marked">Returns the first key in the keychain that has one of the passed in passphrases.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_first_private_key</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-getFirstPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_first_private_key" \
--d "{}"</code></pre>
+                        <p class="marked">Returns the first key in the keychain that has one of the passed in passphrases.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -2981,20 +2817,8 @@
                           <h1>getKeyForFingerprint</h1>
                           <p>Locates and returns a private key matching the provided fingerprint.</p>
                         </div>
-                        <p class="marked">Locates and returns a private key matching the provided fingerprint.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_key_for_fingerprint</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-getKeyForFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_key_for_fingerprint" \
--d "{}"</code></pre>
+                        <p class="marked">Locates and returns a private key matching the provided fingerprint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3103,20 +2927,8 @@
                           <h1>isKeyringLocked</h1>
                           <p>Returns whether the keyring is in a locked state.</p>
                         </div>
-                        <p class="marked">Returns whether the keyring is in a locked state. If the keyring doesn&#x27;t have a master passphrase set, or if a master passphrase is set and the cached passphrase is valid, the keyring is &quot;unlocked&quot;.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/is_keyring_locked</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-isKeyringLocked-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/is_keyring_locked" \
--d "{}"</code></pre>
+                        <p class="marked">Returns whether the keyring is in a locked state. If the keyring doesn&#x27;t have a master passphrase set, or if a master passphrase is set and the cached passphrase is valid, the keyring is &quot;unlocked&quot;.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3225,20 +3037,8 @@
                           <h1>keyringStatus</h1>
                           <p>Get detailed status of the key ring.</p>
                         </div>
-                        <p class="marked">Get detailed status of the key ring.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/keyring_status</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-keyringStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/keyring_status" \
--d "{}"</code></pre>
+                        <p class="marked">Get detailed status of the key ring.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3347,20 +3147,8 @@
                           <h1>migrateKeyring</h1>
                           <p>Migrate from key phrase to key ring.</p>
                         </div>
-                        <p class="marked">Migrate from key phrase to key ring.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/migrate_keyring</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-migrateKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/migrate_keyring" \
--d "{}"</code></pre>
+                        <p class="marked">Migrate from key phrase to key ring.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3469,20 +3257,8 @@
                           <h1>removeKeyringPassphrase</h1>
                           <p>Remove the key ring passphrase.</p>
                         </div>
-                        <p class="marked">Remove the key ring passphrase.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/remove_keyring_passphrase</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-removeKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/remove_keyring_passphrase" \
--d "{}"</code></pre>
+                        <p class="marked">Remove the key ring passphrase.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3591,20 +3367,8 @@
                           <h1>setKeyringPassphrase</h1>
                           <p>Update the key ring passphrase.</p>
                         </div>
-                        <p class="marked">Update the key ring passphrase.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_keyring_passphrase</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-setKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/set_keyring_passphrase" \
--d "{}"</code></pre>
+                        <p class="marked">Update the key ring passphrase.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3713,20 +3477,8 @@
                           <h1>unlockKeyring</h1>
                           <p>Unlock the keyring.</p>
                         </div>
-                        <p class="marked">Unlock the keyring.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/unlock_keyring</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-unlockKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/unlock_keyring" \
--d "{}"</code></pre>
+                        <p class="marked">Unlock the keyring.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3835,20 +3587,8 @@
                           <h1>validateKeyringPassphrase</h1>
                           <p>Test the validity of a passphrase.</p>
                         </div>
-                        <p class="marked">Test the validity of a passphrase.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/validate_keyring_passphrase</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-KeyRing-validateKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/validate_keyring_passphrase" \
--d "{}"</code></pre>
+                        <p class="marked">Test the validity of a passphrase.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -3960,20 +3700,8 @@
                           <h1>getPlotters</h1>
                           <p>Get info about installed and installable plotters.</p>
                         </div>
-                        <p class="marked">Get info about installed and installable plotters.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_plotters</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Plotter-getPlotters-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/get_plotters" \
--d "{}"</code></pre>
+                        <p class="marked">Get info about installed and installable plotters.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -4082,20 +3810,8 @@
                           <h1>startPlotting</h1>
                           <p>Starts plotting.</p>
                         </div>
-                        <p class="marked">Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/start_plotting</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Plotter-startPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/start_plotting" \
--d "{}"</code></pre>
+                        <p class="marked">Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
@@ -4204,20 +3920,8 @@
                           <h1>stopPlotting</h1>
                           <p>Stops the plot with the given id.</p>
                         </div>
-                        <p class="marked">Stops the plot with the given id.</p>                    
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_plotting</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Plotter-stopPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
---key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"wss://localhost:55400/stop_plotting" \
--d "{}"</code></pre>
+                        <p class="marked">Stops the plot with the given id.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
                           <h2>Parameters</h2>
 
 
