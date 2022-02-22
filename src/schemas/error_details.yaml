@@ -1,0 +1,9 @@
+error_details:
+  type: object
+  description: Extended error information
+  properties:
+    error_details:
+      type: object
+      properties:
+        message:
+          type: string

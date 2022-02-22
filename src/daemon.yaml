@@ -43,6 +43,8 @@ components:
       $ref: "./schemas/queued_plot_info.yaml#/queued_plot_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
+    error_details:
+      $ref: "./schemas/error_details.yaml#/error_details"
     key_ring_options:
       type: object
       properties:
@@ -488,7 +490,13 @@ paths:
                       type: string
       responses:
         200:
-          $ref: "#/components/responses/empty"
+          description: OK response without return values
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+                  - $ref: "#/components/schemas/error_details"
   /check_keys:
     post:
       tags:
@@ -500,7 +508,13 @@ paths:
         $ref: "#/components/requestBodies/keychain_request"
       responses:
         200:
-          $ref: "#/components/responses/empty"
+          description: OK response without return values
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+                  - $ref: "#/components/schemas/error_details"
   /delete_all_keys:
     post:
       tags:
@@ -537,7 +551,13 @@ paths:
                       format: uint32
       responses:
         200:
-          $ref: "#/components/responses/empty"
+          description: OK response without return values
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+                  - $ref: "#/components/schemas/error_details"
   /get_all_private_keys:
     post:
       tags:
