@@ -157,8 +157,8 @@
                         <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-{{baseName}}-{{nickname}}-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X {{vendorExtensions.x-codegen-httpMethodUpperCase}} \
---insecure --cert ~/.chia/mainnet/config/ssl/{{{endpoint}}}/private_{{{endpoint}}}.crt \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X {{vendorExtensions.x-codegen-httpMethodUpperCase}} --insecure \
+--cert ~/.chia/mainnet/config/ssl/{{{endpoint}}}/private_{{{endpoint}}}.crt \
 --key ~/.chia/mainnet/config/ssl/{{{endpoint}}}/private_{{{endpoint}}}.key {{#hasProduces}} \
 -H "Accept: {{#produces}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/produces}}"{{/hasProduces}}{{#hasConsumes}} \
 -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
