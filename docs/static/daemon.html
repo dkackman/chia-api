@@ -809,8 +809,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+  "enum" : [ 25, 32, 33, 34, 35 ],
+  "default" : 32
 };
             defs["key_ring_options"] = {
   "type" : "object",
@@ -1225,15 +1225,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/exit</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-exit-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-exit-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/exit" \
@@ -1350,15 +1347,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_status</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-getStatus-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-getStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_status" \
@@ -1475,15 +1469,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_version</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-getVersion-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-getVersion-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_version" \
@@ -1600,15 +1591,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/is_running</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-isRunning-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-isRunning-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/is_running" \
@@ -1731,15 +1719,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/ping</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-ping-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-ping-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/ping" \
@@ -1856,15 +1841,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/register_service</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-registerService-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-registerService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/register_service" \
@@ -1987,15 +1969,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/start_service</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-startService-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-startService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/start_service" \
@@ -2118,15 +2097,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_service</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Daemon-stopService-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Daemon-stopService-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/stop_service" \
@@ -2252,15 +2228,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/add_private_key</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-addPrivateKey-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-addPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/add_private_key" \
@@ -2377,15 +2350,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/check_keys</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-checkKeys-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-checkKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/check_keys" \
@@ -2502,15 +2472,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/delete_all_keys</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-daemonDeleteAllKeys-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-daemonDeleteAllKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/delete_all_keys" \
@@ -2627,15 +2594,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/delete_key_by_fingerprint</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-deleteKeyByFingerprint-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-deleteKeyByFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/delete_key_by_fingerprint" \
@@ -2752,15 +2716,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_all_private_keys</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-getAllPrivateKeys-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getAllPrivateKeys-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_all_private_keys" \
@@ -2877,15 +2838,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_first_private_key</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-getFirstPrivateKey-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getFirstPrivateKey-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_first_private_key" \
@@ -3002,15 +2960,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_key_for_fingerprint</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-getKeyForFingerprint-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-getKeyForFingerprint-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_key_for_fingerprint" \
@@ -3127,15 +3082,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/is_keyring_locked</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-isKeyringLocked-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-isKeyringLocked-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/is_keyring_locked" \
@@ -3252,15 +3204,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/keyring_status</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-keyringStatus-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-keyringStatus-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/keyring_status" \
@@ -3377,15 +3326,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/migrate_keyring</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-migrateKeyring-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-migrateKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/migrate_keyring" \
@@ -3502,15 +3448,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/remove_keyring_passphrase</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-removeKeyringPassphrase-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-removeKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/remove_keyring_passphrase" \
@@ -3627,15 +3570,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_keyring_passphrase</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-setKeyringPassphrase-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-setKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/set_keyring_passphrase" \
@@ -3752,15 +3692,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/unlock_keyring</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-unlockKeyring-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-unlockKeyring-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/unlock_keyring" \
@@ -3877,15 +3814,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/validate_keyring_passphrase</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-KeyRing-validateKeyringPassphrase-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-KeyRing-validateKeyringPassphrase-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/validate_keyring_passphrase" \
@@ -4005,15 +3939,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_plotters</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Plotter-getPlotters-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-getPlotters-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/get_plotters" \
@@ -4130,15 +4061,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/start_plotting</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Plotter-startPlotting-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-startPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/start_plotting" \
@@ -4255,15 +4183,12 @@
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_plotting</span></code></pre>
                         
-                          <h3>Usage</h3>
-                        
-                        <ul class="nav nav-tabs nav-tabs-examples">
-                          <li class="active"><span href="#examples-Plotter-stopPlotting-0-curl">Curl</span></li>
-                        </ul>
+                        <h3>Usage</h3>
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-Plotter-stopPlotting-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST \
---insecure --cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt --key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key \
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/daemon/private_daemon.crt \
+--key ~/.chia/mainnet/config/ssl/daemon/private_daemon.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 "wss://localhost:55400/stop_plotting" \
