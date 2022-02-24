@@ -12,7 +12,14 @@
   {{>js_prettify}}
   {{>marked}}
   <script>
-    $( document ).ready(function() {
+    $(document).ready(function() {
+
+      // for the websocket payload the [path] element is used as the command name
+      // trim the leaading '/' off of the it
+      $(".rpc_command_name").each(function(i) {
+        $(this).text($(this).text().substring(1));
+      });
+
       marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -153,6 +160,15 @@
                         <p class="marked">{{notes}}</p>            
                         {{#if websocket}}
                         <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">{{path}}</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client'_app_id, 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                         {{else}}        
                         <p class="http-method" data-type="{{httpMethod}}">{{httpMethod}}</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code><span class="pln">{{path}}</span></code></pre>
