@@ -845,8 +845,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+  "enum" : [ 25, 32, 33, 34, 35 ],
+  "default" : 32
 };
             defs["key_ring_options"] = {
   "type" : "object",
@@ -1130,7 +1130,8 @@
       "type" : "string"
     },
     "save_passphrase" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
