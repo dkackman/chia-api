@@ -492,7 +492,7 @@ paths:
       description: Check the keys.
       operationId: check_keys
       requestBody:
-        description: The root path
+        description: The config root path
         required: true
         content:
           application/json:
