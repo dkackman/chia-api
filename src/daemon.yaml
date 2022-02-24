@@ -582,8 +582,8 @@ paths:
     post:
       tags:
         - Key Ring
-      summary: Returns the first key in the keychain that has one of the passed in passphrases.
-      description: Returns the first key in the keychain that has one of the passed in passphrases.
+      summary: Returns the first key in the keychain.
+      description: Returns the first key in the keychain.
       operationId: get_first_private_key
       requestBody:
         $ref: "#/components/requestBodies/empty"
