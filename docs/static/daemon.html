@@ -635,20 +635,16 @@
     // Script section to load models into a JS Var
     var defs = {}
             defs["add_private_key_body"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/key_ring_options"
-  }, {
-    "required" : [ "mnemonic", "passphrase" ],
-    "type" : "object",
-    "properties" : {
-      "mnemonic" : {
-        "type" : "string"
-      },
-      "passphrase" : {
-        "type" : "string"
-      }
+  "required" : [ "mnemonic", "passphrase" ],
+  "type" : "object",
+  "properties" : {
+    "mnemonic" : {
+      "type" : "string"
+    },
+    "passphrase" : {
+      "type" : "string"
     }
-  } ]
+  }
 };
             defs["apiResponse"] = {
   "required" : [ "success" ],
@@ -665,19 +661,24 @@
   },
   "description" : "Success indicator and optional error message included in all responses"
 };
-            defs["delete_key_by_fingerprint_body"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/key_ring_options"
-  }, {
-    "required" : [ "fingerprint" ],
-    "type" : "object",
-    "properties" : {
-      "fingerprint" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
+            defs["check_keys_body"] = {
+  "required" : [ "root_path" ],
+  "type" : "object",
+  "properties" : {
+    "root_path" : {
+      "type" : "string"
     }
-  } ]
+  }
+};
+            defs["delete_key_by_fingerprint_body"] = {
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
 };
             defs["error_details"] = {
   "type" : "object",
@@ -698,18 +699,14 @@
   "example" : null
 };
             defs["get_key_for_fingerprint_body"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/key_ring_options"
-  }, {
-    "required" : [ "fingerprint" ],
-    "type" : "object",
-    "properties" : {
-      "fingerprint" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
     }
-  } ]
+  }
 };
             defs["inline_response_200"] = {
   "allOf" : [ {
@@ -845,19 +842,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "enum" : [ 25, 32, 33, 34, 35 ],
-  "default" : 32
-};
-            defs["key_ring_options"] = {
-  "type" : "object",
-  "properties" : {
-    "kc_user" : {
-      "type" : "string"
-    },
-    "kc_service" : {
-      "type" : "string"
-    }
-  }
+  "default" : 32,
+  "enum" : [ 25, 32, 33, 34, 35 ]
 };
             defs["keyring_status"] = {
   "type" : "object",
@@ -2410,11 +2396,11 @@
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "The keychain options",
+  "description" : "The root path",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/key_ring_options"
+        "$ref" : "#/components/schemas/check_keys_body"
       }
     }
   },
@@ -2529,11 +2515,11 @@
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "The keychain options",
+  "description" : "Empty request body",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/key_ring_options"
+        "type" : "object"
       }
     }
   },
@@ -2767,11 +2753,11 @@
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "The keychain options",
+  "description" : "Empty request body",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/key_ring_options"
+        "type" : "object"
       }
     }
   },
@@ -2886,11 +2872,11 @@
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "The keychain options",
+  "description" : "Empty request body",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/key_ring_options"
+        "type" : "object"
       }
     }
   },

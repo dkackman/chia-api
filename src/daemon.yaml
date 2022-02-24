@@ -22,13 +22,6 @@ components:
       $ref: "./requestBodies/empty.yaml#/empty"
     service:
       $ref: "./requestBodies/service.yaml#/service"
-    keychain_request:
-      description: The keychain options
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/key_ring_options"
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
@@ -45,13 +38,6 @@ components:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
     error_details:
       $ref: "./schemas/error_details.yaml#/error_details"
-    key_ring_options:
-      type: object
-      properties:
-        kc_user:
-          type: string
-        kc_service:
-          type: string
     keyring_status:
       type: object
       properties:
@@ -480,17 +466,15 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: "#/components/schemas/key_ring_options"
-                - type: object
-                  required:
-                    - mnemonic
-                    - passphrase
-                  properties:
-                    mnemonic:
-                      type: string
-                    passphrase:
-                      type: string
+              type: object
+              required:
+                - mnemonic
+                - passphrase
+              properties:
+                mnemonic:
+                  type: string
+                passphrase:
+                  type: string
       responses:
         200:
           description: OK response without return values
@@ -508,7 +492,17 @@ paths:
       description: Check the keys.
       operationId: check_keys
       requestBody:
-        $ref: "#/components/requestBodies/keychain_request"
+        description: The root path
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - root_path
+              properties:
+                root_path:
+                  type: string
       responses:
         200:
           description: OK response without return values
@@ -526,7 +520,7 @@ paths:
       description: Deletes all keys from the keychain.
       operationId: daemon_delete_all_keys
       requestBody:
-        $ref: "#/components/requestBodies/keychain_request"
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           $ref: "#/components/responses/empty"
@@ -543,15 +537,13 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: "#/components/schemas/key_ring_options"
-                - type: object
-                  required:
-                    - fingerprint
-                  properties:
-                    fingerprint:
-                      type: integer
-                      format: uint32
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
       responses:
         200:
           description: OK response without return values
@@ -571,7 +563,7 @@ paths:
         A tuple of key, and entropy bytes (i.e. mnemonic) is returned for each key.
       operationId: get_all_private_keys
       requestBody:
-        $ref: "#/components/requestBodies/keychain_request"
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
@@ -594,7 +586,7 @@ paths:
       description: Returns the first key in the keychain that has one of the passed in passphrases.
       operationId: get_first_private_key
       requestBody:
-        $ref: "#/components/requestBodies/keychain_request"
+        $ref: "#/components/requestBodies/empty"
       responses:
         200:
           description: OK
@@ -618,15 +610,13 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: "#/components/schemas/key_ring_options"
-                - type: object
-                  required:
-                    - fingerprint
-                  properties:
-                    fingerprint:
-                      type: integer
-                      format: uint32
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
       responses:
         200:
           description: OK
