@@ -53,7 +53,7 @@
     $(document).ready(function() {
 
       // for the websocket payload the [path] element is used as the command name
-      // trim the leaadin '/' off of the it
+      // trim the leaading '/' off of the it
       $(".rpc_command_name").each(function(i) {
         $(this).text($(this).text().substring(1));
       });
@@ -914,10 +914,12 @@
       "type" : "string"
     },
     "save_passphrase" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     },
     "cleanup_legacy_keyring" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1289,10 +1291,9 @@
   'command': '<span class="rpc_command_name">/exit</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -1409,10 +1410,9 @@
   'command': '<span class="rpc_command_name">/get_status</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -1529,10 +1529,9 @@
   'command': '<span class="rpc_command_name">/get_version</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -1649,10 +1648,9 @@
   'command': '<span class="rpc_command_name">/is_running</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -1775,10 +1773,9 @@
   'command': '<span class="rpc_command_name">/ping</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -1895,10 +1892,9 @@
   'command': '<span class="rpc_command_name">/register_service</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2021,10 +2017,9 @@
   'command': '<span class="rpc_command_name">/start_service</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2147,10 +2142,9 @@
   'command': '<span class="rpc_command_name">/stop_service</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2276,10 +2270,9 @@
   'command': '<span class="rpc_command_name">/add_private_key</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2396,10 +2389,9 @@
   'command': '<span class="rpc_command_name">/check_keys</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2516,10 +2508,9 @@
   'command': '<span class="rpc_command_name">/delete_all_keys</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2636,10 +2627,9 @@
   'command': '<span class="rpc_command_name">/delete_key_by_fingerprint</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2756,10 +2746,9 @@
   'command': '<span class="rpc_command_name">/get_all_private_keys</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2876,10 +2865,9 @@
   'command': '<span class="rpc_command_name">/get_first_private_key</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -2996,10 +2984,9 @@
   'command': '<span class="rpc_command_name">/get_key_for_fingerprint</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3116,10 +3103,9 @@
   'command': '<span class="rpc_command_name">/is_keyring_locked</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3236,10 +3222,9 @@
   'command': '<span class="rpc_command_name">/keyring_status</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3356,10 +3341,9 @@
   'command': '<span class="rpc_command_name">/migrate_keyring</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3476,10 +3460,9 @@
   'command': '<span class="rpc_command_name">/remove_keyring_passphrase</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3596,10 +3579,9 @@
   'command': '<span class="rpc_command_name">/set_keyring_passphrase</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3716,10 +3698,9 @@
   'command': '<span class="rpc_command_name">/unlock_keyring</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3836,10 +3817,9 @@
   'command': '<span class="rpc_command_name">/validate_keyring_passphrase</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -3959,10 +3939,9 @@
   'command': '<span class="rpc_command_name">/get_plotters</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -4079,10 +4058,9 @@
   'command': '<span class="rpc_command_name">/start_plotting</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 
@@ -4199,10 +4177,9 @@
   'command': '<span class="rpc_command_name">/stop_plotting</span>', 
   'data': {}, 
   'destination': 'daemon', 
-  'origin': 'client'_app_id, 
-  'request_id': 'unique message id'
-}
-</code></pre>
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
                           <h2>Parameters</h2>
 
 

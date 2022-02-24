@@ -407,8 +407,10 @@ paths:
                   type: string
                 save_passphrase:
                   type: boolean
+                  default: false
                 cleanup_legacy_keyring:
                   type: boolean
+                  default: false
       responses:
         200:
           $ref: "#/components/responses/empty"
