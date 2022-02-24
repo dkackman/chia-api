@@ -1444,7 +1444,7 @@ paths:
                       private_key:
                         $ref: "#/components/schemas/private_key"
                   - type: object
-                    description: Return type if the privte key is not found.
+                    description: Return type if the private key is not found.
                     properties:
                       private_key:
                         type: object
