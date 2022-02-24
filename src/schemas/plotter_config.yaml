@@ -87,3 +87,23 @@
       default: false
       nullable: true
       description: Only needed when k is set to 25
+    w:
+      type: boolean
+      default: false
+      nullable: true
+      description: BladeBit Only - warm start
+    m:
+      type: boolean
+      default: false
+      nullable: true
+      description: BladeBit Only - disable NUMA
+    K:
+      type: boolean
+      default: false
+      nullable: true
+      description: MadMax Only - note upper case - Thread multiplier for phase 2
+    G:
+      type: boolean
+      default: false
+      nullable: true
+      description: MadMax Only - note upper case - Alternate tmpdir/tmp2dir
