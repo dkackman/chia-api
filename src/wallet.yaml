@@ -1690,6 +1690,7 @@ paths:
                         - existing
                     asset_id:
                       type: string
+                      description: Only used when `mode` is 'existing'
                 - type: object
                   description: Details needed to create a rl_wallet.
                   required:
