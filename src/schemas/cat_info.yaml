@@ -1,0 +1,10 @@
+cat_info:
+  type: object
+  description: Information about a CAT
+  properties:
+    asset_id:
+      type: string
+    name:
+      type: string
+    symbol:
+      type: string

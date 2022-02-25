@@ -60,6 +60,8 @@ components:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
     announcement:
       $ref: "./schemas/announcement.yaml#/announcement"
+    cat_info:
+      $ref: "./schemas/cat_info.yaml#/cat_info"
     coin:
       $ref: "./schemas/coin.yaml#/coin"
     farmer_rewards:
@@ -462,9 +464,7 @@ paths:
                         type: array
                         description: Default list of CATs
                         items:
-                          type: object
-                          additionalProperties:
-                            type: string
+                          $ref: "#/components/schemas/cat_info"
                   - $ref: "#/components/schemas/apiResponse"
   /cancel_offer:
     post:

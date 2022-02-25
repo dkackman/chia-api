@@ -735,6 +735,21 @@
     }
   }
 };
+            defs["cat_info"] = {
+  "type" : "object",
+  "properties" : {
+    "asset_id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "symbol" : {
+      "type" : "string"
+    }
+  },
+  "description" : "Information about a CAT"
+};
             defs["cat_set_name_body"] = {
   "required" : [ "name", "wallet_id" ],
   "type" : "object",
@@ -1857,10 +1872,7 @@
         "type" : "array",
         "description" : "Default list of CATs",
         "items" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "string"
-          }
+          "$ref" : "#/components/schemas/cat_info"
         }
       }
     }
