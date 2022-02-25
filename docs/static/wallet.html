@@ -849,7 +849,8 @@
         "enum" : [ "new", "existing" ]
       },
       "asset_id" : {
-        "type" : "string"
+        "type" : "string",
+        "description" : "Only used when `mode` is 'existing'"
       }
     },
     "description" : "Details needed to create a cat_wallet."
@@ -1854,14 +1855,11 @@
     "properties" : {
       "cat_list" : {
         "type" : "array",
-        "description" : "dict_values[str, dict[str, str]]",
+        "description" : "Default list of CATs",
         "items" : {
           "type" : "object",
           "additionalProperties" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "string"
-            }
+            "type" : "string"
           }
         }
       }

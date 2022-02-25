@@ -460,13 +460,11 @@ paths:
                     properties:
                       cat_list:
                         type: array
-                        description: dict_values[str, dict[str, str]]
+                        description: Default list of CATs
                         items:
                           type: object
                           additionalProperties:
-                            type: object
-                            additionalProperties:
-                              type: string
+                            type: string
                   - $ref: "#/components/schemas/apiResponse"
   /cancel_offer:
     post:
