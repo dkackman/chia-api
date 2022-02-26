@@ -530,13 +530,13 @@ paths:
                       offer:
                         type: string
                   - $ref: "#/components/schemas/apiResponse"
-  /get_offers:
+  /get_all_offers:
     post:
       tags:
         - Coloured Coin Wallet
       summary: Retreives offers.
       description: Retreives offers.
-      operationId: get_offers
+      operationId: get_all_offers
       requestBody:
         required: true
         content:
