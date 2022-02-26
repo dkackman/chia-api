@@ -690,9 +690,7 @@
     }
   }
 };
-            defs["AnyOftrade_recordSent_toItems"] = {};
             defs["AnyOftransaction_recordMemosItems"] = {};
-            defs["AnyOftransaction_recordSent_toItems"] = {};
             defs["apiResponse"] = {
   "required" : [ "success" ],
   "type" : "object",
@@ -1098,12 +1096,16 @@
   }
 };
             defs["get_offer_body"] = {
-  "required" : [ "offer" ],
+  "required" : [ "trade_id" ],
   "type" : "object",
   "properties" : {
-    "offer" : {
+    "trade_id" : {
       "type" : "string",
       "format" : "hex"
+    },
+    "file_contents" : {
+      "type" : "boolean",
+      "description" : "Indicator as to whether to return the offer contents"
     }
   }
 };
@@ -2252,15 +2254,18 @@
       "type" : "array",
       "description" : "Represents the list of peers that we sent the transaction to, whether each one included it in the mempool, and what the error message (if any) was. List[Tuple[str, uint8, Optional[str]]]",
       "items" : {
-        "type" : "object",
-        "anyOf" : [ {
-          "type" : "string"
-        }, {
-          "type" : "integer",
-          "format" : "uint8"
-        }, {
-          "type" : "string"
-        } ]
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "anyOf" : [ {
+            "type" : "string"
+          }, {
+            "type" : "integer",
+            "format" : "uint8"
+          }, {
+            "type" : "string"
+          } ]
+        }
       }
     }
   },
@@ -2359,15 +2364,18 @@
       "type" : "array",
       "description" : "Represents the list of peers that we sent the transaction to, whether each one included it in the mempool, and what the error message (if any) was. List[Tuple[str, uint8, Optional[str]]]",
       "items" : {
-        "type" : "object",
-        "anyOf" : [ {
-          "type" : "string"
-        }, {
-          "type" : "integer",
-          "format" : "uint8"
-        }, {
-          "type" : "string"
-        } ]
+        "type" : "array",
+        "items" : {
+          "type" : "object",
+          "anyOf" : [ {
+            "type" : "string"
+          }, {
+            "type" : "integer",
+            "format" : "uint8"
+          }, {
+            "type" : "string"
+          } ]
+        }
       }
     },
     "trade_id" : {

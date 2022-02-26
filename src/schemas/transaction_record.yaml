@@ -42,12 +42,14 @@ transaction_record:
         included it in the mempool, and what the error message (if any) was.
         List[Tuple[str, uint8, Optional[str]]]
       items:
-        type: object
-        anyOf:
-          - type: string
-          - type: integer
-            format: uint8
-          - type: string
+        type: array
+        items:
+          type: object
+          anyOf:
+            - type: string
+            - type: integer
+              format: uint8
+            - type: string
     trade_id:
       type: string
       format: hex
