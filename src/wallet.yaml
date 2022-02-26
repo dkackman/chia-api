@@ -435,12 +435,11 @@ paths:
                   - type: object
                     properties:
                       total:
-                        type: object
-                        properties:
-                          my_offers_count:
-                            type: integer
-                          taken_offers_count:
-                            type: integer
+                        type: integer
+                      my_offers_count:
+                        type: integer
+                      taken_offers_count:
+                        type: integer
                   - $ref: "#/components/schemas/apiResponse"
   /get_cat_list:
     post:
