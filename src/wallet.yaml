@@ -58,8 +58,10 @@ components:
   schemas:
     amount_with_puzzlehash:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
-    announcement:
-      $ref: "./schemas/announcement.yaml#/announcement"
+    coin_announcement:
+      $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
+    puzzle_announcement:
+      $ref: "./schemas/puzzle_announcement.yaml#/puzzle_announcement"
     cat_info:
       $ref: "./schemas/cat_info.yaml#/cat_info"
     coin:

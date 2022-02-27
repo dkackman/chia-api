@@ -1,4 +1,4 @@
-announcement:
+coin_announcement:
   type: object
   required:
     - coin_id

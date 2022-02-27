@@ -672,24 +672,6 @@
     }
   }
 };
-            defs["announcement"] = {
-  "required" : [ "coin_id", "message" ],
-  "type" : "object",
-  "properties" : {
-    "coin_id" : {
-      "type" : "string",
-      "format" : "hex"
-    },
-    "message" : {
-      "type" : "string",
-      "format" : "hex"
-    },
-    "morph_bytes" : {
-      "type" : "string",
-      "format" : "hex"
-    }
-  }
-};
             defs["AnyOftransaction_recordMemosItems"] = {};
             defs["apiResponse"] = {
   "required" : [ "success" ],
@@ -812,6 +794,24 @@
     "amount" : {
       "type" : "integer",
       "format" : "uint64"
+    }
+  }
+};
+            defs["coin_announcement"] = {
+  "required" : [ "coin_id", "message" ],
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "morph_bytes" : {
+      "type" : "string",
+      "format" : "hex"
     }
   }
 };
@@ -1082,6 +1082,37 @@
     }
   }
 };
+            defs["get_all_offers_body"] = {
+  "type" : "object",
+  "properties" : {
+    "start" : {
+      "type" : "integer",
+      "default" : 0
+    },
+    "end" : {
+      "type" : "integer",
+      "default" : 10
+    },
+    "exclude_my_offers" : {
+      "type" : "boolean"
+    },
+    "exclude_taken_offers" : {
+      "type" : "boolean"
+    },
+    "include_completed" : {
+      "type" : "boolean"
+    },
+    "sort_key" : {
+      "type" : "string"
+    },
+    "reverse" : {
+      "type" : "boolean"
+    },
+    "file_contents" : {
+      "type" : "boolean"
+    }
+  }
+};
             defs["get_next_address_body"] = {
   "required" : [ "wallet_id" ],
   "type" : "object",
@@ -1116,37 +1147,6 @@
     "offer" : {
       "type" : "string",
       "format" : "hex"
-    }
-  }
-};
-            defs["get_offers_body"] = {
-  "type" : "object",
-  "properties" : {
-    "start" : {
-      "type" : "integer",
-      "default" : 0
-    },
-    "end" : {
-      "type" : "integer",
-      "default" : 10
-    },
-    "exclude_my_offers" : {
-      "type" : "boolean"
-    },
-    "exclude_taken_offers" : {
-      "type" : "boolean"
-    },
-    "include_completed" : {
-      "type" : "boolean"
-    },
-    "sort_key" : {
-      "type" : "string"
-    },
-    "reverse" : {
-      "type" : "boolean"
-    },
-    "file_contents" : {
-      "type" : "boolean"
     }
   }
 };
@@ -1847,24 +1847,18 @@
     "type" : "object",
     "properties" : {
       "total" : {
-        "$ref" : "#/components/schemas/inline_response_200_7_total"
+        "type" : "integer"
+      },
+      "my_offers_count" : {
+        "type" : "integer"
+      },
+      "taken_offers_count" : {
+        "type" : "integer"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
-};
-            defs["inline_response_200_7_total"] = {
-  "type" : "object",
-  "properties" : {
-    "my_offers_count" : {
-      "type" : "integer"
-    },
-    "taken_offers_count" : {
-      "type" : "integer"
-    }
-  },
-  "example" : null
 };
             defs["inline_response_200_8"] = {
   "allOf" : [ {
@@ -2029,6 +2023,24 @@
   "properties" : {
     "spend_bundle" : {
       "$ref" : "#/components/schemas/spend_bundle"
+    }
+  }
+};
+            defs["puzzle_announcement"] = {
+  "required" : [ "coin_id", "message" ],
+  "type" : "object",
+  "properties" : {
+    "puzzle_hash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "morph_bytes" : {
+      "type" : "string",
+      "format" : "hex"
     }
   }
 };
@@ -2300,13 +2312,13 @@
     "coin_announcements" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/announcement"
+        "$ref" : "#/components/schemas/coin_announcement"
       }
     },
     "puzzle_announcements" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/announcement"
+        "$ref" : "#/components/schemas/puzzle_announcement"
       }
     }
   }
@@ -2514,6 +2526,9 @@
                     <li class="nav-item" data-group="ColouredCoinWallet" data-name="createOfferForIds">
                       <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-createOfferForIds">createOfferForIds</a>
                     </li>
+                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getAllOffers">
+                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getAllOffers">getAllOffers</a>
+                    </li>
                     <li class="nav-item" data-group="ColouredCoinWallet" data-name="getCatList">
                       <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getCatList">getCatList</a>
                     </li>
@@ -2522,9 +2537,6 @@
                     </li>
                     <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOfferSummary">
                       <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOfferSummary">getOfferSummary</a>
-                    </li>
-                    <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffers">
-                      <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOffers">getOffers</a>
                     </li>
                     <li class="nav-item" data-group="ColouredCoinWallet" data-name="getOffersCount">
                       <a class="nav-link link-secondary" href="#api-ColouredCoinWallet-getOffersCount">getOffersCount</a>
@@ -3680,6 +3692,127 @@
 
                         </article>
                       </div>
+                    <div id="api-ColouredCoinWallet-getAllOffers">
+                      <article id="api-ColouredCoinWallet-getAllOffers-0" data-group="User" data-name="getAllOffers" data-version="0">
+                        <div class="pull-left">
+                          <h1>getAllOffers</h1>
+                          <p>Retreives offers.</p>
+                        </div>
+                        <p class="marked">Retreives offers.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_all_offers</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ColouredCoinWallet-getAllOffers-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_all_offers" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_all_offers_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getAllOffers_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getAllOffers_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAllOffers-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAllOffers-200-schema">
+                                  <div id='responses-getAllOffers-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_10"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAllOffers-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAllOffers-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAllOffers-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-ColouredCoinWallet-getCatList">
                       <article id="api-ColouredCoinWallet-getCatList-0" data-group="User" data-name="getCatList" data-version="0">
                         <div class="pull-left">
@@ -4039,127 +4172,6 @@
                                     </script>
                                   </div>
                                   <input id='responses-getOfferSummary-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-ColouredCoinWallet-getOffers">
-                      <article id="api-ColouredCoinWallet-getOffers-0" data-group="User" data-name="getOffers" data-version="0">
-                        <div class="pull-left">
-                          <h1>getOffers</h1>
-                          <p>Retreives offers.</p>
-                        </div>
-                        <p class="marked">Retreives offers.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_offers</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-ColouredCoinWallet-getOffers-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
---key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:9256/get_offers" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/get_offers_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_getOffers_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_getOffers_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getOffers-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getOffers-200-schema">
-                                  <div id='responses-getOffers-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getOffers-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getOffers-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getOffers-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

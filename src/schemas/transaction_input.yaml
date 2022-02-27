@@ -18,8 +18,8 @@ transaction_input:
     coin_announcements:
       type: array
       items:
-        $ref: "./announcement.yaml#/announcement"
+        $ref: "./coin_announcement.yaml#/coin_announcement"
     puzzle_announcements:
       type: array
       items:
-        $ref: "./announcement.yaml#/announcement"
+        $ref: "./puzzle_announcement.yaml#/puzzle_announcement"
