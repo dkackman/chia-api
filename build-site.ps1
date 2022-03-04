@@ -18,4 +18,5 @@ foreach ($file in $files) {
             -t tools/templates/htmlDocs2 --additional-properties endpoint=$shortFile
     }
     Copy-Item .\build\tmp\$file\index.html -Destination .\build\site\$shortFile.html
+    npm run html --file=$shortFile
 }
