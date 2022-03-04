@@ -1,0 +1,28 @@
+{
+  "name": "chia-rpc",
+  "version": "1.3.0-beta.1",
+  "description": "Multi-file boilerplate for Open API Specification.",
+  "main": "index.js",
+  "scripts": {
+    "build": "swagger-cli bundle src/%npm_config_file%.yaml --outfile build/%npm_config_file%.yaml --type yaml",
+    "test": "npm run build && spectral lint build/%m_config_file%.yaml",
+    "preview": "npm run build && redoc-cli serve build/%npm_config_file%.yaml --options.onlyRequiredInSamples",
+    "html": "npm run build && redoc-cli bundle build/%npm_config_file%.yaml --output build/redoc/%npm_config_file%.html --options.onlyRequiredInSamples",
+    "clean": "rm -r build",
+    "deploy": "./ci/deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkackman/chia-api.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dkackman/chia-api/issues"
+  },
+  "homepage": "https://github.com/dkackman/chia-api#readme",
+  "dependencies": {
+    "@apidevtools/swagger-cli": "^4.0.4",
+    "@stoplight/spectral": "^6.1.0",
+    "redoc-cli": "^0.13.8"
+  }
+}
