@@ -7,7 +7,7 @@
     "build": "swagger-cli bundle src/%npm_config_file%.yaml --outfile build/%npm_config_file%.yaml --type yaml",
     "test": "npm run build && spectral lint build/%m_config_file%.yaml",
     "preview": "npm run build && redoc-cli serve build/%npm_config_file%.yaml --options.onlyRequiredInSamples",
-    "html": "npm run build && redoc-cli bundle build/%npm_config_file%.yaml --output build/redoc/%npm_config_file%.html --options.onlyRequiredInSamples",
+    "html": "npm run build && redoc-cli bundle build/%npm_config_file%.yaml --output build/redoc/%npm_config_file%.html --options.onlyRequiredInSamples --options.theme.colors.primary.main=green",
     "clean": "rm -r build",
     "deploy": "./ci/deploy.sh"
   },
