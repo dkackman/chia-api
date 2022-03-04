@@ -6,7 +6,8 @@ View current spec based on chia 1.3 beta:
 
 - [In the swagger UI](https://dkackman.github.io/chia-api/?urls.primaryName=Full%20Node)
 - [As a statically generated site](https://dkackman.github.io/chia-api/static/)
-
+- [As a redoc generated site](https://dkackman.github.io/chia-api/redoc/)
+- 
 ## TODO
 
 - Generate example payloads for the curl command on the static site
