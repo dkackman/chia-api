@@ -245,7 +245,7 @@ paths:
       tags:
         - Plotter
       summary: Starts plotting.
-      description: Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.
+      description: Starts plotting. Returns after request is added to the plotting queue. Does not wait for plotting to finish.
       operationId: start_plotting
       requestBody:
         description: Options for creating the plots

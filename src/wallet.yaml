@@ -156,8 +156,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retreives the recovery information needed for the given DID wallet.
-      description: Retreives the recovery information needed for the given DID wallet.
+      summary: Retrieves the recovery information needed for the given DID wallet.
+      description: Retrieves the recovery information needed for the given DID wallet.
       operationId: did_get_information_needed_for_recovery
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -237,8 +237,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retreives the public key for the given DID wallet.
-      description: Retreives the public key for the given DID wallet.
+      summary: Retrieves the public key for the given DID wallet.
+      description: Retrieves the public key for the given DID wallet.
       operationId: did_get_pubkey
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -305,8 +305,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retreives the recovery list for a given DID wallet.
-      description: Retreives the recovery list for a given DID wallet.
+      summary: Retrieves the recovery list for a given DID wallet.
+      description: Retrieves the recovery list for a given DID wallet.
       operationId: did_get_recovery_list
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -335,8 +335,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retreives the distributed identity for a given wallet.
-      description: Retreives the distributed identity for a given wallet.
+      summary: Retrieves the distributed identity for a given wallet.
+      description: Retrieves the distributed identity for a given wallet.
       operationId: did_get_did
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -422,8 +422,8 @@ paths:
     post:
       tags:
         - Coloured Coin Wallet
-      summary: Retreives the number of offers.
-      description: Retreives the number of offers.
+      summary: Retrieves the number of offers.
+      description: Retrieves the number of offers.
       operationId: get_offers_count
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -447,8 +447,8 @@ paths:
     post:
       tags:
         - Coloured Coin Wallet
-      summary: Retreives the list of CATs.
-      description: Retreives the list of CATs.
+      summary: Retrieves the list of CATs.
+      description: Retrieves the list of CATs.
       operationId: get_cat_list
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -500,8 +500,8 @@ paths:
     post:
       tags:
         - Coloured Coin Wallet
-      summary: Retreives an offer.
-      description: Retreives an offer.
+      summary: Retrieves an offer.
+      description: Retrieves an offer.
       operationId: get_offer
       requestBody:
         required: true
@@ -536,8 +536,8 @@ paths:
     post:
       tags:
         - Coloured Coin Wallet
-      summary: Retreives offers.
-      description: Retreives offers.
+      summary: Retrieves offers.
+      description: Retrieves offers.
       operationId: get_all_offers
       requestBody:
         required: true
@@ -1183,8 +1183,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreives the balance of a specific wallet.
-      description: Retreives the balance of a specific wallet (in units of mojos).
+      summary: Retrieves the balance of a specific wallet.
+      description: Retrieves the balance of a specific wallet (in units of mojos).
       operationId: get_wallet_balance
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -1206,8 +1206,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreives the amount farmed.
-      description: Retreives the amount farmed.
+      summary: Retrieves the amount farmed.
+      description: Retrieves the amount farmed.
       operationId: get_farmed_amount
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -1236,8 +1236,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreives a specific transaction.
-      description: Retreives a specific transaction.
+      summary: Retrieves a specific transaction.
+      description: Retrieves a specific transaction.
       operationId: get_transaction
       requestBody:
         $ref: "#/components/requestBodies/transaction_id"
@@ -1248,8 +1248,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreives a list of trnsactions from a wallet.
-      description: Retreives a list of trnsactions from a wallet.
+      summary: Retrieves a list of trnsactions from a wallet.
+      description: Retrieves a list of trnsactions from a wallet.
       operationId: get_transactions
       requestBody:
         required: true
@@ -1296,8 +1296,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retreives the number of transactions for a wallet.
-      description: Retreives the number of transactions for a wallet.
+      summary: Retrieves the number of transactions for a wallet.
+      description: Retrieves the number of transactions for a wallet.
       operationId: get_transaction_count
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -1559,8 +1559,8 @@ paths:
     post:
       tags:
         - Wallet Node
-      summary: Retreives the sync status of the wallet.
-      description: Retreives the sync status of the wallet.
+      summary: Retrieves the sync status of the wallet.
+      description: Retrieves the sync status of the wallet.
       operationId: get_sync_status
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -1584,8 +1584,8 @@ paths:
     post:
       tags:
         - Wallet Node
-      summary: Retreives the sync height of the wallet.
-      description: Retreives the sync height of the wallet.
+      summary: Retrieves the sync height of the wallet.
+      description: Retrieves the sync height of the wallet.
       operationId: get_height_info
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -1627,7 +1627,7 @@ paths:
     post:
       tags:
         - Wallet Management
-      summary: Retreives all of the wallets on the node.
+      summary: Retrieves all of the wallets on the node.
       operationId: get_wallets
       requestBody:
         $ref: "#/components/requestBodies/empty"

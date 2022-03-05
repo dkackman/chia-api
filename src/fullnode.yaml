@@ -185,8 +185,8 @@ paths:
     post:
       tags:
         - Connections
-      summary: Retreive the list of connections.
-      description: Retreive the list of connections.
+      summary: Retrieve the list of connections.
+      description: Retrieve the list of connections.
       operationId: get_connections
       requestBody:
         $ref: "#/components/requestBodies/empty"
