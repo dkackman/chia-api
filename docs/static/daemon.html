@@ -842,8 +842,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "enum" : [ 25, 32, 33, 34, 35 ],
-  "default" : 32
+  "default" : 32,
+  "enum" : [ 25, 32, 33, 34, 35 ]
 };
             defs["keyring_status"] = {
   "type" : "object",
@@ -4037,7 +4037,7 @@
                           <h1>startPlotting</h1>
                           <p>Starts plotting.</p>
                         </div>
-                        <p class="marked">Starts plotting. Returns after plot is added to the plotting queue. Does not wait for plot to finish.</p>            
+                        <p class="marked">Starts plotting. Returns after request is added to the plotting queue. Does not wait for plotting to finish.</p>            
                         <p class="http-method" data-type="websocket">websocket</p>
                         <p>RPC payload</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
