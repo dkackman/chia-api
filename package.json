@@ -8,8 +8,7 @@
     "test": "npm run build && spectral lint build/%m_config_file%.yaml",
     "preview": "npm run build && redoc-cli serve build/%npm_config_file%.yaml --options.onlyRequiredInSamples",
     "html": "npm run build && redoc-cli bundle build/%npm_config_file%.yaml --output build/redoc/%npm_config_file%.html --options.theme.colors.primary.main=green",
-    "clean": "rm -r build",
-    "deploy": "./ci/deploy.sh"
+    "clean": "rimraf -r build"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,8 @@
     "@apidevtools/swagger-cli": "^4.0.4",
     "@stoplight/spectral-cli": "^6.3.0",
     "redoc-cli": "^0.13.8"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }
