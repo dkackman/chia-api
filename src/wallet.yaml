@@ -146,7 +146,7 @@ paths:
                 filename:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -168,7 +168,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -227,7 +227,7 @@ paths:
                 filename:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -249,7 +249,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -292,7 +292,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -317,7 +317,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -347,7 +347,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -391,7 +391,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /take_offer:
     post:
@@ -413,7 +413,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -434,7 +434,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -459,7 +459,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -500,7 +500,7 @@ paths:
                 secure:
                   type: boolean
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_offer:
     post:
@@ -525,7 +525,7 @@ paths:
                   type: boolean
                   description: Indicator as to whether to return the offer contents
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -571,7 +571,7 @@ paths:
                 file_contents:
                   type: boolean
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -608,7 +608,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -639,7 +639,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -687,7 +687,7 @@ paths:
                   type: boolean
                   default: false
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -719,7 +719,7 @@ paths:
                 asset_id:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -743,7 +743,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -794,7 +794,7 @@ paths:
                   items:
                     type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/transaction_record"
   /cat_set_name:
     post:
@@ -820,7 +820,7 @@ paths:
                 name:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -842,7 +842,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -890,7 +890,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -927,7 +927,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -964,7 +964,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -987,7 +987,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1030,7 +1030,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /rl_set_user_info:
     post:
@@ -1071,7 +1071,7 @@ paths:
                       type: integer
                       format: uint64
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /send_clawback_transaction:
     post:
@@ -1097,7 +1097,7 @@ paths:
                   type: integer
                   format: uint64
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/transaction_record"
   /create_signed_transaction:
     post:
@@ -1113,7 +1113,7 @@ paths:
             schema:
               $ref: "#/components/schemas/transaction_input"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1159,7 +1159,7 @@ paths:
                   items:
                     type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/transaction_record"
   /send_transaction_multi:
     post:
@@ -1183,7 +1183,7 @@ paths:
                       format: uint32
                 - $ref: "#/components/schemas/transaction_input"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/transaction_record"
   /get_wallet_balance:
     post:
@@ -1195,7 +1195,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1218,7 +1218,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1236,7 +1236,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_transaction:
     post:
@@ -1248,7 +1248,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/transaction_id"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/transaction_record"
   /get_transactions:
     post:
@@ -1282,7 +1282,7 @@ paths:
                 reverse:
                   type: boolean
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1308,7 +1308,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1344,7 +1344,7 @@ paths:
                 new_address:
                   type: boolean
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1369,7 +1369,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1387,7 +1387,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/fingerprint"
   /get_logged_in_fingerprint:
     post:
@@ -1399,7 +1399,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/fingerprint"
   /get_public_keys:
     post:
@@ -1411,7 +1411,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1440,7 +1440,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1472,7 +1472,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1493,7 +1493,7 @@ paths:
             schema:
               $ref: "#/components/schemas/mnemonic"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1519,7 +1519,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /check_delete_key:
     post:
@@ -1531,7 +1531,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1559,7 +1559,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_sync_status:
     post:
@@ -1571,7 +1571,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1596,7 +1596,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1612,7 +1612,8 @@ paths:
     post:
       tags:
         - Wallet Node
-      summary: Pushes a transaction / spend bundle to the mempool and blockchain.
+      description: Pushes a transaction/spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      summary: Pushes a transaction/spend bundle to the mempool and blockchain.
       operationId: wallet_push_tx
       requestBody:
         required: true
@@ -1627,18 +1628,19 @@ paths:
                 spend_bundle:
                   $ref: "#/components/schemas/spend_bundle"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_wallets:
     post:
       tags:
         - Wallet Management
+      description: Retrieves all of the wallets on the node.
       summary: Retrieves all of the wallets on the node.
       operationId: get_wallets
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -1655,6 +1657,7 @@ paths:
     post:
       tags:
         - Wallet Management
+      description: Creates a new wallet.
       summary: Creates a new wallet.
       operationId: create_new_wallet
       requestBody:
@@ -1770,7 +1773,7 @@ paths:
                       type: integer
                       format: uint64
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:

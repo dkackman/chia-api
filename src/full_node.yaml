@@ -149,7 +149,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /open_connection:
     post:
@@ -175,7 +175,7 @@ paths:
                 port:
                   type: integer
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /close_connection:
     post:
@@ -197,7 +197,7 @@ paths:
                 node_id:
                   type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_connections:
     post:
@@ -209,7 +209,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -232,7 +232,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/header_hash"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -253,7 +253,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/start_end"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -287,7 +287,7 @@ paths:
                   type: integer
                   format: uint32
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -308,7 +308,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/header_hash"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -329,7 +329,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/start_end"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -352,7 +352,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -375,7 +375,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/header_hash"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -417,7 +417,7 @@ paths:
                       type: string
                       format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -452,7 +452,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -467,12 +467,13 @@ paths:
     post:
       tags:
         - Full Node
+      description: Retrieves some information about the current network.
       summary: Retrieves some information about the current network.
       operationId: full_node_get_network_info
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -484,7 +485,8 @@ paths:
     post:
       tags:
         - Full Node
-      summary: Retrieves an estimate of total space validating the chain between two block header hashes.
+      description: Retrieves an estimate of total space validating the chain between two block header hashes.
+      summary: Retrieves an estimate of total space.
       operationId: get_network_space
       requestBody:
         required: true
@@ -504,7 +506,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -520,12 +522,13 @@ paths:
     post:
       tags:
         - Mempool
-      summary: Returns a list of all transaction IDs (spend bundle hashes) in the mempool.
+      description: Returns a list of all transaction IDs (spend bundle hashes) in the mempool.
+      summary: Returns a list of all transaction IDs in the mempool.
       operationId: get_all_mempool_tx_ids
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -543,12 +546,13 @@ paths:
     post:
       tags:
         - Mempool
+      description: Returns all items in the mempool.
       summary: Returns all items in the mempool.
       operationId: get_all_mempool_items
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -565,6 +569,7 @@ paths:
     post:
       tags:
         - Mempool
+      description: Returns a specific item from the mempool.
       summary: Returns a specific item from the mempool.
       operationId: get_mempool_item_by_tx_id
       requestBody:
@@ -581,7 +586,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -596,7 +601,8 @@ paths:
     post:
       tags:
         - Coins
-      summary: Retrieves the coins for a given puzzlehash, by default returns unspent coins.
+      description: Retrieves the coins for a given puzzlehash, by default returns unspent coins.
+      summary: Retrieves the coins for a given puzzlehash.
       operationId: get_coin_records_by_puzzle_hash
       requestBody:
         required: true
@@ -614,13 +620,14 @@ paths:
                       format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/coin_records"
   /get_coin_records_by_puzzle_hashes:
     post:
       tags:
         - Coins
-      summary: Retrieves the coins for a given puzzlehashes, by default returns unspent coins.
+      description: Retrieves the coins for a given puzzlehashes, by default returns unspent coins.
+      summary: Retrieves the coins for a given puzzlehashes
       operationId: get_coin_records_by_puzzle_hashes
       requestBody:
         required: true
@@ -640,12 +647,13 @@ paths:
                         format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/coin_records"
   /get_coin_record_by_name:
     post:
       tags:
         - Coins
+      description: Retrieves a coin record by it's name.
       summary: Retrieves a coin record by it's name.
       operationId: get_coin_record_by_name
       requestBody:
@@ -662,7 +670,7 @@ paths:
                   type: string
                   format: hex
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -677,7 +685,8 @@ paths:
     post:
       tags:
         - Coins
-      summary: Retrieves the coins for given coin IDs, by default returns unspent coins.
+      description: Retrieves the coins for given coin IDs, by default returns unspent coins.
+      summary: Retrieves the coins for given coin IDs.
       operationId: get_coin_records_by_names
       requestBody:
         required: true
@@ -697,13 +706,14 @@ paths:
                         format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/coin_records"
   /get_coin_records_by_parent_ids:
     post:
       tags:
         - Coins
-      summary: Retrieves the coins for given parent coin IDs, by default returns unspent coins.
+      description: Retrieves the coins for given parent coin IDs, by default returns unspent coins.
+      summary: Retrieves the coins for given parent coin IDs.
       operationId: get_coin_records_by_parent_ids
       requestBody:
         required: true
@@ -723,12 +733,13 @@ paths:
                         format: hex
                 - $ref: "#/components/schemas/coin_search_options"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/coin_records"
   /get_puzzle_and_solution:
     post:
       tags:
         - Coins
+      description: Retrieves a coin solution.
       summary: Retrieves a coin solution.
       operationId: get_puzzle_and_solution
       requestBody:
@@ -749,7 +760,7 @@ paths:
                   type: integer
                   format: uint32
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -764,7 +775,8 @@ paths:
     post:
       tags:
         - Coins
-      summary: Pushes a transaction / spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      description: Pushes a transaction/spend bundle to the mempool and blockchain. Returns whether the spend bundle was successfully included into the mempool.
+      summary: Pushes a transaction/spend bundle to the mempool and blockchain.
       operationId: push_tx
       requestBody:
         required: true
@@ -779,7 +791,7 @@ paths:
                 spend_bundle:
                   $ref: "#/components/schemas/spend_bundle"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:

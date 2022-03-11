@@ -63,7 +63,7 @@ paths:
                 dirname:
                   type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /remove_plot_directory:
     post:
@@ -85,7 +85,7 @@ paths:
                 dirname:
                   type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_plot_directories:
     post:
@@ -97,7 +97,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -120,7 +120,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_plots:
     post:
@@ -132,7 +132,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -175,7 +175,7 @@ paths:
             example:
               filename: plot-k33-2021-06-12-03-55-1d5a2afe637578d6c9dfa04484854831012b678921a8dce5a8aee9c0fd3c1470.plot
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia

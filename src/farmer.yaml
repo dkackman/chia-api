@@ -86,7 +86,7 @@ paths:
                 pool_target:
                   type: "string"
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_reward_targets:
     post:
@@ -108,7 +108,7 @@ paths:
                 search_for_private_key:
                   type: boolean
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -138,7 +138,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -171,7 +171,7 @@ paths:
                 launcher_id:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -193,7 +193,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -227,7 +227,7 @@ paths:
                 payout_instructions:
                   type: string
       responses:
-        200:
+        '200':
           $ref: "#/components/responses/empty"
   /get_signage_point:
     post:
@@ -249,7 +249,7 @@ paths:
                 sp_hash:
                   type: string
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
@@ -267,7 +267,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
