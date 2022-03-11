@@ -1,6 +1,12 @@
 openapi: 3.0.3
 info:
-  description: "The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. These are accessible via HTTP, WebSockets, or via client SDKs. The ports can be configured in ~/.chia/mainnet/config/config.yaml. The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication."
+  description: >-
+    The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. 
+    These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in `~/.chia/mainnet/config/config.yaml`. 
+    The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication 
+    [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
+
+    The wallet uses port 9256 by defualt.
   version: 1.3.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
