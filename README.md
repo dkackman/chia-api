@@ -1,8 +1,8 @@
 # chia-api
 
-An experimental [OpenAPI](https://www.openapis.org/) description of [chia](https://github.com/Chia-Network/chia-blockchain) RPC interfaces.
+An unoffical [OpenAPI](https://www.openapis.org/) description of [chia](https://github.com/Chia-Network/chia-blockchain) RPC interfaces.
 
-View current spec based on chia 1.3 beta:
+View current spec based on chia 1.3:
 
 - [In the swagger UI](https://dkackman.github.io/chia-api/?urls.primaryName=Full%20Node)
 - [As a statically generated site](https://dkackman.github.io/chia-api/static/)
