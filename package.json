@@ -22,7 +22,7 @@
   "homepage": "https://github.com/dkackman/chia-api#readme",
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
-    "@stoplight/spectral": "^6.1.0",
+    "@stoplight/spectral-cli": "^6.3.0",
     "redoc-cli": "^0.13.8"
   }
 }
