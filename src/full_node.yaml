@@ -67,10 +67,14 @@ components:
             allOf:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
+    proof_of_space:
+      $ref: "./schemas/proof_of_space.yaml#/proof_of_space"
     blockchain_state:
       $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
       $ref: "./schemas/block_record.yaml#/block_record"
+    coin:
+      $ref: "./schemas/coin.yaml#/coin"
     coin_record:
       $ref: "./schemas/coin_record.yaml#/coin_record"
     coin_search_options:
@@ -88,6 +92,10 @@ components:
       $ref: "./schemas/coin_spend.yaml#/coin_spend"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
+    foliage:
+      $ref: "./schemas/foliage.yaml#/foliage"
+    foliage_transaction_block:
+      $ref: "./schemas/foliage_transaction_block.yaml#/foliage_transaction_block"
     full_block:
       $ref: "./schemas/full_block.yaml#/full_block"
     end_of_sub_slot_bundle:
@@ -106,6 +114,10 @@ components:
       $ref: "./schemas/unfinished_header_block.yaml#/unfinished_header_block"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
+    vdf_info:
+      $ref: "./schemas/vdf_info.yaml#/vdf_info"
+    vdf_proof:
+      $ref: "./schemas/vdf_proof.yaml#/vdf_proof"
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
