@@ -106,8 +106,8 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
-  - name: Coloured Coin Wallet
-    description: Coloured coins, trades, and offers.
+  - name: CAT Wallet
+    description: CATs, trades, and offers.
   - name: DID Wallet
     description: Distributed Identity wallet.
   - name: Key Management
@@ -396,7 +396,7 @@ paths:
   /take_offer:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Takes an offer.
       description: Takes an offer.
       operationId: take_offer
@@ -427,7 +427,7 @@ paths:
   /get_offers_count:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Retrieves the number of offers.
       description: Retrieves the number of offers.
       operationId: get_offers_count
@@ -452,7 +452,7 @@ paths:
   /get_cat_list:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Retrieves the list of CATs.
       description: Retrieves the list of CATs.
       operationId: get_cat_list
@@ -476,7 +476,7 @@ paths:
   /cancel_offer:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Cancels an offer.
       description: Cancels an offer.
       operationId: cancel_offer
@@ -505,7 +505,7 @@ paths:
   /get_offer:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Retrieves an offer.
       description: Retrieves an offer.
       operationId: get_offer
@@ -541,7 +541,7 @@ paths:
   /get_all_offers:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Retrieves offers.
       description: Retrieves offers.
       operationId: get_all_offers
@@ -591,7 +591,7 @@ paths:
   /check_offer_validity:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Checks the validity of an offer.
       description: Checks the validity of an offer.
       operationId: check_offer_validity
@@ -622,7 +622,7 @@ paths:
   /get_offer_summary:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Get the summary of a given offer.
       description: Get the summary of a given offer.
       operationId: get_offer_summary
@@ -664,7 +664,7 @@ paths:
   /create_offer_for_ids:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Creates an offer.
       description: Creates an offer.
       operationId: create_offer_for_ids
@@ -705,7 +705,7 @@ paths:
   /cat_asset_id_to_name:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Gets the name and wallet id assocaited with an asset id.
       description: Gets the name and wallet id assocaited with an asset id.
       operationId: cat_asset_id_to_name
@@ -738,9 +738,9 @@ paths:
   /cat_get_asset_id:
     post:
       tags:
-        - Coloured Coin Wallet
-      summary: Gets the asset id of the coloured coin wallet.
-      description: Gets the asset id of the coloured coin wallet.
+        - CAT Wallet
+      summary: Gets the asset id of the CAT wallet.
+      description: Gets the asset id of the CAT wallet.
       operationId: cat_get_asset_id
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -762,7 +762,7 @@ paths:
   /cat_spend:
     post:
       tags:
-        - Coloured Coin Wallet
+        - CAT Wallet
       summary: Spends an amount from the given wallet.
       description: Spends an amount from the given wallet.
       operationId: cat_spend
@@ -801,9 +801,9 @@ paths:
   /cat_set_name:
     post:
       tags:
-        - Coloured Coin Wallet
-      summary: Sets the name of the coloured coin wallet.
-      description: Sets the name of the coloured coin wallet.
+        - CAT Wallet
+      summary: Sets the name of the CAT wallet.
+      description: Sets the name of the CAT wallet.
       operationId: cat_set_name
       requestBody:
         description: Request body with the Id of a wallet
@@ -837,9 +837,9 @@ paths:
   /cat_get_name:
     post:
       tags:
-        - Coloured Coin Wallet
-      summary: Gets the name of the coloured coin wallet.
-      description: Gets the name of the coloured coin wallet.
+        - CAT Wallet
+      summary: Gets the name of the CAT wallet.
+      description: Gets the name of the CAT wallet.
       operationId: cat_get_name
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
