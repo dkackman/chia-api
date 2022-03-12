@@ -1,13 +1,23 @@
-Remove-Item ./build -Force -Recurse
+param(
+    $file
+)
 
-mkdir ./build
-mkdir ./build/tmp
-mkdir ./build/site
-
-$file = "daemon.yaml"
+if (!$file) {
+    $file = "daemon.yaml"
+}
 $shortFile = [IO.Path]::GetFileNameWithoutExtension($file)
-java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o ./build/tmp/$file `
-    -t tools/templates/htmlDocs2 --additional-properties endpoint=$shortFile websocket=true
 
+# this does swagger-codegen
+if ($shortFile -eq "daemon") { # need to let the custom codegen template know to use websocket for deamon
+    java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o .\build\tmp\$file `
+        -t tools/templates/htmlDocs2 --additional-properties endpoint=$shortFile websocket=true
+}
+else {
+    java -jar ./tools/swagger-codegen-cli.jar generate -l html2 -i ./src/$file -o .\build\tmp\$file `
+        -t tools/templates/htmlDocs2 --additional-properties endpoint=$shortFile
+}
 Copy-Item ./build/tmp/$file/index.html -Destination ./build/site/$shortFile.html
 Copy-Item -Path ./build/site/$shortFile.html -Destination ./docs/static/ -Force
+
+# this does redocly
+npm run html --file=$shortFile
