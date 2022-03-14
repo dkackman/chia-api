@@ -68,7 +68,7 @@
     };
 
     function intercept(request) {
-      var cert_root = "daemon"; // defaults to daemon since that's the first in the list
+      var cert_root = "crawler"; // defaults to crawler since that's the first in the list
 
       // get the name of the spec, which govenrs the path to the TLS certs
       const params = new URLSearchParams(window.location.search);
