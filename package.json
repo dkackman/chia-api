@@ -22,7 +22,7 @@
   "dependencies": {
     "@apidevtools/swagger-cli": "^4.0.4",
     "@stoplight/spectral-cli": "^6.3.0",
-    "redoc-cli": "^0.13.8"
+    "redoc-cli": "^0.13.9"
   },
   "devDependencies": {
     "rimraf": "^3.0.2"
