@@ -666,7 +666,7 @@ paths:
       tags:
         - CAT Wallet
       summary: Creates an offer.
-      description: Creates an offer.
+      description: Creates an offer for the given set of wallet id and amount pairs.
       operationId: create_offer_for_ids
       requestBody:
         required: true
@@ -706,8 +706,8 @@ paths:
     post:
       tags:
         - CAT Wallet
-      summary: Gets the name and wallet id assocaited with an asset id.
-      description: Gets the name and wallet id assocaited with an asset id.
+      summary: Gets the name and wallet id associated with an asset id.
+      description: Gets the name and wallet id associated with an asset id.
       operationId: cat_asset_id_to_name
       requestBody:
         required: true
