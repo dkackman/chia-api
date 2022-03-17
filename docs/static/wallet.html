@@ -2700,7 +2700,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.3.0</div>
+              <div class="app-desc">Version: 1.3.1</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -2834,9 +2834,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-CATWallet-catAssetIdToName-0" data-group="User" data-name="catAssetIdToName" data-version="0">
                         <div class="pull-left">
                           <h1>catAssetIdToName</h1>
-                          <p>Gets the name and wallet id assocaited with an asset id.</p>
+                          <p>Gets the name and wallet id associated with an asset id.</p>
                         </div>
-                        <p class="marked">Gets the name and wallet id assocaited with an asset id.</p>            
+                        <p class="marked">Gets the name and wallet id associated with an asset id.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/cat_asset_id_to_name</span></code></pre>
                         
@@ -3580,7 +3580,7 @@ The wallet uses port 9256 by default.</div>
                           <h1>createOfferForIds</h1>
                           <p>Creates an offer.</p>
                         </div>
-                        <p class="marked">Creates an offer.</p>            
+                        <p class="marked">Creates an offer for the given set of wallet id and amount pairs.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/create_offer_for_ids</span></code></pre>
                         
