@@ -47,12 +47,9 @@
         {
             "label": "test",
             "type": "shell",
-            "command": "${workspaceRoot}/node_modules/.bin/spectral.ps1",
-            "args": ["lint", "src/*.yaml"],
+            "command": "npx",
+            "args": ["@redocly/openapi-cli", "lint", "src/*.yaml", "--skip-rule", "operation-4xx-response"],
             "problemMatcher": [],
-            "dependsOn": [
-                "build",
-            ],
             "group": {
                 "kind": "test",
                 "isDefault": true
