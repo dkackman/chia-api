@@ -10,10 +10,13 @@ on:
 
 jobs:
   build:
-    name: Run Spectral
+    name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: stoplightio/spectral-action@v0.8.1
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: openapi-lint 
+        uses: mhiew/redoc-lint-github-action@v3
         with:
-          file_glob: 'src/*.yaml'
+          args: 'src/*.yml'
