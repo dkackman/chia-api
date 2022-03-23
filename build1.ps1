@@ -20,4 +20,4 @@ Copy-Item ./build/tmp/$file/index.html -Destination ./build/site/$shortFile.html
 Copy-Item -Path ./build/site/$shortFile.html -Destination ./docs/static/ -Force
 
 # this does redocly
-npm run html --file=$shortFile
+npx redoc-cli bundle src/$file --output build/redoc/$shortFile.html --options.theme.colors.primary.main=green
