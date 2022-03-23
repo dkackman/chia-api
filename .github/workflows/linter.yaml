@@ -19,4 +19,4 @@ jobs:
       - name: openapi-lint 
         uses: mhiew/redoc-lint-github-action@v3
         with:
-          args: 'src/.yaml'
+          args: 'src/*.yaml'
