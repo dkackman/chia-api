@@ -2,6 +2,22 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
+    "inputs": [
+        {
+          "type": "pickString",
+          "id": "spec-file",
+          "description": "Which spec do you want to debug?",
+          "options": [
+            "crawler",
+            "daemon",
+            "farmer",
+            "full_node",
+            "harvester",
+            "wallet"
+          ],
+          "default": "wallet"
+        }
+    ],
     "tasks": [
         {
             "label": "debug",
@@ -9,7 +25,7 @@
             "command": "./build1.ps1",
             "args": [
                 "-file",
-                "wallet.yaml"
+                "${input:spec-file}.yaml"
             ],
             "problemMatcher": [],
             "dependsOn": [
