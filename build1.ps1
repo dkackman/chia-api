@@ -19,4 +19,4 @@ else {
 Copy-Item ./build/tmp/$file/index.html -Destination ./build/site/$shortFile.html
 
 # this does redocly
-npx redoc-cli bundle src/$file --output build/redoc/$shortFile.html --options.theme.colors.primary.main=green
+npx redoc-cli build src/$file --output build/redoc/$shortFile.html --options.theme.colors.primary.main=green
