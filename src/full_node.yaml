@@ -677,6 +677,31 @@ paths:
       responses:
         '200':
           $ref: "#/components/responses/coin_records"
+  /get_coin_record_by_hint:
+    post:
+      tags:
+        - Coins
+      description: Retrieves coins by hint, by default returns unspent coins.
+      summary: Retrieves coins by hint.
+      operationId: get_coin_record_by_hint
+      requestBody:
+        required: true
+        description: The hint.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  required:
+                    - hint
+                  properties:
+                    hint:
+                      type: string
+                      format: hex
+                - $ref: "#/components/schemas/coin_search_options"
+      responses:
+        '200':
+          $ref: "#/components/responses/coin_records"
   /get_coin_record_by_name:
     post:
       tags:
