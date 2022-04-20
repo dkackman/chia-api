@@ -1702,7 +1702,15 @@ paths:
       summary: Retrieves all of the wallets on the node.
       operationId: get_wallets
       requestBody:
-        $ref: "#/components/requestBodies/empty"
+        description: Optional wallet type to filter by
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  $ref: "#/components/schemas/wallet_type"
       responses:
         "200":
           description: OK
