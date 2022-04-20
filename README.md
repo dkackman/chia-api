@@ -1,6 +1,6 @@
 # chia-api
 
-[![Run OpenAPI linter](https://github.com/dkackman/chia-api/actions/workflows/linter.yaml/badge.svg)](https://github.com/dkackman/chia-api/actions/workflows/linter.yaml)
+[![OpenAPI Linter](https://github.com/dkackman/chia-api/actions/workflows/linter.yaml/badge.svg)](https://github.com/dkackman/chia-api/actions/workflows/linter.yaml)
 
 An unoffical [OpenAPI](https://www.openapis.org/) description of [chia](https://github.com/Chia-Network/chia-blockchain) RPC interfaces.
 
