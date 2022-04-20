@@ -2,12 +2,30 @@ blockchain_state:
   type: object
   description: The node's view of the blockchain.
   properties: 
+    node_id:
+      type: string
+      format: hex
     difficulty: 
       type: integer
       format: uint64
     genesis_challenge_initialized: 
       type: boolean
     mempool_size: 
+      type: integer
+      format: int32
+    mempool_cost: 
+      type: integer
+      format: int32
+    mempool_min_fees:
+      type: object
+      properties:
+        cost_5000000:
+          type: number
+          format: double
+    mempool_max_total_cost:
+      type: integer
+      format: int32
+    block_max_cost:
       type: integer
       format: int32
     peak: 

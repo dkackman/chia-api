@@ -64,7 +64,7 @@
             "label": "test",
             "type": "shell",
             "command": "npx",
-            "args": ["@redocly/openapi-cli", "lint", "src/*.yaml", "--skip-rule", "operation-4xx-response"],
+            "args": ["@redocly/openapi-cli", "lint", "src/*.yaml", "--skip-rule", "operation-4xx-response", "--extends", "recommended"],
             "problemMatcher": [],
             "group": {
                 "kind": "test",
