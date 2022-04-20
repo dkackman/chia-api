@@ -683,7 +683,7 @@ paths:
         - Coins
       description: Retrieves coins by hint, by default returns unspent coins.
       summary: Retrieves coins by hint.
-      operationId: get_coin_record_by_hint
+      operationId: get_coin_records_by_hint
       requestBody:
         required: true
         description: The hint.
