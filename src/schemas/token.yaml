@@ -1,0 +1,12 @@
+﻿token:
+  type: object
+  properties:
+    asset_id:
+      type: string
+    name:
+      type: string
+    first_seen_height:
+      type: integer
+      format: uint32
+    sender_puzzle_hash:
+      type: string

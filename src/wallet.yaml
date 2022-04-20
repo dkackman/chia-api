@@ -86,6 +86,8 @@ components:
       $ref: "./schemas/private_key.yaml#/private_key"
     spend_bundle:
       $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
+    token:
+      $ref: "./schemas/token.yaml#/token"
     trade_record:
       $ref: "./schemas/trade_record.yaml#/trade_record"
     transaction_input:
@@ -502,6 +504,43 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /select_coins:
+    post:
+      tags:
+        - CAT Wallet
+      summary: Returns a set of coins that can be used for generating a new transaction.
+      description: Returns a set of coins that can be used for generating a new transaction.
+      operationId: select_coins
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - amount
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                amount:
+                  type: integer
+                  format: uint64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      coins:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin"
+                  - $ref: "#/components/schemas/apiResponse"
   /get_offer:
     post:
       tags:
@@ -857,6 +896,29 @@ paths:
                         format: uint32
                       name:
                         type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_stray_cats:
+    post:
+      tags:
+        - CAT Wallet
+      summary: Get a list of all unacknowledged CATs.
+      description: Get a list of all unacknowledged CATs.
+      operationId: get_stray_cats
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      stray_cats:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/token"
                   - $ref: "#/components/schemas/apiResponse"
   /pw_join_pool:
     post:
