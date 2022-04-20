@@ -677,7 +677,7 @@ paths:
       responses:
         '200':
           $ref: "#/components/responses/coin_records"
-  /get_coin_record_by_hint:
+  /get_coin_records_by_hint
     post:
       tags:
         - Coins
