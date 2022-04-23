@@ -3,7 +3,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 var _ = require('lodash');
 
-const srcPath = path.join(__dirname, '../build');
+const srcPath = path.join(__dirname, '../build/bundle');
 const outPath = path.join(__dirname, '../build');
 
 fs.readdir(srcPath, function (err, files) {
