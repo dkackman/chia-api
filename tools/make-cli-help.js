@@ -3,7 +3,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 var _ = require('lodash');
 
-const srcPath = path.join(__dirname, '../src');
+const srcPath = path.join(__dirname, '../build');
 const outPath = path.join(__dirname, '../build');
 
 fs.readdir(srcPath, function (err, files) {
@@ -34,6 +34,7 @@ function flattenSpec(file) {
         const params = _.get(value, 'post.requestBody.content.application/json.schema.properties', {});
         
         // this seems to catch any unresolved $ref that js-yaml doesn't go after
+        /*
         for (const property in params) {
             for (const subProperty in params[property]) {
                 if (subProperty === '$ref') { // the $ref forks up the json
@@ -41,6 +42,7 @@ function flattenSpec(file) {
                 }
             }
         }
+        */
         help.params = params;
         endpoint[command] = help;
     });

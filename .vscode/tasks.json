@@ -61,6 +61,16 @@
             ],
         },
         {
+            "label": "bundle",
+            "type": "shell",
+            "command": "npx",
+            "args": ["@redocly/openapi-cli", "bundle", "src/*.yaml", "-o", "build/", "-d"],
+            "problemMatcher": [],
+            "dependsOn": [
+                "clean", "prepare"
+            ]
+        },
+        {
             "label": "test",
             "type": "shell",
             "command": "npx",
