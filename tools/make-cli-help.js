@@ -7,9 +7,8 @@ const srcPath = path.join(__dirname, '../build');
 const outPath = path.join(__dirname, '../build');
 
 fs.readdir(srcPath, function (err, files) {
-    //handling error
     if (err) {
-        return console.log('Unable to scan directory: ' + err);
+        return console.log(`Unable to scan directory: ${err}`);
     }
     const helpMap = {};
     // get all the yaml files
@@ -25,25 +24,18 @@ function flattenSpec(file) {
     const yaml = readFile(file);
     const endpoint = {};
 
+    // get all the paths from the spec. each one is a command
     Object.entries(_.get(yaml, 'paths', {})).forEach(function ([key, value]) {
         const help = {};
 
-        const command = key.slice(1);
+        const command = key.slice(1); //trim leading '/'
         help.summary = _.get(value, 'post.summary', 'no help available');
 
+        // get all the input params that are in the request body
         const params = _.get(value, 'post.requestBody.content.application/json.schema.properties', {});
-        
-        // this seems to catch any unresolved $ref that js-yaml doesn't go after
-        /*
-        for (const property in params) {
-            for (const subProperty in params[property]) {
-                if (subProperty === '$ref') { // the $ref forks up the json
-                    params[property] = '[object]';
-                }
-            }
-        }
-        */
+        fixUpParams(params);
         help.params = params;
+
         endpoint[command] = help;
     });
 
@@ -54,4 +46,16 @@ function readFile(file) {
     return yaml.load(
         fs.readFileSync(path.join(srcPath, file), 'utf8')
     );
+}
+
+function fixUpParams(params) {
+    // strip out any unresolved $ref properties
+    // not needed with fully dereffed spec files
+    for (const property in params) {
+        for (const subProperty in params[property]) {
+            if (subProperty === '$ref') { // the $ref forks up the json
+                params[property] = '[object]';
+            }
+        }
+    }
 }
