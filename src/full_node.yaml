@@ -132,13 +132,135 @@ tags:
     description: Methods for managing blocks.
   - name: Coins
     description: Methods for managing coins.
-  - name: Connections
-    description: Methods for managing connections.
+  - name: Shared
+    description: Methods shared by all services.
   - name: Full Node
     description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
   - name: Mempool
     description: Get information about the mempool.
 paths:
+  /stop_node:
+    post:
+      tags:
+        - Shared
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: stop_node
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /open_connection:
+    post:
+      tags:
+        - Shared
+      summary: Add a connection to another node.
+      description: Add a connection to another node.
+      operationId: open_connection
+      requestBody:
+        required: true
+        description: the address of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ip
+                - port
+              properties:
+                ip:
+                  type: string
+                  format: ipaddress
+                port:
+                  type: integer
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /close_connection:
+    post:
+      tags:
+        - Shared
+      summary: Removes a connection.
+      description: Removes a connection.
+      operationId: close_connection
+      requestBody:
+        required: true
+        description: the node id of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - node_id
+              properties:
+                node_id:
+                  type: string
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /get_connections:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of connections.
+      description: Retrieve the list of connections.
+      operationId: get_connections
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      connections:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/connection_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /healthz:
+    post:
+      tags:
+        - Shared
+      summary: Heartbeat.
+      description: Heartbeat.
+      operationId: healthz
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /get_routes:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of routes exposed by the service.
+      description: Retrieve the list of routes/endpoints exposed by the service.
+      operationId: get_routes
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      routes:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
   /get_block_count_metrics:
     post:
       tags:
@@ -166,89 +288,6 @@ paths:
                             type: integer
                           hint_count:
                             type: integer
-                  - $ref: "#/components/schemas/apiResponse"
-  /stop_node:
-    post:
-      tags:
-        - Connections
-      summary: Stop the node.
-      description: Stop the node.
-      operationId: stop_node
-      requestBody:
-        $ref: "#/components/requestBodies/empty"
-      responses:
-        '200':
-          $ref: "#/components/responses/empty"
-  /open_connection:
-    post:
-      tags:
-        - Connections
-      summary: Add a connection to another node.
-      description: Add a connection to another node.
-      operationId: open_connection
-      requestBody:
-        required: true
-        description: the address of the connection
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - ip
-                - port
-              properties:
-                ip:
-                  type: string
-                  format: ipaddress
-                port:
-                  type: integer
-      responses:
-        '200':
-          $ref: "#/components/responses/empty"
-  /close_connection:
-    post:
-      tags:
-        - Connections
-      summary: Removes a connection.
-      description: Removes a connection.
-      operationId: close_connection
-      requestBody:
-        required: true
-        description: the node id of the connection
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - node_id
-              properties:
-                node_id:
-                  type: string
-      responses:
-        '200':
-          $ref: "#/components/responses/empty"
-  /get_connections:
-    post:
-      tags:
-        - Connections
-      summary: Retrieve the list of connections.
-      description: Retrieve the list of connections.
-      operationId: get_connections
-      requestBody:
-        $ref: "#/components/requestBodies/empty"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      connections:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/connection_info"
                   - $ref: "#/components/schemas/apiResponse"
   /get_block_record:
     post:
