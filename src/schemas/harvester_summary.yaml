@@ -1,4 +1,4 @@
-﻿harvester_info:
+﻿harvester_summary:
   type: object
   properties:
     connection:
@@ -20,19 +20,15 @@
         plot_files_total:
           type: integer
           format: uint32
-    failed_to_open_filenames:
-      type: array
-      items:
-        type: string
-    no_key_filenames:
-      type: array
-      items:
-        type: string
     plots:
-      type: array
-      items:
-        $ref: "./plot_info.yaml#/plot_info"
+      type: integer
+      format: int32
+    failed_to_open_filenames:
+      type: integer
+      format: int32
+    no_keys_filenames:
+      type: integer
+      format: int32
     duplicates:
-      type: array
-      items:
-        type: string
+      type: integer
+      format: int32

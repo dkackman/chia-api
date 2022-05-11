@@ -34,6 +34,8 @@ components:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     harvester_info:
       $ref: "./schemas/harvester_info.yaml#/harvester_info"
+    harvester_summary:
+      $ref: "./schemas/harvester_summary.yaml#/harvester_summary"
     pool_state_info:
       $ref: "./schemas/pool_state_info.yaml#/pool_state_info"
     proof_of_space:
@@ -80,7 +82,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /open_connection:
     post:
@@ -106,7 +108,7 @@ paths:
                 port:
                   type: integer
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /close_connection:
     post:
@@ -128,7 +130,7 @@ paths:
                 node_id:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_connections:
     post:
@@ -140,7 +142,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -163,7 +165,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -179,7 +181,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -212,7 +214,7 @@ paths:
                 pool_target:
                   type: "string"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_reward_targets:
     post:
@@ -234,7 +236,7 @@ paths:
                 search_for_private_key:
                   type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -264,7 +266,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -276,6 +278,29 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/harvester_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvesters_summary:
+    post:
+      tags:
+        - Farmer
+      summary: Get a summary of harvesters.
+      description: Get a summary of harvesters.
+      operationId: get_harvesters_summary
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      harvesters:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/harvester_summary"
                   - $ref: "#/components/schemas/apiResponse"
   /get_pool_login_link:
     post:
@@ -297,7 +322,7 @@ paths:
                 launcher_id:
                   type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -319,7 +344,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -353,7 +378,7 @@ paths:
                 payout_instructions:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_signage_point:
     post:
@@ -375,7 +400,7 @@ paths:
                 sp_hash:
                   type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -393,7 +418,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
