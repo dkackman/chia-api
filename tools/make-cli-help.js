@@ -10,18 +10,33 @@ fs.readdir(srcPath, function (err, files) {
     if (err) {
         return console.log(`Unable to scan directory: ${err}`);
     }
-    const helpMap = {};
+    const helpMap = {}; // these are formatted so they could be used by the chia CLI
+    const completions = []; // these are formatted to be used for chia.repl tab completions
+
     // get all the yaml files
     files.filter(file => file.includes('.yaml')).forEach(function (file) {
         const name = file.replace('.yaml', '');
-        helpMap[name] = flattenSpec(file);
+        const yaml = readFile(file);
+
+        helpMap[name] = flattenSpec(yaml);
+        completions.push(...getCompletions(name, yaml));
     });
 
     fs.writeFileSync(path.join(outPath, 'help.json'), JSON.stringify(helpMap, null, 2));
+    fs.writeFileSync(path.join(outPath, 'completions.json'), JSON.stringify(completions, null, 2));
 });
 
-function flattenSpec(file) {
-    const yaml = readFile(file);
+function getCompletions(endpoint, yaml) {
+    let completions = [];
+    // get all the paths from the spec. each one is a command
+    Object.entries(_.get(yaml, 'paths', {})).forEach(function ([key, value]) {
+        completions.push(`chia.${endpoint}.${key.slice(1)}`);
+    });
+
+    return completions;
+}
+
+function flattenSpec(yaml) {
     const endpoint = {};
 
     // get all the paths from the spec. each one is a command
