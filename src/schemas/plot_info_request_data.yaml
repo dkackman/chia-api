@@ -1,0 +1,21 @@
+plot_info_request_data:
+  type: object
+  properties:
+    node_id: 
+      type: string
+      format: hex
+    page: 
+      type: integer
+      format: int32
+    page_size: 
+      type: integer
+      format: int32
+    filter: 
+      type: array
+      items:
+        $ref: "./filter_item.yaml#/filter_item"
+    sort_key: 
+      type: string
+      default: "filename"
+    reverse: 
+      type: boolean

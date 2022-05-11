@@ -1,0 +1,19 @@
+paginated_plot_request:
+  type: object
+  properties:
+    node_id:
+      type: string
+      format: hex
+    page:
+      type: integer
+      format: int32
+    page_count:
+      type: integer
+      format: int32
+    total_count:
+      type: integer
+      format: int32
+    plots:
+      type: array
+      items:
+        $ref: "./plot_info.yaml#/plot_info"

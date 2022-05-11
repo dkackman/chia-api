@@ -36,8 +36,14 @@ components:
       $ref: "./schemas/harvester_info.yaml#/harvester_info"
     harvester_summary:
       $ref: "./schemas/harvester_summary.yaml#/harvester_summary"
+    paginated_plot_request:
+      $ref: "./schemas/paginated_plot_request.yaml#/paginated_plot_request"
     pool_state_info:
       $ref: "./schemas/pool_state_info.yaml#/pool_state_info"
+    plot_info_request_data:
+      $ref: "./schemas/plot_info_request_data.yaml#/plot_info_request_data"
+    plot_path_request_data:
+      $ref: "./schemas/plot_path_request_data.yaml#/plot_path_request_data"
     proof_of_space:
       $ref: "./schemas/proof_of_space.yaml#/proof_of_space"
     farmer_signage_point:
@@ -284,7 +290,7 @@ paths:
       tags:
         - Farmer
       summary: Get a summary of harvesters.
-      description: Get a summary of harvesters.
+      description: Get a summary of harvesters, similar to get_harvests but with plot counts only.
       operationId: get_harvesters_summary
       requestBody:
         $ref: "#/components/requestBodies/empty"
@@ -301,6 +307,98 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/harvester_summary"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_valid:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of valid plots.
+      description: Get a paginated list of valid plots.
+      operationId: get_harvester_plots_valid
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_info_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_invalid:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of invalid plots.
+      description: Get a paginated list of invalid plots.
+      operationId: get_harvester_plots_invalid
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_keys_missing:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of plots with missing keys.
+      description: Get a paginated list of invalid plots with missing keys.
+      operationId: get_harvester_plots_keys_missing
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_duplicates:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of duplicate plots.
+      description: Get a paginated list of dupliacte plots.
+      operationId: get_harvester_plots_duplicates
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
                   - $ref: "#/components/schemas/apiResponse"
   /get_pool_login_link:
     post:
