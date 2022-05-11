@@ -241,6 +241,10 @@ paths:
               properties:
                 search_for_private_key:
                   type: boolean
+                max_ph_to_search:
+                  type: integer
+                  format: int32
+                  default: 500
       responses:
         "200":
           description: OK

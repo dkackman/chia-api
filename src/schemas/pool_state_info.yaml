@@ -40,3 +40,6 @@
       type: array
       items:
         $ref: "./error_response.yaml#/error_response"
+    plot_count:
+      type: integer
+      format: int32
