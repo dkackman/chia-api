@@ -23,19 +23,148 @@ servers:
 security:
   - bearerAuth: []
 components:
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"
   requestBodies:
     empty:
       $ref: "./requestBodies/empty.yaml#/empty"
   schemas:
+    connection_info:
+      $ref: "./schemas/connection_info.yaml#/connection_info"
     apiResponse:
       $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
+  - name: Shared
+    description: Methods shared by all services.
   - name: Crawler
     description: The crawler RPC API is exposed, by default, on port 8561 and contains peer metrics.
 paths:
+  /stop_node:
+    post:
+      tags:
+        - Shared
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: stop_node
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /open_connection:
+    post:
+      tags:
+        - Shared
+      summary: Add a connection to another node.
+      description: Add a connection to another node.
+      operationId: open_connection
+      requestBody:
+        required: true
+        description: the address of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ip
+                - port
+              properties:
+                ip:
+                  type: string
+                  format: ipaddress
+                port:
+                  type: integer
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /close_connection:
+    post:
+      tags:
+        - Shared
+      summary: Removes a connection.
+      description: Removes a connection.
+      operationId: close_connection
+      requestBody:
+        required: true
+        description: the node id of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - node_id
+              properties:
+                node_id:
+                  type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /get_connections:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of connections.
+      description: Retrieve the list of connections.
+      operationId: get_connections
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      connections:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/connection_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /healthz:
+    post:
+      tags:
+        - Shared
+      summary: Heartbeat.
+      description: Heartbeat.
+      operationId: healthz
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /get_routes:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of routes exposed by the service.
+      description: Retrieve the list of routes/endpoints exposed by the service.
+      operationId: get_routes
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      routes:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
   /get_peer_counts:
     post:
       tags:
@@ -46,7 +175,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -98,9 +227,9 @@ paths:
                 limit:
                   description: The maximum number of result to return
                   type: integer
-                  default: 10000                
+                  default: 10000
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:

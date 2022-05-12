@@ -1,0 +1,18 @@
+plot_path_request_data:
+  type: object
+  properties:
+    node_id: 
+      type: string
+      format: hex
+    page: 
+      type: integer
+      format: int32
+    page_size: 
+      type: integer
+      format: int32
+    filter: 
+      type: array
+      items:
+        type: string
+    reverse: 
+      type: boolean

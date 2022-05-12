@@ -30,10 +30,20 @@ components:
     empty:
       $ref: "./responses/empty.yaml#/empty"
   schemas:
+    connection_info:
+      $ref: "./schemas/connection_info.yaml#/connection_info"
     harvester_info:
       $ref: "./schemas/harvester_info.yaml#/harvester_info"
+    harvester_summary:
+      $ref: "./schemas/harvester_summary.yaml#/harvester_summary"
+    paginated_plot_request:
+      $ref: "./schemas/paginated_plot_request.yaml#/paginated_plot_request"
     pool_state_info:
       $ref: "./schemas/pool_state_info.yaml#/pool_state_info"
+    plot_info_request_data:
+      $ref: "./schemas/plot_info_request_data.yaml#/plot_info_request_data"
+    plot_path_request_data:
+      $ref: "./schemas/plot_path_request_data.yaml#/plot_path_request_data"
     proof_of_space:
       $ref: "./schemas/proof_of_space.yaml#/proof_of_space"
     farmer_signage_point:
@@ -63,9 +73,133 @@ components:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
+  - name: Shared
+    description: Methods shared by all services.
   - name: Farmer
     description: The farmer RPC API is exposed, by default, on port 8559 and contains methods for managing the farmer.
 paths:
+  /stop_node:
+    post:
+      tags:
+        - Shared
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: stop_node
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /open_connection:
+    post:
+      tags:
+        - Shared
+      summary: Add a connection to another node.
+      description: Add a connection to another node.
+      operationId: open_connection
+      requestBody:
+        required: true
+        description: the address of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ip
+                - port
+              properties:
+                ip:
+                  type: string
+                  format: ipaddress
+                port:
+                  type: integer
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /close_connection:
+    post:
+      tags:
+        - Shared
+      summary: Removes a connection.
+      description: Removes a connection.
+      operationId: close_connection
+      requestBody:
+        required: true
+        description: the node id of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - node_id
+              properties:
+                node_id:
+                  type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /get_connections:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of connections.
+      description: Retrieve the list of connections.
+      operationId: get_connections
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      connections:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/connection_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /healthz:
+    post:
+      tags:
+        - Shared
+      summary: Heartbeat.
+      description: Heartbeat.
+      operationId: healthz
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /get_routes:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of routes exposed by the service.
+      description: Retrieve the list of routes/endpoints exposed by the service.
+      operationId: get_routes
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      routes:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
   /set_reward_targets:
     post:
       tags:
@@ -86,7 +220,7 @@ paths:
                 pool_target:
                   type: "string"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_reward_targets:
     post:
@@ -107,8 +241,12 @@ paths:
               properties:
                 search_for_private_key:
                   type: boolean
+                max_ph_to_search:
+                  type: integer
+                  format: int32
+                  default: 500
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -138,7 +276,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -150,6 +288,121 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/harvester_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvesters_summary:
+    post:
+      tags:
+        - Farmer
+      summary: Get a summary of harvesters.
+      description: Get a summary of harvesters, similar to get_harvests but with plot counts only.
+      operationId: get_harvesters_summary
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      harvesters:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/harvester_summary"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_valid:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of valid plots.
+      description: Get a paginated list of valid plots.
+      operationId: get_harvester_plots_valid
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_info_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_invalid:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of invalid plots.
+      description: Get a paginated list of invalid plots.
+      operationId: get_harvester_plots_invalid
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_keys_missing:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of plots with missing keys.
+      description: Get a paginated list of invalid plots with missing keys.
+      operationId: get_harvester_plots_keys_missing
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_harvester_plots_duplicates:
+    post:
+      tags:
+        - Farmer
+      summary: Get a paginated list of duplicate plots.
+      description: Get a paginated list of dupliacte plots.
+      operationId: get_harvester_plots_duplicates
+      requestBody:
+        description: Search filter parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/plot_path_request_data"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/paginated_plot_request"
                   - $ref: "#/components/schemas/apiResponse"
   /get_pool_login_link:
     post:
@@ -171,7 +424,7 @@ paths:
                 launcher_id:
                   type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -193,7 +446,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -227,7 +480,7 @@ paths:
                 payout_instructions:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_signage_point:
     post:
@@ -249,7 +502,7 @@ paths:
                 sp_hash:
                   type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -267,7 +520,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
