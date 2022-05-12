@@ -1351,18 +1351,6 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "metrics" : {
-        "$ref" : "#/components/schemas/inline_response_200_metrics"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_1"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
       "connections" : {
         "type" : "array",
         "items" : {
@@ -1374,14 +1362,41 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_1"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "routes" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["inline_response_200_10"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "blockchain_state" : {
+        "$ref" : "#/components/schemas/blockchain_state"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_11"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_11"] = {
+            defs["inline_response_200_12"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1394,7 +1409,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_12"] = {
+            defs["inline_response_200_13"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1410,7 +1425,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_13"] = {
+            defs["inline_response_200_14"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1425,7 +1440,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_14"] = {
+            defs["inline_response_200_15"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1437,7 +1452,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_15"] = {
+            defs["inline_response_200_16"] = {
   "type" : "object",
   "properties" : {
     "coin_records" : {
@@ -1451,7 +1466,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_16"] = {
+            defs["inline_response_200_17"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1463,7 +1478,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17"] = {
+            defs["inline_response_200_18"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1475,7 +1490,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_18"] = {
+            defs["inline_response_200_19"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1491,6 +1506,33 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "metrics" : {
+        "$ref" : "#/components/schemas/inline_response_200_2_metrics"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_2_metrics"] = {
+  "type" : "object",
+  "properties" : {
+    "compact_blocks" : {
+      "type" : "integer"
+    },
+    "uncompact_blocks" : {
+      "type" : "integer"
+    },
+    "hint_count" : {
+      "type" : "integer"
+    }
+  },
+  "example" : null
+};
+            defs["inline_response_200_3"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "block_record" : {
         "$ref" : "#/components/schemas/block_record"
       }
@@ -1499,7 +1541,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_3"] = {
+            defs["inline_response_200_4"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1514,7 +1556,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_4"] = {
+            defs["inline_response_200_5"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1526,7 +1568,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_5"] = {
+            defs["inline_response_200_6"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1541,7 +1583,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_6"] = {
+            defs["inline_response_200_7"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1556,7 +1598,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_7"] = {
+            defs["inline_response_200_8"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1577,7 +1619,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_8"] = {
+            defs["inline_response_200_9"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1609,33 +1651,6 @@
     },
     "description" : "Type returned when a challenge_hash is provided in the request"
   } ]
-};
-            defs["inline_response_200_9"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "blockchain_state" : {
-        "$ref" : "#/components/schemas/blockchain_state"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_metrics"] = {
-  "type" : "object",
-  "properties" : {
-    "compact_blocks" : {
-      "type" : "integer"
-    },
-    "uncompact_blocks" : {
-      "type" : "integer"
-    },
-    "hint_count" : {
-      "type" : "integer"
-    }
-  },
-  "example" : null
 };
             defs["k_size"] = {
   "type" : "integer",
@@ -1736,7 +1751,7 @@
   }
 };
             defs["OneOfget_recent_signage_point_or_eos_body"] = {};
-            defs["OneOfinline_response_200_8"] = {};
+            defs["OneOfinline_response_200_9"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -2097,21 +2112,6 @@
                     <li class="nav-item" data-group="Coins" data-name="pushTx">
                       <a class="nav-link link-secondary" href="#api-Coins-pushTx">pushTx</a>
                     </li>
-                  <li class="nav-header nav-item" data-group="Connections">
-                    <a class="nav-link" href="#api-Connections">Connections</a>
-                  </li>
-                    <li class="nav-item" data-group="Connections" data-name="closeConnection">
-                      <a class="nav-link link-secondary" href="#api-Connections-closeConnection">closeConnection</a>
-                    </li>
-                    <li class="nav-item" data-group="Connections" data-name="getConnections">
-                      <a class="nav-link link-secondary" href="#api-Connections-getConnections">getConnections</a>
-                    </li>
-                    <li class="nav-item" data-group="Connections" data-name="openConnection">
-                      <a class="nav-link link-secondary" href="#api-Connections-openConnection">openConnection</a>
-                    </li>
-                    <li class="nav-item" data-group="Connections" data-name="stopNode">
-                      <a class="nav-link link-secondary" href="#api-Connections-stopNode">stopNode</a>
-                    </li>
                   <li class="nav-header nav-item" data-group="FullNode">
                     <a class="nav-link" href="#api-FullNode">FullNode</a>
                   </li>
@@ -2135,6 +2135,27 @@
                     </li>
                     <li class="nav-item" data-group="Mempool" data-name="getMempoolItemByTxId">
                       <a class="nav-link link-secondary" href="#api-Mempool-getMempoolItemByTxId">getMempoolItemByTxId</a>
+                    </li>
+                  <li class="nav-header nav-item" data-group="Shared">
+                    <a class="nav-link" href="#api-Shared">Shared</a>
+                  </li>
+                    <li class="nav-item" data-group="Shared" data-name="closeConnection">
+                      <a class="nav-link link-secondary" href="#api-Shared-closeConnection">closeConnection</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="getConnections">
+                      <a class="nav-link link-secondary" href="#api-Shared-getConnections">getConnections</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="getRoutes">
+                      <a class="nav-link link-secondary" href="#api-Shared-getRoutes">getRoutes</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="healthz">
+                      <a class="nav-link link-secondary" href="#api-Shared-healthz">healthz</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="openConnection">
+                      <a class="nav-link link-secondary" href="#api-Shared-openConnection">openConnection</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="stopNode">
+                      <a class="nav-link link-secondary" href="#api-Shared-stopNode">stopNode</a>
                     </li>
           </ul>
         </nav>
@@ -2256,7 +2277,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_7"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
@@ -2385,7 +2406,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_4"
+        "$ref" : "#/components/schemas/inline_response_200_5"
       }
     }
   }
@@ -2507,7 +2528,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_200_2"
       }
     }
   }
@@ -2636,7 +2657,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_3"
       }
     }
   }
@@ -2758,7 +2779,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_3"
       }
     }
   }
@@ -2891,7 +2912,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -3024,7 +3045,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_5"
+        "$ref" : "#/components/schemas/inline_response_200_6"
       }
     }
   }
@@ -3146,7 +3167,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_9"
       }
     }
   }
@@ -3268,7 +3289,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_6"
+        "$ref" : "#/components/schemas/inline_response_200_7"
       }
     }
   }
@@ -3393,7 +3414,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
+        "$ref" : "#/components/schemas/inline_response_200_17"
       }
     }
   }
@@ -3515,7 +3536,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -3637,7 +3658,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -3759,7 +3780,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -3881,7 +3902,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -4003,7 +4024,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -4125,7 +4146,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -4247,7 +4268,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -4273,497 +4294,6 @@ The full node uses port 8555 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-pushTx-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                  </section>
-                <section id="api-Connections">
-                  <h1>Connections</h1>
-                    <div id="api-Connections-closeConnection">
-                      <article id="api-Connections-closeConnection-0" data-group="User" data-name="closeConnection" data-version="0">
-                        <div class="pull-left">
-                          <h1>closeConnection</h1>
-                          <p>Removes a connection.</p>
-                        </div>
-                        <p class="marked">Removes a connection.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/close_connection</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Connections-closeConnection-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
---key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:8555/close_connection" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "description" : "the node id of the connection",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/close_connection_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_closeConnection_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_closeConnection_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-closeConnection-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-closeConnection-200-schema">
-                                  <div id='responses-closeConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-closeConnection-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-closeConnection-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-closeConnection-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-Connections-getConnections">
-                      <article id="api-Connections-getConnections-0" data-group="User" data-name="getConnections" data-version="0">
-                        <div class="pull-left">
-                          <h1>getConnections</h1>
-                          <p>Retrieve the list of connections.</p>
-                        </div>
-                        <p class="marked">Retrieve the list of connections.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_connections</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Connections-getConnections-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
---key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:8555/get_connections" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "description" : "Empty request body",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "object"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_getConnections_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_getConnections_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-getConnections-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-getConnections-200-schema">
-                                  <div id='responses-getConnections-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-getConnections-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-getConnections-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-getConnections-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-Connections-openConnection">
-                      <article id="api-Connections-openConnection-0" data-group="User" data-name="openConnection" data-version="0">
-                        <div class="pull-left">
-                          <h1>openConnection</h1>
-                          <p>Add a connection to another node.</p>
-                        </div>
-                        <p class="marked">Add a connection to another node.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/open_connection</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Connections-openConnection-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
---key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:8555/open_connection" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "description" : "the address of the connection",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/open_connection_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_openConnection_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_openConnection_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-openConnection-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-openConnection-200-schema">
-                                  <div id='responses-openConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-openConnection-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-openConnection-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-openConnection-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-Connections-stopNode">
-                      <article id="api-Connections-stopNode-0" data-group="User" data-name="stopNode" data-version="0">
-                        <div class="pull-left">
-                          <h1>stopNode</h1>
-                          <p>Stop the node.</p>
-                        </div>
-                        <p class="marked">Stop the node.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_node</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Connections-stopNode-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
---key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:8555/stop_node" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "description" : "Empty request body",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "object"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_stopNode_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_stopNode_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-stopNode-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-stopNode-200-schema">
-                                  <div id='responses-stopNode-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-stopNode-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-stopNode-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-stopNode-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -4863,7 +4393,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -4985,7 +4515,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_10"
       }
     }
   }
@@ -5107,7 +4637,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_11"
+        "$ref" : "#/components/schemas/inline_response_200_12"
       }
     }
   }
@@ -5232,7 +4762,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_13"
+        "$ref" : "#/components/schemas/inline_response_200_14"
       }
     }
   }
@@ -5354,7 +4884,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_12"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -5476,7 +5006,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_15"
       }
     }
   }
@@ -5502,6 +5032,741 @@ The full node uses port 8555 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getMempoolItemByTxId-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-Shared">
+                  <h1>Shared</h1>
+                    <div id="api-Shared-closeConnection">
+                      <article id="api-Shared-closeConnection-0" data-group="User" data-name="closeConnection" data-version="0">
+                        <div class="pull-left">
+                          <h1>closeConnection</h1>
+                          <p>Removes a connection.</p>
+                        </div>
+                        <p class="marked">Removes a connection.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/close_connection</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-closeConnection-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/close_connection" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "the node id of the connection",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/close_connection_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_closeConnection_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_closeConnection_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-closeConnection-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-closeConnection-200-schema">
+                                  <div id='responses-closeConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-closeConnection-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-closeConnection-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-closeConnection-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-getConnections">
+                      <article id="api-Shared-getConnections-0" data-group="User" data-name="getConnections" data-version="0">
+                        <div class="pull-left">
+                          <h1>getConnections</h1>
+                          <p>Retrieve the list of connections.</p>
+                        </div>
+                        <p class="marked">Retrieve the list of connections.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_connections</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-getConnections-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_connections" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getConnections_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getConnections_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getConnections-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getConnections-200-schema">
+                                  <div id='responses-getConnections-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getConnections-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getConnections-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getConnections-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-getRoutes">
+                      <article id="api-Shared-getRoutes-0" data-group="User" data-name="getRoutes" data-version="0">
+                        <div class="pull-left">
+                          <h1>getRoutes</h1>
+                          <p>Retrieve the list of routes exposed by the service.</p>
+                        </div>
+                        <p class="marked">Retrieve the list of routes/endpoints exposed by the service.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_routes</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-getRoutes-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_routes" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getRoutes_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getRoutes_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getRoutes-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getRoutes-200-schema">
+                                  <div id='responses-getRoutes-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_1"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getRoutes-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getRoutes-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getRoutes-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-healthz">
+                      <article id="api-Shared-healthz-0" data-group="User" data-name="healthz" data-version="0">
+                        <div class="pull-left">
+                          <h1>healthz</h1>
+                          <p>Heartbeat.</p>
+                        </div>
+                        <p class="marked">Heartbeat.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/healthz</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-healthz-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/healthz" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_healthz_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_healthz_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-healthz-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-healthz-200-schema">
+                                  <div id='responses-healthz-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-healthz-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-healthz-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-healthz-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-openConnection">
+                      <article id="api-Shared-openConnection-0" data-group="User" data-name="openConnection" data-version="0">
+                        <div class="pull-left">
+                          <h1>openConnection</h1>
+                          <p>Add a connection to another node.</p>
+                        </div>
+                        <p class="marked">Add a connection to another node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/open_connection</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-openConnection-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/open_connection" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "the address of the connection",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/open_connection_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_openConnection_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_openConnection_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-openConnection-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-openConnection-200-schema">
+                                  <div id='responses-openConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-openConnection-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-openConnection-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-openConnection-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-stopNode">
+                      <article id="api-Shared-stopNode-0" data-group="User" data-name="stopNode" data-version="0">
+                        <div class="pull-left">
+                          <h1>stopNode</h1>
+                          <p>Stop the node.</p>
+                        </div>
+                        <p class="marked">Stop the node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_node</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-stopNode-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/stop_node" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_stopNode_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_stopNode_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-stopNode-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-stopNode-200-schema">
+                                  <div id='responses-stopNode-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-stopNode-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-stopNode-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-stopNode-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

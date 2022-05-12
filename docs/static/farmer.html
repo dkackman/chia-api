@@ -649,6 +649,73 @@
   },
   "description" : "Success indicator and optional error message included in all responses"
 };
+            defs["close_connection_body"] = {
+  "required" : [ "node_id" ],
+  "type" : "object",
+  "properties" : {
+    "node_id" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["connection_info"] = {
+  "type" : "object",
+  "properties" : {
+    "bytes_read" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "nullable" : true
+    },
+    "bytes_written" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "nullable" : true
+    },
+    "creation_time" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "last_message_time" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "local_port" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "node_id" : {
+      "type" : "string"
+    },
+    "peak_hash" : {
+      "type" : "string"
+    },
+    "peak_height" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "nullable" : true
+    },
+    "peak_weight" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "nullable" : true
+    },
+    "peer_host" : {
+      "type" : "string"
+    },
+    "peer_port" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "peer_server_port" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "type" : {
+      "$ref" : "#/components/schemas/node_type"
+    }
+  },
+  "description" : "Chia's representation of a connection from node to node."
+};
             defs["error_response"] = {
   "type" : "object",
   "properties" : {
@@ -689,6 +756,17 @@
   },
   "description" : "The farmer api's defintion of a signage point. Not the same as signage_point."
 };
+            defs["filter_item"] = {
+  "type" : "object",
+  "properties" : {
+    "key" : {
+      "type" : "string"
+    },
+    "value" : {
+      "type" : "string"
+    }
+  }
+};
             defs["get_pool_login_link_body"] = {
   "required" : [ "launcher_id" ],
   "type" : "object",
@@ -704,6 +782,11 @@
   "properties" : {
     "search_for_private_key" : {
       "type" : "boolean"
+    },
+    "max_ph_to_search" : {
+      "type" : "integer",
+      "format" : "int32",
+      "default" : 500
     }
   }
 };
@@ -737,13 +820,24 @@
     "connection" : {
       "$ref" : "#/components/schemas/harvester_connection"
     },
+    "last_sync_time" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "total_plot_size" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "syncing" : {
+      "$ref" : "#/components/schemas/harvester_info_syncing"
+    },
     "failed_to_open_filenames" : {
       "type" : "array",
       "items" : {
         "type" : "string"
       }
     },
-    "not_found_filenames" : {
+    "no_key_filenames" : {
       "type" : "array",
       "items" : {
         "type" : "string"
@@ -754,10 +848,98 @@
       "items" : {
         "$ref" : "#/components/schemas/plot_info"
       }
+    },
+    "duplicates" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    }
+  }
+};
+            defs["harvester_info_syncing"] = {
+  "type" : "object",
+  "properties" : {
+    "initial" : {
+      "type" : "boolean"
+    },
+    "plot_files_processed" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "plot_files_total" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  },
+  "example" : null
+};
+            defs["harvester_summary"] = {
+  "type" : "object",
+  "properties" : {
+    "connection" : {
+      "$ref" : "#/components/schemas/harvester_connection"
+    },
+    "last_sync_time" : {
+      "type" : "number",
+      "format" : "double"
+    },
+    "total_plot_size" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "syncing" : {
+      "$ref" : "#/components/schemas/harvester_info_syncing"
+    },
+    "plots" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "failed_to_open_filenames" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "no_keys_filenames" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "duplicates" : {
+      "type" : "integer",
+      "format" : "int32"
     }
   }
 };
             defs["inline_response_200"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "connections" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/connection_info"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_1"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "routes" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_2"] = {
   "allOf" : [ {
     "required" : [ "farmer_target", "pool_target" ],
     "type" : "object",
@@ -779,7 +961,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_1"] = {
+            defs["inline_response_200_3"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -794,7 +976,29 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_2"] = {
+            defs["inline_response_200_4"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "harvesters" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/harvester_summary"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_5"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/paginated_plot_request"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_6"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -807,7 +1011,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_3"] = {
+            defs["inline_response_200_7"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -819,14 +1023,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_4"] = {
+            defs["inline_response_200_8"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/signage_point_bundle"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_5"] = {
+            defs["inline_response_200_9"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -847,7 +1051,52 @@
   "default" : 32,
   "enum" : [ 25, 32, 33, 34, 35 ]
 };
+            defs["node_type"] = {
+  "type" : "integer",
+  "description" : "The type of node:\n  * 1 FULL_NODE\n  * 2 HARVESTER\n  * 3 FARMER\n  * 4 TIMELORD\n  * 5 INTRODUCER\n  * 6 WALLET",
+  "enum" : [ 1, 2, 3, 4, 5, 6 ]
+};
             defs["OneOfsignage_point_bundleProofsItems"] = {};
+            defs["open_connection_body"] = {
+  "required" : [ "ip", "port" ],
+  "type" : "object",
+  "properties" : {
+    "ip" : {
+      "type" : "string",
+      "format" : "ipaddress"
+    },
+    "port" : {
+      "type" : "integer"
+    }
+  }
+};
+            defs["paginated_plot_request"] = {
+  "type" : "object",
+  "properties" : {
+    "node_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "page" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "page_count" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "total_count" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "plots" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/plot_info"
+      }
+    }
+  }
+};
             defs["plot_info"] = {
   "type" : "object",
   "properties" : {
@@ -881,6 +1130,62 @@
     }
   },
   "description" : "Info about a plot file"
+};
+            defs["plot_info_request_data"] = {
+  "type" : "object",
+  "properties" : {
+    "node_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "page" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "page_size" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "filter" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/filter_item"
+      }
+    },
+    "sort_key" : {
+      "type" : "string",
+      "default" : "filename"
+    },
+    "reverse" : {
+      "type" : "boolean"
+    }
+  }
+};
+            defs["plot_path_request_data"] = {
+  "type" : "object",
+  "properties" : {
+    "node_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "page" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "page_size" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "filter" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "reverse" : {
+      "type" : "boolean"
+    }
+  }
 };
             defs["pool_point"] = {
   "type" : "object",
@@ -951,6 +1256,10 @@
       "items" : {
         "$ref" : "#/components/schemas/error_response"
       }
+    },
+    "plot_count" : {
+      "type" : "integer",
+      "format" : "int32"
     }
   }
 };
@@ -1064,8 +1373,23 @@
                   <li class="nav-header nav-item" data-group="Farmer">
                     <a class="nav-link" href="#api-Farmer">Farmer</a>
                   </li>
+                    <li class="nav-item" data-group="Farmer" data-name="getHarvesterPlotsDuplicates">
+                      <a class="nav-link link-secondary" href="#api-Farmer-getHarvesterPlotsDuplicates">getHarvesterPlotsDuplicates</a>
+                    </li>
+                    <li class="nav-item" data-group="Farmer" data-name="getHarvesterPlotsInvalid">
+                      <a class="nav-link link-secondary" href="#api-Farmer-getHarvesterPlotsInvalid">getHarvesterPlotsInvalid</a>
+                    </li>
+                    <li class="nav-item" data-group="Farmer" data-name="getHarvesterPlotsKeysMissing">
+                      <a class="nav-link link-secondary" href="#api-Farmer-getHarvesterPlotsKeysMissing">getHarvesterPlotsKeysMissing</a>
+                    </li>
+                    <li class="nav-item" data-group="Farmer" data-name="getHarvesterPlotsValid">
+                      <a class="nav-link link-secondary" href="#api-Farmer-getHarvesterPlotsValid">getHarvesterPlotsValid</a>
+                    </li>
                     <li class="nav-item" data-group="Farmer" data-name="getHarvesters">
                       <a class="nav-link link-secondary" href="#api-Farmer-getHarvesters">getHarvesters</a>
+                    </li>
+                    <li class="nav-item" data-group="Farmer" data-name="getHarvestersSummary">
+                      <a class="nav-link link-secondary" href="#api-Farmer-getHarvestersSummary">getHarvestersSummary</a>
                     </li>
                     <li class="nav-item" data-group="Farmer" data-name="getPoolLoginLink">
                       <a class="nav-link link-secondary" href="#api-Farmer-getPoolLoginLink">getPoolLoginLink</a>
@@ -1087,6 +1411,27 @@
                     </li>
                     <li class="nav-item" data-group="Farmer" data-name="setRewardTargets">
                       <a class="nav-link link-secondary" href="#api-Farmer-setRewardTargets">setRewardTargets</a>
+                    </li>
+                  <li class="nav-header nav-item" data-group="Shared">
+                    <a class="nav-link" href="#api-Shared">Shared</a>
+                  </li>
+                    <li class="nav-item" data-group="Shared" data-name="closeConnection">
+                      <a class="nav-link link-secondary" href="#api-Shared-closeConnection">closeConnection</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="getConnections">
+                      <a class="nav-link link-secondary" href="#api-Shared-getConnections">getConnections</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="getRoutes">
+                      <a class="nav-link link-secondary" href="#api-Shared-getRoutes">getRoutes</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="healthz">
+                      <a class="nav-link link-secondary" href="#api-Shared-healthz">healthz</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="openConnection">
+                      <a class="nav-link link-secondary" href="#api-Shared-openConnection">openConnection</a>
+                    </li>
+                    <li class="nav-item" data-group="Shared" data-name="stopNode">
+                      <a class="nav-link link-secondary" href="#api-Shared-stopNode">stopNode</a>
                     </li>
           </ul>
         </nav>
@@ -1110,6 +1455,494 @@ The farmer uses port 8559 by default.</div>
         <div id="sections">
                 <section id="api-Farmer">
                   <h1>Farmer</h1>
+                    <div id="api-Farmer-getHarvesterPlotsDuplicates">
+                      <article id="api-Farmer-getHarvesterPlotsDuplicates-0" data-group="User" data-name="getHarvesterPlotsDuplicates" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvesterPlotsDuplicates</h1>
+                          <p>Get a paginated list of duplicate plots.</p>
+                        </div>
+                        <p class="marked">Get a paginated list of dupliacte plots.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvester_plots_duplicates</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Farmer-getHarvesterPlotsDuplicates-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvester_plots_duplicates" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Search filter parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/plot_path_request_data"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvesterPlotsDuplicates_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvesterPlotsDuplicates_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvesterPlotsDuplicates-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvesterPlotsDuplicates-200-schema">
+                                  <div id='responses-getHarvesterPlotsDuplicates-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvesterPlotsDuplicates-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvesterPlotsDuplicates-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvesterPlotsDuplicates-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Farmer-getHarvesterPlotsInvalid">
+                      <article id="api-Farmer-getHarvesterPlotsInvalid-0" data-group="User" data-name="getHarvesterPlotsInvalid" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvesterPlotsInvalid</h1>
+                          <p>Get a paginated list of invalid plots.</p>
+                        </div>
+                        <p class="marked">Get a paginated list of invalid plots.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvester_plots_invalid</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Farmer-getHarvesterPlotsInvalid-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvester_plots_invalid" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Search filter parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/plot_path_request_data"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvesterPlotsInvalid_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvesterPlotsInvalid_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvesterPlotsInvalid-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvesterPlotsInvalid-200-schema">
+                                  <div id='responses-getHarvesterPlotsInvalid-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvesterPlotsInvalid-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvesterPlotsInvalid-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvesterPlotsInvalid-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Farmer-getHarvesterPlotsKeysMissing">
+                      <article id="api-Farmer-getHarvesterPlotsKeysMissing-0" data-group="User" data-name="getHarvesterPlotsKeysMissing" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvesterPlotsKeysMissing</h1>
+                          <p>Get a paginated list of plots with missing keys.</p>
+                        </div>
+                        <p class="marked">Get a paginated list of invalid plots with missing keys.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvester_plots_keys_missing</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Farmer-getHarvesterPlotsKeysMissing-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvester_plots_keys_missing" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Search filter parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/plot_path_request_data"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvesterPlotsKeysMissing_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvesterPlotsKeysMissing_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvesterPlotsKeysMissing-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvesterPlotsKeysMissing-200-schema">
+                                  <div id='responses-getHarvesterPlotsKeysMissing-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvesterPlotsKeysMissing-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvesterPlotsKeysMissing-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvesterPlotsKeysMissing-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Farmer-getHarvesterPlotsValid">
+                      <article id="api-Farmer-getHarvesterPlotsValid-0" data-group="User" data-name="getHarvesterPlotsValid" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvesterPlotsValid</h1>
+                          <p>Get a paginated list of valid plots.</p>
+                        </div>
+                        <p class="marked">Get a paginated list of valid plots.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvester_plots_valid</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Farmer-getHarvesterPlotsValid-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvester_plots_valid" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Search filter parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/plot_info_request_data"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvesterPlotsValid_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvesterPlotsValid_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvesterPlotsValid-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvesterPlotsValid-200-schema">
+                                  <div id='responses-getHarvesterPlotsValid-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvesterPlotsValid-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvesterPlotsValid-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvesterPlotsValid-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Farmer-getHarvesters">
                       <article id="api-Farmer-getHarvesters-0" data-group="User" data-name="getHarvesters" data-version="0">
                         <div class="pull-left">
@@ -1201,7 +2034,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
+        "$ref" : "#/components/schemas/inline_response_200_3"
       }
     }
   }
@@ -1227,6 +2060,128 @@ The farmer uses port 8559 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getHarvesters-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Farmer-getHarvestersSummary">
+                      <article id="api-Farmer-getHarvestersSummary-0" data-group="User" data-name="getHarvestersSummary" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvestersSummary</h1>
+                          <p>Get a summary of harvesters.</p>
+                        </div>
+                        <p class="marked">Get a summary of harvesters, similar to get_harvests but with plot counts only.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvesters_summary</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Farmer-getHarvestersSummary-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_harvesters_summary" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvestersSummary_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvestersSummary_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvestersSummary-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvestersSummary-200-schema">
+                                  <div id='responses-getHarvestersSummary-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_4"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvestersSummary-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvestersSummary-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvestersSummary-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -1323,7 +2278,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_6"
       }
     }
   }
@@ -1445,7 +2400,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
+        "$ref" : "#/components/schemas/inline_response_200_7"
       }
     }
   }
@@ -1567,7 +2522,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_200_2"
       }
     }
   }
@@ -1689,7 +2644,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_4"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
@@ -1811,7 +2766,7 @@ The farmer uses port 8559 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_5"
+        "$ref" : "#/components/schemas/inline_response_200_9"
       }
     }
   }
@@ -2081,6 +3036,741 @@ The farmer uses port 8559 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-setRewardTargets-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-Shared">
+                  <h1>Shared</h1>
+                    <div id="api-Shared-closeConnection">
+                      <article id="api-Shared-closeConnection-0" data-group="User" data-name="closeConnection" data-version="0">
+                        <div class="pull-left">
+                          <h1>closeConnection</h1>
+                          <p>Removes a connection.</p>
+                        </div>
+                        <p class="marked">Removes a connection.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/close_connection</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-closeConnection-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/close_connection" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "the node id of the connection",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/close_connection_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_closeConnection_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_closeConnection_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-closeConnection-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-closeConnection-200-schema">
+                                  <div id='responses-closeConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-closeConnection-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-closeConnection-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-closeConnection-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-getConnections">
+                      <article id="api-Shared-getConnections-0" data-group="User" data-name="getConnections" data-version="0">
+                        <div class="pull-left">
+                          <h1>getConnections</h1>
+                          <p>Retrieve the list of connections.</p>
+                        </div>
+                        <p class="marked">Retrieve the list of connections.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_connections</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-getConnections-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_connections" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getConnections_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getConnections_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getConnections-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getConnections-200-schema">
+                                  <div id='responses-getConnections-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getConnections-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getConnections-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getConnections-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-getRoutes">
+                      <article id="api-Shared-getRoutes-0" data-group="User" data-name="getRoutes" data-version="0">
+                        <div class="pull-left">
+                          <h1>getRoutes</h1>
+                          <p>Retrieve the list of routes exposed by the service.</p>
+                        </div>
+                        <p class="marked">Retrieve the list of routes/endpoints exposed by the service.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_routes</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-getRoutes-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/get_routes" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getRoutes_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getRoutes_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getRoutes-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getRoutes-200-schema">
+                                  <div id='responses-getRoutes-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_1"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getRoutes-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getRoutes-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getRoutes-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-healthz">
+                      <article id="api-Shared-healthz-0" data-group="User" data-name="healthz" data-version="0">
+                        <div class="pull-left">
+                          <h1>healthz</h1>
+                          <p>Heartbeat.</p>
+                        </div>
+                        <p class="marked">Heartbeat.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/healthz</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-healthz-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/healthz" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_healthz_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_healthz_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-healthz-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-healthz-200-schema">
+                                  <div id='responses-healthz-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-healthz-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-healthz-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-healthz-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-openConnection">
+                      <article id="api-Shared-openConnection-0" data-group="User" data-name="openConnection" data-version="0">
+                        <div class="pull-left">
+                          <h1>openConnection</h1>
+                          <p>Add a connection to another node.</p>
+                        </div>
+                        <p class="marked">Add a connection to another node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/open_connection</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-openConnection-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/open_connection" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "the address of the connection",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/open_connection_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_openConnection_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_openConnection_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-openConnection-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-openConnection-200-schema">
+                                  <div id='responses-openConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-openConnection-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-openConnection-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-openConnection-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-stopNode">
+                      <article id="api-Shared-stopNode-0" data-group="User" data-name="stopNode" data-version="0">
+                        <div class="pull-left">
+                          <h1>stopNode</h1>
+                          <p>Stop the node.</p>
+                        </div>
+                        <p class="marked">Stop the node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/stop_node</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-stopNode-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
+--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8559/stop_node" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_stopNode_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_stopNode_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-stopNode-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-stopNode-200-schema">
+                                  <div id='responses-stopNode-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-stopNode-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-stopNode-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-stopNode-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
