@@ -94,7 +94,7 @@
         {
             "label": "prepare",
             "type": "shell",
-            "command": "mkdir ${workspaceRoot}/build/tmp; mkdir ${workspaceRoot}/build/site",
+            "command": "mkdir ${workspaceRoot}/build/tmp; mkdir ${workspaceRoot}/build/site; mkdir ${workspaceRoot}/build/bundle;",
             "problemMatcher": []
         }
     ]
