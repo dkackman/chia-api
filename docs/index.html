@@ -9,26 +9,9 @@
   <meta charset="UTF-8">
   <title>Chia RPC</title>
   <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
+  <link rel="stylesheet" type="text/css" href="index.css" />
   <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
-  <style>
-    html {
-      box-sizing: border-box;
-      overflow: -moz-scrollbars-vertical;
-      overflow-y: scroll;
-    }
-
-    *,
-    *:before,
-    *:after {
-      box-sizing: inherit;
-    }
-
-    body {
-      margin: 0;
-      background: #fafafa;
-    }
-  </style>
 </head>
 
 <body>
@@ -73,7 +56,7 @@
     function intercept(request) {
       var cert_root = "crawler"; // defaults to crawler since that's the first in the list
 
-      // get the name of the spec, which govenrs the path to the TLS certs
+      // get the name of the spec, which governs the path to the TLS certs
       const params = new URLSearchParams(window.location.search);
       const primaryName = params.get("urls.primaryName");
       if (primaryName !== null) {
