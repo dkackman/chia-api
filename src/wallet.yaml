@@ -1027,6 +1027,14 @@ paths:
                             additionalProperties:
                               type: integer
                               format: uint64
+                          fees:
+                            type: integer
+                            format: uint64
+                          infos:
+                            type: object
+                            additionalProperties:
+                              type: object
+                              additionalProperties: true
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
