@@ -2151,10 +2151,20 @@ paths:
                         num_of_backup_ids_needed:
                           type: integer
                           format: uint64
+                        metadata:
+                          type: object
+                          additionalProperties:
+                            type: string
+                        wallet_name:
+                          type: string
+                        fee:
+                          type: integer
+                          format: uint64
+                          default: 0
                     - type: object
                       description: Details needed to create a recovery DID wallet.
                       properties:
-                        filename:
+                        backup_data:
                           type: string
                 - type: object
                   description: Details needed to create a pool_wallet.
