@@ -2039,6 +2039,9 @@ paths:
               properties:
                 type:
                   $ref: "#/components/schemas/wallet_type"
+                include_data:
+                  type: boolean
+                  default: true
       responses:
         "200":
           description: OK
