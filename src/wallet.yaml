@@ -1055,6 +1055,10 @@ paths:
                 validate_only:
                   type: boolean
                   default: false
+                driver_dict:
+                  type: object
+                  additionalProperties: 
+                    type: string
       responses:
         "200":
           description: OK
