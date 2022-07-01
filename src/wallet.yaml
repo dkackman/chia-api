@@ -2081,6 +2081,7 @@ paths:
                     - rl_wallet
                     - did_wallet
                     - pool_wallet
+                    - nft_wallet
                 name:
                   type: string
                   description: User supplied name for the wallet. Will default if not provided.
@@ -2167,7 +2168,7 @@ paths:
                         backup_data:
                           type: string
                 - type: object
-                  description: Details needed to create a pool_wallet.
+                  description: Details needed to create a pool wallet.
                   required:
                     - mode
                   properties:
@@ -2185,6 +2186,14 @@ paths:
                     p2_singleton_delay_time:
                       type: integer
                       format: uint64
+                - type: object
+                  description: Details needed to create an NFT wallet.
+                  properties:
+                    did_id:
+                      type: string
+                      format: hex
+                    name:
+                      type: string
       responses:
         "200":
           description: OK
@@ -2271,6 +2280,14 @@ paths:
                       p2_singleton_puzzle_hash:
                         type: string
                         format: hex
+                  - type: object
+                    description: Response when a new nft wallet is created.
+                    properties:
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      wallet_id:
+                        type: integer
+                        format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
