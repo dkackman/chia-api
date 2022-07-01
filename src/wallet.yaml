@@ -80,6 +80,8 @@ components:
       $ref: "./schemas/mnemonic.yaml#/mnemonic"
     network_info:
       $ref: "./schemas/network_info.yaml#/network_info"
+    nft_info:
+      $ref: "./schemas/nft_info.yaml#/nft_info"
     pool_state:
       $ref: "./schemas/pool_state.yaml#/pool_state"
     pool_wallet_info:
@@ -250,6 +252,401 @@ paths:
                         type: array
                         items:
                           type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_mint_nft:
+    post:
+      tags:
+        - NFT Wallet
+      description: Mints an NFT.
+      summary: Mints an NFT.
+      operationId: nft_mint_nft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - royalty_address
+                - target_address
+                - uris
+                - hash
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                royalty_address:
+                  type: string
+                  format: hex
+                target_address:
+                  type: string
+                  format: hex
+                uris:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                meta_uris:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                license_uris:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                hash:
+                  type: string
+                  format: hex
+                series_number:
+                  type: integer
+                  format: uint64
+                  default: 1
+                series_total:
+                  type: integer
+                  format: uint64
+                  default: 1
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                meta_hash:
+                  type: string
+                  format: hex
+                license_hash:
+                  type: string
+                  format: hex
+                did_id:
+                  type: string
+                royalty_percentage:
+                  type: integer
+                  format: uint16
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_get_nfts:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Gets NFTs from a wallet.
+      description: Gets NFTs from a wallet.
+      operationId: nft_get_nfts
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      nft_list:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/nft_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_set_nft_did:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Sets the DID of an NFT.
+      description: Sets the DID of an NFT.
+      operationId: nft_set_nft_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                did_id:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_get_by_did:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Gets an NFT wallet by its DID.
+      description: Gets an NFT wallet by its DID.
+      operationId: nft_get_by_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                did_id:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_get_wallet_did:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Gets the DID for an NFT wallet.
+      description: Gets the DID for an NFT wallet.
+      operationId: nft_get_wallet_did
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      did_id:
+                        type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_get_wallets_with_dids:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Gets all the wallets with a DID.
+      description: Gets all the wallets with a DID.
+      operationId: nft_get_wallets_with_dids
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      nft_wallets:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            wallet_id:
+                              type: integer
+                              format: uint32
+                            did_id:
+                              type: string
+                            did_wallet_id:
+                              type: integer
+                              format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_set_nft_status:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Sets the status of an NFT.
+      description: Sets the status of an NFT.
+      operationId: nft_set_nft_status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - coin_id
+                - in_transaction
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                coin_id:
+                  type: string
+                  format: hex
+                in_transaction:
+                  type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /nft_transfer_nft:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Transfers an NFT to another address.
+      description: Transfers an NFT to another address.
+      operationId: nft_transfer_nft
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - target_address
+                - nft_coin_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                target_address:
+                  type: string
+                  format: hex
+                nft_coin_id:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_get_info:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Gets info about an NFT.
+      description: Gets info about an NFT.
+      operationId: nft_get_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+                latest:
+                  type: boolean
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      nft_info:
+                        $ref: "#/components/schemas/nft_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_add_uri:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Adds an Uri t an NFT.
+      description: Adds a Uri t an NFT.
+      operationId: nft_add_uri
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - uri
+                - key
+                - nft_coin_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                uri:
+                  type: string
+                  format: uri
+                key:
+                  type: string
+                nft_coin_id:
+                  type: string
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
   /did_create_backup_file:
     post:
@@ -1065,7 +1462,7 @@ paths:
                   default: false
                 driver_dict:
                   type: object
-                  additionalProperties: 
+                  additionalProperties:
                     type: string
       responses:
         "200":
