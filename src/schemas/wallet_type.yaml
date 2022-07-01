@@ -12,6 +12,7 @@ wallet_type:
     - 7 # RECOVERABLE = 7
     - 8 # DISTRIBUTED_ID = 8
     - 9 # POOLING_WALLET = 9
+    - 10 # NFT = 10
   description: >-
     The type of wallet:
       * 0 STANDARD_WALLET
@@ -24,3 +25,4 @@ wallet_type:
       * 7 RECOVERABLE
       * 8 DISTRIBUTED_ID
       * 9 POOLING_WALLET
+      * 10 NFT

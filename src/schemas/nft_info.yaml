@@ -1,0 +1,64 @@
+nft_info:
+  type: object
+  description: NFT Info for displaying NFT on the UI
+  properties:
+    launcher_id:
+      type: string
+      format: hex
+    nft_coin_id:
+      type: string
+      format: hex
+    owner_did:
+      type: string
+    royalty_percentage:
+      type: integer
+      format: uint16
+    royalty_puzzle_hash:
+      type: string
+      format: hex
+    data_uris:
+      type: array
+      items:
+        type: string
+        format: uri
+    data_hash:
+      type: string
+      format: hex
+    metadata_uris:
+      type: array
+      items:
+        type: string
+        format: uri
+    metadata_hash:
+      type: string
+      format: hex
+    license_uris:
+      type: array
+      items:
+        type: string
+        format: uri
+    license_hash:
+      type: string
+      format: hex
+    series_total:
+      type: integer
+      format: uint64
+    series_number:
+      type: integer
+      format: uint64
+    updater_puzhash:
+      type: string
+      format: hex
+    chain_info:
+      type: string
+    mint_height:
+      type: integer
+      format: uint32
+    supports_did:
+      type: boolean
+    pending_transaction:
+      type: boolean
+      default: false
+    launcher_puzhash:
+      type: string
+      format: hex
