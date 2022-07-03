@@ -1133,7 +1133,7 @@
   }
 };
             defs["did_transfer_did_body"] = {
-  "required" : [ "filename", "wallet_id" ],
+  "required" : [ "inner_address", "wallet_id" ],
   "type" : "object",
   "properties" : {
     "wallet_id" : {
@@ -1543,8 +1543,8 @@
         "type" : "integer",
         "format" : "uint32"
       },
-      "spend_bundle" : {
-        "$ref" : "#/components/schemas/spend_bundle"
+      "name" : {
+        "type" : "string"
       }
     }
   } ]
@@ -1559,11 +1559,8 @@
         "type" : "integer",
         "format" : "uint32"
       },
-      "metadata" : {
-        "type" : "object",
-        "additionalProperties" : {
-          "type" : "string"
-        }
+      "spend_bundle" : {
+        "$ref" : "#/components/schemas/spend_bundle"
       }
     }
   } ]
@@ -1586,6 +1583,25 @@
 };
             defs["inline_response_200_20"] = {
   "allOf" : [ {
+    "$ref" : "#/components/schemas/apiResponse"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "metadata" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        }
+      }
+    }
+  } ]
+};
+            defs["inline_response_200_21"] = {
+  "allOf" : [ {
     "type" : "object",
     "properties" : {
       "trade_record" : {
@@ -1596,7 +1612,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_21"] = {
+            defs["inline_response_200_22"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1614,7 +1630,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_22"] = {
+            defs["inline_response_200_23"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1630,7 +1646,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_23"] = {
+            defs["inline_response_200_24"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1645,7 +1661,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_24"] = {
+            defs["inline_response_200_25"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1660,7 +1676,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_25"] = {
+            defs["inline_response_200_26"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1681,7 +1697,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_26"] = {
+            defs["inline_response_200_27"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1693,19 +1709,19 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_27"] = {
+            defs["inline_response_200_28"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "summary" : {
-        "$ref" : "#/components/schemas/inline_response_200_27_summary"
+        "$ref" : "#/components/schemas/inline_response_200_28_summary"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_27_summary"] = {
+            defs["inline_response_200_28_summary"] = {
   "type" : "object",
   "properties" : {
     "offered" : {
@@ -1736,7 +1752,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_28"] = {
+            defs["inline_response_200_29"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1745,22 +1761,6 @@
       },
       "trade_record" : {
         "$ref" : "#/components/schemas/trade_record"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_29"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "name" : {
-        "type" : "string"
       }
     }
   }, {
@@ -1794,7 +1794,7 @@
         "type" : "integer",
         "format" : "uint32"
       },
-      "asset_id" : {
+      "name" : {
         "type" : "string"
       }
     }
@@ -1803,6 +1803,22 @@
   } ]
 };
             defs["inline_response_200_31"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "asset_id" : {
+        "type" : "string"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_32"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1817,7 +1833,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_32"] = {
+            defs["inline_response_200_33"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1833,7 +1849,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_33"] = {
+            defs["inline_response_200_34"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1848,7 +1864,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_34"] = {
+            defs["inline_response_200_35"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1866,7 +1882,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_35"] = {
+            defs["inline_response_200_36"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1878,7 +1894,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_36"] = {
+            defs["inline_response_200_37"] = {
   "allOf" : [ {
     "required" : [ "wallet_balance" ],
     "type" : "object",
@@ -1891,28 +1907,9 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/farmer_rewards"
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
             defs["inline_response_200_38"] = {
   "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "transactions" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      },
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
-    }
+    "$ref" : "#/components/schemas/farmer_rewards"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -1921,8 +1918,11 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "count" : {
-        "type" : "integer"
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       },
       "wallet_id" : {
         "type" : "integer",
@@ -1950,6 +1950,22 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "count" : {
+        "type" : "integer"
+      },
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_41"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "wallet_id" : {
         "type" : "integer",
         "format" : "uint32"
@@ -1963,14 +1979,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_41"] = {
+            defs["inline_response_200_42"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_42"] = {
+            defs["inline_response_200_43"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1983,7 +1999,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_43"] = {
+            defs["inline_response_200_44"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2007,7 +2023,7 @@
     }
   } ]
 };
-            defs["inline_response_200_44"] = {
+            defs["inline_response_200_45"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2035,12 +2051,12 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_45"] = {
+            defs["inline_response_200_46"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_45_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_46_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -2048,7 +2064,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_45_private_key"] = {
+            defs["inline_response_200_46_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -2058,7 +2074,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_46"] = {
+            defs["inline_response_200_47"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2080,7 +2096,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_47"] = {
+            defs["inline_response_200_48"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2098,28 +2114,13 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_48"] = {
+            defs["inline_response_200_49"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "height" : {
         "type" : "integer",
         "format" : "uint32"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_49"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallets" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/wallet_info"
-        }
       }
     }
   }, {
@@ -2139,6 +2140,21 @@
   } ]
 };
             defs["inline_response_200_50"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallets" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/wallet_info"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_51"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2393,13 +2409,9 @@
   }
 };
             defs["nft_get_by_did_body"] = {
-  "required" : [ "wallet_id" ],
+  "required" : [ "did_id" ],
   "type" : "object",
   "properties" : {
-    "wallet_id" : {
-      "type" : "integer",
-      "format" : "uint32"
-    },
     "did_id" : {
       "type" : "string"
     }
@@ -2415,11 +2427,6 @@
     },
     "latest" : {
       "type" : "boolean"
-    },
-    "fee" : {
-      "type" : "integer",
-      "format" : "uint64",
-      "default" : 0
     }
   }
 };
@@ -2644,9 +2651,9 @@
   "enum" : [ 1, 2, 3, 4, 5, 6 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
-            defs["OneOfinline_response_200_43"] = {};
             defs["OneOfinline_response_200_44"] = {};
-            defs["OneOfinline_response_200_50"] = {};
+            defs["OneOfinline_response_200_45"] = {};
+            defs["OneOfinline_response_200_51"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -3771,7 +3778,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_29"
+        "$ref" : "#/components/schemas/inline_response_200_30"
       }
     }
   }
@@ -3900,7 +3907,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_30"
+        "$ref" : "#/components/schemas/inline_response_200_31"
       }
     }
   }
@@ -4029,7 +4036,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_29"
+        "$ref" : "#/components/schemas/inline_response_200_30"
       }
     }
   }
@@ -4394,7 +4401,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_26"
+        "$ref" : "#/components/schemas/inline_response_200_27"
       }
     }
   }
@@ -4515,7 +4522,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_28"
+        "$ref" : "#/components/schemas/inline_response_200_29"
       }
     }
   }
@@ -4636,7 +4643,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_25"
+        "$ref" : "#/components/schemas/inline_response_200_26"
       }
     }
   }
@@ -4758,7 +4765,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_22"
+        "$ref" : "#/components/schemas/inline_response_200_23"
       }
     }
   }
@@ -4879,7 +4886,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_24"
+        "$ref" : "#/components/schemas/inline_response_200_25"
       }
     }
   }
@@ -5000,7 +5007,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_27"
+        "$ref" : "#/components/schemas/inline_response_200_28"
       }
     }
   }
@@ -5122,7 +5129,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_22"
       }
     }
   }
@@ -5244,7 +5251,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_31"
+        "$ref" : "#/components/schemas/inline_response_200_32"
       }
     }
   }
@@ -5365,7 +5372,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_23"
+        "$ref" : "#/components/schemas/inline_response_200_24"
       }
     }
   }
@@ -5486,7 +5493,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_20"
+        "$ref" : "#/components/schemas/inline_response_200_21"
       }
     }
   }
@@ -5774,9 +5781,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-DIDWallet-didGetCurrentCoinInfo-0" data-group="User" data-name="didGetCurrentCoinInfo" data-version="0">
                         <div class="pull-left">
                           <h1>didGetCurrentCoinInfo</h1>
-                          <p>Retrieves the public key for the given DID wallet.</p>
+                          <p>Gets information about the DID wallets current coin.</p>
                         </div>
-                        <p class="marked">Retrieves the public key for the given DID wallet.</p>            
+                        <p class="marked">Gets information about the DID wallets current coin.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/did_get_current_coin_info</span></code></pre>
                         
@@ -6255,7 +6262,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_19"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -6642,7 +6649,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -6919,7 +6926,7 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-DIDWallet-didTransferDid-0" data-group="User" data-name="didTransferDid" data-version="0">
                         <div class="pull-left">
                           <h1>didTransferDid</h1>
-                          <p>Transfer the given DID to another owner.</p>
+                          <p>Transfer a DID to another owner.</p>
                         </div>
                         <p class="marked">Transfer the given DID wallet to another owner.</p>            
                         <p class="http-method" data-type="post">post</p>
@@ -7126,7 +7133,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -7372,7 +7379,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -7501,7 +7508,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_46"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -7874,7 +7881,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -8003,7 +8010,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -8125,7 +8132,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -8254,7 +8261,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -8414,9 +8421,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-NFTWallet-nftAddUri-0" data-group="User" data-name="nftAddUri" data-version="0">
                         <div class="pull-left">
                           <h1>nftAddUri</h1>
-                          <p>Adds an Uri t an NFT.</p>
+                          <p>Adds an Uri to an NFT.</p>
                         </div>
-                        <p class="marked">Adds a Uri t an NFT.</p>            
+                        <p class="marked">Adds a Uri to an NFT.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_add_uri</span></code></pre>
                         
@@ -9730,7 +9737,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_33"
+        "$ref" : "#/components/schemas/inline_response_200_34"
       }
     }
   }
@@ -9851,7 +9858,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_32"
+        "$ref" : "#/components/schemas/inline_response_200_33"
       }
     }
   }
@@ -9972,7 +9979,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_32"
+        "$ref" : "#/components/schemas/inline_response_200_33"
       }
     }
   }
@@ -10101,7 +10108,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_34"
+        "$ref" : "#/components/schemas/inline_response_200_35"
       }
     }
   }
@@ -11326,7 +11333,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_35"
+        "$ref" : "#/components/schemas/inline_response_200_36"
       }
     }
   }
@@ -11577,7 +11584,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_37"
+        "$ref" : "#/components/schemas/inline_response_200_38"
       }
     }
   }
@@ -11698,7 +11705,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_40"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -11956,7 +11963,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -12077,7 +12084,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_38"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -12206,7 +12213,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_37"
       }
     }
   }
@@ -12573,7 +12580,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_50"
+        "$ref" : "#/components/schemas/inline_response_200_51"
       }
     }
   }
@@ -12695,7 +12702,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_49"
+        "$ref" : "#/components/schemas/inline_response_200_50"
       }
     }
   }
@@ -12820,7 +12827,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_49"
       }
     }
   }
@@ -12942,7 +12949,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_47"
+        "$ref" : "#/components/schemas/inline_response_200_48"
       }
     }
   }
@@ -13064,7 +13071,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_41"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }

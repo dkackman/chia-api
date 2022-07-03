@@ -415,11 +415,8 @@ paths:
             schema:
               type: object
               required:
-                - wallet_id
+                - did_id
               properties:
-                wallet_id:
-                  type: integer
-                  format: uint32
                 did_id:
                   type: string
       responses:
@@ -584,10 +581,6 @@ paths:
                   format: hex
                 latest:
                   type: boolean
-                fee:
-                  type: integer
-                  format: uint64
-                  default: 0
       responses:
         "200":
           description: OK
@@ -604,8 +597,8 @@ paths:
     post:
       tags:
         - NFT Wallet
-      summary: Adds an Uri t an NFT.
-      description: Adds a Uri t an NFT.
+      summary: Adds an Uri to an NFT.
+      description: Adds a Uri to an NFT.
       operationId: nft_add_uri
       requestBody:
         required: true
@@ -676,7 +669,7 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Transfer the given DID to another owner.
+      summary: Transfer a DID to another owner.
       description: Transfer the given DID wallet to another owner.
       operationId: did_transfer_did
       requestBody:
@@ -687,7 +680,7 @@ paths:
               type: object
               required:
                 - wallet_id
-                - filename
+                - inner_address
               properties:
                 wallet_id:
                   type: integer
@@ -836,8 +829,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      summary: Retrieves the public key for the given DID wallet.
-      description: Retrieves the public key for the given DID wallet.
+      summary: Gets information about the DID wallets current coin.
+      description: Gets information about the DID wallets current coin.
       operationId: did_get_current_coin_info
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
@@ -1052,6 +1045,8 @@ paths:
                       wallet_id:
                         type: integer
                         format: uint32
+                      name:
+                        type: string                      
   /did_update_metadata:
     post:
       tags:
