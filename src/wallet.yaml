@@ -620,8 +620,18 @@ paths:
                   format: uri
                 key:
                   type: string
+                  enum:
+                    - "u" # data uri
+                    - "mu" # metadata uri
+                    - "lu" # license uri
+                  description: >-
+                    The type of uri:
+                      * u Uri for the NFT data
+                      * mu Uri for NFT metadata
+                      * lu Uri for the NFT license
                 nft_coin_id:
                   type: string
+                  format: hex
                 fee:
                   type: integer
                   format: uint64
@@ -1046,7 +1056,7 @@ paths:
                         type: integer
                         format: uint32
                       name:
-                        type: string                      
+                        type: string
   /did_update_metadata:
     post:
       tags:

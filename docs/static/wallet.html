@@ -2396,10 +2396,13 @@
       "format" : "uri"
     },
     "key" : {
-      "type" : "string"
+      "type" : "string",
+      "description" : "The type of uri:\n  * u Uri for the NFT data\n  * mu Uri for NFT metadata\n  * lu Uri for the NFT license",
+      "enum" : [ "u", "mu", "lu" ]
     },
     "nft_coin_id" : {
-      "type" : "string"
+      "type" : "string",
+      "format" : "hex"
     },
     "fee" : {
       "type" : "integer",
