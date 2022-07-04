@@ -1,7 +1,7 @@
 {
   "name": "chia-api",
   "version": "1.3.1",
-  "description": "Build functinos for chia-api",
+  "description": "Build functions for chia-api",
   "main": "index.js",
   "directories": {
     "doc": "docs"
