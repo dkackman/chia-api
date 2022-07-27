@@ -268,8 +268,6 @@ paths:
               type: object
               required:
                 - wallet_id
-                - royalty_address
-                - target_address
                 - uris
                 - hash
               properties:
@@ -300,11 +298,11 @@ paths:
                 hash:
                   type: string
                   format: hex
-                series_number:
+                edition_number:
                   type: integer
                   format: uint64
                   default: 1
-                series_total:
+                edition_total:
                   type: integer
                   format: uint64
                   default: 1
@@ -581,6 +579,7 @@ paths:
                   format: hex
                 latest:
                   type: boolean
+                  default: true
       responses:
         "200":
           description: OK
