@@ -1927,6 +1927,38 @@ paths:
                         type: integer
                         format: uint32
                   - $ref: "#/components/schemas/apiResponse"
+  /extend_derivation_index:
+    post:
+      tags:
+        - Wallet
+      summary: Extends the current derivation index.
+      description: Extends the current derivation index.
+      operationId: extend_derivation_index
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - index
+              properties:
+                index:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      index:
+                        type: integer
+                        format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
   /create_signed_transaction:
     post:
       tags:
