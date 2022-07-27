@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The wallet uses port 9256 by default.
-  version: 1.4.0
+  version: 1.5.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -35,7 +35,7 @@ components:
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
-    fingerprint:
+    fingerprint_response:
       description: OK
       content:
         application/json:
@@ -47,7 +47,7 @@ components:
                     type: integer
                     format: uint32
               - $ref: "#/components/schemas/apiResponse"
-    transaction_record:
+    transaction_record_response:
       description: OK response with a transaction record and a transaction id.
       content:
         application/json:
@@ -1144,6 +1144,14 @@ paths:
                 offer:
                   type: string
                   format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                min_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
       responses:
         "200":
           description: OK
@@ -1469,6 +1477,10 @@ paths:
                   type: object
                   additionalProperties:
                     type: string
+                min_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
       responses:
         "200":
           description: OK
@@ -1576,9 +1588,13 @@ paths:
                   type: array
                   items:
                     type: string
+                min_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
       responses:
         "200":
-          $ref: "#/components/responses/transaction_record"
+          $ref: "#/components/responses/transaction_record_response"
   /cat_set_name:
     post:
       tags:
@@ -1904,7 +1920,61 @@ paths:
                   format: uint64
       responses:
         "200":
-          $ref: "#/components/responses/transaction_record"
+          $ref: "#/components/responses/transaction_record_response"
+  /get_current_derivation_index:
+    post:
+      tags:
+        - Wallet
+      summary: Gets the current derivation index.
+      description: Gets the current derivation index.
+      operationId: get_current_derivation_index
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      index:
+                        type: integer
+                        format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
+  /extend_derivation_index:
+    post:
+      tags:
+        - Wallet
+      summary: Extends the current derivation index.
+      description: Extends the current derivation index.
+      operationId: extend_derivation_index
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - index
+              properties:
+                index:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      index:
+                        type: integer
+                        format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
   /create_signed_transaction:
     post:
       tags:
@@ -1917,7 +1987,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/transaction_input"
+              allOf:
+                - $ref: "#/components/schemas/transaction_input"
+                - type: object
+                  properties:
+                    min_coin_amount:
+                      type: integer
+                      format: uint128
+                      default: 0
       responses:
         "200":
           description: OK
@@ -1964,9 +2041,13 @@ paths:
                   type: array
                   items:
                     type: string
+                min_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
       responses:
         "200":
-          $ref: "#/components/responses/transaction_record"
+          $ref: "#/components/responses/transaction_record_response"
   /send_transaction_multi:
     post:
       tags:
@@ -1990,7 +2071,7 @@ paths:
                 - $ref: "#/components/schemas/transaction_input"
       responses:
         "200":
-          $ref: "#/components/responses/transaction_record"
+          $ref: "#/components/responses/transaction_record_response"
   /get_wallet_balance:
     post:
       tags:
@@ -2055,7 +2136,7 @@ paths:
         $ref: "#/components/requestBodies/transaction_id"
       responses:
         "200":
-          $ref: "#/components/responses/transaction_record"
+          $ref: "#/components/responses/transaction_record_response"
   /get_transactions:
     post:
       tags:
@@ -2194,7 +2275,7 @@ paths:
         $ref: "#/components/requestBodies/fingerprint"
       responses:
         "200":
-          $ref: "#/components/responses/fingerprint"
+          $ref: "#/components/responses/fingerprint_response"
   /get_logged_in_fingerprint:
     post:
       tags:
@@ -2206,7 +2287,7 @@ paths:
         $ref: "#/components/requestBodies/empty"
       responses:
         "200":
-          $ref: "#/components/responses/fingerprint"
+          $ref: "#/components/responses/fingerprint_response"
   /get_public_keys:
     post:
       tags:
