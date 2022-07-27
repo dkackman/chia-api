@@ -2476,7 +2476,8 @@
       "format" : "hex"
     },
     "latest" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : true
     }
   }
 };
@@ -2569,7 +2570,7 @@
   "description" : "NFT Info for displaying NFT on the UI"
 };
             defs["nft_mint_nft_body"] = {
-  "required" : [ "hash", "royalty_address", "target_address", "uris", "wallet_id" ],
+  "required" : [ "hash", "uris", "wallet_id" ],
   "type" : "object",
   "properties" : {
     "wallet_id" : {
@@ -2609,12 +2610,12 @@
       "type" : "string",
       "format" : "hex"
     },
-    "series_number" : {
+    "edition_number" : {
       "type" : "integer",
       "format" : "uint64",
       "default" : 1
     },
-    "series_total" : {
+    "edition_total" : {
       "type" : "integer",
       "format" : "uint64",
       "default" : 1
