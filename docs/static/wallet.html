@@ -769,6 +769,11 @@
       "items" : {
         "type" : "string"
       }
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint128",
+      "default" : 0
     }
   }
 };
@@ -1070,8 +1075,27 @@
       "additionalProperties" : {
         "type" : "string"
       }
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint128",
+      "default" : 0
     }
   }
+};
+            defs["create_signed_transaction_body"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/transaction_input"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "min_coin_amount" : {
+        "type" : "integer",
+        "format" : "uint128",
+        "default" : 0
+      }
+    }
+  } ]
 };
             defs["did_create_attest_body"] = {
   "required" : [ "coin_name", "pubkey", "puzhash", "wallet_id" ],
@@ -1194,6 +1218,16 @@
     "num_verifications_required" : {
       "type" : "integer",
       "format" : "uint64"
+    }
+  }
+};
+            defs["extend_derivation_index_body"] = {
+  "required" : [ "index" ],
+  "type" : "object",
+  "properties" : {
+    "index" : {
+      "type" : "integer",
+      "format" : "uint32"
     }
   }
 };
@@ -1886,6 +1920,19 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "index" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_37"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "signed_tx" : {
         "$ref" : "#/components/schemas/transaction_record"
       }
@@ -1894,7 +1941,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37"] = {
+            defs["inline_response_200_38"] = {
   "allOf" : [ {
     "required" : [ "wallet_balance" ],
     "type" : "object",
@@ -1907,28 +1954,9 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_38"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/farmer_rewards"
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
             defs["inline_response_200_39"] = {
   "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "transactions" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      },
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
-    }
+    "$ref" : "#/components/schemas/farmer_rewards"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -1950,6 +1978,25 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      },
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_41"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "count" : {
         "type" : "integer"
       },
@@ -1962,7 +2009,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_41"] = {
+            defs["inline_response_200_42"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1979,14 +2026,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_42"] = {
+            defs["inline_response_200_43"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_43"] = {
+            defs["inline_response_200_44"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1999,7 +2046,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_44"] = {
+            defs["inline_response_200_45"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2023,7 +2070,7 @@
     }
   } ]
 };
-            defs["inline_response_200_45"] = {
+            defs["inline_response_200_46"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2051,12 +2098,12 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_46"] = {
+            defs["inline_response_200_47"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_46_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_47_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -2064,7 +2111,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_46_private_key"] = {
+            defs["inline_response_200_47_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -2074,7 +2121,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_47"] = {
+            defs["inline_response_200_48"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2096,7 +2143,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_48"] = {
+            defs["inline_response_200_49"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2108,19 +2155,6 @@
       },
       "genesis_initialized" : {
         "type" : "boolean"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_49"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "height" : {
-        "type" : "integer",
-        "format" : "uint32"
       }
     }
   }, {
@@ -2143,6 +2177,19 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "height" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_51"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "wallets" : {
         "type" : "array",
         "items" : {
@@ -2154,7 +2201,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_51"] = {
+            defs["inline_response_200_52"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2654,9 +2701,9 @@
   "enum" : [ 1, 2, 3, 4, 5, 6 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
-            defs["OneOfinline_response_200_44"] = {};
             defs["OneOfinline_response_200_45"] = {};
-            defs["OneOfinline_response_200_51"] = {};
+            defs["OneOfinline_response_200_46"] = {};
+            defs["OneOfinline_response_200_52"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -2946,6 +2993,11 @@
       "items" : {
         "type" : "string"
       }
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint128",
+      "default" : 0
     }
   }
 };
@@ -2984,6 +3036,16 @@
     "offer" : {
       "type" : "string",
       "format" : "hex"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint128",
+      "default" : 0
     }
   }
 };
@@ -3500,6 +3562,12 @@
                     <li class="nav-item" data-group="Wallet" data-name="deleteUnconfirmedTransactions">
                       <a class="nav-link link-secondary" href="#api-Wallet-deleteUnconfirmedTransactions">deleteUnconfirmedTransactions</a>
                     </li>
+                    <li class="nav-item" data-group="Wallet" data-name="extendDerivationIndex">
+                      <a class="nav-link link-secondary" href="#api-Wallet-extendDerivationIndex">extendDerivationIndex</a>
+                    </li>
+                    <li class="nav-item" data-group="Wallet" data-name="getCurrentDerivationIndex">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getCurrentDerivationIndex">getCurrentDerivationIndex</a>
+                    </li>
                     <li class="nav-item" data-group="Wallet" data-name="getFarmedAmount">
                       <a class="nav-link link-secondary" href="#api-Wallet-getFarmedAmount">getFarmedAmount</a>
                     </li>
@@ -3561,7 +3629,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.4.0</div>
+              <div class="app-desc">Version: 1.5.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -7382,7 +7450,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_46"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -7511,7 +7579,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_47"
+        "$ref" : "#/components/schemas/inline_response_200_48"
       }
     }
   }
@@ -7884,7 +7952,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -8013,7 +8081,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -8135,7 +8203,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -8264,7 +8332,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -11286,7 +11354,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/transaction_input"
+        "$ref" : "#/components/schemas/create_signed_transaction_body"
       }
     }
   },
@@ -11336,7 +11404,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_37"
       }
     }
   }
@@ -11496,6 +11564,249 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-Wallet-extendDerivationIndex">
+                      <article id="api-Wallet-extendDerivationIndex-0" data-group="User" data-name="extendDerivationIndex" data-version="0">
+                        <div class="pull-left">
+                          <h1>extendDerivationIndex</h1>
+                          <p>Extends the current derivation index.</p>
+                        </div>
+                        <p class="marked">Extends the current derivation index.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/extend_derivation_index</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-extendDerivationIndex-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/extend_derivation_index" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/extend_derivation_index_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_extendDerivationIndex_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_extendDerivationIndex_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-extendDerivationIndex-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-extendDerivationIndex-200-schema">
+                                  <div id='responses-extendDerivationIndex-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_36"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-extendDerivationIndex-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-extendDerivationIndex-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-extendDerivationIndex-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Wallet-getCurrentDerivationIndex">
+                      <article id="api-Wallet-getCurrentDerivationIndex-0" data-group="User" data-name="getCurrentDerivationIndex" data-version="0">
+                        <div class="pull-left">
+                          <h1>getCurrentDerivationIndex</h1>
+                          <p>Gets the current derivation index.</p>
+                        </div>
+                        <p class="marked">Gets the current derivation index.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_current_derivation_index</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-getCurrentDerivationIndex-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_current_derivation_index" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getCurrentDerivationIndex_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getCurrentDerivationIndex_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getCurrentDerivationIndex-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getCurrentDerivationIndex-200-schema">
+                                  <div id='responses-getCurrentDerivationIndex-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_36"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getCurrentDerivationIndex-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getCurrentDerivationIndex-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getCurrentDerivationIndex-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Wallet-getFarmedAmount">
                       <article id="api-Wallet-getFarmedAmount-0" data-group="User" data-name="getFarmedAmount" data-version="0">
                         <div class="pull-left">
@@ -11587,7 +11898,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_38"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -11708,7 +12019,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_41"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }
@@ -11966,7 +12277,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_40"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -12087,7 +12398,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -12216,7 +12527,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_37"
+        "$ref" : "#/components/schemas/inline_response_200_38"
       }
     }
   }
@@ -12583,7 +12894,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_51"
+        "$ref" : "#/components/schemas/inline_response_200_52"
       }
     }
   }
@@ -12705,7 +13016,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_50"
+        "$ref" : "#/components/schemas/inline_response_200_51"
       }
     }
   }
@@ -12830,7 +13141,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_49"
+        "$ref" : "#/components/schemas/inline_response_200_50"
       }
     }
   }
@@ -12952,7 +13263,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_49"
       }
     }
   }
@@ -13074,7 +13385,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
