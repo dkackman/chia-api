@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dkackman/chia-api#readme",
   "dependencies": {
     "@redocly/cli": "^1.0.0-beta.105",
-    "redoc-cli": "^0.13.16"
+    "redoc-cli": "^0.13.17"
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",
