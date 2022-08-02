@@ -1200,6 +1200,28 @@
     }
   }
 };
+            defs["get_blocks_body"] = {
+  "required" : [ "end", "start" ],
+  "type" : "object",
+  "properties" : {
+    "start" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "end" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "exclude_header_hash" : {
+      "type" : "boolean",
+      "default" : false
+    },
+    "exclude_reorged" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  }
+};
             defs["get_coin_record_by_name_body"] = {
   "required" : [ "name" ],
   "type" : "object",
@@ -2991,18 +3013,7 @@ The full node uses port 8555 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "required" : [ "end", "start" ],
-        "type" : "object",
-        "properties" : {
-          "start" : {
-            "type" : "integer",
-            "format" : "uint32"
-          },
-          "end" : {
-            "type" : "integer",
-            "format" : "uint32"
-          }
-        }
+        "$ref" : "#/components/schemas/get_blocks_body"
       }
     }
   },
