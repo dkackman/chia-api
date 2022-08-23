@@ -22,3 +22,7 @@ wallet_balance:
     pending_coin_removal_count:
       type: integer
       format: int32
+    wallet_type:
+      $ref: "./wallet_type.yaml#/wallet_type"
+    asset_id:
+      type: string

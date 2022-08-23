@@ -1241,6 +1241,41 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /cancel_offers:
+    post:
+      tags:
+        - CAT Wallet
+      summary: Cancels multiple offers.
+      description: Cancels multiple offers.
+      operationId: cancel_offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - secure
+              properties:
+                batch_fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                secure:
+                  type: boolean
+                batch_size:
+                  type: integer
+                  format: int32
+                  default: 5
+                cancel_all:
+                  type: boolean
+                  default: false
+                asset_id:
+                  type: string
+                  default: "xch"
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
   /select_coins:
     post:
       tags:
@@ -1261,9 +1296,14 @@ paths:
                 wallet_id:
                   type: integer
                   format: uint32
-                amount:
+                min_coin_amount:
                   type: integer
                   format: uint64
+                  default: 0
+                excluded_coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
       responses:
         "200":
           description: OK
@@ -1994,6 +2034,10 @@ paths:
                       type: integer
                       format: uint128
                       default: 0
+                    excluded_coins:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/coin"
       responses:
         "200":
           description: OK
@@ -2545,6 +2589,9 @@ paths:
                 allOf:
                   - type: object
                     properties:
+                      fingerprint:
+                        type: integer
+                        format: int32
                       wallets:
                         type: array
                         items:
