@@ -67,7 +67,7 @@
             "args": ["@redocly/cli", "bundle", "src/*.yaml", "-o", "build/bundle/", "-d"],
             "problemMatcher": [],
             "dependsOn": [
-                "clean", "prepare"
+                "publish"
             ]
         },
         {
