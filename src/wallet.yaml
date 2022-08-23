@@ -1296,9 +1296,14 @@ paths:
                 wallet_id:
                   type: integer
                   format: uint32
-                amount:
+                min_coin_amount:
                   type: integer
                   format: uint64
+                  default: 0
+                excluded_coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
       responses:
         "200":
           description: OK
