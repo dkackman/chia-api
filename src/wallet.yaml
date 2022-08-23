@@ -2580,6 +2580,9 @@ paths:
                 allOf:
                   - type: object
                     properties:
+                      fingerprint:
+                        type: integer
+                        format: int32
                       wallets:
                         type: array
                         items:
