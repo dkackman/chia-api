@@ -2034,6 +2034,10 @@ paths:
                       type: integer
                       format: uint128
                       default: 0
+                    excluded_coins:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/coin"
       responses:
         "200":
           description: OK
