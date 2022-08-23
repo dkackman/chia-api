@@ -386,6 +386,29 @@ paths:
                       block:
                         $ref: "#/components/schemas/full_block"
                   - $ref: "#/components/schemas/apiResponse"
+  /get_block_spends:
+    post:
+      tags:
+        - Blocks
+      summary: Retrieves the spends in the given block.
+      description: Retrieves the spends in the given block.
+      operationId: get_block_spends
+      requestBody:
+        $ref: "#/components/requestBodies/header_hash"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      block_spends:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_spend"
+                  - $ref: "#/components/schemas/apiResponse"                  
   /get_blocks:
     post:
       tags:
