@@ -8,6 +8,7 @@ View current spec based on chia 1.5.1:
 
 - [In the swagger UI](https://dkackman.github.io/chia-api/?urls.primaryName=Full%20Node)
 - [As a redoc generated site](https://dkackman.github.io/chia-api/redoc/)
+- [As a swagger-codegen generated site](https://dkackman.github.io/chia-api/static/)
 
 ___
 
