@@ -769,8 +769,7 @@
       "type" : "string"
     }
   },
-  "description" : "This is the intermediary VDF output at ip_iters in challenge chain.",
-  "example" : null
+  "description" : "This is the intermediary VDF output at ip_iters in challenge chain."
 };
             defs["blockchain_state"] = {
   "type" : "object",
@@ -829,8 +828,7 @@
       "type" : "number",
       "format" : "double"
     }
-  },
-  "example" : null
+  }
 };
             defs["blockchain_state_sync"] = {
   "type" : "object",
@@ -849,8 +847,7 @@
     "synced" : {
       "type" : "boolean"
     }
-  },
-  "example" : null
+  }
 };
             defs["challenge_chain_sub_slot"] = {
   "type" : "object",
@@ -1349,25 +1346,7 @@
     }
   }
 };
-            defs["get_recent_signage_point_or_eos_body"] = {
-  "oneOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "sp_hash" : {
-        "type" : "string",
-        "format" : "hex"
-      }
-    }
-  }, {
-    "type" : "object",
-    "properties" : {
-      "challenge_hash" : {
-        "type" : "string",
-        "format" : "hex"
-      }
-    }
-  } ]
-};
+            defs["get_recent_signage_point_or_eos_body"] = {};
             defs["infused_challenge_chain_sub_slot"] = {
   "type" : "object",
   "properties" : {
@@ -1588,8 +1567,7 @@
     "hint_count" : {
       "type" : "integer"
     }
-  },
-  "example" : null
+  }
 };
             defs["inline_response_200_3"] = {
   "allOf" : [ {
@@ -1794,7 +1772,6 @@
     }
   }
 };
-            defs["OneOfget_recent_signage_point_or_eos_body"] = {};
             defs["OneOfinline_response_200_10"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
@@ -2319,16 +2296,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getAdditionsAndRemovals-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -2448,16 +2416,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlock-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_5"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -2570,16 +2529,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockCountMetrics-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -2699,16 +2649,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockRecord-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -2821,16 +2762,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockRecordByHeight-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -2954,16 +2886,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockRecords-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_4"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3083,16 +3006,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockSpends-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_6"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3205,16 +3119,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlocks-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_7"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3327,16 +3232,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getRecentSignagePointOrEos-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3449,16 +3345,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getUnfinishedBlockHeaders-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3574,16 +3461,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordByName-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3696,16 +3574,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordsByHint-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3818,16 +3687,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordsByNames-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -3940,16 +3800,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordsByParentIds-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4062,16 +3913,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordsByPuzzleHash-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4184,16 +4026,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getCoinRecordsByPuzzleHashes-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4306,16 +4139,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getPuzzleAndSolution-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_19"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4428,16 +4252,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-pushTx-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_20"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4553,16 +4368,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-fullNodeGetNetworkInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_12"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4675,16 +4481,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getBlockchainState-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_11"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4797,16 +4594,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getNetworkSpace-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_13"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -4922,16 +4710,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getAllMempoolItems-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5044,16 +4823,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getAllMempoolTxIds-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5166,16 +4936,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getMempoolItemByTxId-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5291,16 +5052,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-closeConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5413,16 +5165,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getConnections-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5535,16 +5278,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-getRoutes-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5657,16 +5391,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-healthz-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5779,16 +5504,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-openConnection-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
@@ -5901,16 +5617,7 @@ The full node uses port 8555 by default.</div>
                                   <div id='responses-stopNode-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
+                                        var schemaWrapper = ;
                                         var schema = schemaWrapper.content["application/json"].schema;
                                         if (schema.$ref != null) {
                                           schema = defsParser.$refs.get(schema.$ref);
