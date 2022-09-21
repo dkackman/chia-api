@@ -1585,6 +1585,10 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                solver:
+                  type: object
+                  additionalProperties:
+                    type: object                  
       responses:
         "200":
           description: OK
@@ -1954,6 +1958,10 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                solver:
+                  type: object
+                  additionalProperties:
+                    type: object
       responses:
         "200":
           description: OK
