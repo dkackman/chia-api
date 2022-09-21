@@ -76,6 +76,10 @@ components:
       $ref: "./schemas/coin.yaml#/coin"
     farmer_rewards:
       $ref: "./schemas/farmer_rewards.yaml#/farmer_rewards"
+    lineage_proof:
+      $ref: "./schemas/lineage_proof.yaml#/lineage_proof"
+    mirror:
+      $ref: "./schemas/mirror.yaml#/mirror"
     mnemonic:
       $ref: "./schemas/mnemonic.yaml#/mnemonic"
     network_info:
@@ -88,6 +92,8 @@ components:
       $ref: "./schemas/pool_wallet_info.yaml#/pool_wallet_info"
     private_key:
       $ref: "./schemas/private_key.yaml#/private_key"
+    singleton_record:
+      $ref: "./schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
       $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
     token:
@@ -130,7 +136,435 @@ tags:
     description: Methods for creating and managing wallets.
   - name: Wallet Node
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
+  - name: Data Layer Wallet
+    description: Methods for managing a data layer wallet.
 paths:
+  /create_new_dl:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Initialize the new data layer wallets.
+      description: Initialize the DataLayer Wallet (only one can exist).
+      operationId: create_new_dl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - root
+              properties:
+                root:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    description: Response when the new data layer wallet is created.
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      launcher_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_track_new:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Track the new data layer wallet
+      description: Track the new data layer wallet.
+      operationId: dl_track_new
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /dl_stop_tracking:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Stop tracking the data layer wallets.
+      description: Stop tracking the data layer wallet.
+      operationId: dl_stop_tracking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /dl_latest_singleton:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Get the singleton records that contain the specified root.
+      description: Get the singleton records that contain the specified root.
+      operationId: dl_latest_singleton
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+                - root
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+                root:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      singleton:
+                        $ref: "#/components/schemas/lineage_proof"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_singletons_by_root:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Get the singleton records that contain the specified root.
+      description: Get the singleton records that contain the specified root.
+      operationId: dl_singletons_by_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+                - root
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+                root:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      singleton:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/singleton_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_update_root:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: dl_update_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+                - new_root
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+                new_root:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_record:
+                        $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_update_multiple:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: dl_update_multiple
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - updates
+                - new_root
+              properties:
+                updates:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - root
+                      - launcher
+                    properties:
+                      root:
+                        type: string
+                        format: bytes32
+                      launcher:
+                        type: string
+                        format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_history:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Get the singleton record for the latest singleton of a launcher ID.
+      description: Get the singleton record for the latest singleton of a launcher ID.
+      operationId: dl_history
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+                min_generation:
+                  type: integer
+                  format: uint32
+                max_generation:
+                  type: integer
+                  format: uint32
+                num_results:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      count:
+                        type: integer
+                      history:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/singleton_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_owned_singletons:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Get all owned singleton records.
+      description: Get all owned singleton records.
+      operationId: dl_owned_singletons
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      history:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/singleton_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_get_mirrors:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Get all of the mirrors for a specific singleton.
+      description: Get all of the mirrors for a specific singleton.
+      operationId: dl_get_mirrors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      mirrors:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/mirror"
+                  - $ref: "#/components/schemas/apiResponse"
+
+  /dl_new_mirror:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Add a new on chain message for a specific singleton.
+      description: Add a new on chain message for a specific singleton
+      operationId: dl_new_mirror
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launcher_id
+                - amount
+                - urls
+              properties:
+                launcher_id:
+                  type: string
+                  format: bytes32
+                amount:
+                  type: integer
+                  format: unint64
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32
+                fee:
+                  type: integer
+                  format: unint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_delete_mirror:
+    post:
+      tags:
+        - Data Layer Wallet
+      summary: Remove an existing mirror for a specific singleton.
+      description: Remove an existing mirror for a specific singleton.
+      operationId: dl_delete_mirror
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: unint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
   /stop_node:
     post:
       tags:

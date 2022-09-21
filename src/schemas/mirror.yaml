@@ -1,0 +1,19 @@
+mirror:
+  type: object
+  properties:
+    coin_id:
+      type: string
+      format: bytes32
+    launcher_id:
+      type: string
+      format: bytes32
+    amount:
+      type: integer
+      format: uint64
+    urls:
+      type: array
+      items:
+        type: string
+        format: bytes32
+    ours:
+      type: boolean
