@@ -1,0 +1,10 @@
+offer_store:
+  type: object
+  properties:
+    store_id:
+      type: string
+      format: bytes32
+    inclusions:
+      type: array
+      items:
+        $ref: "./key_value.yaml#/key_value"

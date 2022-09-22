@@ -1,0 +1,9 @@
+﻿key_value:
+  type: object
+  properties:
+    key:
+      type: string
+      format: bytes32
+    value:
+      type: string
+      format: bytes32

@@ -6,9 +6,7 @@
       format: bytes32
     offer:
       type: string
-    taker:
-      type: object
-      additionalProperties: {}
     maker:
-      type: object
-      additionalProperties: {}
+      $ref: "./store_proofs.yaml#/store_proofs"
+    taker:
+      $ref: "./offer_store.yaml#/offer_store"

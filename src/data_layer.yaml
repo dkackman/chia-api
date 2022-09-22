@@ -34,14 +34,12 @@ components:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     internal_node:
       $ref: "./schemas/internal_node.yaml#/internal_node"
-    k_size:
-      $ref: "./schemas/k_size.yaml#/k_size"
     mirror:
       $ref: "./schemas/mirror.yaml#/mirror"
     offer:
       $ref: "./schemas/offer.yaml#/offer"
-    plot_info:
-      $ref: "./schemas/plot_info.yaml#/plot_info"
+    offer_store:
+      $ref: "./schemas/offer_store.yaml#/offer_store"
     terminal_node:
       $ref: "./schemas/terminal_node.yaml#/terminal_node"
     transaction_record:
@@ -51,7 +49,7 @@ components:
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
-tags:  
+tags:
   - name: Shared
     description: Methods shared by all services.
   - name: Data Layer
@@ -67,7 +65,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /open_connection:
     post:
@@ -93,7 +91,7 @@ paths:
                 port:
                   type: integer
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /close_connection:
     post:
@@ -115,7 +113,7 @@ paths:
                 node_id:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_connections:
     post:
@@ -127,7 +125,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -150,7 +148,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -166,7 +164,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -179,7 +177,7 @@ paths:
                         items:
                           type: string
                   - $ref: "#/components/schemas/apiResponse"
-  /create_data_store: 
+  /create_data_store:
     post:
       tags:
         - Data Layer
@@ -196,9 +194,9 @@ paths:
                 fee:
                   type: integer
                   format: uint64
-                  default: 0   
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -213,8 +211,8 @@ paths:
                       id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"                
-  /get_owned_stores: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_owned_stores:
     post:
       tags:
         - Data Layer
@@ -222,9 +220,9 @@ paths:
       description: Gets the list of owned store ids.
       operationId: get_owned_stores
       requestBody:
-        $ref: "#/components/requestBodies/empty"  
+        $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -237,8 +235,8 @@ paths:
                         items:
                           type: string
                           format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"                
-  /batch_update: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /batch_update:
     post:
       tags:
         - Data Layer
@@ -256,18 +254,18 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32 
+                  format: bytes32
                 changelist:
                   type: array
                   items:
                     type: object
-                    additionalProperties: {}    
+                    additionalProperties: {}
                 fee:
                   type: integer
                   format: uint64
-                  default: 0   
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -278,8 +276,8 @@ paths:
                       tx_id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"     
-  /get_value: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_value:
     post:
       tags:
         - Data Layer
@@ -303,7 +301,7 @@ paths:
                   type: string
                   format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -314,8 +312,8 @@ paths:
                       value:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"                        
-  /get_keys: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_keys:
     post:
       tags:
         - Data Layer
@@ -339,7 +337,7 @@ paths:
                   type: string
                   format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -349,11 +347,11 @@ paths:
                     properties:
                       keys:
                         type: array
-                        items: 
+                        items:
                           type: string
                           format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"                        
-  /get_keys_values: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_keys_values:
     post:
       tags:
         - Data Layer
@@ -377,7 +375,7 @@ paths:
                   type: string
                   format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -387,10 +385,10 @@ paths:
                     properties:
                       keys_values:
                         type: array
-                        items: 
+                        items:
                           $ref: "#/components/schemas/terminal_node"
-                  - $ref: "#/components/schemas/apiResponse"       
-  /get_ancestors: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_ancestors:
     post:
       tags:
         - Data Layer
@@ -414,7 +412,7 @@ paths:
                   type: string
                   format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -424,10 +422,10 @@ paths:
                     properties:
                       anscestors:
                         type: array
-                        items: 
+                        items:
                           $ref: "#/components/schemas/internal_node"
-                  - $ref: "#/components/schemas/apiResponse"    
-  /get_root: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_root:
     post:
       tags:
         - Data Layer
@@ -445,9 +443,9 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32    
+                  format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -463,8 +461,8 @@ paths:
                       timestamp:
                         type: integer
                         format: uint64
-                  - $ref: "#/components/schemas/apiResponse"                     
-  /get_local_root: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_local_root:
     post:
       tags:
         - Data Layer
@@ -482,9 +480,9 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32                           
+                  format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -495,10 +493,10 @@ paths:
                       hash:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"  
-  /get_roots: 
-    post: 
-      tags: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_roots:
+    post:
+      tags:
         - Data Layer
       summary: Gets state hashes for a list of roots
       description: Gets state hashes for a list of roots.
@@ -516,9 +514,9 @@ paths:
                   type: array
                   items:
                     type: string
-                    format: bytes32                           
+                    format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -542,8 +540,8 @@ paths:
                             timestamp:
                               type: integer
                               format: uint64
-                  - $ref: "#/components/schemas/apiResponse"          
-  /delete_key: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /delete_key:
     post:
       tags:
         - Data Layer
@@ -562,16 +560,16 @@ paths:
               properties:
                 key:
                   type: string
-                  format: bytes32 
+                  format: bytes32
                 id:
                   type: string
-                  format: bytes32 
+                  format: bytes32
                 fee:
                   type: integer
                   format: uint64
-                  default: 0   
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -582,8 +580,8 @@ paths:
                       tx_id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"           
-  /insert: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /insert:
     post:
       tags:
         - Data Layer
@@ -603,16 +601,16 @@ paths:
               properties:
                 value:
                   type: string
-                  format: bytes32 
+                  format: bytes32
                 id:
                   type: string
-                  format: bytes32 
+                  format: bytes32
                 fee:
                   type: integer
                   format: uint64
-                  default: 0   
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -623,8 +621,8 @@ paths:
                       tx_id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"           
-  /subscribe: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /subscribe:
     post:
       tags:
         - Data Layer
@@ -644,14 +642,14 @@ paths:
                   type: array
                   items:
                     type: string
-                    format: bytes32 
+                    format: bytes32
                 id:
                   type: string
-                  format: bytes32 
+                  format: bytes32
       responses:
-        '200':
-          $ref: "#/components/responses/empty"       
-  /unsubscribe: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /unsubscribe:
     post:
       tags:
         - Data Layer
@@ -669,11 +667,11 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32       
+                  format: bytes32
       responses:
-        '200':
-          $ref: "#/components/responses/empty"      
-  /add_mirror: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /add_mirror:
     post:
       tags:
         - Data Layer
@@ -693,7 +691,7 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32    
+                  format: bytes32
                 amount:
                   type: integer
                   format: uint64
@@ -701,15 +699,15 @@ paths:
                   type: array
                   items:
                     type: string
-                    format: bytes32                   
+                    format: bytes32
                 fee:
                   type: integer
                   format: uint64
-                  default: 0                                           
+                  default: 0
       responses:
-        '200':
-          $ref: "#/components/responses/empty"         
-  /delete_mirror: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /delete_mirror:
     post:
       tags:
         - Data Layer
@@ -727,15 +725,15 @@ paths:
               properties:
                 coin_id:
                   type: string
-                  format: bytes32                   
+                  format: bytes32
                 fee:
                   type: integer
                   format: uint64
-                  default: 0             
+                  default: 0
       responses:
-        '200':
-          $ref: "#/components/responses/empty"         
-  /get_mirrors: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /get_mirrors:
     post:
       tags:
         - Data Layer
@@ -753,9 +751,9 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32   
+                  format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -767,8 +765,8 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/mirror"
-                  - $ref: "#/components/schemas/apiResponse"                                       
-  /remove_subscriptions: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /remove_subscriptions:
     post:
       tags:
         - Data Layer
@@ -788,24 +786,24 @@ paths:
                   type: array
                   items:
                     type: string
-                    format: bytes32 
+                    format: bytes32
                 id:
                   type: string
-                  format: bytes32      
+                  format: bytes32
       responses:
-        '200':
-          $ref: "#/components/responses/empty"         
-  /subscriptions: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /subscriptions:
     post:
       tags:
         - Data Layer
       summary: List current subscriptions.
       description: List current subscriptions.
-      operationId: subscriptions       
+      operationId: subscriptions
       requestBody:
-        $ref: "#/components/requestBodies/empty"   
+        $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -818,8 +816,8 @@ paths:
                         items:
                           type: string
                           format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"               
-  /get_kv_diff: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_kv_diff:
     post:
       tags:
         - Data Layer
@@ -839,15 +837,15 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32           
+                  format: bytes32
                 hash_1:
                   type: string
-                  format: bytes32           
+                  format: bytes32
                 hash_2:
                   type: string
-                  format: bytes32        
+                  format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -868,8 +866,8 @@ paths:
                             value:
                               type: string
                               format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"                         
-  /get_root_history: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_root_history:
     post:
       tags:
         - Data Layer
@@ -887,9 +885,9 @@ paths:
               properties:
                 id:
                   type: string
-                  format: bytes32         
+                  format: bytes32
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -910,8 +908,8 @@ paths:
                             timestamp:
                               type: integer
                               format: uint64
-                  - $ref: "#/components/schemas/apiResponse"         
-  /add_missing_files: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /add_missing_files:
     post:
       tags:
         - Data Layer
@@ -931,16 +929,16 @@ paths:
                   type: array
                   items:
                     type: string
-                    format: bytes32 
+                    format: bytes32
                 overwrite:
                   type: boolean
-                  default: false      
+                  default: false
                 foldername:
                   type: string
       responses:
-        '200':
-          $ref: "#/components/responses/empty"         
-  /make_offer: 
+        "200":
+          $ref: "#/components/responses/empty"
+  /make_offer:
     post:
       tags:
         - Data Layer
@@ -958,17 +956,19 @@ paths:
                 - taker
               properties:
                 maker:
-                  type: string
-                  format: bytes32                   
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/offer_store"
                 taker:
-                  type: string
-                  format: bytes32                   
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/offer_store"
                 fee:
                   type: integer
                   format: uint64
-                  default: 0      
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -978,8 +978,8 @@ paths:
                     properties:
                       offer:
                         $ref: "#/components/schemas/offer"
-                  - $ref: "#/components/schemas/apiResponse"                             
-  /take_offer: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /take_offer:
     post:
       tags:
         - Data Layer
@@ -993,25 +993,16 @@ paths:
             schema:
               type: object
               required:
-                - maker
-                - taker
+                - offer
               properties:
                 offer:
-                  type: object
-                  properties: 
-                    offer:                  
-                      type: string
-                      format: bytes32 
-                    maker:
-                      type: object
-                    taker:
-                      type: object
+                  $ref: "#/components/schemas/offer"
                 fee:
                   type: integer
                   format: uint64
-                  default: 0      
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -1022,8 +1013,8 @@ paths:
                       trade_id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"   
-  /verify_offer: 
+                  - $ref: "#/components/schemas/apiResponse"
+  /verify_offer:
     post:
       tags:
         - Data Layer
@@ -1037,25 +1028,16 @@ paths:
             schema:
               type: object
               required:
-                - maker
-                - taker
+                - offer
               properties:
                 offer:
-                  type: object
-                  properties: 
-                    offer:                  
-                      type: string
-                      format: bytes32 
-                    maker:
-                      type: object
-                    taker:
-                      type: object
+                  $ref: "#/components/schemas/offer"
                 fee:
                   type: integer
                   format: uint64
-                  default: 0      
+                  default: 0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -1067,9 +1049,9 @@ paths:
                         type: boolean
                       fee:
                         type: integer
-                        format: uint64                        
-                  - $ref: "#/components/schemas/apiResponse"                          
-  /cancel_offer: 
+                        format: uint64
+                  - $ref: "#/components/schemas/apiResponse"
+  /cancel_offer:
     post:
       tags:
         - Data Layer
@@ -1088,19 +1070,19 @@ paths:
               properties:
                 offer:
                   type: object
-                  properties: 
-                    trade_id:                  
+                  properties:
+                    trade_id:
                       type: string
-                      format: bytes32 
+                      format: bytes32
                     secure:
                       type: boolean
                 fee:
                   type: integer
                   format: uint64
-                  default: 0          
+                  default: 0
       responses:
-        '200':
-          $ref: "#/components/responses/empty"         
+        "200":
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net

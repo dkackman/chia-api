@@ -1385,23 +1385,54 @@
     }
   }
 };
-            defs["k_size"] = {
-  "type" : "integer",
-  "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+            defs["key_value"] = {
+  "type" : "object",
+  "properties" : {
+    "key" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "value" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["layer"] = {
+  "type" : "object",
+  "properties" : {
+    "other_hash_side" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "other_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "combined_hash" : {
+      "type" : "array",
+      "format" : "bytes32",
+      "items" : {
+        "$ref" : "#/components/schemas/key_value"
+      }
+    }
+  }
 };
             defs["make_offer_body"] = {
   "required" : [ "maker", "taker" ],
   "type" : "object",
   "properties" : {
     "maker" : {
-      "type" : "string",
-      "format" : "bytes32"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/offer_store"
+      }
     },
     "taker" : {
-      "type" : "string",
-      "format" : "bytes32"
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/offer_store"
+      }
     },
     "fee" : {
       "type" : "integer",
@@ -1452,13 +1483,26 @@
     "offer" : {
       "type" : "string"
     },
-    "taker" : {
-      "type" : "object",
-      "additionalProperties" : { }
-    },
     "maker" : {
-      "type" : "object",
-      "additionalProperties" : { }
+      "$ref" : "#/components/schemas/store_proofs"
+    },
+    "taker" : {
+      "$ref" : "#/components/schemas/offer_store"
+    }
+  }
+};
+            defs["offer_store"] = {
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inclusions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/key_value"
+      }
     }
   }
 };
@@ -1475,39 +1519,28 @@
     }
   }
 };
-            defs["plot_info"] = {
+            defs["proof"] = {
   "type" : "object",
   "properties" : {
-    "file_size" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "filename" : {
-      "type" : "string"
-    },
-    "plot_id" : {
-      "type" : "string"
-    },
-    "plot_public_key" : {
+    "key" : {
       "type" : "string",
-      "nullable" : true
+      "format" : "bytes32"
     },
-    "pool_contract_puzzle_hash" : {
-      "type" : "string"
-    },
-    "pool_public_key" : {
+    "value" : {
       "type" : "string",
-      "nullable" : true
+      "format" : "bytes32"
     },
-    "size" : {
-      "$ref" : "#/components/schemas/k_size"
+    "node_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
     },
-    "time_modified" : {
-      "type" : "number",
-      "format" : "double"
+    "layers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/layer"
+      }
     }
-  },
-  "description" : "Info about a plot file"
+  }
 };
             defs["remove_subscriptions_body"] = {
   "required" : [ "id" ],
@@ -1540,6 +1573,21 @@
     }
   }
 };
+            defs["store_proofs"] = {
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "proofs" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/proof"
+      }
+    }
+  }
+};
             defs["subscribe_body"] = {
   "required" : [ "id" ],
   "type" : "object",
@@ -1558,11 +1606,11 @@
   }
 };
             defs["take_offer_body"] = {
-  "required" : [ "maker", "taker" ],
+  "required" : [ "offer" ],
   "type" : "object",
   "properties" : {
     "offer" : {
-      "$ref" : "#/components/schemas/take_offer_offer"
+      "$ref" : "#/components/schemas/offer"
     },
     "fee" : {
       "type" : "integer",
@@ -1570,22 +1618,6 @@
       "default" : 0
     }
   }
-};
-            defs["take_offer_offer"] = {
-  "type" : "object",
-  "properties" : {
-    "offer" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "maker" : {
-      "type" : "object"
-    },
-    "taker" : {
-      "type" : "object"
-    }
-  },
-  "example" : null
 };
             defs["terminal_node"] = {
   "type" : "object",
@@ -1719,11 +1751,11 @@
   }
 };
             defs["verify_offer_body"] = {
-  "required" : [ "maker", "taker" ],
+  "required" : [ "offer" ],
   "type" : "object",
   "properties" : {
     "offer" : {
-      "$ref" : "#/components/schemas/take_offer_offer"
+      "$ref" : "#/components/schemas/offer"
     },
     "fee" : {
       "type" : "integer",

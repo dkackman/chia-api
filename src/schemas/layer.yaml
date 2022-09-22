@@ -1,0 +1,14 @@
+﻿layer:
+  type: object
+  properties:
+    other_hash_side:
+      type: string
+      format: bytes32
+    other_hash:
+      type: string
+      format: bytes32
+    combined_hash:
+      type: string
+      format: bytes32
+      items:
+        $ref: "./key_value.yaml#/key_value"

@@ -1,0 +1,16 @@
+﻿proof:
+  type: object
+  properties:
+    key:
+      type: string
+      format: bytes32
+    value:
+      type: string
+      format: bytes32
+    node_hash:
+      type: string
+      format: bytes32
+    layers:
+      type: array
+      items:
+        $ref: "./layer.yaml#/layer"
