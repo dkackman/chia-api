@@ -1,0 +1,1106 @@
+openapi: 3.0.3
+info:
+  description: >-
+    The Chia node and services come with a JSON RPC API server that allows you to access information and control the services. 
+    These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in `~/.chia/mainnet/config/config.yaml`. 
+    The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication 
+    [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
+
+    The data layer uses port 8561 by default.
+  version: 1.5.1
+  title: Chia RPC
+  termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
+  contact:
+    name: Chia Network
+    url: https://www.chia.net/
+    email: hello@chia.net
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://localhost:8561
+    description: Data layer RPC
+security:
+  - bearerAuth: []
+components:
+  requestBodies:
+    empty:
+      $ref: "./requestBodies/empty.yaml#/empty"
+  responses:
+    empty:
+      $ref: "./responses/empty.yaml#/empty"
+  schemas:
+    connection_info:
+      $ref: "./schemas/connection_info.yaml#/connection_info"
+    internal_node:
+      $ref: "./schemas/internal_node.yaml#/internal_node"
+    k_size:
+      $ref: "./schemas/k_size.yaml#/k_size"
+    mirror:
+      $ref: "./schemas/mirror.yaml#/mirror"
+    offer:
+      $ref: "./schemas/offer.yaml#/offer"
+    plot_info:
+      $ref: "./schemas/plot_info.yaml#/plot_info"
+    terminal_node:
+      $ref: "./schemas/terminal_node.yaml#/terminal_node"
+    transaction_record:
+      $ref: "./schemas/transaction_record.yaml#/transaction_record"
+    apiResponse:
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+  securitySchemes:
+    bearerAuth:
+      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+tags:  
+  - name: Shared
+    description: Methods shared by all services.
+  - name: Data Layer
+    description: The data layer RPC API is exposed, by default, on port 8561 and contains methods interacting with =off-chain data.
+paths:
+  /stop_node:
+    post:
+      tags:
+        - Shared
+      summary: Stop the node.
+      description: Stop the node.
+      operationId: stop_node
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /open_connection:
+    post:
+      tags:
+        - Shared
+      summary: Add a connection to another node.
+      description: Add a connection to another node.
+      operationId: open_connection
+      requestBody:
+        required: true
+        description: the address of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ip
+                - port
+              properties:
+                ip:
+                  type: string
+                  format: ipaddress
+                port:
+                  type: integer
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /close_connection:
+    post:
+      tags:
+        - Shared
+      summary: Removes a connection.
+      description: Removes a connection.
+      operationId: close_connection
+      requestBody:
+        required: true
+        description: the node id of the connection
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - node_id
+              properties:
+                node_id:
+                  type: string
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"
+  /get_connections:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of connections.
+      description: Retrieve the list of connections.
+      operationId: get_connections
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      connections:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/connection_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /healthz:
+    post:
+      tags:
+        - Shared
+      summary: Heartbeat.
+      description: Heartbeat.
+      operationId: healthz
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /get_routes:
+    post:
+      tags:
+        - Shared
+      summary: Retrieve the list of routes exposed by the service.
+      description: Retrieve the list of routes/endpoints exposed by the service.
+      operationId: get_routes
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      routes:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /create_data_store: 
+    post:
+      tags:
+        - Data Layer
+      summary: Creates a data store.
+      description: Creates a data store.
+      operationId: create_data_store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      txs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"                
+  /get_owned_stores: 
+    post:
+      tags:
+        - Data Layer
+      summary: Gets the list of owned store ids.
+      description: Gets the list of owned store ids.
+      operationId: get_owned_stores
+      requestBody:
+        $ref: "#/components/requestBodies/empty"  
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      store_ids:
+                        type: array
+                        items:
+                          type: string
+                          format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"                
+  /batch_update: 
+    post:
+      tags:
+        - Data Layer
+      summary: Applies a batch of updates.
+      description: Applies a batch of updates.
+      operationId: batch_update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32 
+                changelist:
+                  type: array
+                  items:
+                    type: object
+                    additionalProperties: {}    
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"     
+  /get_value: 
+    post:
+      tags:
+        - Data Layer
+      summary: Get the value for a given id/key pair.
+      description: Get the value for a given id/key pair.
+      operationId: get_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - key
+              properties:
+                id:
+                  type: string
+                  format: bytes32
+                key:
+                  type: string
+                  format: bytes32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      value:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"                        
+  /get_keys: 
+    post:
+      tags:
+        - Data Layer
+      summary: Get the keys for a given id/root_hash pair.
+      description: Get the keys for a given id/root_hash pair.
+      operationId: get_keys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - root_hash
+              properties:
+                id:
+                  type: string
+                  format: bytes32
+                root_hash:
+                  type: string
+                  format: bytes32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      keys:
+                        type: array
+                        items: 
+                          type: string
+                          format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"                        
+  /get_keys_values: 
+    post:
+      tags:
+        - Data Layer
+      summary: Get the keys and values for a given id/root_hash pair.
+      description: Get the keys and values for a given id/root_hash pair.
+      operationId: get_keys_values
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - root_hash
+              properties:
+                id:
+                  type: string
+                  format: bytes32
+                root_hash:
+                  type: string
+                  format: bytes32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      keys_values:
+                        type: array
+                        items: 
+                          $ref: "#/components/schemas/terminal_node"
+                  - $ref: "#/components/schemas/apiResponse"       
+  /get_ancestors: 
+    post:
+      tags:
+        - Data Layer
+      summary: Gets the list of ancestors for a given id/hash pair.
+      description: Gets the list of ancestors for a given id/hash pair.
+      operationId: get_ancestors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - hash
+              properties:
+                id:
+                  type: string
+                  format: bytes32
+                hash:
+                  type: string
+                  format: bytes32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      anscestors:
+                        type: array
+                        items: 
+                          $ref: "#/components/schemas/internal_node"
+                  - $ref: "#/components/schemas/apiResponse"    
+  /get_root: 
+    post:
+      tags:
+        - Data Layer
+      summary: Gets hash of latest tree root.
+      description: Gets hash of latest tree root.
+      operationId: get_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32    
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      hash:
+                        type: string
+                        format: bytes32
+                      confirmed:
+                        type: boolean
+                      timestamp:
+                        type: integer
+                        format: uint64
+                  - $ref: "#/components/schemas/apiResponse"                     
+  /get_local_root: 
+    post:
+      tags:
+        - Data Layer
+      summary: Gets hash of latest tree root saved in our local datastore.
+      description: Gets hash of latest tree root saved in our local datastore.
+      operationId: get_local_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32                           
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      hash:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"  
+  /get_roots: 
+    post: 
+      tags: 
+        - Data Layer
+      summary: Gets state hashes for a list of roots
+      description: Gets state hashes for a list of roots.
+      operationId: get_roots
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ids
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32                           
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      root_hashes:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: bytes32
+                            hash:
+                              type: string
+                              format: bytes32
+                            confirmed:
+                              type: boolean
+                            timestamp:
+                              type: integer
+                              format: uint64
+                  - $ref: "#/components/schemas/apiResponse"          
+  /delete_key: 
+    post:
+      tags:
+        - Data Layer
+      summary: Removes a list of rows.
+      description: Removes a list of rows.
+      operationId: delete_key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - key
+                - id
+              properties:
+                key:
+                  type: string
+                  format: bytes32 
+                id:
+                  type: string
+                  format: bytes32 
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"           
+  /insert: 
+    post:
+      tags:
+        - Data Layer
+      summary: Adds a list of clvm objects as bytes to add to table.
+      description: Adds a list of clvm objects as bytes to add to table.
+      operationId: insert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - key
+                - value
+                - id
+              properties:
+                value:
+                  type: string
+                  format: bytes32 
+                id:
+                  type: string
+                  format: bytes32 
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"           
+  /subscribe: 
+    post:
+      tags:
+        - Data Layer
+      summary: Subscribe to singleton.
+      description: Subscribe to singleton.
+      operationId: subscribe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32 
+                id:
+                  type: string
+                  format: bytes32 
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"       
+  /unsubscribe: 
+    post:
+      tags:
+        - Data Layer
+      summary: Unsubscribe from singleton.
+      description: Unsubscribe from singleton.
+      operationId: unsubscribe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32       
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"      
+  /add_mirror: 
+    post:
+      tags:
+        - Data Layer
+      summary: Adds a mirror.
+      description: Adds a mirror.
+      operationId: add_mirror
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - amount
+                - urls
+              properties:
+                id:
+                  type: string
+                  format: bytes32    
+                amount:
+                  type: integer
+                  format: uint64
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32                   
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0                                           
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"         
+  /delete_mirror: 
+    post:
+      tags:
+        - Data Layer
+      summary: Deletes a mirror.
+      description: Deletes a mirror.
+      operationId: delete_mirror
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: bytes32                   
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0             
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"         
+  /get_mirrors: 
+    post:
+      tags:
+        - Data Layer
+      summary: Gets the mirrors for a given store id.
+      description: Gets the mirrors for a given store id.
+      operationId: get_mirrors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      mirrors:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/mirror"
+                  - $ref: "#/components/schemas/apiResponse"                                       
+  /remove_subscriptions: 
+    post:
+      tags:
+        - Data Layer
+      summary: Removes subscriptions for the given id.
+      description: Removes subscriptions for the given id.
+      operationId: remove_subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32 
+                id:
+                  type: string
+                  format: bytes32      
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"         
+  /subscriptions: 
+    post:
+      tags:
+        - Data Layer
+      summary: List current subscriptions.
+      description: List current subscriptions.
+      operationId: subscriptions       
+      requestBody:
+        $ref: "#/components/requestBodies/empty"   
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      store_ids:
+                        type: array
+                        items:
+                          type: string
+                          format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"               
+  /get_kv_diff: 
+    post:
+      tags:
+        - Data Layer
+      summary: Get kv diff between two root hashes.
+      description: Get kv diff between two root hashes.
+      operationId: get_kv_diff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - hash_1
+                - hash_2
+              properties:
+                id:
+                  type: string
+                  format: bytes32           
+                hash_1:
+                  type: string
+                  format: bytes32           
+                hash_2:
+                  type: string
+                  format: bytes32        
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      diff:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            key:
+                              type: string
+                              format: bytes32
+                            value:
+                              type: string
+                              format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"                         
+  /get_root_history: 
+    post:
+      tags:
+        - Data Layer
+      summary: Get history of state hashes for a store.
+      description: Get history of state hashes for a store.
+      operationId: get_root_history
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32         
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      root_history:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            root_hash:
+                              type: string
+                              format: bytes32
+                            confirmed:
+                              type: boolean
+                            timestamp:
+                              type: integer
+                              format: uint64
+                  - $ref: "#/components/schemas/apiResponse"         
+  /add_missing_files: 
+    post:
+      tags:
+        - Data Layer
+      summary: Complete the data server files.
+      description: Complete the data server files.
+      operationId: add_missing_files
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ids
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32 
+                overwrite:
+                  type: boolean
+                  default: false      
+                foldername:
+                  type: string
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"         
+  /make_offer: 
+    post:
+      tags:
+        - Data Layer
+      summary: Makes an offer.
+      description: Makes an offer.
+      operationId: make_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - maker
+                - taker
+              properties:
+                maker:
+                  type: string
+                  format: bytes32                   
+                taker:
+                  type: string
+                  format: bytes32                   
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      offer:
+                        $ref: "#/components/schemas/offer"
+                  - $ref: "#/components/schemas/apiResponse"                             
+  /take_offer: 
+    post:
+      tags:
+        - Data Layer
+      summary: Takes an offer.
+      description: Takes an offer.
+      operationId: take_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - maker
+                - taker
+              properties:
+                offer:
+                  type: object
+                  properties: 
+                    offer:                  
+                      type: string
+                      format: bytes32 
+                    maker:
+                      type: object
+                    taker:
+                      type: object
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      trade_id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"   
+  /verify_offer: 
+    post:
+      tags:
+        - Data Layer
+      summary: Verifies an offer.
+      description: Verifies an offer.
+      operationId: verify_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - maker
+                - taker
+              properties:
+                offer:
+                  type: object
+                  properties: 
+                    offer:                  
+                      type: string
+                      format: bytes32 
+                    maker:
+                      type: object
+                    taker:
+                      type: object
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      valid:
+                        type: boolean
+                      fee:
+                        type: integer
+                        format: uint64                        
+                  - $ref: "#/components/schemas/apiResponse"                          
+  /cancel_offer: 
+    post:
+      tags:
+        - Data Layer
+      summary: Cancels an offer.
+      description: Cancels an offer.
+      operationId: cancel_offer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - trade_id
+                - secure
+              properties:
+                offer:
+                  type: object
+                  properties: 
+                    trade_id:                  
+                      type: string
+                      format: bytes32 
+                    secure:
+                      type: boolean
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0          
+      responses:
+        '200':
+          $ref: "#/components/responses/empty"         
+externalDocs:
+  description: Find out more about chia
+  url: https://chia.net

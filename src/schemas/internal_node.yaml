@@ -1,0 +1,20 @@
+﻿internal_node:
+  type: object
+  properties:
+    hash:
+      type: string
+      format: bytes32
+    left_hash:
+      type: string
+      format: bytes32
+    right_hash:
+      type: string
+      format: bytes32
+    pair:
+      type: array
+      items: 
+        type: object
+        minLength: 2
+        maxLength: 2
+    atom:
+      type: string

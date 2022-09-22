@@ -1,0 +1,14 @@
+﻿offer:
+  type: object
+  properties:
+    trade_id:
+      type: string
+      format: bytes32
+    offer:
+      type: string
+    taker:
+      type: object
+      additionalProperties: {}
+    maker:
+      type: object
+      additionalProperties: {}

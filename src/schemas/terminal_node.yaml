@@ -1,0 +1,12 @@
+﻿terminal_node:
+  type: object
+  properties:
+    hash:
+      type: string
+      format: bytes32
+    key:
+      type: string
+      format: bytes32
+    value:
+      type: string
+      format: bytes32
