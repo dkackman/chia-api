@@ -54,6 +54,12 @@ tags:
     description: Methods shared by all services.
   - name: Data Layer
     description: The data layer RPC API is exposed, by default, on port 8561 and contains methods interacting with =off-chain data.
+  - name: Mirrors
+    description: Methods for managing mirrors.
+  - name: Subscriptions
+    description: Methods related to singleton subscriptions.
+  - name: Offers
+    description: Methods related to offers.
 paths:
   /stop_node:
     post:
@@ -625,7 +631,7 @@ paths:
   /subscribe:
     post:
       tags:
-        - Data Layer
+        - Subscriptions
       summary: Subscribe to singleton.
       description: Subscribe to singleton.
       operationId: subscribe
@@ -652,7 +658,7 @@ paths:
   /unsubscribe:
     post:
       tags:
-        - Data Layer
+        - Subscriptions
       summary: Unsubscribe from singleton.
       description: Unsubscribe from singleton.
       operationId: unsubscribe
@@ -674,7 +680,7 @@ paths:
   /add_mirror:
     post:
       tags:
-        - Data Layer
+        - Mirrors
       summary: Adds a mirror.
       description: Adds a mirror.
       operationId: add_mirror
@@ -710,7 +716,7 @@ paths:
   /delete_mirror:
     post:
       tags:
-        - Data Layer
+        - Mirrors
       summary: Deletes a mirror.
       description: Deletes a mirror.
       operationId: delete_mirror
@@ -736,7 +742,7 @@ paths:
   /get_mirrors:
     post:
       tags:
-        - Data Layer
+        - Mirrors
       summary: Gets the mirrors for a given store id.
       description: Gets the mirrors for a given store id.
       operationId: get_mirrors
@@ -769,7 +775,7 @@ paths:
   /remove_subscriptions:
     post:
       tags:
-        - Data Layer
+        - Subscriptions
       summary: Removes subscriptions for the given id.
       description: Removes subscriptions for the given id.
       operationId: remove_subscriptions
@@ -796,7 +802,7 @@ paths:
   /subscriptions:
     post:
       tags:
-        - Data Layer
+        - Subscriptions
       summary: List current subscriptions.
       description: List current subscriptions.
       operationId: subscriptions
@@ -941,7 +947,7 @@ paths:
   /make_offer:
     post:
       tags:
-        - Data Layer
+        - Offers
       summary: Makes an offer.
       description: Makes an offer.
       operationId: make_offer
@@ -982,7 +988,7 @@ paths:
   /take_offer:
     post:
       tags:
-        - Data Layer
+        - Offers
       summary: Takes an offer.
       description: Takes an offer.
       operationId: take_offer
@@ -1017,7 +1023,7 @@ paths:
   /verify_offer:
     post:
       tags:
-        - Data Layer
+        - Offers
       summary: Verifies an offer.
       description: Verifies an offer.
       operationId: verify_offer
@@ -1054,7 +1060,7 @@ paths:
   /cancel_offer:
     post:
       tags:
-        - Data Layer
+        - Offers
       summary: Cancels an offer.
       description: Cancels an offer.
       operationId: cancel_offer
