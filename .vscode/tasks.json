@@ -69,6 +69,16 @@
             "dependsOn": [
                 "publish"
             ]
+        },        
+        {
+            "label": "make-repl-files",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "cli-help"],
+            "problemMatcher": [],
+            "dependsOn": [
+                "bundle"
+            ]
         },
         {
             "label": "test",
