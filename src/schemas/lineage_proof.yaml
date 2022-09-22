@@ -1,0 +1,12 @@
+﻿lineage_proof:
+  type: object
+  properties:
+    parent_name:
+      type: string
+      format: bytes32
+    inner_puzzle_hash:
+      type: string
+      format: bytes32
+    amount:
+      type: integer
+      format: uint64

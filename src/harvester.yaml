@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The harvester uses port 8560 by default.
-  version: 1.5.1
+  version: 1.6.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -41,7 +41,7 @@ components:
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
-tags:  
+tags:
   - name: Shared
     description: Methods shared by all services.
   - name: Harvester
@@ -57,7 +57,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /open_connection:
     post:
@@ -83,7 +83,7 @@ paths:
                 port:
                   type: integer
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /close_connection:
     post:
@@ -105,7 +105,7 @@ paths:
                 node_id:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_connections:
     post:
@@ -117,7 +117,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -140,7 +140,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -156,7 +156,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -189,7 +189,7 @@ paths:
                 dirname:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /remove_plot_directory:
     post:
@@ -211,7 +211,7 @@ paths:
                 dirname:
                   type: string
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_plot_directories:
     post:
@@ -223,7 +223,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -246,7 +246,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
   /get_plots:
     post:
@@ -258,7 +258,7 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -301,7 +301,7 @@ paths:
             example:
               filename: plot-k33-2021-06-12-03-55-1d5a2afe637578d6c9dfa04484854831012b678921a8dce5a8aee9c0fd3c1470.plot
       responses:
-        '200':
+        "200":
           $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia

@@ -928,6 +928,21 @@
   },
   "description" : "Chia's representation of a connection from node to node."
 };
+            defs["create_new_dl_body"] = {
+  "required" : [ "root" ],
+  "type" : "object",
+  "properties" : {
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
             defs["create_new_wallet_body"] = {
   "required" : [ "wallet_type" ],
   "type" : "object",
@@ -1107,6 +1122,12 @@
       "type" : "integer",
       "format" : "uint128",
       "default" : 0
+    },
+    "solver" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "object"
+      }
     }
   }
 };
@@ -1251,6 +1272,173 @@
     "num_verifications_required" : {
       "type" : "integer",
       "format" : "uint64"
+    }
+  }
+};
+            defs["dl_delete_mirror_body"] = {
+  "required" : [ "coin_id" ],
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "unint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dl_get_mirrors_body"] = {
+  "required" : [ "launcher_id" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["dl_history_body"] = {
+  "required" : [ "launcher_id" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "min_generation" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "max_generation" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "num_results" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["dl_latest_singleton_body"] = {
+  "required" : [ "launcher_id", "root" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["dl_new_mirror_body"] = {
+  "required" : [ "amount", "launcher_id", "urls" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "unint64"
+    },
+    "urls" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "bytes32"
+      }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "unint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dl_singletons_by_root_body"] = {
+  "required" : [ "launcher_id", "root" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["dl_stop_tracking_body"] = {
+  "required" : [ "launcher_id" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["dl_track_new_body"] = {
+  "required" : [ "launcher_id" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["dl_update_multiple_body"] = {
+  "required" : [ "new_root", "updates" ],
+  "type" : "object",
+  "properties" : {
+    "updates" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/dl_update_multiple_updates"
+      }
+    }
+  }
+};
+            defs["dl_update_multiple_updates"] = {
+  "required" : [ "launcher", "root" ],
+  "type" : "object",
+  "properties" : {
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "launcher" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  },
+  "example" : null
+};
+            defs["dl_update_root_body"] = {
+  "required" : [ "launcher_id", "new_root" ],
+  "type" : "object",
+  "properties" : {
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "new_root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
     }
   }
 };
@@ -1399,18 +1587,35 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "connections" : {
+      "transactions" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/connection_info"
+          "$ref" : "#/components/schemas/transaction_record"
         }
+      },
+      "launcher_id" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "description" : "Response when the new data layer wallet is created."
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_1"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "singleton" : {
+        "$ref" : "#/components/schemas/lineage_proof"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_1"] = {
+            defs["inline_response_200_10"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1425,7 +1630,143 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_10"] = {
+            defs["inline_response_200_11"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "spend_bundle" : {
+        "$ref" : "#/components/schemas/spend_bundle"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_12"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "nft_list" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/nft_info"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_13"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_14"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "did_id" : {
+        "type" : "string"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_15"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "nft_wallets" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/inline_response_200_15_nft_wallets"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_15_nft_wallets"] = {
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "did_id" : {
+      "type" : "string"
+    },
+    "did_wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  },
+  "example" : null
+};
+            defs["inline_response_200_16"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "nft_info" : {
+        "$ref" : "#/components/schemas/nft_info"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_17"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "backup_data" : {
+        "type" : "string"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_18"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "transaction" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      },
+      "transaction_id" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_19"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1456,7 +1797,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_11"] = {
+            defs["inline_response_200_2"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "singleton" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_20"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1490,7 +1846,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_12"] = {
+            defs["inline_response_200_21"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1503,7 +1859,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_13"] = {
+            defs["inline_response_200_22"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1532,7 +1888,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_14"] = {
+            defs["inline_response_200_23"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1544,7 +1900,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_15"] = {
+            defs["inline_response_200_24"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1568,7 +1924,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_16"] = {
+            defs["inline_response_200_25"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1587,7 +1943,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17"] = {
+            defs["inline_response_200_26"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1600,7 +1956,7 @@
     }
   } ]
 };
-            defs["inline_response_200_18"] = {
+            defs["inline_response_200_27"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1616,7 +1972,7 @@
     }
   } ]
 };
-            defs["inline_response_200_19"] = {
+            defs["inline_response_200_28"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1632,23 +1988,7 @@
     }
   } ]
 };
-            defs["inline_response_200_2"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "spend_bundle" : {
-        "$ref" : "#/components/schemas/spend_bundle"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_20"] = {
+            defs["inline_response_200_29"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1667,7 +2007,19 @@
     }
   } ]
 };
-            defs["inline_response_200_21"] = {
+            defs["inline_response_200_3"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "tx_record" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_30"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1679,7 +2031,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_22"] = {
+            defs["inline_response_200_31"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1697,7 +2049,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_23"] = {
+            defs["inline_response_200_32"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1713,7 +2065,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_24"] = {
+            defs["inline_response_200_33"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1728,7 +2080,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_25"] = {
+            defs["inline_response_200_34"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1743,7 +2095,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_26"] = {
+            defs["inline_response_200_35"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1764,7 +2116,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_27"] = {
+            defs["inline_response_200_36"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1776,19 +2128,19 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_28"] = {
+            defs["inline_response_200_37"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "summary" : {
-        "$ref" : "#/components/schemas/inline_response_200_28_summary"
+        "$ref" : "#/components/schemas/inline_response_200_37_summary"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_28_summary"] = {
+            defs["inline_response_200_37_summary"] = {
   "type" : "object",
   "properties" : {
     "offered" : {
@@ -1819,7 +2171,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_29"] = {
+            defs["inline_response_200_38"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1834,26 +2186,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_3"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "nft_list" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/nft_info"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_30"] = {
+            defs["inline_response_200_39"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1869,7 +2202,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_31"] = {
+            defs["inline_response_200_4"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "tx_records" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_40"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1885,7 +2233,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_32"] = {
+            defs["inline_response_200_41"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1900,7 +2248,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_33"] = {
+            defs["inline_response_200_42"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1916,7 +2264,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_34"] = {
+            defs["inline_response_200_43"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1931,7 +2279,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_35"] = {
+            defs["inline_response_200_44"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1949,7 +2297,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_36"] = {
+            defs["inline_response_200_45"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1962,7 +2310,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37"] = {
+            defs["inline_response_200_46"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1974,7 +2322,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_38"] = {
+            defs["inline_response_200_47"] = {
   "allOf" : [ {
     "required" : [ "wallet_balance" ],
     "type" : "object",
@@ -1987,27 +2335,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_39"] = {
+            defs["inline_response_200_48"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/farmer_rewards"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_4"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_40"] = {
+            defs["inline_response_200_49"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2026,7 +2361,25 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_41"] = {
+            defs["inline_response_200_5"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "count" : {
+        "type" : "integer"
+      },
+      "history" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_50"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2042,7 +2395,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_42"] = {
+            defs["inline_response_200_51"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2059,14 +2412,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_43"] = {
+            defs["inline_response_200_52"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_44"] = {
+            defs["inline_response_200_53"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2079,7 +2432,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_45"] = {
+            defs["inline_response_200_54"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2103,7 +2456,7 @@
     }
   } ]
 };
-            defs["inline_response_200_46"] = {
+            defs["inline_response_200_55"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2131,12 +2484,12 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_47"] = {
+            defs["inline_response_200_56"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_47_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_56_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -2144,7 +2497,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_47_private_key"] = {
+            defs["inline_response_200_56_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -2154,7 +2507,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_48"] = {
+            defs["inline_response_200_57"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2176,7 +2529,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_49"] = {
+            defs["inline_response_200_58"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2194,19 +2547,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_5"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "did_id" : {
-        "type" : "string"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_50"] = {
+            defs["inline_response_200_59"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2219,7 +2560,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_51"] = {
+            defs["inline_response_200_6"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "history" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_60"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2238,7 +2594,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_52"] = {
+            defs["inline_response_200_61"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2369,44 +2725,15 @@
     "description" : "Response when a new nft wallet is created."
   } ]
 };
-            defs["inline_response_200_6"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "nft_wallets" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_6_nft_wallets"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_6_nft_wallets"] = {
-  "type" : "object",
-  "properties" : {
-    "wallet_id" : {
-      "type" : "integer",
-      "format" : "uint32"
-    },
-    "did_id" : {
-      "type" : "string"
-    },
-    "did_wallet_id" : {
-      "type" : "integer",
-      "format" : "uint32"
-    }
-  },
-  "example" : null
-};
             defs["inline_response_200_7"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "nft_info" : {
-        "$ref" : "#/components/schemas/nft_info"
+      "mirrors" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/mirror"
+        }
       }
     }
   }, {
@@ -2417,12 +2744,11 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "backup_data" : {
-        "type" : "string"
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2433,17 +2759,60 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "transaction" : {
-        "$ref" : "#/components/schemas/transaction_record"
-      },
-      "transaction_id" : {
-        "type" : "string",
-        "format" : "hex"
+      "connections" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/connection_info"
+        }
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["lineage_proof"] = {
+  "type" : "object",
+  "properties" : {
+    "parent_name" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inner_puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["mirror"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "urls" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "bytes32"
+      }
+    },
+    "ours" : {
+      "type" : "boolean"
+    }
+  }
 };
             defs["mnemonic"] = {
   "maxItems" : 24,
@@ -2739,9 +3108,9 @@
   "enum" : [ 1, 2, 3, 4, 5, 6 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
-            defs["OneOfinline_response_200_45"] = {};
-            defs["OneOfinline_response_200_46"] = {};
-            defs["OneOfinline_response_200_52"] = {};
+            defs["OneOfinline_response_200_54"] = {};
+            defs["OneOfinline_response_200_55"] = {};
+            defs["OneOfinline_response_200_61"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -3060,6 +3429,45 @@
     "$ref" : "#/components/schemas/transaction_input"
   } ]
 };
+            defs["singleton_record"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inner_puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "confirmed" : {
+      "type" : "boolean"
+    },
+    "confirmed_at_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "lineage_proof" : {
+      "$ref" : "#/components/schemas/lineage_proof"
+    },
+    "generation" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "timestamp" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
             defs["spend_bundle"] = {
   "type" : "object",
   "properties" : {
@@ -3091,6 +3499,12 @@
       "type" : "integer",
       "format" : "uint128",
       "default" : 0
+    },
+    "solver" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "object"
+      }
     }
   }
 };
@@ -3496,6 +3910,45 @@
                     <li class="nav-item" data-group="DIDWallet" data-name="didUpdateRecoveryIds">
                       <a class="nav-link link-secondary" href="#api-DIDWallet-didUpdateRecoveryIds">didUpdateRecoveryIds</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="DataLayerWallet">
+                    <a class="nav-link" href="#api-DataLayerWallet">DataLayerWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="createNewDl">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-createNewDl">createNewDl</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlDeleteMirror">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlDeleteMirror">dlDeleteMirror</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlGetMirrors">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlGetMirrors">dlGetMirrors</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlHistory">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlHistory">dlHistory</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlLatestSingleton">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlLatestSingleton">dlLatestSingleton</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlNewMirror">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlNewMirror">dlNewMirror</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlOwnedSingletons">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlOwnedSingletons">dlOwnedSingletons</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlSingletonsByRoot">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlSingletonsByRoot">dlSingletonsByRoot</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlStopTracking">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlStopTracking">dlStopTracking</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlTrackNew">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlTrackNew">dlTrackNew</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlUpdateMultiple">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlUpdateMultiple">dlUpdateMultiple</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayerWallet" data-name="dlUpdateRoot">
+                      <a class="nav-link link-secondary" href="#api-DataLayerWallet-dlUpdateRoot">dlUpdateRoot</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="KeyManagement">
                     <a class="nav-link" href="#api-KeyManagement">KeyManagement</a>
                   </li>
@@ -3683,7 +4136,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.5.1</div>
+              <div class="app-desc">Version: 1.6.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -4024,7 +4477,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_30"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -4153,7 +4606,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_31"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -4282,7 +4735,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_30"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -4404,7 +4857,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_4"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -4526,7 +4979,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -4647,7 +5100,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_27"
+        "$ref" : "#/components/schemas/inline_response_200_36"
       }
     }
   }
@@ -4768,7 +5221,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_29"
+        "$ref" : "#/components/schemas/inline_response_200_38"
       }
     }
   }
@@ -4889,7 +5342,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_26"
+        "$ref" : "#/components/schemas/inline_response_200_35"
       }
     }
   }
@@ -5011,7 +5464,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_23"
+        "$ref" : "#/components/schemas/inline_response_200_32"
       }
     }
   }
@@ -5132,7 +5585,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_25"
+        "$ref" : "#/components/schemas/inline_response_200_34"
       }
     }
   }
@@ -5253,7 +5706,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_28"
+        "$ref" : "#/components/schemas/inline_response_200_37"
       }
     }
   }
@@ -5375,7 +5828,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_22"
+        "$ref" : "#/components/schemas/inline_response_200_31"
       }
     }
   }
@@ -5497,7 +5950,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_32"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -5618,7 +6071,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_24"
+        "$ref" : "#/components/schemas/inline_response_200_33"
       }
     }
   }
@@ -5739,7 +6192,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_30"
       }
     }
   }
@@ -5863,7 +6316,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_11"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -5992,7 +6445,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_17"
       }
     }
   }
@@ -6121,7 +6574,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_13"
+        "$ref" : "#/components/schemas/inline_response_200_22"
       }
     }
   }
@@ -6250,7 +6703,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
+        "$ref" : "#/components/schemas/inline_response_200_25"
       }
     }
   }
@@ -6379,7 +6832,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -6508,7 +6961,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_20"
+        "$ref" : "#/components/schemas/inline_response_200_29"
       }
     }
   }
@@ -6637,7 +7090,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_12"
+        "$ref" : "#/components/schemas/inline_response_200_21"
       }
     }
   }
@@ -6766,7 +7219,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_24"
       }
     }
   }
@@ -6895,7 +7348,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_27"
       }
     }
   }
@@ -7016,7 +7469,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_23"
       }
     }
   }
@@ -7137,7 +7590,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_26"
       }
     }
   }
@@ -7258,7 +7711,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -7379,7 +7832,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_19"
+        "$ref" : "#/components/schemas/inline_response_200_28"
       }
     }
   }
@@ -7532,6 +7985,1462 @@ The wallet uses port 9256 by default.</div>
                         </article>
                       </div>
                   </section>
+                <section id="api-DataLayerWallet">
+                  <h1>DataLayerWallet</h1>
+                    <div id="api-DataLayerWallet-createNewDl">
+                      <article id="api-DataLayerWallet-createNewDl-0" data-group="User" data-name="createNewDl" data-version="0">
+                        <div class="pull-left">
+                          <h1>createNewDl</h1>
+                          <p>Initialize the new data layer wallets.</p>
+                        </div>
+                        <p class="marked">Initialize the DataLayer Wallet (only one can exist).</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/create_new_dl</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-createNewDl-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/create_new_dl" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/create_new_dl_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_createNewDl_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_createNewDl_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-createNewDl-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-createNewDl-200-schema">
+                                  <div id='responses-createNewDl-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-createNewDl-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-createNewDl-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-createNewDl-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlDeleteMirror">
+                      <article id="api-DataLayerWallet-dlDeleteMirror-0" data-group="User" data-name="dlDeleteMirror" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlDeleteMirror</h1>
+                          <p>Remove an existing mirror for a specific singleton.</p>
+                        </div>
+                        <p class="marked">Remove an existing mirror for a specific singleton.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_delete_mirror</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlDeleteMirror-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_delete_mirror" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_delete_mirror_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlDeleteMirror_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlDeleteMirror_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlDeleteMirror-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlDeleteMirror-200-schema">
+                                  <div id='responses-dlDeleteMirror-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlDeleteMirror-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlDeleteMirror-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlDeleteMirror-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlGetMirrors">
+                      <article id="api-DataLayerWallet-dlGetMirrors-0" data-group="User" data-name="dlGetMirrors" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlGetMirrors</h1>
+                          <p>Get all of the mirrors for a specific singleton.</p>
+                        </div>
+                        <p class="marked">Get all of the mirrors for a specific singleton.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_get_mirrors</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlGetMirrors-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_get_mirrors" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_get_mirrors_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlGetMirrors_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlGetMirrors_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlGetMirrors-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlGetMirrors-200-schema">
+                                  <div id='responses-dlGetMirrors-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_7"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlGetMirrors-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlGetMirrors-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlGetMirrors-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlHistory">
+                      <article id="api-DataLayerWallet-dlHistory-0" data-group="User" data-name="dlHistory" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlHistory</h1>
+                          <p>Get the singleton record for the latest singleton of a launcher ID.</p>
+                        </div>
+                        <p class="marked">Get the singleton record for the latest singleton of a launcher ID.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_history</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlHistory-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_history" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_history_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlHistory_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlHistory_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlHistory-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlHistory-200-schema">
+                                  <div id='responses-dlHistory-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlHistory-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlHistory-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlHistory-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlLatestSingleton">
+                      <article id="api-DataLayerWallet-dlLatestSingleton-0" data-group="User" data-name="dlLatestSingleton" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlLatestSingleton</h1>
+                          <p>Get the singleton records that contain the specified root.</p>
+                        </div>
+                        <p class="marked">Get the singleton records that contain the specified root.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_latest_singleton</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlLatestSingleton-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_latest_singleton" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_latest_singleton_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlLatestSingleton_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlLatestSingleton_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlLatestSingleton-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlLatestSingleton-200-schema">
+                                  <div id='responses-dlLatestSingleton-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_1"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlLatestSingleton-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlLatestSingleton-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlLatestSingleton-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlNewMirror">
+                      <article id="api-DataLayerWallet-dlNewMirror-0" data-group="User" data-name="dlNewMirror" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlNewMirror</h1>
+                          <p>Add a new on chain message for a specific singleton.</p>
+                        </div>
+                        <p class="marked">Add a new on chain message for a specific singleton</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_new_mirror</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlNewMirror-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_new_mirror" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_new_mirror_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlNewMirror_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlNewMirror_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlNewMirror-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlNewMirror-200-schema">
+                                  <div id='responses-dlNewMirror-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlNewMirror-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlNewMirror-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlNewMirror-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlOwnedSingletons">
+                      <article id="api-DataLayerWallet-dlOwnedSingletons-0" data-group="User" data-name="dlOwnedSingletons" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlOwnedSingletons</h1>
+                          <p>Get all owned singleton records.</p>
+                        </div>
+                        <p class="marked">Get all owned singleton records.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_owned_singletons</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlOwnedSingletons-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_owned_singletons" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlOwnedSingletons_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlOwnedSingletons_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlOwnedSingletons-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlOwnedSingletons-200-schema">
+                                  <div id='responses-dlOwnedSingletons-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_6"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlOwnedSingletons-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlOwnedSingletons-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlOwnedSingletons-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlSingletonsByRoot">
+                      <article id="api-DataLayerWallet-dlSingletonsByRoot-0" data-group="User" data-name="dlSingletonsByRoot" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlSingletonsByRoot</h1>
+                          <p>Get the singleton records that contain the specified root.</p>
+                        </div>
+                        <p class="marked">Get the singleton records that contain the specified root.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_singletons_by_root</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlSingletonsByRoot-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_singletons_by_root" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_singletons_by_root_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlSingletonsByRoot_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlSingletonsByRoot_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlSingletonsByRoot-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlSingletonsByRoot-200-schema">
+                                  <div id='responses-dlSingletonsByRoot-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_2"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlSingletonsByRoot-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlSingletonsByRoot-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlSingletonsByRoot-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlStopTracking">
+                      <article id="api-DataLayerWallet-dlStopTracking-0" data-group="User" data-name="dlStopTracking" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlStopTracking</h1>
+                          <p>Stop tracking the data layer wallets.</p>
+                        </div>
+                        <p class="marked">Stop tracking the data layer wallet.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_stop_tracking</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlStopTracking-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_stop_tracking" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_stop_tracking_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlStopTracking_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlStopTracking_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlStopTracking-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlStopTracking-200-schema">
+                                  <div id='responses-dlStopTracking-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlStopTracking-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlStopTracking-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlStopTracking-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlTrackNew">
+                      <article id="api-DataLayerWallet-dlTrackNew-0" data-group="User" data-name="dlTrackNew" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlTrackNew</h1>
+                          <p>Track the new data layer wallet</p>
+                        </div>
+                        <p class="marked">Track the new data layer wallet.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_track_new</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlTrackNew-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_track_new" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_track_new_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlTrackNew_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlTrackNew_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlTrackNew-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlTrackNew-200-schema">
+                                  <div id='responses-dlTrackNew-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlTrackNew-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlTrackNew-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlTrackNew-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlUpdateMultiple">
+                      <article id="api-DataLayerWallet-dlUpdateMultiple-0" data-group="User" data-name="dlUpdateMultiple" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlUpdateMultiple</h1>
+                          <p>Stop the node.</p>
+                        </div>
+                        <p class="marked">Stop the node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_update_multiple</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlUpdateMultiple-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_update_multiple" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_update_multiple_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlUpdateMultiple_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlUpdateMultiple_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlUpdateMultiple-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlUpdateMultiple-200-schema">
+                                  <div id='responses-dlUpdateMultiple-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_4"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlUpdateMultiple-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlUpdateMultiple-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlUpdateMultiple-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayerWallet-dlUpdateRoot">
+                      <article id="api-DataLayerWallet-dlUpdateRoot-0" data-group="User" data-name="dlUpdateRoot" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlUpdateRoot</h1>
+                          <p>Stop the node.</p>
+                        </div>
+                        <p class="marked">Stop the node.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_update_root</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayerWallet-dlUpdateRoot-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_update_root" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_update_root_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlUpdateRoot_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlUpdateRoot_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlUpdateRoot-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlUpdateRoot-200-schema">
+                                  <div id='responses-dlUpdateRoot-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_3"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlUpdateRoot-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlUpdateRoot-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlUpdateRoot-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
                 <section id="api-KeyManagement">
                   <h1>KeyManagement</h1>
                     <div id="api-KeyManagement-addKey">
@@ -7625,7 +9534,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_47"
+        "$ref" : "#/components/schemas/inline_response_200_56"
       }
     }
   }
@@ -7754,7 +9663,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_57"
       }
     }
   }
@@ -8127,7 +10036,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_53"
       }
     }
   }
@@ -8256,7 +10165,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_46"
+        "$ref" : "#/components/schemas/inline_response_200_55"
       }
     }
   }
@@ -8378,7 +10287,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_54"
       }
     }
   }
@@ -8507,7 +10416,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_53"
       }
     }
   }
@@ -8753,7 +10662,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -8874,7 +10783,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_4"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -8995,7 +10904,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_7"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -9124,7 +11033,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
+        "$ref" : "#/components/schemas/inline_response_200_12"
       }
     }
   }
@@ -9253,7 +11162,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_5"
+        "$ref" : "#/components/schemas/inline_response_200_14"
       }
     }
   }
@@ -9375,7 +11284,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_6"
+        "$ref" : "#/components/schemas/inline_response_200_15"
       }
     }
   }
@@ -9496,7 +11405,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -9617,7 +11526,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -9859,7 +11768,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -9983,7 +11892,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_34"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -10104,7 +12013,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_33"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }
@@ -10225,7 +12134,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_33"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }
@@ -10354,7 +12263,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_35"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -10720,7 +12629,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -10967,7 +12876,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_200_9"
       }
     }
   }
@@ -11089,7 +12998,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
+        "$ref" : "#/components/schemas/inline_response_200_10"
       }
     }
   }
@@ -11579,7 +13488,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_37"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -11829,7 +13738,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -11951,7 +13860,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -12073,7 +13982,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_48"
       }
     }
   }
@@ -12194,7 +14103,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_51"
       }
     }
   }
@@ -12323,7 +14232,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -12452,7 +14361,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_41"
+        "$ref" : "#/components/schemas/inline_response_200_50"
       }
     }
   }
@@ -12573,7 +14482,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_40"
+        "$ref" : "#/components/schemas/inline_response_200_49"
       }
     }
   }
@@ -12702,7 +14611,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_38"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -12823,7 +14732,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -12944,7 +14853,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -13069,7 +14978,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_52"
+        "$ref" : "#/components/schemas/inline_response_200_61"
       }
     }
   }
@@ -13191,7 +15100,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_51"
+        "$ref" : "#/components/schemas/inline_response_200_60"
       }
     }
   }
@@ -13316,7 +15225,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_50"
+        "$ref" : "#/components/schemas/inline_response_200_59"
       }
     }
   }
@@ -13438,7 +15347,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_49"
+        "$ref" : "#/components/schemas/inline_response_200_58"
       }
     }
   }
@@ -13560,7 +15469,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_52"
       }
     }
   }
