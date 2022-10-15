@@ -687,6 +687,97 @@ paths:
                         items:
                           type: string
                   - $ref: "#/components/schemas/apiResponse"
+  /nft_mint_bulk:
+    post:
+      tags:
+        - NFT Wallet
+      description: Mints NFTs in bulk.
+      summary: Mints NFTs in bulk.
+      operationId: nft_mint_bulk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - metadata_list
+              properties:
+                metadata_list:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - uris
+                      - meta_uris                    
+                    properties:
+                      uris:
+                        type: array
+                        items:
+                          type: string
+                          format: uri
+                      meta_uris:
+                        type: array
+                        items:
+                          type: string
+                          format: uri    
+                      license_uris:
+                        type: array
+                        items:
+                          type: string
+                          format: uri                                                
+                wallet_id:
+                  type: integer
+                  format: uint32
+                royalty_address:
+                  type: string
+                  format: hex
+                royalty_percentage:
+                  type: integer
+                  format: uint16
+                  default: 0                  
+                target_address:
+                  type: string
+                  format: hex
+                hash:
+                  type: string
+                  format: hex
+                edition_number:
+                  type: integer
+                  format: uint64
+                  default: 1
+                edition_total:
+                  type: integer
+                  format: uint64
+                  default: 1
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                meta_hash:
+                  type: string
+                  format: hex
+                license_hash:
+                  type: string
+                  format: hex
+                did_id:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"                  
   /nft_mint_nft:
     post:
       tags:
