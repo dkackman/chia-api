@@ -710,7 +710,7 @@ paths:
                     type: object
                     required:
                       - uris
-                      - meta_uris                    
+                      - meta_uris
                     properties:
                       uris:
                         type: array
@@ -721,12 +721,29 @@ paths:
                         type: array
                         items:
                           type: string
-                          format: uri    
+                          format: uri
                       license_uris:
                         type: array
                         items:
                           type: string
-                          format: uri                                                
+                          format: uri
+                      hash:
+                        type: string
+                        format: hex
+                      meta_hash:
+                        type: string
+                        format: hex
+                      license_hash:
+                        type: string
+                        format: hex
+                      edition_number:
+                        type: integer
+                        format: uint64
+                        default: 1
+                      edition_total:
+                        type: integer
+                        format: uint64
+                        default: 1
                 wallet_id:
                   type: integer
                   format: uint32
@@ -736,33 +753,46 @@ paths:
                 royalty_percentage:
                   type: integer
                   format: uint16
-                  default: 0                  
-                target_address:
-                  type: string
-                  format: hex
-                hash:
-                  type: string
-                  format: hex
-                edition_number:
+                  default: 0
+                target_address_list:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+                mint_number_start:
                   type: integer
                   format: uint64
                   default: 1
-                edition_total:
+                mint_total:
                   type: integer
                   format: uint64
-                  default: 1
+                xch_coin_list:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+                xch_change_target:
+                  type: string
+                  format: hex
+                new_innerpuzhash:
+                  type: string
+                  format: hex
+                new_p2_puzhash:
+                  type: string
+                  format: hex
+                did_coin_dict:
+                  type: object
+                  additionalProperties: true
+                did_lineage_parent_hex:
+                  type: string
+                  format: hex
+                mint_from_did:
+                  type: boolean
+                  default: false
                 fee:
                   type: integer
                   format: uint64
                   default: 0
-                meta_hash:
-                  type: string
-                  format: hex
-                license_hash:
-                  type: string
-                  format: hex
-                did_id:
-                  type: string
       responses:
         "200":
           description: OK
@@ -777,7 +807,7 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
   /nft_mint_nft:
     post:
       tags:
@@ -1679,7 +1709,7 @@ paths:
                 solver:
                   type: object
                   additionalProperties:
-                    type: object                  
+                    type: object
       responses:
         "200":
           description: OK
