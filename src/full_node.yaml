@@ -938,6 +938,68 @@ paths:
                       status:
                         type: string
                   - $ref: "#/components/schemas/apiResponse"
+  /get_fee_estimate:
+    post:
+      tags:
+        - Fees
+      description: Estimates the fee for a given spend_bundle.
+      summary: Estimates the fee for a given spend_bundle.
+      operationId: get_fee_estimate
+      requestBody:
+        required: true
+        description: The spend bundle
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spend_bundle:
+                  $ref: "#/components/schemas/spend_bundle"
+                cost:
+                  type: integer
+                  format: uint64
+                target_times:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      estimates:
+                        type: array
+                        items:
+                          type: integer
+                      target_times:
+                        type: array
+                        items:
+                          type: integer
+                      current_fee_rate:
+                        type: integer
+                        format: uint64
+                      mempool_size:
+                        type: integer
+                        format: uint64
+                      mempool_max_size:
+                        type: integer
+                        format: uint64
+                      full_node_synced:
+                        type: boolean
+                      peak_height:
+                        type: integer
+                        format: uint64
+                      last_peak_timestamp:
+                        type: integer
+                        format: uint64
+                      node_time_utc:
+                        type: integer
+                        format: in32
+                  - $ref: "#/components/schemas/apiResponse"                  
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
