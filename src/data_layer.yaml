@@ -306,6 +306,9 @@ paths:
                 key:
                   type: string
                   format: bytes32
+                root_hash:
+                  type: string
+                  format: bytes32
       responses:
         "200":
           description: OK
@@ -475,7 +478,6 @@ paths:
                             type: integer
                             format: int32
                   - $ref: "#/components/schemas/apiResponse"
-
   /get_root:
     post:
       tags:
