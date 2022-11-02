@@ -480,7 +480,6 @@ paths:
                         items:
                           $ref: "#/components/schemas/mirror"
                   - $ref: "#/components/schemas/apiResponse"
-
   /dl_new_mirror:
     post:
       tags:
@@ -3134,6 +3133,30 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /push_transactions:
+    post:
+      tags:
+        - Wallet Node
+      description: Pushes multiple transactions spend bundle to the mempool and blockchain.
+      summary: Pushes multiple transactions spend bundle to the mempool and blockchain.
+      operationId: push_transactions
+      requestBody:
+        required: true
+        description: The trasnaction list
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - transactions
+              properties:
+                transactions:
+                  type: array
+                  items:                  
+                    $ref: "#/components/schemas/transaction_record"
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"          
   /get_wallets:
     post:
       tags:
