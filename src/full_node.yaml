@@ -138,6 +138,8 @@ tags:
     description: The full node RPC API is exposed, by default, on port 8555. This port must not be exposed publicly for security concerns.
   - name: Mempool
     description: Get information about the mempool.
+  - name: Fees
+    description: Get information about fees.
 paths:
   /stop_node:
     post:
