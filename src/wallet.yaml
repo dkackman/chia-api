@@ -74,6 +74,8 @@ components:
       $ref: "./schemas/cat_info.yaml#/cat_info"
     coin:
       $ref: "./schemas/coin.yaml#/coin"
+    coin_record:
+      $ref: "./schemas/coin_record.yaml#/coin_record"
     farmer_rewards:
       $ref: "./schemas/farmer_rewards.yaml#/farmer_rewards"
     lineage_proof:
@@ -1864,7 +1866,7 @@ paths:
                   format: uint32
                 amount:
                   type: integer
-                  format: uint64               
+                  format: uint64
                 min_coin_amount:
                   type: integer
                   format: uint64
@@ -2753,6 +2755,64 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
+  /get_spendable_coins:
+    post:
+      tags:
+        - Wallet
+      summary: Retrieves all spendable coins in a wallet.
+      description: Retrieves all spendable coins in a wallet.
+      operationId: get_spendable_coins
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                min_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                excluded_coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
+                excluded_coin_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      confirmed_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_record"
+                      unconfirmed_removals:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_record"
+                      unconfirmed_additions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin"
+                  - $ref: "#/components/schemas/apiResponse"
   /get_transactions:
     post:
       tags:
@@ -3152,11 +3212,11 @@ paths:
               properties:
                 transactions:
                   type: array
-                  items:                  
+                  items:
                     $ref: "#/components/schemas/transaction_record"
       responses:
         "200":
-          $ref: "#/components/responses/empty"          
+          $ref: "#/components/responses/empty"
   /get_wallets:
     post:
       tags:
