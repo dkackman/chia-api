@@ -431,6 +431,51 @@ paths:
                         items:
                           $ref: "#/components/schemas/internal_node"
                   - $ref: "#/components/schemas/apiResponse"
+  /get_sync_status:
+    post:
+      tags:
+        - Data Layer
+      summary: Gets the sync status of a store.
+      description: Gets the sync status of a store.
+      operationId: get_sync_status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      sync_status:
+                        type: object
+                        properties:
+                          root_hash:
+                            type: string
+                            format: bytes32
+                          generation:
+                            type: integer
+                            format: int32
+                          target_root_hash:
+                            type: string
+                            format: bytes32
+                          target_generation:
+                            type: integer
+                            format: int32
+                  - $ref: "#/components/schemas/apiResponse"
+
   /get_root:
     post:
       tags:
