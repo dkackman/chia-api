@@ -998,6 +998,16 @@
     }
   }
 };
+            defs["get_sync_status_body"] = {
+  "required" : [ "id" ],
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
             defs["get_value_body"] = {
   "required" : [ "id", "key" ],
   "type" : "object",
@@ -1007,6 +1017,10 @@
       "format" : "bytes32"
     },
     "key" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "root_hash" : {
       "type" : "string",
       "format" : "bytes32"
     }
@@ -1049,6 +1063,13 @@
       "hash" : {
         "type" : "string",
         "format" : "bytes32"
+      },
+      "confirmed" : {
+        "type" : "boolean"
+      },
+      "timestamp" : {
+        "type" : "integer",
+        "format" : "uint64"
       }
     }
   }, {
@@ -1059,10 +1080,23 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "hash" : {
+        "type" : "string",
+        "format" : "bytes32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_12"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "root_hashes" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_11_root_hashes"
+          "$ref" : "#/components/schemas/inline_response_200_12_root_hashes"
         }
       }
     }
@@ -1070,7 +1104,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_11_root_hashes"] = {
+            defs["inline_response_200_12_root_hashes"] = {
   "type" : "object",
   "properties" : {
     "id" : {
@@ -1091,7 +1125,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_12"] = {
+            defs["inline_response_200_13"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1106,14 +1140,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_13"] = {
+            defs["inline_response_200_14"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "diff" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_13_diff"
+          "$ref" : "#/components/schemas/inline_response_200_14_diff"
         }
       }
     }
@@ -1121,7 +1155,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_13_diff"] = {
+            defs["inline_response_200_14_diff"] = {
   "type" : "object",
   "properties" : {
     "type" : {
@@ -1138,14 +1172,14 @@
   },
   "example" : null
 };
-            defs["inline_response_200_14"] = {
+            defs["inline_response_200_15"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "root_history" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_14_root_history"
+          "$ref" : "#/components/schemas/inline_response_200_15_root_history"
         }
       }
     }
@@ -1153,7 +1187,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_14_root_history"] = {
+            defs["inline_response_200_15_root_history"] = {
   "type" : "object",
   "properties" : {
     "root_hash" : {
@@ -1170,7 +1204,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_15"] = {
+            defs["inline_response_200_16"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1182,7 +1216,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_16"] = {
+            defs["inline_response_200_17"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1195,7 +1229,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17"] = {
+            defs["inline_response_200_18"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1322,21 +1356,35 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "hash" : {
-        "type" : "string",
-        "format" : "bytes32"
-      },
-      "confirmed" : {
-        "type" : "boolean"
-      },
-      "timestamp" : {
-        "type" : "integer",
-        "format" : "uint64"
+      "sync_status" : {
+        "$ref" : "#/components/schemas/inline_response_200_9_sync_status"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["inline_response_200_9_sync_status"] = {
+  "type" : "object",
+  "properties" : {
+    "root_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "generation" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "target_root_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "target_generation" : {
+      "type" : "integer",
+      "format" : "int32"
+    }
+  },
+  "example" : null
 };
             defs["insert_body"] = {
   "required" : [ "id", "key", "value" ],
@@ -1819,6 +1867,9 @@
                     <li class="nav-item" data-group="DataLayer" data-name="getRoots">
                       <a class="nav-link link-secondary" href="#api-DataLayer-getRoots">getRoots</a>
                     </li>
+                    <li class="nav-item" data-group="DataLayer" data-name="getSyncStatus">
+                      <a class="nav-link link-secondary" href="#api-DataLayer-getSyncStatus">getSyncStatus</a>
+                    </li>
                     <li class="nav-item" data-group="DataLayer" data-name="getValue">
                       <a class="nav-link link-secondary" href="#api-DataLayer-getValue">getValue</a>
                     </li>
@@ -1901,7 +1952,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.6.0</div>
+              <div class="app-desc">Version: 1.6.1</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The data layer uses port 8561 by default.</div>
@@ -2847,7 +2898,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_13"
+        "$ref" : "#/components/schemas/inline_response_200_14"
       }
     }
   }
@@ -2968,7 +3019,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -3211,7 +3262,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_10"
       }
     }
   }
@@ -3332,7 +3383,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_15"
       }
     }
   }
@@ -3453,7 +3504,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_11"
+        "$ref" : "#/components/schemas/inline_response_200_12"
       }
     }
   }
@@ -3479,6 +3530,127 @@ The data layer uses port 8561 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getRoots-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayer-getSyncStatus">
+                      <article id="api-DataLayer-getSyncStatus-0" data-group="User" data-name="getSyncStatus" data-version="0">
+                        <div class="pull-left">
+                          <h1>getSyncStatus</h1>
+                          <p>Gets the sync status of a store.</p>
+                        </div>
+                        <p class="marked">Gets the sync status of a store.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_sync_status</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayer-getSyncStatus-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.crt \
+--key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8561/get_sync_status" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_sync_status_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getSyncStatus_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getSyncStatus_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getSyncStatus-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getSyncStatus-200-schema">
+                                  <div id='responses-getSyncStatus-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_9"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getSyncStatus-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getSyncStatus-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getSyncStatus-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -4061,7 +4233,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_12"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -4306,7 +4478,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -4427,7 +4599,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
+        "$ref" : "#/components/schemas/inline_response_200_17"
       }
     }
   }
@@ -4548,7 +4720,7 @@ The data layer uses port 8561 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }

@@ -634,24 +634,6 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
-            defs["add_rate_limited_funds_body"] = {
-  "required" : [ "amount", "fee", "wallet_id" ],
-  "type" : "object",
-  "properties" : {
-    "wallet_id" : {
-      "type" : "integer",
-      "format" : "uint32"
-    },
-    "amount" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "fee" : {
-      "type" : "integer",
-      "format" : "uint64"
-    }
-  }
-};
             defs["amount_with_puzzlehash"] = {
   "required" : [ "amount", "puzzle_hash" ],
   "type" : "object",
@@ -856,6 +838,48 @@
     }
   }
 };
+            defs["coin_record"] = {
+  "type" : "object",
+  "properties" : {
+    "coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "confirmed_block_index" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "spent_block_index" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "spent" : {
+      "type" : "boolean"
+    },
+    "coinbase" : {
+      "type" : "boolean"
+    },
+    "timestamp" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["coin_search_options"] = {
+  "type" : "object",
+  "properties" : {
+    "start_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "end_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "include_spent_coins" : {
+      "type" : "boolean"
+    }
+  }
+};
             defs["coin_spend"] = {
   "type" : "object",
   "properties" : {
@@ -950,7 +974,7 @@
     "wallet_type" : {
       "type" : "string",
       "description" : "The type of wallet to create.",
-      "enum" : [ "cat_wallet", "rl_wallet", "did_wallet", "pool_wallet", "nft_wallet" ]
+      "enum" : [ "cat_wallet", "did_wallet", "pool_wallet", "nft_wallet" ]
     },
     "name" : {
       "type" : "string",
@@ -981,32 +1005,6 @@
       }
     },
     "description" : "Details needed to create a cat_wallet."
-  }, {
-    "required" : [ "rl_type" ],
-    "type" : "object",
-    "properties" : {
-      "rl_type" : {
-        "type" : "string",
-        "description" : "The type of RL Wallet to create.",
-        "enum" : [ "admin", "user" ]
-      },
-      "interval" : {
-        "type" : "integer",
-        "description" : "Rate interval - needed for admin creation only.",
-        "format" : "uint64"
-      },
-      "limit" : {
-        "type" : "integer",
-        "description" : "Rate limit - needed for admin creation only.",
-        "format" : "uint64"
-      },
-      "pubkey" : {
-        "type" : "string",
-        "description" : "Public key - needed for admin creation only.",
-        "format" : "hex"
-      }
-    },
-    "description" : "Details needed to create a rl_wallet."
   }, {
     "required" : [ "did_type" ],
     "type" : "object",
@@ -1137,9 +1135,17 @@
   }, {
     "type" : "object",
     "properties" : {
+      "wallet_id" : {
+        "type" : "integer"
+      },
       "min_coin_amount" : {
         "type" : "integer",
-        "format" : "uint128",
+        "format" : "uint64",
+        "default" : 0
+      },
+      "max_coin_amount" : {
+        "type" : "integer",
+        "format" : "uint64",
         "default" : 0
       },
       "excluded_coins" : {
@@ -1147,9 +1153,27 @@
         "items" : {
           "$ref" : "#/components/schemas/coin"
         }
+      },
+      "excluded_coin_amounts" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer",
+          "format" : "uint64"
+        }
       }
     }
   } ]
+};
+            defs["delete_notifications_body"] = {
+  "type" : "object",
+  "properties" : {
+    "ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    }
+  }
 };
             defs["did_create_attest_body"] = {
   "required" : [ "coin_name", "pubkey", "puzhash", "wallet_id" ],
@@ -1508,6 +1532,23 @@
     }
   }
 };
+            defs["get_coin_records_by_names_body"] = {
+  "allOf" : [ {
+    "required" : [ "names" ],
+    "type" : "object",
+    "properties" : {
+      "names" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "format" : "hex"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/coin_search_options"
+  } ]
+};
             defs["get_next_address_body"] = {
   "required" : [ "wallet_id" ],
   "type" : "object",
@@ -1518,6 +1559,23 @@
     },
     "new_address" : {
       "type" : "boolean"
+    }
+  }
+};
+            defs["get_notifications_body"] = {
+  "type" : "object",
+  "properties" : {
+    "ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "start" : {
+      "type" : "integer"
+    },
+    "end" : {
+      "type" : "integer"
     }
   }
 };
@@ -1542,6 +1600,39 @@
     "offer" : {
       "type" : "string",
       "format" : "hex"
+    }
+  }
+};
+            defs["get_spendable_coins_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "max_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "excluded_coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "excluded_coin_ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
     }
   }
 };
@@ -1724,6 +1815,30 @@
 };
             defs["inline_response_200_16"] = {
   "allOf" : [ {
+    "type" : "array",
+    "items" : {
+      "type" : "object",
+      "properties" : {
+        "asset" : {
+          "type" : "string",
+          "format" : "hex"
+        },
+        "address" : {
+          "type" : "string",
+          "format" : "hex"
+        },
+        "wallet_id" : {
+          "type" : "integer",
+          "format" : "uint64"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_17"] = {
+  "allOf" : [ {
     "type" : "object",
     "properties" : {
       "nft_info" : {
@@ -1734,7 +1849,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17"] = {
+            defs["inline_response_200_18"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1750,7 +1865,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_18"] = {
+            defs["inline_response_200_19"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1766,7 +1881,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_19"] = {
+            defs["inline_response_200_2"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "singleton" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_20"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1797,22 +1927,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_2"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "singleton" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/singleton_record"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_20"] = {
+            defs["inline_response_200_21"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1846,7 +1961,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_21"] = {
+            defs["inline_response_200_22"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1859,7 +1974,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_22"] = {
+            defs["inline_response_200_23"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1888,7 +2003,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_23"] = {
+            defs["inline_response_200_24"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1900,7 +2015,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_24"] = {
+            defs["inline_response_200_25"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1924,7 +2039,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_25"] = {
+            defs["inline_response_200_26"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -1943,7 +2058,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_26"] = {
+            defs["inline_response_200_27"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1956,7 +2071,7 @@
     }
   } ]
 };
-            defs["inline_response_200_27"] = {
+            defs["inline_response_200_28"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1972,7 +2087,7 @@
     }
   } ]
 };
-            defs["inline_response_200_28"] = {
+            defs["inline_response_200_29"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -1984,25 +2099,6 @@
       },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
-      }
-    }
-  } ]
-};
-            defs["inline_response_200_29"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/apiResponse"
-  }, {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "metadata" : {
-        "type" : "object",
-        "additionalProperties" : {
-          "type" : "string"
-        }
       }
     }
   } ]
@@ -2021,6 +2117,25 @@
 };
             defs["inline_response_200_30"] = {
   "allOf" : [ {
+    "$ref" : "#/components/schemas/apiResponse"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "metadata" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        }
+      }
+    }
+  } ]
+};
+            defs["inline_response_200_31"] = {
+  "allOf" : [ {
     "type" : "object",
     "properties" : {
       "trade_record" : {
@@ -2031,7 +2146,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_31"] = {
+            defs["inline_response_200_32"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2049,7 +2164,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_32"] = {
+            defs["inline_response_200_33"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2065,7 +2180,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_33"] = {
+            defs["inline_response_200_34"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2080,7 +2195,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_34"] = {
+            defs["inline_response_200_35"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2095,7 +2210,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_35"] = {
+            defs["inline_response_200_36"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2116,7 +2231,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_36"] = {
+            defs["inline_response_200_37"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2128,19 +2243,19 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37"] = {
+            defs["inline_response_200_38"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "summary" : {
-        "$ref" : "#/components/schemas/inline_response_200_37_summary"
+        "$ref" : "#/components/schemas/inline_response_200_38_summary"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37_summary"] = {
+            defs["inline_response_200_38_summary"] = {
   "type" : "object",
   "properties" : {
     "offered" : {
@@ -2171,7 +2286,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_38"] = {
+            defs["inline_response_200_39"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2180,22 +2295,6 @@
       },
       "trade_record" : {
         "$ref" : "#/components/schemas/trade_record"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_39"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "name" : {
-        "type" : "string"
       }
     }
   }, {
@@ -2225,7 +2324,7 @@
         "type" : "integer",
         "format" : "uint32"
       },
-      "asset_id" : {
+      "name" : {
         "type" : "string"
       }
     }
@@ -2234,6 +2333,22 @@
   } ]
 };
             defs["inline_response_200_41"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "asset_id" : {
+        "type" : "string"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_42"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2248,7 +2363,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_42"] = {
+            defs["inline_response_200_43"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2264,7 +2379,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_43"] = {
+            defs["inline_response_200_44"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2279,7 +2394,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_44"] = {
+            defs["inline_response_200_45"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2297,7 +2412,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_45"] = {
+            defs["inline_response_200_46"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2310,7 +2425,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_46"] = {
+            defs["inline_response_200_47"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2322,7 +2437,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_47"] = {
+            defs["inline_response_200_48"] = {
   "allOf" : [ {
     "required" : [ "wallet_balance" ],
     "type" : "object",
@@ -2335,28 +2450,9 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_48"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/farmer_rewards"
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
             defs["inline_response_200_49"] = {
   "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "transactions" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      },
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
-    }
+    "$ref" : "#/components/schemas/farmer_rewards"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -2383,6 +2479,52 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "confirmed_records" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/coin_record"
+        }
+      },
+      "unconfirmed_removals" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/coin_record"
+        }
+      },
+      "unconfirmed_additions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/coin"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_51"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      },
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_52"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "count" : {
         "type" : "integer"
       },
@@ -2395,7 +2537,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_51"] = {
+            defs["inline_response_200_53"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2412,14 +2554,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_52"] = {
+            defs["inline_response_200_54"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_53"] = {
+            defs["inline_response_200_55"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2432,7 +2574,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_54"] = {
+            defs["inline_response_200_56"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2456,7 +2598,7 @@
     }
   } ]
 };
-            defs["inline_response_200_55"] = {
+            defs["inline_response_200_57"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2484,12 +2626,12 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_56"] = {
+            defs["inline_response_200_58"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_56_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_58_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -2497,7 +2639,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_56_private_key"] = {
+            defs["inline_response_200_58_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -2507,7 +2649,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_57"] = {
+            defs["inline_response_200_59"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2523,37 +2665,6 @@
       },
       "wallet_balance" : {
         "type" : "boolean"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_58"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "synced" : {
-        "type" : "boolean"
-      },
-      "syncing" : {
-        "type" : "boolean"
-      },
-      "genesis_initialized" : {
-        "type" : "boolean"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_59"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "height" : {
-        "type" : "integer",
-        "format" : "uint32"
       }
     }
   }, {
@@ -2579,6 +2690,101 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "synced" : {
+        "type" : "boolean"
+      },
+      "syncing" : {
+        "type" : "boolean"
+      },
+      "genesis_initialized" : {
+        "type" : "boolean"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_61"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "height" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_62"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "notifications" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/inline_response_200_62_notifications"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_62_notifications"] = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  },
+  "example" : null
+};
+            defs["inline_response_200_63"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "pubkey" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "signature" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_64"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_records" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin_record"
+      }
+    }
+  },
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_65"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "fingerprint" : {
         "type" : "integer",
         "format" : "int32"
@@ -2594,7 +2800,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_61"] = {
+            defs["inline_response_200_66"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2614,25 +2820,6 @@
       }
     },
     "description" : "Response when a CAT wallet is created."
-  }, {
-    "type" : "object",
-    "properties" : {
-      "id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "type" : {
-        "$ref" : "#/components/schemas/wallet_type"
-      },
-      "origin" : {
-        "$ref" : "#/components/schemas/coin"
-      },
-      "pubkey" : {
-        "type" : "string",
-        "format" : "hex"
-      }
-    },
-    "description" : "Response when a RL wallet is created."
   }, {
     "type" : "object",
     "properties" : {
@@ -2864,6 +3051,46 @@
     }
   }
 };
+            defs["nft_calculate_royalties_body"] = {
+  "type" : "object",
+  "properties" : {
+    "royalty_assets" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/nft_calculate_royalties_royalty_assets"
+      }
+    },
+    "fungible_assets" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/nft_calculate_royalties_fungible_assets"
+      }
+    }
+  }
+};
+            defs["nft_calculate_royalties_fungible_assets"] = {
+  "type" : "object",
+  "properties" : {
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  },
+  "example" : null
+};
+            defs["nft_calculate_royalties_royalty_assets"] = {
+  "type" : "object",
+  "properties" : {
+    "royalty_address" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "royalty_percentage" : {
+      "type" : "integer"
+    }
+  },
+  "example" : null
+};
             defs["nft_get_by_did_body"] = {
   "required" : [ "did_id" ],
   "type" : "object",
@@ -2884,6 +3111,30 @@
     "latest" : {
       "type" : "boolean",
       "default" : true
+    }
+  }
+};
+            defs["nft_get_nfts_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "start_index" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "default" : 0
+    },
+    "num" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "default" : 0
+    },
+    "ignore_size_limit" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -2974,6 +3225,137 @@
     }
   },
   "description" : "NFT Info for displaying NFT on the UI"
+};
+            defs["nft_mint_bulk_body"] = {
+  "required" : [ "metadata_list", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "metadata_list" : {
+      "type" : "array",
+      "description" : "A list of dicts containing the metadata for each NFT to be minted",
+      "items" : {
+        "$ref" : "#/components/schemas/nft_mint_bulk_metadata_list"
+      }
+    },
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "royalty_address" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "royalty_percentage" : {
+      "type" : "integer",
+      "format" : "uint16",
+      "default" : 0
+    },
+    "target_list" : {
+      "type" : "array",
+      "description" : "a list of targets for transfering minted NFTs (aka airdrop)",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "mint_number_start" : {
+      "type" : "integer",
+      "description" : "The starting point for mint number used in intermediate launcher puzzle",
+      "default" : 1
+    },
+    "mint_total" : {
+      "type" : "integer",
+      "description" : "The total number of NFTs being minted"
+    },
+    "xch_coin_list" : {
+      "type" : "array",
+      "description" : "For use with bulk minting to provide the coin used for funding the minting spend. This coin can be one that will be created in the future",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "xch_change_target" : {
+      "type" : "string",
+      "description" : "For use with bulk minting, so we can specify the puzzle hash that the change from the funding transaction goes to.",
+      "format" : "hex"
+    },
+    "new_innerpuzhash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "new_p2_puzhash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "did_coin_dict" : {
+      "type" : "object",
+      "additionalProperties" : true
+    },
+    "did_lineage_parent_hex" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "mint_from_did" : {
+      "type" : "boolean",
+      "default" : false
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["nft_mint_bulk_metadata_list"] = {
+  "required" : [ "meta_uris", "uris" ],
+  "type" : "object",
+  "properties" : {
+    "uris" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "uri"
+      }
+    },
+    "meta_uris" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "uri"
+      }
+    },
+    "license_uris" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "uri"
+      }
+    },
+    "hash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "meta_hash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "license_hash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "edition_number" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 1
+    },
+    "edition_total" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 1
+    }
+  },
+  "example" : null
 };
             defs["nft_mint_nft_body"] = {
   "required" : [ "hash", "uris", "wallet_id" ],
@@ -3108,9 +3490,9 @@
   "enum" : [ 1, 2, 3, 4, 5, 6 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
-            defs["OneOfinline_response_200_54"] = {};
-            defs["OneOfinline_response_200_55"] = {};
-            defs["OneOfinline_response_200_61"] = {};
+            defs["OneOfinline_response_200_56"] = {};
+            defs["OneOfinline_response_200_57"] = {};
+            defs["OneOfinline_response_200_66"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -3224,6 +3606,18 @@
     }
   }
 };
+            defs["push_transactions_body"] = {
+  "required" : [ "transactions" ],
+  "type" : "object",
+  "properties" : {
+    "transactions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      }
+    }
+  }
+};
             defs["push_tx_body"] = {
   "required" : [ "spend_bundle" ],
   "type" : "object",
@@ -3305,48 +3699,6 @@
     }
   }
 };
-            defs["rl_set_user_info_body"] = {
-  "type" : "object",
-  "properties" : {
-    "wallet_id" : {
-      "type" : "integer",
-      "format" : "uint32"
-    },
-    "interval" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "limit" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "admin_pubkey" : {
-      "type" : "string",
-      "format" : "hex"
-    },
-    "origin" : {
-      "$ref" : "#/components/schemas/rl_set_user_info_origin"
-    }
-  }
-};
-            defs["rl_set_user_info_origin"] = {
-  "type" : "object",
-  "properties" : {
-    "parent_coin_info" : {
-      "type" : "string",
-      "format" : "hex"
-    },
-    "puzzle_hash" : {
-      "type" : "string",
-      "format" : "hex"
-    },
-    "amount" : {
-      "type" : "integer",
-      "format" : "uint64"
-    }
-  },
-  "example" : null
-};
             defs["select_coins_body"] = {
   "required" : [ "amount", "wallet_id" ],
   "type" : "object",
@@ -3354,6 +3706,10 @@
     "wallet_id" : {
       "type" : "integer",
       "format" : "uint32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
     },
     "min_coin_amount" : {
       "type" : "integer",
@@ -3365,20 +3721,41 @@
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
+    },
+    "max_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "exclude_coin_amounts" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
     }
   }
 };
-            defs["send_clawback_transaction_body"] = {
-  "required" : [ "fee", "wallet_id" ],
+            defs["send_notification_body"] = {
+  "required" : [ "amount", "message", "target" ],
   "type" : "object",
   "properties" : {
-    "wallet_id" : {
+    "target" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "amount" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint64"
     },
     "fee" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "default" : 0
     }
   }
 };
@@ -3410,8 +3787,27 @@
     },
     "min_coin_amount" : {
       "type" : "integer",
-      "format" : "uint128",
+      "format" : "uint64",
       "default" : 0
+    },
+    "max_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "exclude_coin_amounts" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    },
+    "exclude_coin_ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
     }
   }
 };
@@ -3428,6 +3824,32 @@
   }, {
     "$ref" : "#/components/schemas/transaction_input"
   } ]
+};
+            defs["sign_message_by_address_body"] = {
+  "required" : [ "address", "message" ],
+  "type" : "object",
+  "properties" : {
+    "address" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["sign_message_by_id_body"] = {
+  "required" : [ "id", "message" ],
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "message" : {
+      "type" : "string"
+    }
+  }
 };
             defs["singleton_record"] = {
   "type" : "object",
@@ -3865,6 +4287,12 @@
                     <li class="nav-item" data-group="CATWallet" data-name="takeOffer">
                       <a class="nav-link link-secondary" href="#api-CATWallet-takeOffer">takeOffer</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="Coins">
+                    <a class="nav-link" href="#api-Coins">Coins</a>
+                  </li>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByNames">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByNames">getCoinRecordsByNames</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="DIDWallet">
                     <a class="nav-link" href="#api-DIDWallet">DIDWallet</a>
                   </li>
@@ -3985,6 +4413,9 @@
                     <li class="nav-item" data-group="NFTWallet" data-name="nftAddUri">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftAddUri">nftAddUri</a>
                     </li>
+                    <li class="nav-item" data-group="NFTWallet" data-name="nftCalculateRoyalties">
+                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftCalculateRoyalties">nftCalculateRoyalties</a>
+                    </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftGetByDid">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftGetByDid">nftGetByDid</a>
                     </li>
@@ -4000,6 +4431,9 @@
                     <li class="nav-item" data-group="NFTWallet" data-name="nftGetWalletsWithDids">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftGetWalletsWithDids">nftGetWalletsWithDids</a>
                     </li>
+                    <li class="nav-item" data-group="NFTWallet" data-name="nftMintBulk">
+                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftMintBulk">nftMintBulk</a>
+                    </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftMintNft">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftMintNft">nftMintNft</a>
                     </li>
@@ -4011,6 +4445,24 @@
                     </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftTransferNft">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftTransferNft">nftTransferNft</a>
+                    </li>
+                  <li class="nav-header nav-item" data-group="Notifications">
+                    <a class="nav-link" href="#api-Notifications">Notifications</a>
+                  </li>
+                    <li class="nav-item" data-group="Notifications" data-name="deleteNotifications">
+                      <a class="nav-link link-secondary" href="#api-Notifications-deleteNotifications">deleteNotifications</a>
+                    </li>
+                    <li class="nav-item" data-group="Notifications" data-name="getNotifications">
+                      <a class="nav-link link-secondary" href="#api-Notifications-getNotifications">getNotifications</a>
+                    </li>
+                    <li class="nav-item" data-group="Notifications" data-name="sendNotification">
+                      <a class="nav-link link-secondary" href="#api-Notifications-sendNotification">sendNotification</a>
+                    </li>
+                    <li class="nav-item" data-group="Notifications" data-name="signMessageByAddress">
+                      <a class="nav-link link-secondary" href="#api-Notifications-signMessageByAddress">signMessageByAddress</a>
+                    </li>
+                    <li class="nav-item" data-group="Notifications" data-name="signMessageById">
+                      <a class="nav-link link-secondary" href="#api-Notifications-signMessageById">signMessageById</a>
                     </li>
                   <li class="nav-header nav-item" data-group="PoolWallet">
                     <a class="nav-link" href="#api-PoolWallet">PoolWallet</a>
@@ -4026,18 +4478,6 @@
                     </li>
                     <li class="nav-item" data-group="PoolWallet" data-name="pwStatus">
                       <a class="nav-link link-secondary" href="#api-PoolWallet-pwStatus">pwStatus</a>
-                    </li>
-                  <li class="nav-header nav-item" data-group="RateLimitedWallet">
-                    <a class="nav-link" href="#api-RateLimitedWallet">RateLimitedWallet</a>
-                  </li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="addRateLimitedFunds">
-                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-addRateLimitedFunds">addRateLimitedFunds</a>
-                    </li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="rlSetUserInfo">
-                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-rlSetUserInfo">rlSetUserInfo</a>
-                    </li>
-                    <li class="nav-item" data-group="RateLimitedWallet" data-name="sendClawbackTransaction">
-                      <a class="nav-link link-secondary" href="#api-RateLimitedWallet-sendClawbackTransaction">sendClawbackTransaction</a>
                     </li>
                   <li class="nav-header nav-item" data-group="Shared">
                     <a class="nav-link" href="#api-Shared">Shared</a>
@@ -4081,6 +4521,9 @@
                     <li class="nav-item" data-group="Wallet" data-name="getNextAddress">
                       <a class="nav-link link-secondary" href="#api-Wallet-getNextAddress">getNextAddress</a>
                     </li>
+                    <li class="nav-item" data-group="Wallet" data-name="getSpendableCoins">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getSpendableCoins">getSpendableCoins</a>
+                    </li>
                     <li class="nav-item" data-group="Wallet" data-name="getTransaction">
                       <a class="nav-link link-secondary" href="#api-Wallet-getTransaction">getTransaction</a>
                     </li>
@@ -4117,6 +4560,9 @@
                     <li class="nav-item" data-group="WalletNode" data-name="getSyncStatus">
                       <a class="nav-link link-secondary" href="#api-WalletNode-getSyncStatus">getSyncStatus</a>
                     </li>
+                    <li class="nav-item" data-group="WalletNode" data-name="pushTransactions">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-pushTransactions">pushTransactions</a>
+                    </li>
                     <li class="nav-item" data-group="WalletNode" data-name="walletGetNetworkInfo">
                       <a class="nav-link link-secondary" href="#api-WalletNode-walletGetNetworkInfo">walletGetNetworkInfo</a>
                     </li>
@@ -4136,7 +4582,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.6.0</div>
+              <div class="app-desc">Version: 1.6.1</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -4477,7 +4923,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -4606,7 +5052,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_40"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -4735,7 +5181,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -4979,7 +5425,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -5100,7 +5546,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_37"
       }
     }
   }
@@ -5221,7 +5667,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_38"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -5342,7 +5788,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_35"
+        "$ref" : "#/components/schemas/inline_response_200_36"
       }
     }
   }
@@ -5464,7 +5910,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_32"
+        "$ref" : "#/components/schemas/inline_response_200_33"
       }
     }
   }
@@ -5585,7 +6031,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_34"
+        "$ref" : "#/components/schemas/inline_response_200_35"
       }
     }
   }
@@ -5706,7 +6152,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_37"
+        "$ref" : "#/components/schemas/inline_response_200_38"
       }
     }
   }
@@ -5828,7 +6274,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_31"
+        "$ref" : "#/components/schemas/inline_response_200_32"
       }
     }
   }
@@ -5950,7 +6396,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_41"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }
@@ -6071,7 +6517,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_33"
+        "$ref" : "#/components/schemas/inline_response_200_34"
       }
     }
   }
@@ -6192,7 +6638,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_30"
+        "$ref" : "#/components/schemas/inline_response_200_31"
       }
     }
   }
@@ -6218,6 +6664,131 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-takeOffer-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-Coins">
+                  <h1>Coins</h1>
+                    <div id="api-Coins-getCoinRecordsByNames">
+                      <article id="api-Coins-getCoinRecordsByNames-0" data-group="User" data-name="getCoinRecordsByNames" data-version="0">
+                        <div class="pull-left">
+                          <h1>getCoinRecordsByNames</h1>
+                          <p>Retrieves the coins for given coin IDs.</p>
+                        </div>
+                        <p class="marked">Retrieves the coins for given coin IDs, by default returns unspent coins.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records_by_names</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Coins-getCoinRecordsByNames-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_coin_records_by_names" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The coin names.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_coin_records_by_names_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getCoinRecordsByNames_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getCoinRecordsByNames_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getCoinRecordsByNames-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getCoinRecordsByNames-200-schema">
+                                  <div id='responses-getCoinRecordsByNames-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_64"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getCoinRecordsByNames-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getCoinRecordsByNames-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getCoinRecordsByNames-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -6316,7 +6887,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_20"
+        "$ref" : "#/components/schemas/inline_response_200_21"
       }
     }
   }
@@ -6445,7 +7016,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -6574,7 +7145,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_22"
+        "$ref" : "#/components/schemas/inline_response_200_23"
       }
     }
   }
@@ -6703,7 +7274,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_25"
+        "$ref" : "#/components/schemas/inline_response_200_26"
       }
     }
   }
@@ -6832,7 +7403,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_19"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -6961,7 +7532,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_29"
+        "$ref" : "#/components/schemas/inline_response_200_30"
       }
     }
   }
@@ -7090,7 +7661,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_22"
       }
     }
   }
@@ -7219,7 +7790,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_24"
+        "$ref" : "#/components/schemas/inline_response_200_25"
       }
     }
   }
@@ -7348,7 +7919,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_27"
+        "$ref" : "#/components/schemas/inline_response_200_28"
       }
     }
   }
@@ -7469,7 +8040,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_23"
+        "$ref" : "#/components/schemas/inline_response_200_24"
       }
     }
   }
@@ -7590,7 +8161,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_26"
+        "$ref" : "#/components/schemas/inline_response_200_27"
       }
     }
   }
@@ -7711,7 +8282,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -7832,7 +8403,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_28"
+        "$ref" : "#/components/schemas/inline_response_200_29"
       }
     }
   }
@@ -9534,7 +10105,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_56"
+        "$ref" : "#/components/schemas/inline_response_200_58"
       }
     }
   }
@@ -9663,7 +10234,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_57"
+        "$ref" : "#/components/schemas/inline_response_200_59"
       }
     }
   }
@@ -10036,7 +10607,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_53"
+        "$ref" : "#/components/schemas/inline_response_200_55"
       }
     }
   }
@@ -10165,7 +10736,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_55"
+        "$ref" : "#/components/schemas/inline_response_200_57"
       }
     }
   }
@@ -10287,7 +10858,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_54"
+        "$ref" : "#/components/schemas/inline_response_200_56"
       }
     }
   }
@@ -10416,7 +10987,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_53"
+        "$ref" : "#/components/schemas/inline_response_200_55"
       }
     }
   }
@@ -10693,6 +11264,127 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-NFTWallet-nftCalculateRoyalties">
+                      <article id="api-NFTWallet-nftCalculateRoyalties-0" data-group="User" data-name="nftCalculateRoyalties" data-version="0">
+                        <div class="pull-left">
+                          <h1>nftCalculateRoyalties</h1>
+                          <p>Transfers an NFT to another address.</p>
+                        </div>
+                        <p class="marked">Transfers an NFT to another address.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_calculate_royalties</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-NFTWallet-nftCalculateRoyalties-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/nft_calculate_royalties" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/nft_calculate_royalties_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_nftCalculateRoyalties_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_nftCalculateRoyalties_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-nftCalculateRoyalties-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-nftCalculateRoyalties-200-schema">
+                                  <div id='responses-nftCalculateRoyalties-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_16"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-nftCalculateRoyalties-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-nftCalculateRoyalties-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-nftCalculateRoyalties-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-NFTWallet-nftGetByDid">
                       <article id="api-NFTWallet-nftGetByDid-0" data-group="User" data-name="nftGetByDid" data-version="0">
                         <div class="pull-left">
@@ -10904,7 +11596,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
+        "$ref" : "#/components/schemas/inline_response_200_17"
       }
     }
   }
@@ -10972,18 +11664,10 @@ The wallet uses port 9256 by default.</div>
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "Request body with the Id of a wallet",
   "content" : {
     "application/json" : {
       "schema" : {
-        "required" : [ "wallet_id" ],
-        "type" : "object",
-        "properties" : {
-          "wallet_id" : {
-            "type" : "integer",
-            "format" : "uint32"
-          }
-        }
+        "$ref" : "#/components/schemas/nft_get_nfts_body"
       }
     }
   },
@@ -11310,6 +11994,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-nftGetWalletsWithDids-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-NFTWallet-nftMintBulk">
+                      <article id="api-NFTWallet-nftMintBulk-0" data-group="User" data-name="nftMintBulk" data-version="0">
+                        <div class="pull-left">
+                          <h1>nftMintBulk</h1>
+                          <p>Mints NFTs in bulk.</p>
+                        </div>
+                        <p class="marked">Mints NFTs in bulk.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_mint_bulk</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-NFTWallet-nftMintBulk-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/nft_mint_bulk" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/nft_mint_bulk_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_nftMintBulk_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_nftMintBulk_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-nftMintBulk-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-nftMintBulk-200-schema">
+                                  <div id='responses-nftMintBulk-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_11"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-nftMintBulk-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-nftMintBulk-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-nftMintBulk-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -11800,6 +12605,619 @@ The wallet uses port 9256 by default.</div>
                         </article>
                       </div>
                   </section>
+                <section id="api-Notifications">
+                  <h1>Notifications</h1>
+                    <div id="api-Notifications-deleteNotifications">
+                      <article id="api-Notifications-deleteNotifications-0" data-group="User" data-name="deleteNotifications" data-version="0">
+                        <div class="pull-left">
+                          <h1>deleteNotifications</h1>
+                          <p>Deletes notifications.</p>
+                        </div>
+                        <p class="marked">Deletes notifications.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/delete_notifications</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Notifications-deleteNotifications-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/delete_notifications" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The notifications to delete",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/delete_notifications_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_deleteNotifications_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_deleteNotifications_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-deleteNotifications-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-deleteNotifications-200-schema">
+                                  <div id='responses-deleteNotifications-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-deleteNotifications-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-deleteNotifications-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-deleteNotifications-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Notifications-getNotifications">
+                      <article id="api-Notifications-getNotifications-0" data-group="User" data-name="getNotifications" data-version="0">
+                        <div class="pull-left">
+                          <h1>getNotifications</h1>
+                          <p>Retreives notifications.</p>
+                        </div>
+                        <p class="marked">Retreives notifications.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_notifications</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Notifications-getNotifications-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_notifications" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Notification query inputs",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_notifications_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getNotifications_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getNotifications_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getNotifications-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getNotifications-200-schema">
+                                  <div id='responses-getNotifications-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_62"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getNotifications-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getNotifications-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getNotifications-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Notifications-sendNotification">
+                      <article id="api-Notifications-sendNotification-0" data-group="User" data-name="sendNotification" data-version="0">
+                        <div class="pull-left">
+                          <h1>sendNotification</h1>
+                          <p>Sends a notification.</p>
+                        </div>
+                        <p class="marked">Sends a notification.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/send_notification</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Notifications-sendNotification-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/send_notification" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The notification to send",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/send_notification_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_sendNotification_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_sendNotification_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-sendNotification-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-sendNotification-200-schema">
+                                  <div id='responses-sendNotification-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-sendNotification-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-sendNotification-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-sendNotification-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Notifications-signMessageByAddress">
+                      <article id="api-Notifications-signMessageByAddress-0" data-group="User" data-name="signMessageByAddress" data-version="0">
+                        <div class="pull-left">
+                          <h1>signMessageByAddress</h1>
+                          <p>Given a derived P2 address, sign the message by its private key.</p>
+                        </div>
+                        <p class="marked">Given a derived P2 address, sign the message by its private key.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/sign_message_by_address</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Notifications-signMessageByAddress-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/sign_message_by_address" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The message",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/sign_message_by_address_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_signMessageByAddress_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_signMessageByAddress_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-signMessageByAddress-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-signMessageByAddress-200-schema">
+                                  <div id='responses-signMessageByAddress-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_63"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-signMessageByAddress-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-signMessageByAddress-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-signMessageByAddress-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Notifications-signMessageById">
+                      <article id="api-Notifications-signMessageById-0" data-group="User" data-name="signMessageById" data-version="0">
+                        <div class="pull-left">
+                          <h1>signMessageById</h1>
+                          <p>Given a NFT/DID ID, sign the message by the P2 private key.</p>
+                        </div>
+                        <p class="marked">Given a NFT/DID ID, sign the message by the P2 private key.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/sign_message_by_id</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Notifications-signMessageById-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/sign_message_by_id" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The message",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/sign_message_by_id_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_signMessageById_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_signMessageById_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-signMessageById-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-signMessageById-200-schema">
+                                  <div id='responses-signMessageById-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_63"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-signMessageById-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-signMessageById-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-signMessageById-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
                 <section id="api-PoolWallet">
                   <h1>PoolWallet</h1>
                     <div id="api-PoolWallet-pwAbsorbRewards">
@@ -11892,7 +13310,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -12013,7 +13431,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -12134,7 +13552,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -12263,7 +13681,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -12289,372 +13707,6 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-pwStatus-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                  </section>
-                <section id="api-RateLimitedWallet">
-                  <h1>RateLimitedWallet</h1>
-                    <div id="api-RateLimitedWallet-addRateLimitedFunds">
-                      <article id="api-RateLimitedWallet-addRateLimitedFunds-0" data-group="User" data-name="addRateLimitedFunds" data-version="0">
-                        <div class="pull-left">
-                          <h1>addRateLimitedFunds</h1>
-                          <p>Adds rate limited funds.</p>
-                        </div>
-                        <p class="marked">Adds rate limited funds.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/add_rate_limited_funds</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-RateLimitedWallet-addRateLimitedFunds-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
---key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:9256/add_rate_limited_funds" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/add_rate_limited_funds_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_addRateLimitedFunds_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_addRateLimitedFunds_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-addRateLimitedFunds-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-addRateLimitedFunds-200-schema">
-                                  <div id='responses-addRateLimitedFunds-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-addRateLimitedFunds-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-addRateLimitedFunds-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-addRateLimitedFunds-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-RateLimitedWallet-rlSetUserInfo">
-                      <article id="api-RateLimitedWallet-rlSetUserInfo-0" data-group="User" data-name="rlSetUserInfo" data-version="0">
-                        <div class="pull-left">
-                          <h1>rlSetUserInfo</h1>
-                          <p>Sets user info on a rate limited wallet.</p>
-                        </div>
-                        <p class="marked">Sets user info on a rate limited wallet.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/rl_set_user_info</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-RateLimitedWallet-rlSetUserInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
---key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:9256/rl_set_user_info" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/rl_set_user_info_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_rlSetUserInfo_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_rlSetUserInfo_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-rlSetUserInfo-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-rlSetUserInfo-200-schema">
-                                  <div id='responses-rlSetUserInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response without return values",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-rlSetUserInfo-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-rlSetUserInfo-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-rlSetUserInfo-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-RateLimitedWallet-sendClawbackTransaction">
-                      <article id="api-RateLimitedWallet-sendClawbackTransaction-0" data-group="User" data-name="sendClawbackTransaction" data-version="0">
-                        <div class="pull-left">
-                          <h1>sendClawbackTransaction</h1>
-                          <p>Sends a clawback transaction.</p>
-                        </div>
-                        <p class="marked">Sends a clawback transaction.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/send_clawback_transaction</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-RateLimitedWallet-sendClawbackTransaction-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
---key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:9256/send_clawback_transaction" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/send_clawback_transaction_body"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_sendClawbackTransaction_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_sendClawbackTransaction_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK response with a transaction record and a transaction id. </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-sendClawbackTransaction-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-sendClawbackTransaction-200-schema">
-                                  <div id='responses-sendClawbackTransaction-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK response with a transaction record and a transaction id.",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-sendClawbackTransaction-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-sendClawbackTransaction-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-sendClawbackTransaction-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -13488,7 +14540,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_46"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -13738,7 +14790,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -13860,7 +14912,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -13982,7 +15034,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_49"
       }
     }
   }
@@ -14103,7 +15155,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_51"
+        "$ref" : "#/components/schemas/inline_response_200_53"
       }
     }
   }
@@ -14129,6 +15181,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getNextAddress-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Wallet-getSpendableCoins">
+                      <article id="api-Wallet-getSpendableCoins-0" data-group="User" data-name="getSpendableCoins" data-version="0">
+                        <div class="pull-left">
+                          <h1>getSpendableCoins</h1>
+                          <p>Retrieves all spendable coins in a wallet.</p>
+                        </div>
+                        <p class="marked">Retrieves all spendable coins in a wallet.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_spendable_coins</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-getSpendableCoins-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_spendable_coins" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_spendable_coins_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getSpendableCoins_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getSpendableCoins_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getSpendableCoins-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getSpendableCoins-200-schema">
+                                  <div id='responses-getSpendableCoins-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_50"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getSpendableCoins-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getSpendableCoins-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getSpendableCoins-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -14232,7 +15405,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -14361,7 +15534,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_50"
+        "$ref" : "#/components/schemas/inline_response_200_52"
       }
     }
   }
@@ -14482,7 +15655,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_49"
+        "$ref" : "#/components/schemas/inline_response_200_51"
       }
     }
   }
@@ -14611,7 +15784,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_47"
+        "$ref" : "#/components/schemas/inline_response_200_48"
       }
     }
   }
@@ -14732,7 +15905,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -14853,7 +16026,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -14978,7 +16151,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_61"
+        "$ref" : "#/components/schemas/inline_response_200_66"
       }
     }
   }
@@ -15100,7 +16273,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_60"
+        "$ref" : "#/components/schemas/inline_response_200_65"
       }
     }
   }
@@ -15225,7 +16398,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_59"
+        "$ref" : "#/components/schemas/inline_response_200_61"
       }
     }
   }
@@ -15347,7 +16520,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_58"
+        "$ref" : "#/components/schemas/inline_response_200_60"
       }
     }
   }
@@ -15373,6 +16546,128 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getSyncStatus-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-WalletNode-pushTransactions">
+                      <article id="api-WalletNode-pushTransactions-0" data-group="User" data-name="pushTransactions" data-version="0">
+                        <div class="pull-left">
+                          <h1>pushTransactions</h1>
+                          <p>Pushes multiple transactions spend bundle to the mempool and blockchain.</p>
+                        </div>
+                        <p class="marked">Pushes multiple transactions spend bundle to the mempool and blockchain.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/push_transactions</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-WalletNode-pushTransactions-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/push_transactions" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The transaction list",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/push_transactions_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_pushTransactions_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_pushTransactions_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pushTransactions-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pushTransactions-200-schema">
+                                  <div id='responses-pushTransactions-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pushTransactions-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pushTransactions-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pushTransactions-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -15469,7 +16764,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_52"
+        "$ref" : "#/components/schemas/inline_response_200_54"
       }
     }
   }
