@@ -35,6 +35,19 @@ components:
   responses:
     empty:
       $ref: "./responses/empty.yaml#/empty"
+    coin_records:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              coin_records:
+                type: array
+                items:
+                  $ref: "#/components/schemas/coin_record"
+            allOf:
+              - $ref: "#/components/schemas/apiResponse"
     fingerprint_response:
       description: OK
       content:
@@ -66,6 +79,17 @@ components:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
     coin_announcement:
       $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
+    coin_search_options:
+      type: object
+      properties:
+        start_height:
+          type: integer
+          format: uint32
+        end_height:
+          type: integer
+          format: uint32
+        include_spent_coins:
+          type: boolean
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     puzzle_announcement:
@@ -130,8 +154,8 @@ tags:
     description: Methods for managing keys.
   - name: Pool Wallet
     description: Pool wallet api.
-  - name: Rate Limited Wallet
-    description: Rate limited wallet api.
+  - name: Notifications
+    description: Notifcaiton api.
   - name: Wallet
     description: Methods for shared wallet operations.
   - name: Wallet Management
@@ -909,7 +933,28 @@ paths:
       description: Gets NFTs from a wallet.
       operationId: nft_get_nfts
       requestBody:
-        $ref: "#/components/requestBodies/wallet_id"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                start_index:
+                  type: integer
+                  format: uint32
+                  default: 0
+                num:
+                  type: integer
+                  format: uint32
+                  default: 0
+                ignore_size_limit:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1122,6 +1167,60 @@ paths:
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
+  /nft_calculate_royalties:
+    post:
+      tags:
+        - NFT Wallet
+      summary: Transfers an NFT to another address.
+      description: Transfers an NFT to another address.
+      operationId: nft_calculate_royalties
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                royalty_assets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      royalty_address:
+                        type: string
+                        format: hex
+                      royalty_percentage:
+                        type: integer
+                fungible_assets:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      amount:
+                        type: integer
+                        format: uint64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: array
+                    items:
+                      type: object
+                      properties:
+                        asset:
+                          type: string
+                          format: hex
+                        address:
+                          type: string
+                          format: hex
+                        wallet_id:
+                          type: integer
+                          format: uint64
+                  - $ref: "#/components/schemas/apiResponse"
+
   /nft_get_info:
     post:
       tags:
@@ -1875,6 +1974,15 @@ paths:
                   type: array
                   items:
                     $ref: "#/components/schemas/coin"
+                max_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                exclude_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
       responses:
         "200":
           description: OK
@@ -2438,103 +2546,6 @@ paths:
                       state:
                         $ref: "#/components/schemas/pool_wallet_info"
                   - $ref: "#/components/schemas/apiResponse"
-  /add_rate_limited_funds:
-    post:
-      tags:
-        - Rate Limited Wallet
-      summary: Adds rate limited funds.
-      description: Adds rate limited funds.
-      operationId: add_rate_limited_funds
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - wallet_id
-                - amount
-                - fee
-              properties:
-                wallet_id:
-                  type: integer
-                  format: uint32
-                amount:
-                  type: integer
-                  format: uint64
-                fee:
-                  type: integer
-                  format: uint64
-      responses:
-        "200":
-          $ref: "#/components/responses/empty"
-  /rl_set_user_info:
-    post:
-      tags:
-        - Rate Limited Wallet
-      summary: Sets user info on a rate limited wallet.
-      description: Sets user info on a rate limited wallet.
-      operationId: rl_set_user_info
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                wallet_id:
-                  type: integer
-                  format: uint32
-                interval:
-                  type: integer
-                  format: uint64
-                limit:
-                  type: integer
-                  format: uint64
-                admin_pubkey:
-                  type: string
-                  format: hex
-                origin:
-                  type: object
-                  properties:
-                    parent_coin_info:
-                      type: string
-                      format: hex
-                    puzzle_hash:
-                      type: string
-                      format: hex
-                    amount:
-                      type: integer
-                      format: uint64
-      responses:
-        "200":
-          $ref: "#/components/responses/empty"
-  /send_clawback_transaction:
-    post:
-      tags:
-        - Rate Limited Wallet
-      summary: Sends a clawback transaction.
-      description: Sends a clawback transaction.
-      operationId: send_clawback_transaction
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - wallet_id
-                - fee
-              properties:
-                wallet_id:
-                  type: integer
-                  format: uint32
-                fee:
-                  type: integer
-                  format: uint64
-      responses:
-        "200":
-          $ref: "#/components/responses/transaction_record_response"
   /get_current_derivation_index:
     post:
       tags:
@@ -2605,14 +2616,25 @@ paths:
                 - $ref: "#/components/schemas/transaction_input"
                 - type: object
                   properties:
+                    wallet_id:
+                      type: integer
                     min_coin_amount:
                       type: integer
-                      format: uint128
+                      format: uint64
+                      default: 0
+                    max_coin_amount:
+                      type: integer
+                      format: uint64
                       default: 0
                     excluded_coins:
                       type: array
                       items:
                         $ref: "#/components/schemas/coin"
+                    excluded_coin_amounts:
+                      type: array
+                      items:
+                        type: integer
+                        format: uint64
       responses:
         "200":
           description: OK
@@ -2661,8 +2683,22 @@ paths:
                     type: string
                 min_coin_amount:
                   type: integer
-                  format: uint128
+                  format: uint64
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                exclude_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
+                exclude_coin_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -3202,7 +3238,7 @@ paths:
       operationId: push_transactions
       requestBody:
         required: true
-        description: The trasnaction list
+        description: The transaction list
         content:
           application/json:
             schema:
@@ -3217,6 +3253,223 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /get_notifications:
+    post:
+      tags:
+        - Notifications
+      description: Retreives notifications.
+      summary: Retreives notifications.
+      operationId: get_notifications
+      requestBody:
+        required: true
+        description: Notification query inputs
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                start:
+                  type: integer
+                end:
+                  type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      notifications:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              format: hex
+                            message:
+                              type: string
+                              format: hex
+                            amount:
+                              type: integer
+                              format: uint64
+                  - $ref: "#/components/schemas/apiResponse"
+  /delete_notifications:
+    post:
+      tags:
+        - Notifications
+      description: Deletes notifications.
+      summary: Deletes notifications.
+      operationId: delete_notifications
+      requestBody:
+        required: true
+        description: The notifications to delete
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /send_notification:
+    post:
+      tags:
+        - Notifications
+      description: Sends a notification.
+      summary: Sends a notification.
+      operationId: send_notification
+      requestBody:
+        required: true
+        description: The notification to send
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target
+                - message
+                - amount
+              properties:
+                target:
+                  type: string
+                  format: hex
+                message:
+                  type: string
+                  format: hex
+                amount:
+                  type: integer
+                  format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+  /sign_message_by_address:
+    post:
+      tags:
+        - Notifications
+      description: Given a derived P2 address, sign the message by its private key.
+      summary: Given a derived P2 address, sign the message by its private key.
+      operationId: sign_message_by_address
+      requestBody:
+        required: true
+        description: The message
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - address
+                - message
+              properties:
+                address:
+                  type: string
+                  format: hex
+                message:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      pubkey:
+                        type: string
+                        format: hex
+                      signature:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /sign_message_by_id:
+    post:
+      tags:
+        - Notifications
+      description: Given a NFT/DID ID, sign the message by the P2 private key.
+      summary: Given a NFT/DID ID, sign the message by the P2 private key.
+      operationId: sign_message_by_id
+      requestBody:
+        required: true
+        description: The message
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - message
+              properties:
+                id:
+                  type: string
+                  format: hex
+                message:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      pubkey:
+                        type: string
+                        format: hex
+                      signature:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_coin_records_by_names:
+    post:
+      tags:
+        - Coins
+      description: Retrieves the coins for given coin IDs, by default returns unspent coins.
+      summary: Retrieves the coins for given coin IDs.
+      operationId: get_coin_records_by_names
+      requestBody:
+        required: true
+        description: The coin names.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - type: object
+                  required:
+                    - names
+                  properties:
+                    names:
+                      type: array
+                      items:
+                        type: string
+                        format: hex
+                - $ref: "#/components/schemas/coin_search_options"
+      responses:
+        "200":
+          $ref: "#/components/responses/coin_records"
   /get_wallets:
     post:
       tags:
@@ -3276,7 +3529,6 @@ paths:
                   description: The type of wallet to create.
                   enum:
                     - cat_wallet
-                    - rl_wallet
                     - did_wallet
                     - pool_wallet
                     - nft_wallet
@@ -3304,29 +3556,6 @@ paths:
                     asset_id:
                       type: string
                       description: Only used when `mode` is 'existing'
-                - type: object
-                  description: Details needed to create a rl_wallet.
-                  required:
-                    - rl_type
-                  properties:
-                    rl_type:
-                      type: string
-                      description: The type of RL Wallet to create.
-                      enum:
-                        - admin
-                        - user
-                    interval:
-                      type: integer
-                      format: uint64
-                      description: Rate interval - needed for admin creation only.
-                    limit:
-                      type: integer
-                      format: uint64
-                      description: Rate limit - needed for admin creation only.
-                    pubkey:
-                      type: string
-                      format: hex
-                      description: Public key - needed for admin creation only.
                 - type: object
                   description: Details needed to create a did_wallet.
                   required:
@@ -3410,19 +3639,6 @@ paths:
                       wallet_id:
                         type: integer
                         format: uint32
-                  - type: object
-                    description: Response when a RL wallet is created.
-                    properties:
-                      id:
-                        type: integer
-                        format: uint32
-                      type:
-                        $ref: "#/components/schemas/wallet_type"
-                      origin:
-                        $ref: "#/components/schemas/coin"
-                      pubkey:
-                        type: string
-                        format: hex
                   - type: object
                     description: Response when a new DID wallet is created.
                     properties:
