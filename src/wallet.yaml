@@ -3364,7 +3364,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/apiResponse"
+                allOf:
+                  - type: object
+                    properties:
+                      tx:
+                        $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
   /sign_message_by_address:
     post:
       tags:
