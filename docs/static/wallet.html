@@ -2754,6 +2754,18 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "tx" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_64"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "pubkey" : {
         "type" : "string",
         "format" : "hex"
@@ -2767,7 +2779,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_64"] = {
+            defs["inline_response_200_65"] = {
   "type" : "object",
   "properties" : {
     "coin_records" : {
@@ -2781,7 +2793,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_65"] = {
+            defs["inline_response_200_66"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2800,7 +2812,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_66"] = {
+            defs["inline_response_200_67"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -3492,7 +3504,7 @@
             defs["OneOfcreate_new_wallet_body"] = {};
             defs["OneOfinline_response_200_56"] = {};
             defs["OneOfinline_response_200_57"] = {};
-            defs["OneOfinline_response_200_66"] = {};
+            defs["OneOfinline_response_200_67"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -6763,7 +6775,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_64"
+        "$ref" : "#/components/schemas/inline_response_200_65"
       }
     }
   }
@@ -12942,7 +12954,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
+        "$ref" : "#/components/schemas/inline_response_200_63"
       }
     }
   }
@@ -13064,7 +13076,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_63"
+        "$ref" : "#/components/schemas/inline_response_200_64"
       }
     }
   }
@@ -13186,7 +13198,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_63"
+        "$ref" : "#/components/schemas/inline_response_200_64"
       }
     }
   }
@@ -16151,7 +16163,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_66"
+        "$ref" : "#/components/schemas/inline_response_200_67"
       }
     }
   }
@@ -16273,7 +16285,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_65"
+        "$ref" : "#/components/schemas/inline_response_200_66"
       }
     }
   }
