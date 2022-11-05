@@ -1510,8 +1510,8 @@
     "type" : "object",
     "properties" : {
       "mempool_items" : {
-        "type" : "array",
-        "items" : {
+        "type" : "object",
+        "additionalProperties" : {
           "$ref" : "#/components/schemas/mempool_item"
         }
       }

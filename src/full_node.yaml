@@ -674,8 +674,8 @@ paths:
                   - type: object
                     properties:
                       mempool_items:
-                        type: array
-                        items:
+                        type: object
+                        additionalProperties:
                           $ref: "#/components/schemas/mempool_item"
                   - $ref: "#/components/schemas/apiResponse"
   /get_mempool_item_by_tx_id:
