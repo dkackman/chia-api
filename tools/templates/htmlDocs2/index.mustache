@@ -183,7 +183,7 @@
 -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
 "{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^@first}}&{{/@first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}" \
 -d "{}"</code></pre>
-                          {{/if}}
+                          {{/if websocket}}
                           <h2>Parameters</h2>
 
                           {{#hasPathParams}}
