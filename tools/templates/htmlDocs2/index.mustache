@@ -158,7 +158,7 @@
                           <p>{{summary}}</p>
                         </div>
                         <p class="marked">{{notes}}</p>            
-                        {{#if websocket}}
+                        {{#websocket}}
                         <p class="http-method" data-type="websocket">websocket</p>
                         <p>RPC payload</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="{{httpMethod}}"><code>{
@@ -183,7 +183,7 @@
 -H "Content-Type: {{#consumes}}{{{mediaType}}}{{#hasMore}},{{/hasMore}}{{/consumes}}"{{/hasConsumes}} \
 "{{basePath}}{{path}}{{#hasQueryParams}}?{{#queryParams}}{{^@first}}&{{/@first}}{{baseName}}={{vendorExtensions.x-eg}}{{/queryParams}}{{/hasQueryParams}}" \
 -d "{}"</code></pre>
-                          {{/if websocket}}
+                          {{/websocket}}
                           <h2>Parameters</h2>
 
                           {{#hasPathParams}}
