@@ -1,10 +1,22 @@
 #!/usr/bin/env zx
+//
+// This tool takes an example JSON RPC response and the path to a YAML schema, and inserts
+// `example` keys in the appropriate `property` fields of the YAML schema. It was used to
+// generate the example fields in `src/schemas`.
+//
 // See https://github.com/google/zx#install for getting zx
+//
+// cat <<EOF | ./tools/annotate-with-example.zx.mjs src/schemas/network_info.yaml
+// {
+//     "network_name": "mainnet",
+//     "network_prefix": "xch",
+//     "success": true
+// }
+// EOF
 
 const args = argv._
 
 const yamlFile = args[0];
-// const schemasDir = path.dirname(yamlFile);
 const input = await stdin();
 
 const examplesJson = JSON.parse(
@@ -19,25 +31,6 @@ function isRef(record) {
   const keys = Object.keys(record);
   return keys.length === 1 && keys[0] === '$ref';
 }
-
-// /**
-//  * @param {object} record
-//  */
-// async function resolveRef(record) {
-//   const keys = Object.keys(record);
-//   const isRef = keys.length === 1 && keys[0] === '$ref';
-//   if (!isRef) {
-//     return record;
-//   }
-//   console.log(`<${record['$ref']}>`)
-//   const [, filename, , yamlPath] = record['$ref'].match(/^(.*?)(#\/(.*))?$/) || [];
-//   const file = path.join(schemasDir, filename);
-//   const schema = await YAML.parse((await fs.readFile(file)).toString());
-//   const dereferrenced = yamlPath ? get(yamlPath.split('/'), schema) : schema;
-//   console.log(' resolveRef: ', 'filename:', filename, '  yamlPath:', yamlPath)
-//   console.log('  dereferrenced:', dereferrenced)
-//   return dereferrenced;
-// }
 
 const PathError = Symbol('path error')
 
