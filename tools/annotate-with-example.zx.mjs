@@ -1,6 +1,17 @@
 #!/usr/bin/env zx
 // See https://github.com/google/zx#install for getting zx
 
+// this script is used to insert examples into the existing schemas.
+//  We can use it by piping the example data corresponding to the given schema file. For instance:
+//
+// cat <<EOF | ./tools/annotate-with-example.zx.mjs src/schemas/network_info.yaml
+// {
+//     "network_name": "mainnet",
+//     "network_prefix": "xch",
+//     "success": true
+// }
+// EOF
+
 const args = argv._
 
 const yamlFile = args[0];
