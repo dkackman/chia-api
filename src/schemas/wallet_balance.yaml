@@ -3,26 +3,33 @@ wallet_balance:
   properties:
     confirmed_wallet_balance:
       type: integer
+      example: 999999799
       format: uint64
     unconfirmed_wallet_balance:
       type: integer
+      example: 999999799
       format: uint64
     spendable_balance:
       type: integer
+      example: 999999799
       format: uint64
     pending_change:
       type: integer
+      example: 0
       format: uint64
     max_send_amount:
       type: integer
+      example: 999999799
       format: uint64
     unspent_coin_count:
       type: integer
+      example: 1
       format: int32
     pending_coin_removal_count:
       type: integer
+      example: 0
       format: int32
     wallet_type:
-      $ref: "./wallet_type.yaml#/wallet_type"
+      $ref: ./wallet_type.yaml#/wallet_type
     asset_id:
       type: string

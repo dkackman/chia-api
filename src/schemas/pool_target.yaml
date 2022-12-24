@@ -1,8 +1,10 @@
-﻿pool_target:
+pool_target:
   type: object
   properties:
     puzzle_hash:
       type: string
+      example: "0x77c08f1ae7c6ae4808c8c07f7d99363b0c00f0ad416c4a292b5341282e38dc35"
     max_height:
       type: integer
+      example: 0
       format: uint32

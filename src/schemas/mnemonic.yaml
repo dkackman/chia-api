@@ -1,7 +1,33 @@
 mnemonic:
   description: 24 words of entropy.
   type: array
+  example:
+    - hint
+    - dice
+    - session
+    - fun
+    - budget
+    - strong
+    - album
+    - lava
+    - tackle
+    - sudden
+    - garage
+    - people
+    - bundle
+    - federal
+    - chest
+    - process
+    - vicious
+    - behave
+    - nephew
+    - zero
+    - vital
+    - ocean
+    - artist
+    - lawsuit
   items:
     type: string
+    example: hint
   minItems: 24
   maxItems: 24

@@ -4,43 +4,59 @@ transaction_record:
   properties:
     confirmed_at_height:
       type: integer
+      example: 2863494
       format: uint32
     created_at_time:
       type: integer
+      example: 1669182237
       format: uint64
     to_puzzle_hash:
       type: string
+      example: "0xb6ed191a2f80194f49fe33e9b9254642ca942ee287faeca2a45f4b96a5c0875a"
       format: hex
     amount:
       type: integer
+      example: 100
       format: uint64
     fee_amount:
       type: integer
+      example: 0
       format: uint64
     confirmed:
       type: boolean
+      example: true
     sent:
       type: integer
+      example: 10
       format: uint32
     spend_bundle:
-      $ref: "./spend_bundle.yaml#/spend_bundle"
+      $ref: ./spend_bundle.yaml#/spend_bundle
     additions:
       type: array
+      example:
+        - amount: 100
+          parent_coin_info: "0xabbb6c6859db74e8e627f21263c078893383131bcf22faec68b2de914d03e59f"
+          puzzle_hash: "0xb4a41bbce457745b006181ab99e34a0cbd8c83c196bc74fc98eb3aec882ed784"
       items:
-        $ref: "./coin.yaml#/coin"
+        $ref: ./coin.yaml#/coin
     removals:
       type: array
+      example:
+        - amount: 100
+          parent_coin_info: "0x9c0083d8da8733c899787e4dcf18a56bc944f49ed668808e20890f01cbc35f37"
+          puzzle_hash: "0xb4a41bbce457745b006181ab99e34a0cbd8c83c196bc74fc98eb3aec882ed784"
       items:
-        $ref: "./coin.yaml#/coin"
+        $ref: ./coin.yaml#/coin
     wallet_id:
       type: integer
+      example: 2
       format: uint32
     sent_to:
       type: array
-      description:
-        Represents the list of peers that we sent the transaction to, whether each one
-        included it in the mempool, and what the error message (if any) was.
-        List[Tuple[str, uint8, Optional[str]]]
+      example: []
+      description: Represents the list of peers that we sent the transaction to,
+        whether each one included it in the mempool, and what the error message
+        (if any) was. List[Tuple[str, uint8, Optional[str]]]
       items:
         type: array
         items:
@@ -52,14 +68,17 @@ transaction_record:
             - type: string
     trade_id:
       type: string
+      example: null
       format: hex
     type:
-      $ref: "./transaction_type.yaml#/transaction_type"
+      $ref: ./transaction_type.yaml#/transaction_type
     name:
       type: string
+      example: "0x43f6811a4daf18622fc7f132f5166a1246056b4a983b7befccb7e4b2e2c57f3b"
       format: hex
     memos:
       type: array
+      example: {}
       description: List[Tuple[bytes32, List[bytes]]]
       items:
         type: object

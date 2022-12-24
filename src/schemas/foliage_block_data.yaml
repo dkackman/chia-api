@@ -1,13 +1,19 @@
-﻿foliage_block_data:
+foliage_block_data:
   type: object
   properties:
     unfinished_reward_block_hash:
       type: string
+      example: "0xcc705bd601b6c9e3081bde85db2a917d312716136e077c37e7f5090c2685733f"
     pool_target:
-      $ref: "./pool_target.yaml#/pool_target"
+      $ref: ./pool_target.yaml#/pool_target
     pool_signature:
       type: string
+      example: "0xb39237cb5db187f1a3f210f5fff1bee0f7b66e466eb1bd393204768d982335f3ee5\
+        c7faec138e334110d80ce47e46704067db26f8a2c5267bbaefb74ea9ef144bd51a8fe38\
+        8ba68727f3e246b8aefef427b2e2e299ed976d27ba2789bcf7cb7c"
     farmer_reward_puzzle_hash:
       type: string
+      example: "0x77c08f1ae7c6ae4808c8c07f7d99363b0c00f0ad416c4a292b5341282e38dc35"
     extension_data:
       type: string
+      example: "0x0000000000000000000000000000000000000000000000000000000003a2c7c9"

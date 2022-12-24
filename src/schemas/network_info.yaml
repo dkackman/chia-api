@@ -6,6 +6,8 @@ network_info:
     - network_prefix
   properties:
     network_name:
-      type: "string"
+      type: string
+      example: mainnet
     network_prefix:
-      type: "string"
+      type: string
+      example: xch

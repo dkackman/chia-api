@@ -1,32 +1,35 @@
-﻿full_block:
+full_block:
   type: object
   properties:
     finished_sub_slots:
       type: array
+      example: []
       items:
-        $ref: "./end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle"
+        $ref: ./end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle
     reward_chain_block:
-      $ref: "./reward_chain_block.yaml#/reward_chain_block"
+      $ref: ./reward_chain_block.yaml#/reward_chain_block
     challenge_chain_sp_proof:
-      $ref: "./vdf_proof.yaml#/vdf_proof"
+      $ref: ./vdf_proof.yaml#/vdf_proof
     challenge_chain_ip_proof:
-      $ref: "./vdf_proof.yaml#/vdf_proof"
+      $ref: ./vdf_proof.yaml#/vdf_proof
     reward_chain_sp_proof:
-      $ref: "./vdf_proof.yaml#/vdf_proof"
+      $ref: ./vdf_proof.yaml#/vdf_proof
     reward_chain_ip_proof:
-      $ref: "./vdf_proof.yaml#/vdf_proof"
+      $ref: ./vdf_proof.yaml#/vdf_proof
     infused_challenge_chain_ip_proof:
-      $ref: "./vdf_proof.yaml#/vdf_proof"
+      $ref: ./vdf_proof.yaml#/vdf_proof
     foliage:
-      $ref: "./foliage.yaml#/foliage"
+      $ref: ./foliage.yaml#/foliage
     foliage_transaction_block:
-      $ref: "./foliage_transaction_block.yaml#/foliage_transaction_block"
+      $ref: ./foliage_transaction_block.yaml#/foliage_transaction_block
     transactions_info:
-      $ref: "./transactions_info.yaml#/transactions_info"
+      $ref: ./transactions_info.yaml#/transactions_info
     transactions_generator:
       type: string
+      example: null
     transactions_generator_ref_list:
       type: array
+      example: []
       items:
         type: integer
         format: uint32

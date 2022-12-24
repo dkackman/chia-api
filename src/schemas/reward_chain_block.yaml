@@ -1,4 +1,4 @@
-﻿reward_chain_block:
+reward_chain_block:
   type: object
   properties:
     weight:
@@ -9,27 +9,36 @@
       format: uint32
     total_iters:
       type: integer
+      example: 4212156346430
       format: bigint
     signage_point_index:
       type: integer
+      example: 37
       format: uint8
     pos_ss_cc_challenge_hash:
       type: string
+      example: "0x04b130f89a8fc37519eab0d835a43ef5547552b2b67c5129fa00f79a57ba8d7f"
     proof_of_space:
-      $ref: "./proof_of_space.yaml#/proof_of_space"
+      $ref: ./proof_of_space.yaml#/proof_of_space
     challenge_chain_sp_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     challenge_chain_sp_signature:
       type: string
+      example: "0xa6058eaa6e9cf8469e152e80b4ac4c3cfdca8660cbe44ca50d3771ab1bbf1d040cb\
+        a842d1b9bf633756159859ecb2ebc05b5f994cef91d5915d4763284e340095a59fb87f2\
+        e50fc3f0b6658d1663aeb9d6732373203d7e45df56eb19baeff64c"
     challenge_chain_ip_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     reward_chain_sp_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     reward_chain_sp_signature:
       type: string
+      example: "0xa4fb8eb7afc74b945efe1f6b28453a708df7de1f0b56239c5fed50974b896b9bb1f\
+        559b49b5a6cf7f4351f1545918b5017e28e81f974bc7bdba88b61f2f9ca8492ab9b7d23\
+        371e579b30da9a1a5c7dc0a8fe5605a86165d34c3c552f509fdd7b"
     reward_chain_ip_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     infused_challenge_chain_ip_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     is_transaction_block:
       type: boolean

@@ -1,11 +1,28 @@
-﻿npc:
+npc:
   type: object
   properties:
     coin_name:
       type: string
+      example: "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278"
     puzzle_hash:
       type: string
+      example: "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
     conditions:
       type: array
+      example:
+        - - "0x33"
+          - - opcode: CREATE_COIN
+              vars:
+                - "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76b\
+                  b5033d"
+                - "0x00ec8e78e9"
+                - 0x
+        - - "0x32"
+          - - opcode: AGG_SIG_ME
+              vars:
+                - "0xb44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734\
+                  c229d351fed2a5a87c059049d205a8ec3c8124"
+                - "0xcae8db944550d51ef9eb4bdc297ac7a2ddb759f2e202c13df629abb41c\
+                  c69290"
       items:
-        $ref: "./condition.yaml#/condition"
+        $ref: ./condition.yaml#/condition

@@ -4,41 +4,60 @@ nft_info:
   properties:
     launcher_id:
       type: string
+      example: "0x821fdd13fe209466f1c69d82eb951cf630d28e901c2e14285d8a574dbde034c4"
       format: hex
     nft_coin_id:
       type: string
+      example: "0x9bcf429079bd8e394658a3f0c43c6641c9f92d0dcc1770eeb6be6588a49fc925"
       format: hex
     owner_did:
       type: string
+      example: "0xd590645dc77e25f22ffe37846e73868a99179d33de11648efaa286bc341936ea"
     royalty_percentage:
       type: integer
+      example: 300
       format: uint16
     royalty_puzzle_hash:
       type: string
+      example: "0x0fe4e859760b755980c9a92c91459b75eb4f02135ace8d2731eca0e89ceef1fb"
       format: hex
     data_uris:
       type: array
+      example:
+        - https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg
       items:
         type: string
+        example: https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg
         format: uri
     data_hash:
       type: string
+      example: "0x14836b86a48e1b2b5e857213af97534704475b4c155d34b2cb83ed4b7cba2bb0"
       format: hex
     metadata_uris:
       type: array
+      example:
+        - https://metadata_example.com
+        - https://metadata_example2.com
       items:
         type: string
+        example: https://metadata_example.com
         format: uri
     metadata_hash:
       type: string
+      example: "0x868463c2ae6f8a9585156c9ad9f4b9b01eeacc56fec82aa629c97135ff21823e"
       format: hex
     license_uris:
       type: array
+      example:
+        - https://license_example.com
+        - https://license_example2.com
       items:
         type: string
+        example: https://license_example.com
         format: uri
     license_hash:
       type: string
+      example: "0x358d4eb4aedefbec22824036299eff24216d213a95c8f986f862f0a89a250a82"
       format: hex
     series_total:
       type: integer
@@ -48,17 +67,32 @@ nft_info:
       format: uint64
     updater_puzhash:
       type: string
+      example: "0xfe8a4b4e27a2e29a4d3fc7ce9d527adbcaccbab6ada3903ccf3ba9a769d2d78b"
       format: hex
     chain_info:
       type: string
+      example: ((117
+        "https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg")
+        (104 .
+        0x14836b86a48e1b2b5e857213af97534704475b4c155d34b2cb83ed4b7cba2bb0)
+        (28021 "https://metadata_example.com", "https://metadata_example2.com")
+        (27765 "https://license_example.com", "https://license_example2.com")
+        (29550 . 1) (29556 . 5) (28008 .
+        0x868463c2ae6f8a9585156c9ad9f4b9b01eeacc56fec82aa629c97135ff21823e)
+        (27752 .
+        0x358d4eb4aedefbec22824036299eff24216d213a95c8f986f862f0a89a250a82))
     mint_height:
       type: integer
+      example: 1127304
       format: uint32
     supports_did:
       type: boolean
+      example: true
     pending_transaction:
       type: boolean
+      example: false
       default: false
     launcher_puzhash:
       type: string
+      example: "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
       format: hex

@@ -1,11 +1,13 @@
-﻿vdf_info:
+vdf_info:
   type: object
   description: Used to generate the discriminant (VDF group)
   properties:
     challenge:
       type: string
+      example: "0xeb8c4d20b322be8d9fddbf9412016bdffe9a2901d7edb0e364e94266d0e095f7"
     number_of_iterations:
       type: integer
+      example: 1024
       format: uint64
     output:
-      $ref: "./classgroup_element.yaml#/classgroup_element"
+      $ref: ./classgroup_element.yaml#/classgroup_element

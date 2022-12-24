@@ -1,10 +1,15 @@
-﻿vdf_proof:
+vdf_proof:
   type: object
   properties:
     witness_type:
       type: integer
+      example: 0
       format: uint8
     witness:
       type: string
+      example: "0x02004c0001010000000000000000000000000000000000000000000000000000000\
+        00000000000000000000000000000000000000000000000000000000000000000000000\
+        00000000000000000000000000000000000000000000000000000000000000"
     normalized_to_identity:
       type: boolean
+      example: false

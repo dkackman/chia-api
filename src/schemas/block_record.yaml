@@ -1,92 +1,124 @@
 block_record:
   type: object
-  description: "This class is not included or hashed into the blockchain, but it is kept in memory as a more
-              efficient way to maintain data about the blockchain. This allows us to validate future blocks,
-              difficulty adjustments, etc, without saving the whole header block in memory."
-  properties: 
-    challenge_block_info_hash: 
+  description: This class is not included or hashed into the blockchain, but it is
+    kept in memory as a more efficient way to maintain data about the
+    blockchain. This allows us to validate future blocks, difficulty
+    adjustments, etc, without saving the whole header block in memory.
+  properties:
+    challenge_block_info_hash:
       type: string
-      description: Hash of challenge chain data, used to validate end of slots in the future.
-    challenge_vdf_output: 
+      example: "0x08dbc5c9f4676bad4cd2fad9b120afefdc107ffdd4066f73f14baf2a204f13df"
+      description: Hash of challenge chain data, used to validate end of slots in the
+        future.
+    challenge_vdf_output:
       type: object
       description: This is the intermediary VDF output at ip_iters in challenge chain.
-      properties: 
-        data: 
+      properties:
+        data:
           type: string
-    deficit: 
+          example: "0x0000af33fa9862d4e257498e9ba0c3cda09c1389d1fde0facd72ea26f5371ba94de\
+            b18137d95bd83b1c7afefba6293feda91d744d014c747e132db0247839e9bd00d79\
+            0c06f753a9d344c80c455a86ecd979c31687ece60748a5d62dca4723c3780d0906"
+    deficit:
       type: integer
+      example: 9
       format: uint8
-      description: A deficit of 16 is an overflow block after an infusion. Deficit of 15 is a challenge block.
-    farmer_puzzle_hash: 
+      description: A deficit of 16 is an overflow block after an infusion. Deficit of
+        15 is a challenge block.
+    farmer_puzzle_hash:
       type: string
-    fees: 
+      example: "0x8f5474dc460673a39c96bb0fdfea933f5d1269c138e47a67f07872c04803a4e7"
+    fees:
       type: integer
+      example: 0
       format: uint64
       nullable: true
       description: Transaction block (present iff is_transaction_block)
-    finished_challenge_slot_hashes: 
+    finished_challenge_slot_hashes:
       type: string
+      example: null
       format: nullable
       description: Slot (present iff this is the first SB in sub slot)
-    finished_infused_challenge_slot_hashes: 
+    finished_infused_challenge_slot_hashes:
       type: string
+      example: null
       format: nullable
       description: Slot (present iff this is the first SB in sub slot)
-    finished_reward_slot_hashes: 
+    finished_reward_slot_hashes:
       type: string
+      example: null
       format: nullable
       description: Slot (present iff this is the first SB in sub slot)
-    header_hash: 
+    header_hash:
       type: string
-    height: 
+      example: "0x3723909a7374c4c88cf00ab9b15365f4988f5bdb2d51bac23f6af939fe40f56c"
+    height:
       type: integer
+      example: 101
       format: uint32
-    infused_challenge_vdf_output: 
+    infused_challenge_vdf_output:
       type: string
+      example: '{"data":"0x0300a4bc6790208e73245df6a85b3f7beac0d17e73972b414a7f94cf1e3c3e9bb4a400516d368cfa8b1814f3b5163fe5a54a1fe35781f58290673c8d9f56cd23b94c138b21207d6aa6f3049f8ad805eb99b28292e06e748117e78e13598cee9945670100"}'
       format: nullable
-      description: This is the intermediary VDF output at ip_iters in infused cc, if deficit less than or equal to 3.
-    overflow: 
+      description: This is the intermediary VDF output at ip_iters in infused cc, if
+        deficit less than or equal to 3.
+    overflow:
       type: boolean
-    pool_puzzle_hash: 
+      example: false
+    pool_puzzle_hash:
       type: string
+      example: "0x8f5474dc460673a39c96bb0fdfea933f5d1269c138e47a67f07872c04803a4e7"
       description: Need to keep track of these because Coins are created in a future block.
-    prev_hash: 
+    prev_hash:
       type: string
-      description: Header hash of the previous block. Transaction block (present iff is_transaction_block).
-    prev_transaction_block_hash: 
+      example: "0x9a6c8728021574c5f3242370831b9fde7a0421f4448b4848276fe1652580c6a7"
+      description: Header hash of the previous block. Transaction block (present iff
+        is_transaction_block).
+    prev_transaction_block_hash:
       type: string
+      example: "0x6c94307cb88f37ca002936769246579824ecadc77fe1e445d31165e6958288e8"
       format: nullable
       description: Header hash of the previous transaction block
-    prev_transaction_block_height: 
+    prev_transaction_block_height:
       type: integer
+      example: 97
       format: int32
-    required_iters: 
+    required_iters:
       type: integer
+      example: 1045145
       format: int32
-    reward_claims_incorporated: 
+    reward_claims_incorporated:
       type: string
+      example: '[{"amount":1750000000000,"parent_coin_info":"0xccd5bb71183532bff220ba46c268991a00000000000000000000000000000061","puzzle_hash":"0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588"},{"amount":250000000000,"parent_coin_info":"0x3ff07eb358e8255a65c30a2dce0e5fbb00000000000000000000000000000061","puzzle_hash":"0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588"}]'
       format: nullable
-    reward_infusion_new_challenge: 
+    reward_infusion_new_challenge:
       type: string
+      example: "0x100b6fbe0778ae13e48e9bf71b7de4e31e5c1d73a0b041e0277f4a76b5338604"
       description: The reward chain infusion output, input to next VDF
-    signage_point_index: 
+    signage_point_index:
       type: integer
+      example: 19
       format: uint8
-    sub_epoch_summary_included: 
+    sub_epoch_summary_included:
       type: string
+      example: null
       format: nullable
-    sub_slot_iters: 
+    sub_slot_iters:
       type: integer
+      example: 134217728
       format: uint64
-    timestamp: 
+    timestamp:
       type: integer
+      example: 1616164827
       format: uint64
       nullable: true
-    total_iters: 
+    total_iters:
       type: integer
+      example: 449835673
       format: bigint
       description: Total number of VDF iterations since genesis, including this block
-    weight: 
+    weight:
       type: integer
+      example: 714
       format: bigint
       description: Total cumulative difficulty of all ancestor blocks since genesis

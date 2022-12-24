@@ -1,9 +1,15 @@
-﻿condition_with_args:
+condition_with_args:
   type: object
   properties:
     opcode:
       type: string
+      example: CREATE_COIN
     vars:
       type: array
+      example:
+        - "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d"
+        - "0x00ec8e78e9"
+        - 0x
       items:
         type: string
+        example: "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d"
