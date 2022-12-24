@@ -4,7 +4,10 @@ cat_info:
   properties:
     asset_id:
       type: string
+      example: a628c1c2c6fcb74d53746157e438e108eab5c0bb3e5c80ff9b1910b3e4832913
     name:
       type: string
+      example: Spacebucks
     symbol:
       type: string
+      example: SBX

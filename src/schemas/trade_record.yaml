@@ -7,35 +7,45 @@ trade_record:
       format: uint32
     accepted_at_time:
       type: integer
+      example: null
       format: uint64
       nullable: true
     created_at_time:
       type: integer
+      example: 1669275137
       format: uint64
     is_my_offer:
       type: boolean
+      example: true
     sent:
       type: integer
+      example: 0
       format: uint32
     offer:
       type: string
     taken_offer:
       type: string
+      example: null
     coins_of_interest:
       type: array
+      example:
+        - amount: 999999
+          parent_coin_info: "0x60a8b06515aaefe74236eb234130d769a1b65c99706414901277926fe29c3360"
+          puzzle_hash: "0xad5de77c7da1316b9b72708d17dbb8937855d740ebaf85669b8bd925275e8d49"
       items:
-        $ref: "./coin.yaml#/coin"
+        $ref: ./coin.yaml#/coin
     trade_id:
       type: string
+      example: "0x84d14398c1a38f376953bf8fa76cbee0d3216b382266d38b5612f17e96bcd1de"
       format: hex
     status:
-      $ref: "./trade_status.yaml#/trade_status"
+      $ref: ./trade_status.yaml#/trade_status
     sent_to:
       type: array
-      description:
-        Represents the list of peers that we sent the transaction to, whether each one
-        included it in the mempool, and what the error message (if any) was.
-        List[Tuple[str, uint8, Optional[str]]]
+      example: []
+      description: Represents the list of peers that we sent the transaction to,
+        whether each one included it in the mempool, and what the error message
+        (if any) was. List[Tuple[str, uint8, Optional[str]]]
       items:
         type: array
         items:

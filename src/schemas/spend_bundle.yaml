@@ -1,9 +1,31 @@
-﻿spend_bundle:
+spend_bundle:
   type: object
   properties:
     aggregated_signature:
       type: string
+      example: "0xa5e5ea1f5ae2335a72fe0a7ed7ca39e8f142e2e1f6e37a348482290e88eb9cea2d9\
+        73acf6145e34d0afeee7ba22f99850641e21a549b2c092bb49aa393acd938825bccca94\
+        13c1a268ba44367bc8433cd0fc0eb82e87bebe23817aa695bdb566"
     coin_spends:
       type: array
+      example:
+        - coin:
+            amount: 1750000000000
+            parent_coin_info: "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000\
+              004082"
+            puzzle_hash: "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb1\
+              0"
+          puzzle_reveal: "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05f\
+            fff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080\
+            808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04f\
+            fff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ff\
+            ff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff0\
+            1ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff\
+            04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff01808\
+            0ffff04ffff01b0aec9c2e5984fe928406abca942d55ec6b56340af8315bfefa558\
+            89dbaade669b9fd3f330af2af44c2a0626d383e64757ff018080"
+          solution: "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567\
+            bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a\
+            9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
       items:
-        $ref: "./coin_spend.yaml#/coin_spend"
+        $ref: ./coin_spend.yaml#/coin_spend

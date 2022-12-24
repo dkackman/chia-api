@@ -1,9 +1,21 @@
-﻿coin_spend:
+coin_spend:
   type: object
   properties:
     coin:
-      $ref: "./coin.yaml#/coin"
+      $ref: ./coin.yaml#/coin
     puzzle_reveal:
       type: string
+      example: "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1df\
+        f0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff\
+        01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff0\
+        4ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080\
+        ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff0\
+        6ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff80808080\
+        80ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0aec9c2e5984fe92\
+        8406abca942d55ec6b56340af8315bfefa55889dbaade669b9fd3f330af2af44c2a0626\
+        d383e64757ff018080"
     solution:
       type: string
+      example: "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567b\
+        ea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158d\
+        c0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"

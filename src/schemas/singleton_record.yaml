@@ -1,28 +1,36 @@
-﻿singleton_record:
+singleton_record:
   type: object
   properties:
     coin_id:
       type: string
+      example: "0x70e75ede3b9ba91ab4b91bc5efea8946fde60518becdce40e2cf6800ff173245"
       format: bytes32
     launcher_id:
       type: string
+      example: "0x4aecd65d5fd0dcac59ef41ad5a74134e38b3e8334aebb1356972b7e9c793a09e"
       format: bytes32
     root:
       type: string
+      example: "0x0000000000000000000000000000000000000000000000000000000000000000"
       format: bytes32
     inner_puzzle_hash:
       type: string
+      example: "0x607b04952b317c81eb21ba96ff5f62adb58621f89d5fe6240f6e83d4395998c5"
       format: bytes32
     confirmed:
       type: boolean
+      example: true
     confirmed_at_height:
       type: integer
+      example: 2872567
       format: uint32
     lineage_proof:
-      $ref: "./lineage_proof.yaml#/lineage_proof"
+      $ref: ./lineage_proof.yaml#/lineage_proof
     generation:
       type: integer
+      example: 1
       format: uint32
     timestamp:
       type: integer
+      example: 1669352585
       format: uint64

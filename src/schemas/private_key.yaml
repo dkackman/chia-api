@@ -3,18 +3,26 @@ private_key:
   properties:
     fingerprint:
       type: integer
+      example: 2473794447
       format: uint32
     sk:
       type: string
+      example: 0665913196501420c0fe2de6b5ce7b25f749d52dcbf997b069bb2ea8438c6c3c
       format: hex
-    pk: 
+    pk:
       type: string
+      example: b73cf2471b10a7ba839616aff0ab1cb319d9d3a77ee26ff88ec1c8e645468eb0b7653518b85e5dd0df7cf50d8612b978
       format: hex
-    farmer_pk: 
+    farmer_pk:
       type: string
+      example: 8c65856685323f149a651e6cbe068ece36f87a84efa16246b0eef65ac586a30fb678878bd4364d52c432fbb77838cbf6
       format: hex
-    pool_pk: 
+    pool_pk:
       type: string
+      example: 845ff087376ffecf83950485d63ffed1cc73f36daf018deb4fbd2f05e7198b07521486274d82ecc4f5a2eaae63dfd0a7
       format: hex
-    seed: 
+    seed:
       type: string
+      example: arrest legend bounce attend rebel blade palace bean dry shell nice
+        bubble coil cook token nerve visa december hero garment grid attend
+        nerve certain

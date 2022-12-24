@@ -1,12 +1,15 @@
-﻿lineage_proof:
+lineage_proof:
   type: object
   properties:
     parent_name:
       type: string
+      example: "0xc2347b264b412bde5893f4e1369adab3a6c61496845c10f8ec98bc35f9e1429f"
       format: bytes32
     inner_puzzle_hash:
       type: string
+      example: "0x60f66f9824d5f96d4025b70b4f7ac3def458cae742fbd2d70343eeeaa5a59c58"
       format: bytes32
     amount:
       type: integer
+      example: 1
       format: uint64

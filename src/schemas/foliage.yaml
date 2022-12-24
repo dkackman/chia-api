@@ -1,15 +1,24 @@
-﻿foliage:
+foliage:
   type: object
   properties:
     prev_block_hash:
       type: string
+      example: "0x0b08b0ceca65b371729ad3731ba5982c0c63d487cd526874fb907c3e683eb185"
     reward_block_hash:
       type: string
+      example: "0xcc705bd601b6c9e3081bde85db2a917d312716136e077c37e7f5090c2685733f"
     foliage_block_data:
-      $ref: "./foliage_block_data.yaml#/foliage_block_data"
+      $ref: ./foliage_block_data.yaml#/foliage_block_data
     foliage_block_data_signature:
       type: string
+      example: "0x838f98f281429094df95adbd023f7ac285ffe08d7e584e0e1c9d6def26b215f8675\
+        3f52d781116eab02ac949beea9b9c009b6242ba97568f226aeafc2bf4fc83b791fffb2d\
+        636a8b0473727b5bee6a560b09df3dabf9d2b4ca707a35f22e5f38"
     foliage_transaction_block_hash:
       type: string
+      example: "0x813540921a72fdfcbe47858e087b9e848df5fe2d8213288a6df71acf22214cf2"
     foliage_transaction_block_signature:
       type: string
+      example: "0xb0db31ae6d773b3b27009cfdd9a232b54f840e00caf24a5a87e8c27e96933acd03d\
+        8e553ea62e9179ed4078ed86b9e471987e8803ff4311c9d0727d876490012af403094e3\
+        baa4f627785d846c60f770494c253ea7a09e7bc24a53ad683e4704"

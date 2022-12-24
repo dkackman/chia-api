@@ -1,19 +1,22 @@
 blockchain_state:
   type: object
   description: The node's view of the blockchain.
-  properties: 
+  properties:
     node_id:
       type: string
       format: hex
-    difficulty: 
+    difficulty:
       type: integer
+      example: 3008
       format: uint64
-    genesis_challenge_initialized: 
+    genesis_challenge_initialized:
       type: boolean
-    mempool_size: 
+      example: true
+    mempool_size:
       type: integer
+      example: 0
       format: int32
-    mempool_cost: 
+    mempool_cost:
       type: integer
       format: int32
     mempool_min_fees:
@@ -28,25 +31,31 @@ blockchain_state:
     block_max_cost:
       type: integer
       format: int32
-    peak: 
-      $ref: "./block_record.yaml#/block_record"
+    peak:
+      $ref: ./block_record.yaml#/block_record
       nullable: true
-    space: 
+    space:
       type: integer
+      example: 40110198681182960000
       format: bigint
-    sub_slot_iters: 
+    sub_slot_iters:
       type: integer
+      example: 136314880
       format: uint64
-    sync: 
+    sync:
       type: object
-      properties: 
-        sync_mode: 
+      properties:
+        sync_mode:
           type: boolean
-        sync_progress_height: 
+          example: false
+        sync_progress_height:
           type: integer
+          example: 0
           format: uint64
-        sync_tip_height: 
+        sync_tip_height:
           type: integer
+          example: 0
           format: uint64
-        synced: 
+        synced:
           type: boolean
+          example: false

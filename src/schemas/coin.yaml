@@ -1,10 +1,13 @@
-﻿coin:
+coin:
   type: object
   properties:
     parent_coin_info:
       type: string
+      example: "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000004082"
     puzzle_hash:
       type: string
+      example: "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb10"
     amount:
       type: integer
+      example: 1750000000000
       format: uint64

@@ -1,16 +1,26 @@
-﻿proof:
+proof:
   type: object
   properties:
     key:
       type: string
+      example: "9999"
       format: bytes32
     value:
       type: string
+      example: abc123
       format: bytes32
     node_hash:
       type: string
+      example: b87c24e0521f559236a2e06d6e1bb196c138c1c9bfcadad3b25708e7eab97ca7
       format: bytes32
     layers:
       type: array
+      example:
+        - combined_hash: 0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902
+          other_hash: cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5
+          other_hash_side: left
+        - combined_hash: 568ca0020114772138db61001c63ac8574a7c8c76c051dd2d3e28964496aa88c
+          other_hash: 919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11
+          other_hash_side: left
       items:
-        $ref: "./layer.yaml#/layer"
+        $ref: ./layer.yaml#/layer

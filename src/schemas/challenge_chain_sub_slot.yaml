@@ -1,17 +1,21 @@
-﻿challenge_chain_sub_slot:
+challenge_chain_sub_slot:
   type: object
   properties:
     challenge_chain_end_of_slot_vdf:
-      $ref: "./vdf_info.yaml#/vdf_info"
+      $ref: ./vdf_info.yaml#/vdf_info
     infused_challenge_chain_sub_slot_hash:
       type: string
+      example: null
     subepoch_summary_hash:
       type: string
+      example: null
     new_sub_slot_iters:
       type: integer
+      example: null
       format: uint64
       nullable: true
     new_difficulty:
       type: integer
+      example: null
       format: uint64
       nullable: true

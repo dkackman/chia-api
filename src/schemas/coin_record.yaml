@@ -1,18 +1,23 @@
-﻿coin_record:
+coin_record:
   type: object
   properties:
     coin:
-      $ref: "./coin.yaml#/coin"
+      $ref: ./coin.yaml#/coin
     confirmed_block_index:
       type: integer
+      example: 922637
       format: uint32
     spent_block_index:
       type: integer
+      example: 922641
       format: uint32
     spent:
       type: boolean
+      example: true
     coinbase:
       type: boolean
+      example: false
     timestamp:
       type: integer
+      example: 1632832094
       format: uint64

@@ -3,17 +3,25 @@ mirror:
   properties:
     coin_id:
       type: string
+      example: b5756487c17fe3a2628e45a9d3d42e89231af718bb1735e6c8441e07ec005f9d
       format: bytes32
     launcher_id:
       type: string
+      example: 1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f
       format: bytes32
     amount:
       type: integer
+      example: 1000
       format: uint64
     urls:
       type: array
+      example:
+        - http://www.example.com:8575
+        - http://www.example2.com:8575
       items:
         type: string
+        example: http://www.example.com:8575
         format: bytes32
     ours:
       type: boolean
+      example: true
