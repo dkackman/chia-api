@@ -654,7 +654,8 @@
   "properties" : {
     "challenge_block_info_hash" : {
       "type" : "string",
-      "description" : "Hash of challenge chain data, used to validate end of slots in the future."
+      "description" : "Hash of challenge chain data, used to validate end of slots in the future.",
+      "example" : "0x08dbc5c9f4676bad4cd2fad9b120afefdc107ffdd4066f73f14baf2a204f13df"
     },
     "challenge_vdf_output" : {
       "$ref" : "#/components/schemas/block_record_challenge_vdf_output"
@@ -662,16 +663,19 @@
     "deficit" : {
       "type" : "integer",
       "description" : "A deficit of 16 is an overflow block after an infusion. Deficit of 15 is a challenge block.",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 9
     },
     "farmer_puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x8f5474dc460673a39c96bb0fdfea933f5d1269c138e47a67f07872c04803a4e7"
     },
     "fees" : {
       "type" : "integer",
       "description" : "Transaction block (present iff is_transaction_block)",
       "format" : "uint64",
-      "nullable" : true
+      "nullable" : true,
+      "example" : 0
     },
     "finished_challenge_slot_hashes" : {
       "type" : "string",
@@ -689,52 +693,64 @@
       "format" : "nullable"
     },
     "header_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x3723909a7374c4c88cf00ab9b15365f4988f5bdb2d51bac23f6af939fe40f56c"
     },
     "height" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 101
     },
     "infused_challenge_vdf_output" : {
       "type" : "string",
       "description" : "This is the intermediary VDF output at ip_iters in infused cc, if deficit less than or equal to 3.",
-      "format" : "nullable"
+      "format" : "nullable",
+      "example" : "{\"data\":\"0x0300a4bc6790208e73245df6a85b3f7beac0d17e73972b414a7f94cf1e3c3e9bb4a400516d368cfa8b1814f3b5163fe5a54a1fe35781f58290673c8d9f56cd23b94c138b21207d6aa6f3049f8ad805eb99b28292e06e748117e78e13598cee9945670100\"}"
     },
     "overflow" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     },
     "pool_puzzle_hash" : {
       "type" : "string",
-      "description" : "Need to keep track of these because Coins are created in a future block."
+      "description" : "Need to keep track of these because Coins are created in a future block.",
+      "example" : "0x8f5474dc460673a39c96bb0fdfea933f5d1269c138e47a67f07872c04803a4e7"
     },
     "prev_hash" : {
       "type" : "string",
-      "description" : "Header hash of the previous block. Transaction block (present iff is_transaction_block)."
+      "description" : "Header hash of the previous block. Transaction block (present iff is_transaction_block).",
+      "example" : "0x9a6c8728021574c5f3242370831b9fde7a0421f4448b4848276fe1652580c6a7"
     },
     "prev_transaction_block_hash" : {
       "type" : "string",
       "description" : "Header hash of the previous transaction block",
-      "format" : "nullable"
+      "format" : "nullable",
+      "example" : "0x6c94307cb88f37ca002936769246579824ecadc77fe1e445d31165e6958288e8"
     },
     "prev_transaction_block_height" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "example" : 97
     },
     "required_iters" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "example" : 1045145
     },
     "reward_claims_incorporated" : {
       "type" : "string",
-      "format" : "nullable"
+      "format" : "nullable",
+      "example" : "[{\"amount\":1750000000000,\"parent_coin_info\":\"0xccd5bb71183532bff220ba46c268991a00000000000000000000000000000061\",\"puzzle_hash\":\"0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588\"},{\"amount\":250000000000,\"parent_coin_info\":\"0x3ff07eb358e8255a65c30a2dce0e5fbb00000000000000000000000000000061\",\"puzzle_hash\":\"0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588\"}]"
     },
     "reward_infusion_new_challenge" : {
       "type" : "string",
-      "description" : "The reward chain infusion output, input to next VDF"
+      "description" : "The reward chain infusion output, input to next VDF",
+      "example" : "0x100b6fbe0778ae13e48e9bf71b7de4e31e5c1d73a0b041e0277f4a76b5338604"
     },
     "signage_point_index" : {
       "type" : "integer",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 19
     },
     "sub_epoch_summary_included" : {
       "type" : "string",
@@ -742,22 +758,26 @@
     },
     "sub_slot_iters" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 134217728
     },
     "timestamp" : {
       "type" : "integer",
       "format" : "uint64",
-      "nullable" : true
+      "nullable" : true,
+      "example" : 1616164827
     },
     "total_iters" : {
       "type" : "integer",
       "description" : "Total number of VDF iterations since genesis, including this block",
-      "format" : "bigint"
+      "format" : "bigint",
+      "example" : 449835673
     },
     "weight" : {
       "type" : "integer",
       "description" : "Total cumulative difficulty of all ancestor blocks since genesis",
-      "format" : "bigint"
+      "format" : "bigint",
+      "example" : 714
     }
   },
   "description" : "This class is not included or hashed into the blockchain, but it is kept in memory as a more efficient way to maintain data about the blockchain. This allows us to validate future blocks, difficulty adjustments, etc, without saving the whole header block in memory."
@@ -766,7 +786,8 @@
   "type" : "object",
   "properties" : {
     "data" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x0000af33fa9862d4e257498e9ba0c3cda09c1389d1fde0facd72ea26f5371ba94deb18137d95bd83b1c7afefba6293feda91d744d014c747e132db0247839e9bd00d790c06f753a9d344c80c455a86ecd979c31687ece60748a5d62dca4723c3780d0906"
     }
   },
   "description" : "This is the intermediary VDF output at ip_iters in challenge chain.",
@@ -781,14 +802,17 @@
     },
     "difficulty" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 3008
     },
     "genesis_challenge_initialized" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "mempool_size" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "example" : 0
     },
     "mempool_cost" : {
       "type" : "integer",
@@ -814,7 +838,8 @@
     },
     "sub_slot_iters" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 136314880
     },
     "sync" : {
       "$ref" : "#/components/schemas/blockchain_state_sync"
@@ -836,18 +861,22 @@
   "type" : "object",
   "properties" : {
     "sync_mode" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     },
     "sync_progress_height" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "sync_tip_height" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "synced" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     }
   },
   "example" : null
@@ -898,14 +927,17 @@
   "type" : "object",
   "properties" : {
     "parent_coin_info" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000004082"
     },
     "puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb10"
     },
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1750000000000
     }
   }
 };
@@ -917,21 +949,26 @@
     },
     "confirmed_block_index" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 922637
     },
     "spent_block_index" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 922641
     },
     "spent" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "coinbase" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     },
     "timestamp" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1632832094
     }
   }
 };
@@ -958,10 +995,12 @@
       "$ref" : "#/components/schemas/coin"
     },
     "puzzle_reveal" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0aec9c2e5984fe928406abca942d55ec6b56340af8315bfefa55889dbaade669b9fd3f330af2af44c2a0626d383e64757ff018080"
     },
     "solution" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
     }
   }
 };
@@ -983,12 +1022,15 @@
   "type" : "object",
   "properties" : {
     "opcode" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "CREATE_COIN"
     },
     "vars" : {
       "type" : "array",
+      "example" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ],
       "items" : {
-        "type" : "string"
+        "type" : "string",
+        "example" : "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d"
       }
     }
   }
@@ -1072,22 +1114,27 @@
   "type" : "object",
   "properties" : {
     "prev_block_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x0b08b0ceca65b371729ad3731ba5982c0c63d487cd526874fb907c3e683eb185"
     },
     "reward_block_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xcc705bd601b6c9e3081bde85db2a917d312716136e077c37e7f5090c2685733f"
     },
     "foliage_block_data" : {
       "$ref" : "#/components/schemas/foliage_block_data"
     },
     "foliage_block_data_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x838f98f281429094df95adbd023f7ac285ffe08d7e584e0e1c9d6def26b215f86753f52d781116eab02ac949beea9b9c009b6242ba97568f226aeafc2bf4fc83b791fffb2d636a8b0473727b5bee6a560b09df3dabf9d2b4ca707a35f22e5f38"
     },
     "foliage_transaction_block_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x813540921a72fdfcbe47858e087b9e848df5fe2d8213288a6df71acf22214cf2"
     },
     "foliage_transaction_block_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xb0db31ae6d773b3b27009cfdd9a232b54f840e00caf24a5a87e8c27e96933acd03d8e553ea62e9179ed4078ed86b9e471987e8803ff4311c9d0727d876490012af403094e3baa4f627785d846c60f770494c253ea7a09e7bc24a53ad683e4704"
     }
   }
 };
@@ -1095,19 +1142,23 @@
   "type" : "object",
   "properties" : {
     "unfinished_reward_block_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xcc705bd601b6c9e3081bde85db2a917d312716136e077c37e7f5090c2685733f"
     },
     "pool_target" : {
       "$ref" : "#/components/schemas/pool_target"
     },
     "pool_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xb39237cb5db187f1a3f210f5fff1bee0f7b66e466eb1bd393204768d982335f3ee5c7faec138e334110d80ce47e46704067db26f8a2c5267bbaefb74ea9ef144bd51a8fe388ba68727f3e246b8aefef427b2e2e299ed976d27ba2789bcf7cb7c"
     },
     "farmer_reward_puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x77c08f1ae7c6ae4808c8c07f7d99363b0c00f0ad416c4a292b5341282e38dc35"
     },
     "extension_data" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x0000000000000000000000000000000000000000000000000000000003a2c7c9"
     }
   }
 };
@@ -1115,23 +1166,29 @@
   "type" : "object",
   "properties" : {
     "prev_transaction_block_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xf88a87d79c8e65ca559b7e74a9aca3a6f9fc90e6bb9dc6cb4602ed599610876e"
     },
     "timestamp" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1636577488
     },
     "filter_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xea0d50f296d1bdaccc00be16e48a310dd4fa1fcf575065761add6366498b3fbf"
     },
     "additions_root" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x2c04ae163cf5916b774e2591b075560b6dface2b242d10cbb9f40b134cdf2080"
     },
     "removals_root" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x409433654e3b7a530da6cf55c93abde2c7a71a2ea9814883ceef956f8fed61ea"
     },
     "transactions_info_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x9f3d9cb990c560fb66d4e09a9da79844ce933a809bc754eb151775f3600b73ed"
     }
   }
 };
@@ -1140,6 +1197,7 @@
   "properties" : {
     "finished_sub_slots" : {
       "type" : "array",
+      "example" : [ ],
       "items" : {
         "$ref" : "#/components/schemas/end_of_sub_slot_bundle"
       }
@@ -1176,6 +1234,7 @@
     },
     "transactions_generator_ref_list" : {
       "type" : "array",
+      "example" : [ ],
       "items" : {
         "type" : "integer",
         "format" : "uint32"
@@ -1776,32 +1835,45 @@
     },
     "fee" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "npc_result" : {
       "$ref" : "#/components/schemas/npc_result"
     },
     "cost" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 10940866
     },
     "spend_budndle_name" : {
       "type" : "string"
     },
     "additions" : {
       "type" : "array",
+      "example" : [ {
+        "amount" : 3968760041,
+        "parent_coin_info" : "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278",
+        "puzzle_hash" : "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
     "removals" : {
       "type" : "array",
+      "example" : [ {
+        "amount" : 3981342052,
+        "parent_coin_info" : "0x0252418f0ad7a0009dc055a48a2aaff897f4ea6289b57f1ed9c0d8c7a5b5e6a8",
+        "puzzle_hash" : "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
     "program" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xff01ffffffa00252418f0ad7a0009dc055a48a2aaff897f4ea6289b57f1ed9c0d8c7a5b5e6a8ffff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0b44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124ff018080ff8500ed4e7564ffff80ffff01ffff33ffa057b09fa466e876fed06a697b0b82e237ad81424fa809df8c7f41fbcfcc7fcc25ff8400bffc7b80ffff33ffa03be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033dff8500ec8e78e980ffff3cffa029505509405ab0d47b986bb2456c288dc272b7fecad9a54943db25c26dc03de48080ff8080808080"
     }
   }
 };
@@ -1810,10 +1882,12 @@
   "type" : "object",
   "properties" : {
     "network_name" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "mainnet"
     },
     "network_prefix" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "xch"
     }
   },
   "description" : "Basic information about the current network."
@@ -1827,13 +1901,22 @@
   "type" : "object",
   "properties" : {
     "coin_name" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278"
     },
     "puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
     },
     "conditions" : {
       "type" : "array",
+      "example" : [ [ "0x33", [ {
+        "opcode" : "CREATE_COIN",
+        "vars" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ]
+      } ] ], [ "0x32", [ {
+        "opcode" : "AGG_SIG_ME",
+        "vars" : [ "0xb44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124", "0xcae8db944550d51ef9eb4bdc297ac7a2ddb759f2e202c13df629abb41cc69290" ]
+      } ] ] ],
       "items" : {
         "$ref" : "#/components/schemas/condition"
       }
@@ -1850,13 +1933,25 @@
     },
     "npc_list" : {
       "type" : "array",
+      "example" : [ {
+        "coin_name" : "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278",
+        "conditions" : [ [ "0x33", [ {
+          "opcode" : "CREATE_COIN",
+          "vars" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ]
+        } ] ], [ "0x32", [ {
+          "opcode" : "AGG_SIG_ME",
+          "vars" : [ "0xb44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124", "0xcae8db944550d51ef9eb4bdc297ac7a2ddb759f2e202c13df629abb41cc69290" ]
+        } ] ] ],
+        "puzzle_hash" : "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/npc"
       }
     },
     "clvm_cost" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 416866
     }
   }
 };
@@ -1879,11 +1974,13 @@
   "type" : "object",
   "properties" : {
     "puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x77c08f1ae7c6ae4808c8c07f7d99363b0c00f0ad416c4a292b5341282e38dc35"
     },
     "max_height" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 0
     }
   }
 };
@@ -1891,22 +1988,26 @@
   "type" : "object",
   "properties" : {
     "challenge" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xad43c12b5c5a480ee93992697bd8c9153d536007b0ffac024341cd8ca853a9e3"
     },
     "public_pool_key" : {
       "type" : "string"
     },
     "pool_contract_puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x71afdce401a0f2a6f03de6287902eacfa38502d6667b04da36e32c3930171ce4"
     },
     "plot_public_key" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x8b5f3cd22bf5073e12f285d2a0e9bbfb485fea8f3ede2f5573e44168fadbb91b71cef1dffc03758a5241c47b105df81a"
     },
     "size" : {
       "$ref" : "#/components/schemas/k_size"
     },
     "proof" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa84606d3dba86cbc1c2f56d05175bbbcb970629380bec5c49ad46f0c5f067e4ba74101ac24f0e09fb73ce0ebc9249436c528b5fab689d94c4213072e2acfc1c3a6f17763b16304234002ce471da4ce7e888e2f5abadf4d7f48cd157294ce03cb28df0f45597ca5460cd66c772c7650f2d170d08a5898fe65623b33aac864f44d2a39bcf074e62866edccf9b424f9a8ca56c9a98e87d48fb02b933af951284d610ff1eb71e730a05c2f6c7be86fd4df7efb26e8fb2e573981d8ad866adc02a82ffb0d7ff106c9c78f9cea08f4a2de9db2607266edf6e807924edf9af0f36b8938d97865072126011b67646b4d0e206b706d3a3e67e8862cb0502520f1ad1b4341"
     }
   }
 };
@@ -1932,14 +2033,17 @@
     },
     "total_iters" : {
       "type" : "integer",
-      "format" : "bigint"
+      "format" : "bigint",
+      "example" : 4212156346430
     },
     "signage_point_index" : {
       "type" : "integer",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 37
     },
     "pos_ss_cc_challenge_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x04b130f89a8fc37519eab0d835a43ef5547552b2b67c5129fa00f79a57ba8d7f"
     },
     "proof_of_space" : {
       "$ref" : "#/components/schemas/proof_of_space"
@@ -1948,7 +2052,8 @@
       "$ref" : "#/components/schemas/vdf_info"
     },
     "challenge_chain_sp_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa6058eaa6e9cf8469e152e80b4ac4c3cfdca8660cbe44ca50d3771ab1bbf1d040cba842d1b9bf633756159859ecb2ebc05b5f994cef91d5915d4763284e340095a59fb87f2e50fc3f0b6658d1663aeb9d6732373203d7e45df56eb19baeff64c"
     },
     "challenge_chain_ip_vdf" : {
       "$ref" : "#/components/schemas/vdf_info"
@@ -1957,7 +2062,8 @@
       "$ref" : "#/components/schemas/vdf_info"
     },
     "reward_chain_sp_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa4fb8eb7afc74b945efe1f6b28453a708df7de1f0b56239c5fed50974b896b9bb1f559b49b5a6cf7f4351f1545918b5017e28e81f974bc7bdba88b61f2f9ca8492ab9b7d23371e579b30da9a1a5c7dc0a8fe5605a86165d34c3c552f509fdd7b"
     },
     "reward_chain_ip_vdf" : {
       "$ref" : "#/components/schemas/vdf_info"
@@ -1975,14 +2081,17 @@
   "properties" : {
     "total_iters" : {
       "type" : "integer",
-      "format" : "bigint"
+      "format" : "bigint",
+      "example" : 4212156346430
     },
     "signage_point_index" : {
       "type" : "integer",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 37
     },
     "pos_ss_cc_challenge_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x04b130f89a8fc37519eab0d835a43ef5547552b2b67c5129fa00f79a57ba8d7f"
     },
     "proof_of_space" : {
       "$ref" : "#/components/schemas/proof_of_space"
@@ -1991,13 +2100,15 @@
       "$ref" : "#/components/schemas/vdf_info"
     },
     "challenge_chain_sp_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa6058eaa6e9cf8469e152e80b4ac4c3cfdca8660cbe44ca50d3771ab1bbf1d040cba842d1b9bf633756159859ecb2ebc05b5f994cef91d5915d4763284e340095a59fb87f2e50fc3f0b6658d1663aeb9d6732373203d7e45df56eb19baeff64c"
     },
     "reward_chain_sp_vdf" : {
       "$ref" : "#/components/schemas/vdf_info"
     },
     "reward_chain_sp_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa4fb8eb7afc74b945efe1f6b28453a708df7de1f0b56239c5fed50974b896b9bb1f559b49b5a6cf7f4351f1545918b5017e28e81f974bc7bdba88b61f2f9ca8492ab9b7d23371e579b30da9a1a5c7dc0a8fe5605a86165d34c3c552f509fdd7b"
     }
   }
 };
@@ -2008,14 +2119,16 @@
       "$ref" : "#/components/schemas/vdf_info"
     },
     "challenge_chain_sub_slot_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xe44e06ed13eb06c7c2f0218945b7c62e785d6482c27ebbe69aab499ae199258c"
     },
     "infused_challenge_chain_sub_slot_hash" : {
       "type" : "string"
     },
     "deficit" : {
       "type" : "integer",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 12
     }
   }
 };
@@ -2040,10 +2153,20 @@
   "type" : "object",
   "properties" : {
     "aggregated_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa5e5ea1f5ae2335a72fe0a7ed7ca39e8f142e2e1f6e37a348482290e88eb9cea2d973acf6145e34d0afeee7ba22f99850641e21a549b2c092bb49aa393acd938825bccca9413c1a268ba44367bc8433cd0fc0eb82e87bebe23817aa695bdb566"
     },
     "coin_spends" : {
       "type" : "array",
+      "example" : [ {
+        "coin" : {
+          "amount" : 1750000000000,
+          "parent_coin_info" : "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000004082",
+          "puzzle_hash" : "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb10"
+        },
+        "puzzle_reveal" : "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0aec9c2e5984fe928406abca942d55ec6b56340af8315bfefa55889dbaade669b9fd3f330af2af44c2a0626d383e64757ff018080",
+        "solution" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin_spend"
       }
@@ -2125,11 +2248,13 @@
   "type" : "object",
   "properties" : {
     "challenge" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xeb8c4d20b322be8d9fddbf9412016bdffe9a2901d7edb0e364e94266d0e095f7"
     },
     "number_of_iterations" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1024
     },
     "output" : {
       "$ref" : "#/components/schemas/classgroup_element"
@@ -2142,13 +2267,16 @@
   "properties" : {
     "witness_type" : {
       "type" : "integer",
-      "format" : "uint8"
+      "format" : "uint8",
+      "example" : 0
     },
     "witness" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x02004c00010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
     },
     "normalized_to_identity" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     }
   }
 };

@@ -640,14 +640,17 @@
   "properties" : {
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 250000000000
     },
     "puzzle_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588"
     },
     "memos" : {
       "type" : "array",
+      "example" : [ ],
       "items" : {
         "type" : "string"
       }
@@ -728,13 +731,16 @@
   "type" : "object",
   "properties" : {
     "asset_id" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "a628c1c2c6fcb74d53746157e438e108eab5c0bb3e5c80ff9b1910b3e4832913"
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "Spacebucks"
     },
     "symbol" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "SBX"
     }
   },
   "description" : "Information about a CAT"
@@ -809,14 +815,17 @@
   "type" : "object",
   "properties" : {
     "parent_coin_info" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000004082"
     },
     "puzzle_hash" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb10"
     },
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1750000000000
     }
   }
 };
@@ -846,21 +855,26 @@
     },
     "confirmed_block_index" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 922637
     },
     "spent_block_index" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 922641
     },
     "spent" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "coinbase" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : false
     },
     "timestamp" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1632832094
     }
   }
 };
@@ -887,10 +901,12 @@
       "$ref" : "#/components/schemas/coin"
     },
     "puzzle_reveal" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0aec9c2e5984fe928406abca942d55ec6b56340af8315bfefa55889dbaade669b9fd3f330af2af44c2a0626d383e64757ff018080"
     },
     "solution" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
     }
   }
 };
@@ -1481,23 +1497,28 @@
   "properties" : {
     "farmed_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "pool_reward_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "farmer_reward_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "fee_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "last_height_farmed" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     }
   }
 };
@@ -2974,15 +2995,18 @@
   "properties" : {
     "parent_name" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0xc2347b264b412bde5893f4e1369adab3a6c61496845c10f8ec98bc35f9e1429f"
     },
     "inner_puzzle_hash" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0x60f66f9824d5f96d4025b70b4f7ac3def458cae742fbd2d70343eeeaa5a59c58"
     },
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1
     }
   }
 };
@@ -2991,25 +3015,31 @@
   "properties" : {
     "coin_id" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "b5756487c17fe3a2628e45a9d3d42e89231af718bb1735e6c8441e07ec005f9d"
     },
     "launcher_id" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "1a119374fc7d7055d3419fdcd7f93065f28a1e4acacdf9c73b933b27b685550f"
     },
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1000
     },
     "urls" : {
       "type" : "array",
+      "example" : [ "http://www.example.com:8575", "http://www.example2.com:8575" ],
       "items" : {
         "type" : "string",
-        "format" : "bytes32"
+        "format" : "bytes32",
+        "example" : "http://www.example.com:8575"
       }
     },
     "ours" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     }
   }
 };
@@ -3018,8 +3048,10 @@
   "minItems" : 24,
   "type" : "array",
   "description" : "24 words of entropy.",
+  "example" : [ "hint", "dice", "session", "fun", "budget", "strong", "album", "lava", "tackle", "sudden", "garage", "people", "bundle", "federal", "chest", "process", "vicious", "behave", "nephew", "zero", "vital", "ocean", "artist", "lawsuit" ],
   "items" : {
-    "type" : "string"
+    "type" : "string",
+    "example" : "hint"
   }
 };
             defs["network_info"] = {
@@ -3027,10 +3059,12 @@
   "type" : "object",
   "properties" : {
     "network_name" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "mainnet"
     },
     "network_prefix" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "xch"
     }
   },
   "description" : "Basic information about the current network."
@@ -3155,55 +3189,69 @@
   "properties" : {
     "launcher_id" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x821fdd13fe209466f1c69d82eb951cf630d28e901c2e14285d8a574dbde034c4"
     },
     "nft_coin_id" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x9bcf429079bd8e394658a3f0c43c6641c9f92d0dcc1770eeb6be6588a49fc925"
     },
     "owner_did" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xd590645dc77e25f22ffe37846e73868a99179d33de11648efaa286bc341936ea"
     },
     "royalty_percentage" : {
       "type" : "integer",
-      "format" : "uint16"
+      "format" : "uint16",
+      "example" : 300
     },
     "royalty_puzzle_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x0fe4e859760b755980c9a92c91459b75eb4f02135ace8d2731eca0e89ceef1fb"
     },
     "data_uris" : {
       "type" : "array",
+      "example" : [ "https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg" ],
       "items" : {
         "type" : "string",
-        "format" : "uri"
+        "format" : "uri",
+        "example" : "https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg"
       }
     },
     "data_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x14836b86a48e1b2b5e857213af97534704475b4c155d34b2cb83ed4b7cba2bb0"
     },
     "metadata_uris" : {
       "type" : "array",
+      "example" : [ "https://metadata_example.com", "https://metadata_example2.com" ],
       "items" : {
         "type" : "string",
-        "format" : "uri"
+        "format" : "uri",
+        "example" : "https://metadata_example.com"
       }
     },
     "metadata_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x868463c2ae6f8a9585156c9ad9f4b9b01eeacc56fec82aa629c97135ff21823e"
     },
     "license_uris" : {
       "type" : "array",
+      "example" : [ "https://license_example.com", "https://license_example2.com" ],
       "items" : {
         "type" : "string",
-        "format" : "uri"
+        "format" : "uri",
+        "example" : "https://license_example.com"
       }
     },
     "license_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x358d4eb4aedefbec22824036299eff24216d213a95c8f986f862f0a89a250a82"
     },
     "series_total" : {
       "type" : "integer",
@@ -3215,25 +3263,31 @@
     },
     "updater_puzhash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0xfe8a4b4e27a2e29a4d3fc7ce9d527adbcaccbab6ada3903ccf3ba9a769d2d78b"
     },
     "chain_info" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "((117 \"https://images.pexels.com/photos/11053072/pexels-photo-11053072.jpeg\") (104 . 0x14836b86a48e1b2b5e857213af97534704475b4c155d34b2cb83ed4b7cba2bb0) (28021 \"https://metadata_example.com\", \"https://metadata_example2.com\") (27765 \"https://license_example.com\", \"https://license_example2.com\") (29550 . 1) (29556 . 5) (28008 . 0x868463c2ae6f8a9585156c9ad9f4b9b01eeacc56fec82aa629c97135ff21823e) (27752 . 0x358d4eb4aedefbec22824036299eff24216d213a95c8f986f862f0a89a250a82))"
     },
     "mint_height" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 1127304
     },
     "supports_did" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "pending_transaction" : {
       "type" : "boolean",
+      "example" : false,
       "default" : false
     },
     "launcher_puzhash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
     }
   },
   "description" : "NFT Info for displaying NFT on the UI"
@@ -3595,26 +3649,32 @@
   "properties" : {
     "fingerprint" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 2473794447
     },
     "sk" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0665913196501420c0fe2de6b5ce7b25f749d52dcbf997b069bb2ea8438c6c3c"
     },
     "pk" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "b73cf2471b10a7ba839616aff0ab1cb319d9d3a77ee26ff88ec1c8e645468eb0b7653518b85e5dd0df7cf50d8612b978"
     },
     "farmer_pk" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "8c65856685323f149a651e6cbe068ece36f87a84efa16246b0eef65ac586a30fb678878bd4364d52c432fbb77838cbf6"
     },
     "pool_pk" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "845ff087376ffecf83950485d63ffed1cc73f36daf018deb4fbd2f05e7198b07521486274d82ecc4f5a2eaae63dfd0a7"
     },
     "seed" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "arrest legend bounce attend rebel blade palace bean dry shell nice bubble coil cook token nerve visa december hero garment grid attend nerve certain"
     }
   }
 };
@@ -3868,37 +3928,45 @@
   "properties" : {
     "coin_id" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0x70e75ede3b9ba91ab4b91bc5efea8946fde60518becdce40e2cf6800ff173245"
     },
     "launcher_id" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0x4aecd65d5fd0dcac59ef41ad5a74134e38b3e8334aebb1356972b7e9c793a09e"
     },
     "root" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0x0000000000000000000000000000000000000000000000000000000000000000"
     },
     "inner_puzzle_hash" : {
       "type" : "string",
-      "format" : "bytes32"
+      "format" : "bytes32",
+      "example" : "0x607b04952b317c81eb21ba96ff5f62adb58621f89d5fe6240f6e83d4395998c5"
     },
     "confirmed" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "confirmed_at_height" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 2872567
     },
     "lineage_proof" : {
       "$ref" : "#/components/schemas/lineage_proof"
     },
     "generation" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 1
     },
     "timestamp" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1669352585
     }
   }
 };
@@ -3906,10 +3974,20 @@
   "type" : "object",
   "properties" : {
     "aggregated_signature" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "0xa5e5ea1f5ae2335a72fe0a7ed7ca39e8f142e2e1f6e37a348482290e88eb9cea2d973acf6145e34d0afeee7ba22f99850641e21a549b2c092bb49aa393acd938825bccca9413c1a268ba44367bc8433cd0fc0eb82e87bebe23817aa695bdb566"
     },
     "coin_spends" : {
       "type" : "array",
+      "example" : [ {
+        "coin" : {
+          "amount" : 1750000000000,
+          "parent_coin_info" : "0xccd5bb71183532bff220ba46c268991a00000000000000000000000000004082",
+          "puzzle_hash" : "0x94c6db00186900418ef7c1f05e127ee1a647cbe6e514ec3bc57acb7bbe6dfb10"
+        },
+        "puzzle_reveal" : "0xff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0aec9c2e5984fe928406abca942d55ec6b56340af8315bfefa55889dbaade669b9fd3f330af2af44c2a0626d383e64757ff018080",
+        "solution" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin_spend"
       }
@@ -3974,14 +4052,17 @@
     },
     "created_at_time" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1669275137
     },
     "is_my_offer" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "sent" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 0
     },
     "offer" : {
       "type" : "string"
@@ -3991,13 +4072,19 @@
     },
     "coins_of_interest" : {
       "type" : "array",
+      "example" : [ {
+        "amount" : 999999,
+        "parent_coin_info" : "0x60a8b06515aaefe74236eb234130d769a1b65c99706414901277926fe29c3360",
+        "puzzle_hash" : "0xad5de77c7da1316b9b72708d17dbb8937855d740ebaf85669b8bd925275e8d49"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
     "trade_id" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x84d14398c1a38f376953bf8fa76cbee0d3216b382266d38b5612f17e96bcd1de"
     },
     "status" : {
       "$ref" : "#/components/schemas/trade_status"
@@ -4005,6 +4092,7 @@
     "sent_to" : {
       "type" : "array",
       "description" : "Represents the list of peers that we sent the transaction to, whether each one included it in the mempool, and what the error message (if any) was. List[Tuple[str, uint8, Optional[str]]]",
+      "example" : [ ],
       "items" : {
         "type" : "array",
         "items" : {
@@ -4068,53 +4156,72 @@
   "properties" : {
     "confirmed_at_height" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 2863494
     },
     "created_at_time" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 1669182237
     },
     "to_puzzle_hash" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0xb6ed191a2f80194f49fe33e9b9254642ca942ee287faeca2a45f4b96a5c0875a"
     },
     "amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 100
     },
     "fee_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "confirmed" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "example" : true
     },
     "sent" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 10
     },
     "spend_bundle" : {
       "$ref" : "#/components/schemas/spend_bundle"
     },
     "additions" : {
       "type" : "array",
+      "example" : [ {
+        "amount" : 100,
+        "parent_coin_info" : "0xabbb6c6859db74e8e627f21263c078893383131bcf22faec68b2de914d03e59f",
+        "puzzle_hash" : "0xb4a41bbce457745b006181ab99e34a0cbd8c83c196bc74fc98eb3aec882ed784"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
     "removals" : {
       "type" : "array",
+      "example" : [ {
+        "amount" : 100,
+        "parent_coin_info" : "0x9c0083d8da8733c899787e4dcf18a56bc944f49ed668808e20890f01cbc35f37",
+        "puzzle_hash" : "0xb4a41bbce457745b006181ab99e34a0cbd8c83c196bc74fc98eb3aec882ed784"
+      } ],
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
     "wallet_id" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 2
     },
     "sent_to" : {
       "type" : "array",
       "description" : "Represents the list of peers that we sent the transaction to, whether each one included it in the mempool, and what the error message (if any) was. List[Tuple[str, uint8, Optional[str]]]",
+      "example" : [ ],
       "items" : {
         "type" : "array",
         "items" : {
@@ -4139,11 +4246,13 @@
     },
     "name" : {
       "type" : "string",
-      "format" : "hex"
+      "format" : "hex",
+      "example" : "0x43f6811a4daf18622fc7f132f5166a1246056b4a983b7befccb7e4b2e2c57f3b"
     },
     "memos" : {
       "type" : "array",
       "description" : "List[Tuple[bytes32, List[bytes]]]",
+      "example" : { },
       "items" : {
         "type" : "object",
         "anyOf" : [ {
@@ -4172,31 +4281,38 @@
   "properties" : {
     "confirmed_wallet_balance" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 999999799
     },
     "unconfirmed_wallet_balance" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 999999799
     },
     "spendable_balance" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 999999799
     },
     "pending_change" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 0
     },
     "max_send_amount" : {
       "type" : "integer",
-      "format" : "uint64"
+      "format" : "uint64",
+      "example" : 999999799
     },
     "unspent_coin_count" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "example" : 1
     },
     "pending_coin_removal_count" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "example" : 0
     },
     "wallet_type" : {
       "$ref" : "#/components/schemas/wallet_type"
@@ -4211,17 +4327,20 @@
   "properties" : {
     "id" : {
       "type" : "integer",
-      "format" : "uint32"
+      "format" : "uint32",
+      "example" : 1
     },
     "name" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "Chia Wallet"
     },
     "type" : {
       "$ref" : "#/components/schemas/wallet_type"
     },
     "data" : {
       "type" : "string",
-      "format" : "json"
+      "format" : "json",
+      "example" : ""
     }
   },
   "description" : "This object represents the wallet data as it is stored in DB. ID: Main wallet (Standard) is stored at index 1, every wallet created after done has auto incremented id. Name: can be a user provided or default generated name. (can be modified) Type: is specified during wallet creation and should never be changed. Data: this field is intended to be used for storing any wallet specific information required for it. (RL wallet stores origin_id, admin/user pubkey, rate limit, etc.) This data should be a json encoded string."
