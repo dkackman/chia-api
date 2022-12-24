@@ -6,7 +6,7 @@
     fee:
       type: integer
       format: uint64
-    n_p_c_result:
+    npc_result:
       $ref: "./npc_result.yaml#/npc_result"
     cost:
       type: integer
