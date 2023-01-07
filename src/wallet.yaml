@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The wallet uses port 9256 by default.
-  version: 1.6.1
+  version: 1.6.2
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -835,11 +835,13 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      wallet_id:
-                        type: integer
-                        format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      nft_id_list:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /nft_mint_nft:
     post:
@@ -924,6 +926,9 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      nft_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /nft_get_nfts:
     post:
@@ -1243,6 +1248,9 @@ paths:
                 latest:
                   type: boolean
                   default: true
+                ignore_size_limit:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1814,6 +1822,10 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
                 solver:
                   type: object
                   additionalProperties:
@@ -2199,6 +2211,10 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
                 solver:
                   type: object
                   additionalProperties:
@@ -2314,6 +2330,20 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
+                exclude_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
+                exclude_coin_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -2818,6 +2848,12 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
+                excluded_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
+                    default: 0
                 excluded_coins:
                   type: array
                   items:
@@ -3447,6 +3483,9 @@ paths:
                       signature:
                         type: string
                         format: hex
+                      latest_coin_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_names:
     post:
@@ -3475,6 +3514,46 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/coin_records"
+  /verify_signature:
+    post:
+      tags:
+        - Key Management
+      description: Given a public key, message and signature, verify if it is valid.
+      summary: Given a public key, message and signature, verify if it is valid.
+      operationId: verify_signature
+      requestBody:
+        required: true
+        description: The coin names.
+        content:
+          application/json:
+            schema:
+              required:
+                - pubkey
+                - message
+                - signature
+              properties:
+                pubkey:
+                  type: string
+                  format: hex
+                message:
+                  type: string
+                  format: hex
+                signature:
+                  type: string
+                  format: hex
+                address:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isValid:
+                    type: boolean
   /get_wallets:
     post:
       tags:
@@ -3708,6 +3787,192 @@ paths:
                         type: integer
                         format: uint32
                 allOf:
+                  - $ref: "#/components/schemas/apiResponse"
+  /did_message_spend:
+    post:
+      tags:
+        - DID Wallet
+      description: Spends a DID message
+      summary: Spends a DID message.
+      operationId: did_message_spend
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                coin_announcements:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+                puzzle_announcements:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+  /did_get_info:
+    post:
+      tags:
+        - DID Wallet
+      description: Retreives information about a DID
+      summary: Retreives information about a DID.
+      operationId: did_get_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+                latest:
+                  type: boolean
+                  default: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      latest_coin:
+                        type: string
+                        format: hex
+                      p2_address:
+                        type: string
+                        format: hex
+                      public_key:
+                        type: string
+                        format: hex
+                      recovery_list_hash:
+                        type: string
+                        format: hex
+                      num_verification:
+                        type: integer
+                      metadata:
+                        type: object
+                        additionalProperties: true
+                      launcher_id:
+                        type: string
+                        format: hex
+                      full_puzzle:
+                        type: string
+                        format: hex
+                      hints:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /did_find_lost_did:
+    post:
+      tags:
+        - DID Wallet
+      description: Recover a missing or unspendable DID wallet by a coin id of the DID
+      summary: Recover a missing or unspendable DID wallet by a coin id of the DID.
+      operationId: did_find_lost_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      latest_coin_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_set_bulk_nft_did:
+    post:
+      tags:
+        - NFT Wallet
+      description: Bulk set DID for NFTs across different wallets
+      summary: Bulk set DID for NFTs across different wallets.
+      operationId: nft_set_bulk_nft_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nft_coin_list
+              properties:
+                nft_coin_list:
+                  type: array
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - nft_coin_id
+                      - wallet_id
+                    properties:
+                      nft_coin_id:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: int32
+                did_id:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: int32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
