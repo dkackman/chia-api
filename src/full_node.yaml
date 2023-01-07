@@ -698,6 +698,9 @@ paths:
                 tx_id:
                   type: string
                   format: hex
+                include_pending:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
