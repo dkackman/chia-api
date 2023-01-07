@@ -3856,6 +3856,38 @@ paths:
                           type: string
                           format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /did_find_lost_did:
+    post:
+      tags:
+        - DID Wallet
+      description: Recover a missing or unspendable DID wallet by a coin id of the DID
+      summary: Recover a missing or unspendable DID wallet by a coin id of the DID.
+      operationId: did_find_lost_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      latest_coin_id:
+                        type: string
+                        format: hex                      
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
