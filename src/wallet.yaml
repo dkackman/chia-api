@@ -3453,6 +3453,9 @@ paths:
                       signature:
                         type: string
                         format: hex
+                      latest_coin_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_names:
     post:
@@ -3886,7 +3889,7 @@ paths:
                     properties:
                       latest_coin_id:
                         type: string
-                        format: hex                      
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /nft_set_bulk_nft_did:
     post:
@@ -3925,7 +3928,7 @@ paths:
                 fee:
                   type: integer
                   format: uint64
-                  default: 0                  
+                  default: 0
       responses:
         "200":
           description: OK
