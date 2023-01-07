@@ -2314,6 +2314,20 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
+                exclude_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
+                exclude_coin_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
