@@ -2818,6 +2818,12 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
+                excluded_coin_amounts:
+                  type: array
+                  items: 
+                    type: integer
+                    format: uint64
+                    default: 0
                 excluded_coins:
                   type: array
                   items:
