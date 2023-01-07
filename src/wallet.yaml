@@ -924,6 +924,9 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      nft_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /nft_get_nfts:
     post:
