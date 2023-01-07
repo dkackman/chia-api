@@ -2820,7 +2820,7 @@ paths:
                   default: 0
                 excluded_coin_amounts:
                   type: array
-                  items: 
+                  items:
                     type: integer
                     format: uint64
                     default: 0
@@ -3507,10 +3507,10 @@ paths:
                   format: hex
                 signature:
                   type: string
-                  format: hex                  
+                  format: hex
                 address:
                   type: string
-                  format: hex                  
+                  format: hex
       responses:
         "200":
           description: OK
@@ -3520,7 +3520,7 @@ paths:
                 type: object
                 properties:
                   isValid:
-                    type: boolean         
+                    type: boolean
   /get_wallets:
     post:
       tags:
@@ -3796,7 +3796,66 @@ paths:
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
-
+  /did_get_info:
+    post:
+      tags:
+        - DID Wallet
+      description: Retreives information about a DID
+      summary: Retreives information about a DID.
+      operationId: did_get_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_id
+              properties:
+                coin_id:
+                  type: string
+                  format: hex
+                latest:
+                  type: boolean
+                  default: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      latest_coin:
+                        type: string
+                        format: hex
+                      p2_address:
+                        type: string
+                        format: hex
+                      public_key:
+                        type: string
+                        format: hex
+                      recovery_list_hash:
+                        type: string
+                        format: hex
+                      num_verification:
+                        type: integer
+                      metadata:
+                        type: object
+                        additionalProperties: true
+                      launcher_id:
+                        type: string
+                        format: hex
+                      full_puzzle:
+                        type: string
+                        format: hex
+                      hints:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
