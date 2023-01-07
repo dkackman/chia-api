@@ -3888,6 +3888,59 @@ paths:
                         type: string
                         format: hex                      
                   - $ref: "#/components/schemas/apiResponse"
+  /nft_set_bulk_nft_did:
+    post:
+      tags:
+        - NFT Wallet
+      description: Bulk set DID for NFTs across different wallets
+      summary: Bulk set DID for NFTs across different wallets.
+      operationId: nft_set_bulk_nft_did
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nft_coin_list
+              properties:
+                nft_coin_list:
+                  type: array
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - nft_coin_id
+                      - wallet_id
+                    properties:
+                      nft_coin_id:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: int32
+                did_id:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0                  
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: int32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
