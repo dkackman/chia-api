@@ -1814,6 +1814,10 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
                 solver:
                   type: object
                   additionalProperties:
@@ -2196,6 +2200,10 @@ paths:
                   additionalProperties:
                     type: string
                 min_coin_amount:
+                  type: integer
+                  format: uint128
+                  default: 0
+                max_coin_amount:
                   type: integer
                   format: uint128
                   default: 0
