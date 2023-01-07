@@ -1246,6 +1246,9 @@ paths:
                 latest:
                   type: boolean
                   default: true
+                ignore_size_limit:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
