@@ -3481,6 +3481,46 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/coin_records"
+  /verify_signature:
+    post:
+      tags:
+        - Key Management
+      description: Given a public key, message and signature, verify if it is valid.
+      summary: Given a public key, message and signature, verify if it is valid.
+      operationId: verify_signature
+      requestBody:
+        required: true
+        description: The coin names.
+        content:
+          application/json:
+            schema:
+              required:
+                - pubkey
+                - message
+                - signature
+              properties:
+                pubkey:
+                  type: string
+                  format: hex
+                message:
+                  type: string
+                  format: hex
+                signature:
+                  type: string
+                  format: hex                  
+                address:
+                  type: string
+                  format: hex                  
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isValid:
+                    type: boolean         
   /get_wallets:
     post:
       tags:
