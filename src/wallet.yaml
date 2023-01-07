@@ -3755,6 +3755,48 @@ paths:
                         format: uint32
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
+  /did_message_spend:
+    post:
+      tags:
+        - DID Wallet
+      description: Spends a DID message
+      summary: Spends a DID message.
+      operationId: did_message_spend
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                coin_announcements:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+                puzzle_announcements:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
