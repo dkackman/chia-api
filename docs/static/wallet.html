@@ -3431,6 +3431,7 @@
     },
     "royalty_percentage" : {
       "type" : "integer",
+      "description" : "Percentage of the transaction fee paid to the author, e.g. 1000 = 1%",
       "format" : "uint16",
       "example" : 300
     },
@@ -3481,11 +3482,11 @@
       "format" : "hex",
       "example" : "0x358d4eb4aedefbec22824036299eff24216d213a95c8f986f862f0a89a250a82"
     },
-    "series_total" : {
+    "edition_total" : {
       "type" : "integer",
       "format" : "uint64"
     },
-    "series_number" : {
+    "edition_number" : {
       "type" : "integer",
       "format" : "uint64"
     },
@@ -3516,6 +3517,19 @@
       "type" : "string",
       "format" : "hex",
       "example" : "0xeff07522495060c066f66f32acc2a77e3a3e737aca8baea4d1a64ea4cdc13da9"
+    },
+    "minter_did" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "0x963a2fbab5032f6996e56b5ef722badc1b10ed443bb72aaa2fc0ccf98f643f0e"
+    },
+    "off_chain_metadata" : {
+      "type" : "string",
+      "description" : "Serialized off-chain metadata"
+    },
+    "p2_address" : {
+      "type" : "string",
+      "description" : "The innermost puzzle hash of the NFT"
     }
   },
   "description" : "NFT Info for displaying NFT on the UI"
