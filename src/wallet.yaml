@@ -2681,8 +2681,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Sends an amount of mojo from then given wallet to the given address.
-      description: Sends an amount of mojo from then given wallet to the given address.
+      summary: Sends an amount of mojo from the given wallet to the given address.
+      description: Sends an amount of mojo from the given wallet to the given address.
       operationId: send_transaction
       requestBody:
         required: true
