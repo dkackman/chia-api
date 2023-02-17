@@ -3547,6 +3547,9 @@ paths:
                 address:
                   type: string
                   format: hex
+                signing_mode:
+                  type: string
+                  example: BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_
       responses:
         "200":
           description: OK
