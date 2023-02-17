@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The full node uses port 8555 by default.
-  version: 1.6.2
+  version: 1.7.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -410,7 +410,7 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/coin_spend"
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
   /get_blocks:
     post:
       tags:
@@ -1004,7 +1004,7 @@ paths:
                       node_time_utc:
                         type: integer
                         format: in32
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
