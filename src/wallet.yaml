@@ -3921,13 +3921,13 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
-  /nft_set_bulk_nft_did:
+  /nft_set_did_bulk:
     post:
       tags:
         - NFT Wallet
       description: Bulk set DID for NFTs across different wallets
       summary: Bulk set DID for NFTs across different wallets.
-      operationId: nft_set_bulk_nft_did
+      operationId: nft_set_did_bulk
       requestBody:
         required: true
         content:
@@ -3969,6 +3969,9 @@ paths:
                   - type: object
                     properties:
                       wallet_id:
+                        type: integer
+                        format: int32
+                      tx_num:
                         type: integer
                         format: int32
                       spend_bundle:
