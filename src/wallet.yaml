@@ -3335,6 +3335,9 @@ paths:
                             amount:
                               type: integer
                               format: uint64
+                            height:
+                              type: integer
+                              format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /delete_notifications:
     post:
