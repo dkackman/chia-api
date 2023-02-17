@@ -3977,6 +3977,62 @@ paths:
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
+  /nft_transfer_bulk:
+    post:
+      tags:
+        - NFT Wallet
+      description: Bulk transfer NFTs to an address
+      summary: Bulk transfer NFTs to an address.
+      operationId: nft_transfer_bulk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nft_coin_list
+              properties:
+                nft_coin_list:
+                  type: array
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - nft_coin_id
+                      - wallet_id
+                    properties:
+                      nft_coin_id:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: int32
+                target_address:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: int32
+                      tx_num:
+                        type: integer
+                        format: int32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
   /get_timestamp_for_height:
     post:
       tags:
