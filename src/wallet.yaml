@@ -2312,6 +2312,10 @@ paths:
                 wallet_id:
                   type: integer
                   format: uint32
+                coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
                 amount:
                   type: integer
                   format: uint64
