@@ -3492,6 +3492,9 @@ paths:
                       latest_coin_id:
                         type: string
                         format: hex
+                      signing_mode:
+                        type: string
+                        default: BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_names:
     post:
