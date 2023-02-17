@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The full node uses port 8555 by default.
-  version: 1.6.2
+  version: 1.7.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -410,7 +410,7 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/coin_spend"
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
   /get_blocks:
     post:
       tags:
@@ -967,6 +967,12 @@ paths:
                   type: array
                   items:
                     type: integer
+                spend_type:
+                  type: integer
+                  format: uint64
+                spend_count:
+                  type: integer
+                  default: 1
       responses:
         "200":
           description: OK
@@ -990,9 +996,15 @@ paths:
                       mempool_size:
                         type: integer
                         format: uint64
+                      mempool_fees:
+                        type: integer
+                        format: uint64
                       mempool_max_size:
                         type: integer
                         format: uint64
+                      num_spends:
+                        type: integer
+                        format: int32
                       full_node_synced:
                         type: boolean
                       peak_height:
@@ -1001,10 +1013,21 @@ paths:
                       last_peak_timestamp:
                         type: integer
                         format: uint64
+                      last_block_cost:
+                        type: integer
+                        format: uint64
+                      fees_last_block:
+                        type: integer
+                        format: uint64
+                      fee_rate_last_block:
+                        type: number
+                      last_tx_block_height:
+                        type: integer
+                        format: uint32
                       node_time_utc:
                         type: integer
                         format: in32
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net

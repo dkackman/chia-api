@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The farmer uses port 8559 by default.
-  version: 1.6.2
+  version: 1.7.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:

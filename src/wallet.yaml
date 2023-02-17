@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The wallet uses port 9256 by default.
-  version: 1.6.2
+  version: 1.7.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -2125,6 +2125,8 @@ paths:
                     properties:
                       valid:
                         type: boolean
+                      id:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /get_offer_summary:
     post:
@@ -2145,6 +2147,9 @@ paths:
                 offer:
                   type: string
                   format: hex
+                advanced:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -2152,29 +2157,59 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - type: object
-                    properties:
-                      summary:
-                        type: object
+                  - oneOf:
+                      - type: object
                         properties:
+                          id:
+                            type: string
                           offered:
-                            type: object
-                            additionalProperties:
-                              type: integer
-                              format: uint64
-                          requested:
-                            type: object
-                            additionalProperties:
-                              type: integer
-                              format: uint64
-                          fees:
-                            type: integer
-                            format: uint64
-                          infos:
-                            type: object
-                            additionalProperties:
+                            type: array
+                            items:
                               type: object
-                              additionalProperties: true
+                              properties:
+                                launcher_id:
+                                  type: string
+                                  format: hex
+                                new_root:
+                                  type: string
+                                  format: hex
+                                dependencies:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      launcher_id:
+                                        type: string
+                                        format: hex
+                                      values_to_prove:
+                                        type: array
+                                        items:
+                                          type: string
+                                          format: hex
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          summary:
+                            properties:
+                              offered:
+                                type: object
+                                additionalProperties:
+                                  type: integer
+                                  format: uint64
+                              requested:
+                                type: object
+                                additionalProperties:
+                                  type: integer
+                                  format: uint64
+                              fees:
+                                type: integer
+                                format: uint64
+                              infos:
+                                type: object
+                                additionalProperties:
+                                  type: object
+                                  additionalProperties: true
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
@@ -2312,6 +2347,10 @@ paths:
                 wallet_id:
                   type: integer
                   format: uint32
+                coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
                 amount:
                   type: integer
                   format: uint64
@@ -3335,6 +3374,9 @@ paths:
                             amount:
                               type: integer
                               format: uint64
+                            height:
+                              type: integer
+                              format: uint32
                   - $ref: "#/components/schemas/apiResponse"
   /delete_notifications:
     post:
@@ -3444,6 +3486,9 @@ paths:
                       signature:
                         type: string
                         format: hex
+                      signing_mode:
+                        type: string
+                        default: BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_
                   - $ref: "#/components/schemas/apiResponse"
   /sign_message_by_id:
     post:
@@ -3486,6 +3531,9 @@ paths:
                       latest_coin_id:
                         type: string
                         format: hex
+                      signing_mode:
+                        type: string
+                        default: BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_
                   - $ref: "#/components/schemas/apiResponse"
   /get_coin_records_by_names:
     post:
@@ -3544,6 +3592,9 @@ paths:
                 address:
                   type: string
                   format: hex
+                signing_mode:
+                  type: string
+                  example: BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_
       responses:
         "200":
           description: OK
@@ -3921,13 +3972,13 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
-  /nft_set_bulk_nft_did:
+  /nft_set_did_bulk:
     post:
       tags:
         - NFT Wallet
       description: Bulk set DID for NFTs across different wallets
       summary: Bulk set DID for NFTs across different wallets.
-      operationId: nft_set_bulk_nft_did
+      operationId: nft_set_did_bulk
       requestBody:
         required: true
         content:
@@ -3971,9 +4022,101 @@ paths:
                       wallet_id:
                         type: integer
                         format: int32
+                      tx_num:
+                        type: integer
+                        format: int32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
+  /nft_transfer_bulk:
+    post:
+      tags:
+        - NFT Wallet
+      description: Bulk transfer NFTs to an address
+      summary: Bulk transfer NFTs to an address.
+      operationId: nft_transfer_bulk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nft_coin_list
+              properties:
+                nft_coin_list:
+                  type: array
+                  maxItems: 25
+                  items:
+                    type: object
+                    required:
+                      - nft_coin_id
+                      - wallet_id
+                    properties:
+                      nft_coin_id:
+                        type: string
+                        format: hex
+                      wallet_id:
+                        type: integer
+                        format: int32
+                target_address:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: int32
+                      tx_num:
+                        type: integer
+                        format: int32
+                      spend_bundle:
+                        $ref: "#/components/schemas/spend_bundle"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_timestamp_for_height:
+    post:
+      tags:
+        - Wallet Node
+      description: Retreive the timestamp for a given block height
+      summary: Retreive the timestamp for a given block height.
+      operationId: get_timestamp_for_height
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - height
+              properties:
+                height:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      timestamp:
+                        type: integer
+                        format: uint62
+                  - $ref: "#/components/schemas/apiResponse"
+
 externalDocs:
   description: Find out more about chia
   url: https://chia.net

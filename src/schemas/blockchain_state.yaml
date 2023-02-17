@@ -19,6 +19,9 @@ blockchain_state:
     mempool_cost:
       type: integer
       format: int32
+    mempool_fees:
+      type: integer
+      format: uint64
     mempool_min_fees:
       type: object
       properties:
