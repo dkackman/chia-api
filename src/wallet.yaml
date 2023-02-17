@@ -2125,6 +2125,8 @@ paths:
                     properties:
                       valid:
                         type: boolean
+                      id:
+                        type: string
                   - $ref: "#/components/schemas/apiResponse"
   /get_offer_summary:
     post:
