@@ -766,6 +766,12 @@
       "type" : "integer",
       "format" : "uint32"
     },
+    "coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
     "amount" : {
       "type" : "integer",
       "format" : "uint64"
@@ -1693,6 +1699,10 @@
     "offer" : {
       "type" : "string",
       "format" : "hex"
+    },
+    "advanced" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1734,6 +1744,16 @@
         "type" : "string",
         "format" : "hex"
       }
+    }
+  }
+};
+            defs["get_timestamp_for_height_body"] = {
+  "required" : [ "height" ],
+  "type" : "object",
+  "properties" : {
+    "height" : {
+      "type" : "integer",
+      "format" : "uint32"
     }
   }
 };
@@ -2377,6 +2397,9 @@
     "properties" : {
       "valid" : {
         "type" : "boolean"
+      },
+      "id" : {
+        "type" : "string"
       }
     }
   }, {
@@ -2400,46 +2423,88 @@
 };
             defs["inline_response_200_40"] = {
   "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "summary" : {
-        "$ref" : "#/components/schemas/inline_response_200_40_summary"
+    "oneOf" : [ {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "offered" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "properties" : {
+              "launcher_id" : {
+                "type" : "string",
+                "format" : "hex"
+              },
+              "new_root" : {
+                "type" : "string",
+                "format" : "hex"
+              },
+              "dependencies" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "properties" : {
+                    "launcher_id" : {
+                      "type" : "string",
+                      "format" : "hex"
+                    },
+                    "values_to_prove" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string",
+                        "format" : "hex"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    }
+    }, {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "summary" : {
+          "properties" : {
+            "offered" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "integer",
+                "format" : "uint64"
+              }
+            },
+            "requested" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "integer",
+                "format" : "uint64"
+              }
+            },
+            "fees" : {
+              "type" : "integer",
+              "format" : "uint64"
+            },
+            "infos" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object",
+                "additionalProperties" : true
+              }
+            }
+          }
+        }
+      }
+    } ]
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
-};
-            defs["inline_response_200_40_summary"] = {
-  "type" : "object",
-  "properties" : {
-    "offered" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "integer",
-        "format" : "uint64"
-      }
-    },
-    "requested" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "integer",
-        "format" : "uint64"
-      }
-    },
-    "fees" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "infos" : {
-      "type" : "object",
-      "additionalProperties" : {
-        "type" : "object",
-        "additionalProperties" : true
-      }
-    }
-  },
-  "example" : null
 };
             defs["inline_response_200_41"] = {
   "allOf" : [ {
@@ -2886,6 +2951,10 @@
     "amount" : {
       "type" : "integer",
       "format" : "uint64"
+    },
+    "height" : {
+      "type" : "integer",
+      "format" : "uint32"
     }
   },
   "example" : null
@@ -2913,6 +2982,10 @@
       "signature" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "signing_mode" : {
+        "type" : "string",
+        "default" : "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_"
       }
     }
   }, {
@@ -2934,6 +3007,10 @@
       "latest_coin_id" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "signing_mode" : {
+        "type" : "string",
+        "default" : "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_"
       }
     }
   }, {
@@ -3176,8 +3253,25 @@
         "type" : "integer",
         "format" : "int32"
       },
+      "tx_num" : {
+        "type" : "integer",
+        "format" : "int32"
+      },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_75"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "timestamp" : {
+        "type" : "integer",
+        "format" : "uint62"
       }
     }
   }, {
@@ -3739,7 +3833,7 @@
     }
   }
 };
-            defs["nft_set_bulk_nft_did_body"] = {
+            defs["nft_set_did_bulk_body"] = {
   "required" : [ "nft_coin_list" ],
   "type" : "object",
   "properties" : {
@@ -3747,7 +3841,7 @@
       "maxItems" : 25,
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/nft_set_bulk_nft_did_nft_coin_list"
+        "$ref" : "#/components/schemas/nft_set_did_bulk_nft_coin_list"
       }
     },
     "did_id" : {
@@ -3761,7 +3855,7 @@
     }
   }
 };
-            defs["nft_set_bulk_nft_did_nft_coin_list"] = {
+            defs["nft_set_did_bulk_nft_coin_list"] = {
   "required" : [ "nft_coin_id", "wallet_id" ],
   "type" : "object",
   "properties" : {
@@ -3803,6 +3897,28 @@
     },
     "in_transaction" : {
       "type" : "boolean"
+    }
+  }
+};
+            defs["nft_transfer_bulk_body"] = {
+  "required" : [ "nft_coin_list" ],
+  "type" : "object",
+  "properties" : {
+    "nft_coin_list" : {
+      "maxItems" : 25,
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/nft_set_did_bulk_nft_coin_list"
+      }
+    },
+    "target_address" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
     }
   }
 };
@@ -4578,6 +4694,10 @@
     "address" : {
       "type" : "string",
       "format" : "hex"
+    },
+    "signing_mode" : {
+      "type" : "string",
+      "example" : "BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_AUG:CHIP-0002_"
     }
   }
 };
@@ -4885,14 +5005,17 @@
                     <li class="nav-item" data-group="NFTWallet" data-name="nftMintNft">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftMintNft">nftMintNft</a>
                     </li>
-                    <li class="nav-item" data-group="NFTWallet" data-name="nftSetBulkNftDid">
-                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftSetBulkNftDid">nftSetBulkNftDid</a>
+                    <li class="nav-item" data-group="NFTWallet" data-name="nftSetDidBulk">
+                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftSetDidBulk">nftSetDidBulk</a>
                     </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftSetNftDid">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftSetNftDid">nftSetNftDid</a>
                     </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftSetNftStatus">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftSetNftStatus">nftSetNftStatus</a>
+                    </li>
+                    <li class="nav-item" data-group="NFTWallet" data-name="nftTransferBulk">
+                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftTransferBulk">nftTransferBulk</a>
                     </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftTransferNft">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftTransferNft">nftTransferNft</a>
@@ -5011,6 +5134,9 @@
                     <li class="nav-item" data-group="WalletNode" data-name="getSyncStatus">
                       <a class="nav-link link-secondary" href="#api-WalletNode-getSyncStatus">getSyncStatus</a>
                     </li>
+                    <li class="nav-item" data-group="WalletNode" data-name="getTimestampForHeight">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-getTimestampForHeight">getTimestampForHeight</a>
+                    </li>
                     <li class="nav-item" data-group="WalletNode" data-name="pushTransactions">
                       <a class="nav-link link-secondary" href="#api-WalletNode-pushTransactions">pushTransactions</a>
                     </li>
@@ -5033,7 +5159,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.6.2</div>
+              <div class="app-desc">Version: 1.7.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -13177,25 +13303,25 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
-                    <div id="api-NFTWallet-nftSetBulkNftDid">
-                      <article id="api-NFTWallet-nftSetBulkNftDid-0" data-group="User" data-name="nftSetBulkNftDid" data-version="0">
+                    <div id="api-NFTWallet-nftSetDidBulk">
+                      <article id="api-NFTWallet-nftSetDidBulk-0" data-group="User" data-name="nftSetDidBulk" data-version="0">
                         <div class="pull-left">
-                          <h1>nftSetBulkNftDid</h1>
+                          <h1>nftSetDidBulk</h1>
                           <p>Bulk set DID for NFTs across different wallets.</p>
                         </div>
                         <p class="marked">Bulk set DID for NFTs across different wallets</p>            
                         <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_set_bulk_nft_did</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_set_did_bulk</span></code></pre>
                         
                         <h3>Usage</h3>
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-NFTWallet-nftSetBulkNftDid-0-curl">
+                          <div class="tab-pane active" id="examples-NFTWallet-nftSetDidBulk-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
 --cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
 --key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:9256/nft_set_bulk_nft_did" \
+"https://localhost:9256/nft_set_did_bulk" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -13217,7 +13343,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/nft_set_bulk_nft_did_body"
+        "$ref" : "#/components/schemas/nft_set_did_bulk_body"
       }
     }
   },
@@ -13235,12 +13361,12 @@ The wallet uses port 9256 by default.</div>
                                   }
                                 
                                   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_nftSetBulkNftDid_body');
+                                  var result = $('#d2e199_nftSetDidBulk_body');
                                   result.empty();
                                   result.append(view.render());
                                 });
                                 </script>
-                                <div id="d2e199_nftSetBulkNftDid_body"></div>
+                                <div id="d2e199_nftSetDidBulk_body"></div>
                                 </td>
                                 </tr>
                             </table>
@@ -13252,14 +13378,14 @@ The wallet uses port 9256 by default.</div>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-nftSetBulkNftDid-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-nftSetDidBulk-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-nftSetBulkNftDid-200-schema">
-                                  <div id='responses-nftSetBulkNftDid-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-nftSetDidBulk-200-schema">
+                                  <div id='responses-nftSetDidBulk-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -13285,14 +13411,14 @@ The wallet uses port 9256 by default.</div>
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-nftSetBulkNftDid-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-nftSetBulkNftDid-200-schema-200');
+                                        $('#responses-nftSetDidBulk-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-nftSetDidBulk-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-nftSetBulkNftDid-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-nftSetDidBulk-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -13535,6 +13661,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-nftSetNftStatus-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-NFTWallet-nftTransferBulk">
+                      <article id="api-NFTWallet-nftTransferBulk-0" data-group="User" data-name="nftTransferBulk" data-version="0">
+                        <div class="pull-left">
+                          <h1>nftTransferBulk</h1>
+                          <p>Bulk transfer NFTs to an address.</p>
+                        </div>
+                        <p class="marked">Bulk transfer NFTs to an address</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_transfer_bulk</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-NFTWallet-nftTransferBulk-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/nft_transfer_bulk" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/nft_transfer_bulk_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_nftTransferBulk_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_nftTransferBulk_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-nftTransferBulk-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-nftTransferBulk-200-schema">
+                                  <div id='responses-nftTransferBulk-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_74"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-nftTransferBulk-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-nftTransferBulk-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-nftTransferBulk-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -16876,9 +17123,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-Wallet-sendTransaction-0" data-group="User" data-name="sendTransaction" data-version="0">
                         <div class="pull-left">
                           <h1>sendTransaction</h1>
-                          <p>Sends an amount of mojo from then given wallet to the given address.</p>
+                          <p>Sends an amount of mojo from the given wallet to the given address.</p>
                         </div>
-                        <p class="marked">Sends an amount of mojo from then given wallet to the given address.</p>            
+                        <p class="marked">Sends an amount of mojo from the given wallet to the given address.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/send_transaction</span></code></pre>
                         
@@ -17603,6 +17850,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getSyncStatus-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-WalletNode-getTimestampForHeight">
+                      <article id="api-WalletNode-getTimestampForHeight-0" data-group="User" data-name="getTimestampForHeight" data-version="0">
+                        <div class="pull-left">
+                          <h1>getTimestampForHeight</h1>
+                          <p>Retreive the timestamp for a given block height.</p>
+                        </div>
+                        <p class="marked">Retreive the timestamp for a given block height</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_timestamp_for_height</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-WalletNode-getTimestampForHeight-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_timestamp_for_height" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_timestamp_for_height_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getTimestampForHeight_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getTimestampForHeight_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getTimestampForHeight-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getTimestampForHeight-200-schema">
+                                  <div id='responses-getTimestampForHeight-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_75"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getTimestampForHeight-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getTimestampForHeight-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getTimestampForHeight-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
