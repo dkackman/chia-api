@@ -2145,6 +2145,9 @@ paths:
                 offer:
                   type: string
                   format: hex
+                advanced:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -2152,29 +2155,59 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - type: object
-                    properties:
-                      summary:
-                        type: object
+                  - oneOf:
+                      - type: object
                         properties:
+                          id:
+                            type: string
                           offered:
-                            type: object
-                            additionalProperties:
-                              type: integer
-                              format: uint64
-                          requested:
-                            type: object
-                            additionalProperties:
-                              type: integer
-                              format: uint64
-                          fees:
-                            type: integer
-                            format: uint64
-                          infos:
-                            type: object
-                            additionalProperties:
+                            type: array
+                            items:
                               type: object
-                              additionalProperties: true
+                              properties:
+                                launcher_id:
+                                  type: string
+                                  format: hex
+                                new_root:
+                                  type: string
+                                  format: hex
+                                dependencies:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      launcher_id:
+                                        type: string
+                                        format: hex
+                                      values_to_prove:
+                                        type: array
+                                        items:
+                                          type: string
+                                          format: hex
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          summary:
+                            properties:
+                              offered:
+                                type: object
+                                additionalProperties:
+                                  type: integer
+                                  format: uint64
+                              requested:
+                                type: object
+                                additionalProperties:
+                                  type: integer
+                                  format: uint64
+                              fees:
+                                type: integer
+                                format: uint64
+                              infos:
+                                type: object
+                                additionalProperties:
+                                  type: object
+                                  additionalProperties: true
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
