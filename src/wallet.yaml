@@ -3974,6 +3974,39 @@ paths:
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
                   - $ref: "#/components/schemas/apiResponse"
+  /get_timestamp_for_height:
+    post:
+      tags:
+        - Wallet Node
+      description: Retreive the timestamp for a given block height
+      summary: Retreive the timestamp for a given block height.
+      operationId: get_timestamp_for_height
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - height
+              properties:
+                height:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      timestamp:
+                        type: integer
+                        format: uint62
+                  - $ref: "#/components/schemas/apiResponse"
+
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
