@@ -2254,6 +2254,8 @@ paths:
                   type: object
                   additionalProperties:
                     type: object
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
@@ -2383,6 +2385,8 @@ paths:
                   items:
                     type: string
                     format: hex
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
