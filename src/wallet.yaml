@@ -4129,7 +4129,6 @@ paths:
           application/json:
             schema:
               type: object
-
               properties:
                 enable:
                   type: boolean
@@ -4137,6 +4136,40 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /get_transaction_memo:
+    post:
+      tags:
+        - Wallet
+      description: Retreive the memo from a transaction
+      summary: Retreive the memo from a transaction.
+      operationId: get_transaction_memo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - transaction_id
+              properties:
+                transaction_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    additionalProperties:
+                      type: object
+                      additionalProperties:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
