@@ -912,6 +912,8 @@ paths:
                   type: integer
                   format: uint16
                   default: 0
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
