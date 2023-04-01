@@ -1375,6 +1375,8 @@ paths:
                 with_recovery_info:
                   type: boolean
                   default: true
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
