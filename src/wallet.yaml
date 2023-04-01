@@ -1830,6 +1830,8 @@ paths:
                   type: object
                   additionalProperties:
                     type: object
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
