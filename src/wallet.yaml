@@ -4214,7 +4214,7 @@ paths:
         - NFT Wallet
       description: Retreives the number of NFTs in a wallet
       summary: Retreives the number of NFTs in a wallet.
-      operationId: get_transaction_memo
+      operationId: nft_count_nfts
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
       responses:
