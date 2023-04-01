@@ -814,6 +814,9 @@
         "type" : "string",
         "format" : "hex"
       }
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -1172,6 +1175,9 @@
       "additionalProperties" : {
         "type" : "object"
       }
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -1348,6 +1354,9 @@
     "with_recovery_info" : {
       "type" : "boolean",
       "default" : true
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -1369,6 +1378,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -1390,6 +1402,9 @@
     "num_verifications_required" : {
       "type" : "integer",
       "format" : "uint64"
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -1754,6 +1769,16 @@
     "height" : {
       "type" : "integer",
       "format" : "uint32"
+    }
+  }
+};
+            defs["get_transaction_memo_body"] = {
+  "required" : [ "transaction_id" ],
+  "type" : "object",
+  "properties" : {
+    "transaction_id" : {
+      "type" : "string",
+      "format" : "hex"
     }
   }
 };
@@ -3220,6 +3245,9 @@
         "type" : "string",
         "format" : "hex"
       },
+      "solution" : {
+        "type" : "string"
+      },
       "hints" : {
         "type" : "array",
         "items" : {
@@ -3272,6 +3300,39 @@
       "timestamp" : {
         "type" : "integer",
         "format" : "uint62"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_76"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "additionalProperties" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_77"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "int32"
+      },
+      "count" : {
+        "type" : "integer",
+        "format" : "int32"
       }
     }
   }, {
@@ -3412,6 +3473,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3479,6 +3543,9 @@
     "ignore_size_limit" : {
       "type" : "boolean",
       "default" : false
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3706,6 +3773,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3830,6 +3900,9 @@
       "type" : "integer",
       "format" : "uint16",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3852,6 +3925,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3880,6 +3956,9 @@
     },
     "did_id" : {
       "type" : "string"
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3919,6 +3998,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -3942,6 +4024,9 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -4275,6 +4360,9 @@
         "type" : "string",
         "format" : "hex"
       }
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -4292,6 +4380,15 @@
     "$ref" : "#/components/schemas/transaction_input"
   } ]
 };
+            defs["set_wallet_resync_on_startup_body"] = {
+  "type" : "object",
+  "properties" : {
+    "enable" : {
+      "type" : "boolean",
+      "default" : true
+    }
+  }
+};
             defs["sign_message_by_address_body"] = {
   "required" : [ "address", "message" ],
   "type" : "object",
@@ -4302,6 +4399,10 @@
     },
     "message" : {
       "type" : "string"
+    },
+    "is_hex" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4315,6 +4416,10 @@
     },
     "message" : {
       "type" : "string"
+    },
+    "is_hex" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4417,6 +4522,9 @@
       "additionalProperties" : {
         "type" : "object"
       }
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean"
     }
   }
 };
@@ -4984,6 +5092,9 @@
                     <li class="nav-item" data-group="NFTWallet" data-name="nftCalculateRoyalties">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftCalculateRoyalties">nftCalculateRoyalties</a>
                     </li>
+                    <li class="nav-item" data-group="NFTWallet" data-name="nftCountNfts">
+                      <a class="nav-link link-secondary" href="#api-NFTWallet-nftCountNfts">nftCountNfts</a>
+                    </li>
                     <li class="nav-item" data-group="NFTWallet" data-name="nftGetByDid">
                       <a class="nav-link link-secondary" href="#api-NFTWallet-nftGetByDid">nftGetByDid</a>
                     </li>
@@ -5104,6 +5215,9 @@
                     <li class="nav-item" data-group="Wallet" data-name="getTransactionCount">
                       <a class="nav-link link-secondary" href="#api-Wallet-getTransactionCount">getTransactionCount</a>
                     </li>
+                    <li class="nav-item" data-group="Wallet" data-name="getTransactionMemo">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getTransactionMemo">getTransactionMemo</a>
+                    </li>
                     <li class="nav-item" data-group="Wallet" data-name="getTransactions">
                       <a class="nav-link link-secondary" href="#api-Wallet-getTransactions">getTransactions</a>
                     </li>
@@ -5140,6 +5254,9 @@
                     <li class="nav-item" data-group="WalletNode" data-name="pushTransactions">
                       <a class="nav-link link-secondary" href="#api-WalletNode-pushTransactions">pushTransactions</a>
                     </li>
+                    <li class="nav-item" data-group="WalletNode" data-name="setWalletResyncOnStartup">
+                      <a class="nav-link link-secondary" href="#api-WalletNode-setWalletResyncOnStartup">setWalletResyncOnStartup</a>
+                    </li>
                     <li class="nav-item" data-group="WalletNode" data-name="walletGetNetworkInfo">
                       <a class="nav-link link-secondary" href="#api-WalletNode-walletGetNetworkInfo">walletGetNetworkInfo</a>
                     </li>
@@ -5159,7 +5276,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.7.0</div>
+              <div class="app-desc">Version: 1.7.1</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -12447,6 +12564,135 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-NFTWallet-nftCountNfts">
+                      <article id="api-NFTWallet-nftCountNfts-0" data-group="User" data-name="nftCountNfts" data-version="0">
+                        <div class="pull-left">
+                          <h1>nftCountNfts</h1>
+                          <p>Retreives the number of NFTs in a wallet.</p>
+                        </div>
+                        <p class="marked">Retreives the number of NFTs in a wallet</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_count_nfts</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-NFTWallet-nftCountNfts-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/nft_count_nfts" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Request body with the Id of a wallet",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "required" : [ "wallet_id" ],
+        "type" : "object",
+        "properties" : {
+          "wallet_id" : {
+            "type" : "integer",
+            "format" : "uint32"
+          }
+        }
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_nftCountNfts_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_nftCountNfts_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-nftCountNfts-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-nftCountNfts-200-schema">
+                                  <div id='responses-nftCountNfts-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_77"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-nftCountNfts-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-nftCountNfts-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-nftCountNfts-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-NFTWallet-nftGetByDid">
                       <article id="api-NFTWallet-nftGetByDid-0" data-group="User" data-name="nftGetByDid" data-version="0">
                         <div class="pull-left">
@@ -16869,6 +17115,127 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-Wallet-getTransactionMemo">
+                      <article id="api-Wallet-getTransactionMemo-0" data-group="User" data-name="getTransactionMemo" data-version="0">
+                        <div class="pull-left">
+                          <h1>getTransactionMemo</h1>
+                          <p>Retreives the memo from a transaction.</p>
+                        </div>
+                        <p class="marked">Retreives the memo from a transaction</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_transaction_memo</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-getTransactionMemo-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_transaction_memo" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_transaction_memo_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getTransactionMemo_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getTransactionMemo_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getTransactionMemo-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getTransactionMemo-200-schema">
+                                  <div id='responses-getTransactionMemo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_76"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getTransactionMemo-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getTransactionMemo-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getTransactionMemo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Wallet-getTransactions">
                       <article id="api-Wallet-getTransactions-0" data-group="User" data-name="getTransactions" data-version="0">
                         <div class="pull-left">
@@ -18093,6 +18460,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-pushTransactions-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-WalletNode-setWalletResyncOnStartup">
+                      <article id="api-WalletNode-setWalletResyncOnStartup-0" data-group="User" data-name="setWalletResyncOnStartup" data-version="0">
+                        <div class="pull-left">
+                          <h1>setWalletResyncOnStartup</h1>
+                          <p>Resync the current logged in wallet. The transaction and offer records will be kept.</p>
+                        </div>
+                        <p class="marked">Resync the current logged in wallet</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_wallet_resync_on_startup</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-WalletNode-setWalletResyncOnStartup-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/set_wallet_resync_on_startup" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/set_wallet_resync_on_startup_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_setWalletResyncOnStartup_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_setWalletResyncOnStartup_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-setWalletResyncOnStartup-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-setWalletResyncOnStartup-200-schema">
+                                  <div id='responses-setWalletResyncOnStartup-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-setWalletResyncOnStartup-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-setWalletResyncOnStartup-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-setWalletResyncOnStartup-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
