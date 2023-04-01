@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The wallet uses port 9256 by default.
-  version: 1.7.0
+  version: 1.7.1
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -4116,7 +4116,27 @@ paths:
                         type: integer
                         format: uint62
                   - $ref: "#/components/schemas/apiResponse"
+  /set_wallet_resync_on_startup:
+    post:
+      tags:
+        - Wallet Node
+      description: Resync the current logged in wallet
+      summary: Resync the current logged in wallet. The transaction and offer records will be kept.
+      operationId: set_wallet_resync_on_startup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
 
+              properties:
+                enable:
+                  type: boolean
+                  default: true
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
