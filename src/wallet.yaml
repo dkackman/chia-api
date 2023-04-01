@@ -3950,6 +3950,8 @@ paths:
                       full_puzzle:
                         type: string
                         format: hex
+                      solution:
+                        type: string
                       hints:
                         type: array
                         items:
