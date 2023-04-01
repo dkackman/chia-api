@@ -4140,8 +4140,8 @@ paths:
     post:
       tags:
         - Wallet
-      description: Retreive the memo from a transaction
-      summary: Retreive the memo from a transaction.
+      description: Retreives the memo from a transaction
+      summary: Retreives the memo from a transaction.
       operationId: get_transaction_memo
       requestBody:
         required: true
@@ -4169,6 +4169,31 @@ paths:
                         type: array
                         items:
                           type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /nft_count_nfts:
+    post:
+      tags:
+        - NFT Wallet
+      description: Retreives the number of NFTs in a wallet
+      summary: Retreives the number of NFTs in a wallet.
+      operationId: get_transaction_memo
+      requestBody:
+        $ref: "#/components/requestBodies/wallet_id"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_id:
+                        type: integer
+                        format: int32
+                      count:
+                        type: integer
+                        format: int32
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
