@@ -1665,6 +1665,8 @@ paths:
                 num_verifications_required:
                   type: integer
                   format: uint64
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           $ref: "#/components/responses/empty"
