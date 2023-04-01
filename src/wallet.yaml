@@ -1000,6 +1000,8 @@ paths:
                   format: uint32
                 did_id:
                   type: string
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
