@@ -1257,6 +1257,8 @@ paths:
                 ignore_size_limit:
                   type: boolean
                   default: false
+                reuse_puzhash:
+                  type: boolean
       responses:
         "200":
           description: OK
