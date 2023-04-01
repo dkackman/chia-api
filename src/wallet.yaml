@@ -3518,6 +3518,9 @@ paths:
                   format: hex
                 message:
                   type: string
+                is_hex:
+                  type: boolean
+                  default: false
       responses:
         "200":
           description: OK
