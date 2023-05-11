@@ -1250,6 +1250,13 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_19"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/plugin_status"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["inline_response_200_2"] = {
   "allOf" : [ {
     "type" : "object",
@@ -1585,6 +1592,32 @@
       "type" : "integer"
     }
   }
+};
+            defs["plugin_status"] = {
+  "type" : "object",
+  "properties" : {
+    "plugin_status" : {
+      "$ref" : "#/components/schemas/plugin_status_plugin_status"
+    }
+  }
+};
+            defs["plugin_status_plugin_status"] = {
+  "type" : "object",
+  "properties" : {
+    "uploaders" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "string"
+      }
+    },
+    "downloaders" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "string"
+      }
+    }
+  },
+  "example" : null
 };
             defs["proof"] = {
   "type" : "object",
@@ -2004,6 +2037,9 @@
                   <li class="nav-header nav-item" data-group="Subscriptions">
                     <a class="nav-link" href="#api-Subscriptions">Subscriptions</a>
                   </li>
+                    <li class="nav-item" data-group="Subscriptions" data-name="checkPlugins">
+                      <a class="nav-link link-secondary" href="#api-Subscriptions-checkPlugins">checkPlugins</a>
+                    </li>
                     <li class="nav-item" data-group="Subscriptions" data-name="removeSubscriptions">
                       <a class="nav-link link-secondary" href="#api-Subscriptions-removeSubscriptions">removeSubscriptions</a>
                     </li>
@@ -2029,7 +2065,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.7.1</div>
+              <div class="app-desc">Version: 1.8.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The data layer uses port 8561 by default.</div>
@@ -5566,6 +5602,128 @@ The data layer uses port 8561 by default.</div>
                   </section>
                 <section id="api-Subscriptions">
                   <h1>Subscriptions</h1>
+                    <div id="api-Subscriptions-checkPlugins">
+                      <article id="api-Subscriptions-checkPlugins-0" data-group="User" data-name="checkPlugins" data-version="0">
+                        <div class="pull-left">
+                          <h1>checkPlugins</h1>
+                          <p>Checks the status of plugins.</p>
+                        </div>
+                        <p class="marked">Checks the status of plugins.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/check_plugins</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Subscriptions-checkPlugins-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.crt \
+--key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8561/check_plugins" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_checkPlugins_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_checkPlugins_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-checkPlugins-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-checkPlugins-200-schema">
+                                  <div id='responses-checkPlugins-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_19"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-checkPlugins-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-checkPlugins-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-checkPlugins-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Subscriptions-removeSubscriptions">
                       <article id="api-Subscriptions-removeSubscriptions-0" data-group="User" data-name="removeSubscriptions" data-version="0">
                         <div class="pull-left">

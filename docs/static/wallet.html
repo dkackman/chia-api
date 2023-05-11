@@ -4814,17 +4814,17 @@
   "properties" : {
     "confirmed_wallet_balance" : {
       "type" : "integer",
-      "format" : "uint64",
+      "format" : "uint128",
       "example" : 999999799
     },
     "unconfirmed_wallet_balance" : {
       "type" : "integer",
-      "format" : "uint64",
+      "format" : "uint128",
       "example" : 999999799
     },
     "spendable_balance" : {
       "type" : "integer",
-      "format" : "uint64",
+      "format" : "uint128",
       "example" : 999999799
     },
     "pending_change" : {
@@ -4834,17 +4834,17 @@
     },
     "max_send_amount" : {
       "type" : "integer",
-      "format" : "uint64",
+      "format" : "uint128",
       "example" : 999999799
     },
     "unspent_coin_count" : {
       "type" : "integer",
-      "format" : "int32",
+      "format" : "uint32",
       "example" : 1
     },
     "pending_coin_removal_count" : {
       "type" : "integer",
-      "format" : "int32",
+      "format" : "uint32",
       "example" : 0
     },
     "wallet_type" : {
@@ -4852,6 +4852,16 @@
     },
     "asset_id" : {
       "type" : "string"
+    },
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "example" : 1
+    },
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "int32",
+      "example" : 128964
     }
   }
 };
@@ -5276,7 +5286,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.7.1</div>
+              <div class="app-desc">Version: 1.8.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
