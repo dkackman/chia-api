@@ -1,0 +1,14 @@
+plugin_status:
+  type: object
+  properties:
+    plugin_status:
+      type: object
+      properties:
+        uploaders:
+          type: object
+          additionalProperties:
+            type: string
+        downloaders:
+          type: object
+          additionalProperties:
+            type: string

@@ -40,6 +40,8 @@ components:
       $ref: "./schemas/offer.yaml#/offer"
     offer_store:
       $ref: "./schemas/offer_store.yaml#/offer_store"
+    plugin_status:
+      $ref: "./schemas/plugin_status.yaml#/plugin_status"
     terminal_node:
       $ref: "./schemas/terminal_node.yaml#/terminal_node"
     transaction_record:
@@ -1136,6 +1138,24 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /check_plugins:
+    post:
+      tags:
+        - Subscriptions
+      summary: Checks the status of plugins.
+      description: Checks the status of plugins.
+      operationId: check_plugins
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/plugin_status"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
