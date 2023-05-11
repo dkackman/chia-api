@@ -4,15 +4,15 @@ wallet_balance:
     confirmed_wallet_balance:
       type: integer
       example: 999999799
-      format: uint64
+      format: uint128
     unconfirmed_wallet_balance:
       type: integer
       example: 999999799
-      format: uint64
+      format: uint128
     spendable_balance:
       type: integer
       example: 999999799
-      format: uint64
+      format: uint128
     pending_change:
       type: integer
       example: 0
@@ -20,16 +20,24 @@ wallet_balance:
     max_send_amount:
       type: integer
       example: 999999799
-      format: uint64
+      format: uint128
     unspent_coin_count:
       type: integer
       example: 1
-      format: int32
+      format: uint32
     pending_coin_removal_count:
       type: integer
       example: 0
-      format: int32
+      format: uint32
     wallet_type:
       $ref: ./wallet_type.yaml#/wallet_type
     asset_id:
       type: string
+    wallet_id:
+      type: integer
+      example: 1
+      format: uint32
+    fingerprint:
+      type: integer
+      example: 128964
+      format: int32
