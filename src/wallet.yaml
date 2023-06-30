@@ -3040,6 +3040,8 @@ paths:
                   type: boolean
                 type_filter:
                   $ref: "#/components/schemas/transaction_type_filter"
+                confirmed:
+                  type: boolean
       responses:
         "200":
           description: OK
