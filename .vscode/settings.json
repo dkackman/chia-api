@@ -1,6 +1,7 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "cSpell.words": [
-        "merkle"
+        "merkle",
+        "mojos"
     ]
 }

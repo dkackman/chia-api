@@ -2846,6 +2846,41 @@ paths:
                       wallet_balance:
                         $ref: "#/components/schemas/wallet_balance"
                   - $ref: "#/components/schemas/apiResponse"
+  /get_wallet_balances:
+    post:
+      tags:
+        - Wallet
+      summary: Retrieves the balance of a specific list of wallets.
+      description: Retrieves the balance of a specific list of wallets (in units of mojos).
+      operationId: get_wallet_balances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_ids
+              properties:
+                wallet_ids:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_balances:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/wallet_balance"
+                  - $ref: "#/components/schemas/apiResponse"
   /get_farmed_amount:
     post:
       tags:
