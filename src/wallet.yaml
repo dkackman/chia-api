@@ -148,6 +148,8 @@ components:
       $ref: "./schemas/uint32_range.yaml#/uint32_range"
     uint64_range:
       $ref: "./schemas/uint64_range.yaml#/uint64_range"
+    vc_record:
+      $ref: "./schemas/vc_record.yaml#/vc_record"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     wallet_info:
@@ -180,6 +182,8 @@ tags:
     description: The wallet RPC API is exposed, by default, on port 9256 and contains methods for managing wallet, trades, offers and transactions.
   - name: Data Layer Wallet
     description: Methods for managing a data layer wallet.
+  - name: Verified Credential
+    description: Methods for managing verified credentials
 paths:
   /create_new_dl:
     post:
@@ -545,7 +549,7 @@ paths:
                   format: bytes32
                 amount:
                   type: integer
-                  format: unint64
+                  format: uint64
                 urls:
                   type: array
                   items:
@@ -553,7 +557,7 @@ paths:
                     format: bytes32
                 fee:
                   type: integer
-                  format: unint64
+                  format: uint64
                   default: 0
       responses:
         "200":
@@ -4451,6 +4455,48 @@ paths:
                         items:
                           type: string
                           format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /vc_mint:
+    post:
+      tags:
+        - Verified Credential
+      description: Mint a verified credential using the assigned DID
+      summary: Mint a verified credential using the assigned DID.
+      operationId: vc_mint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - did_id
+              properties:
+                did_id:
+                  type: string
+                  format: hex
+                target_address:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      vc_record:
+                        $ref: "#/components/schemas/vc_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

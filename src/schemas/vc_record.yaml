@@ -1,0 +1,8 @@
+vc_record:
+  type: object
+  properties:
+    vc:
+      $ref: ./vc_record.yaml#/vc_record
+    confirmed_at_height:
+      type: integer
+      format: uint32
