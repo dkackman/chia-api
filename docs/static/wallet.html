@@ -634,6 +634,21 @@
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+            defs["amount_filter"] = {
+  "type" : "object",
+  "properties" : {
+    "values" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    },
+    "mode" : {
+      "$ref" : "#/components/schemas/filter_mode"
+    }
+  }
+};
             defs["amount_with_puzzlehash"] = {
   "required" : [ "amount", "puzzle_hash" ],
   "type" : "object",
@@ -672,6 +687,30 @@
     }
   },
   "description" : "Success indicator and optional error message included in all responses"
+};
+            defs["auto_claim_settings"] = {
+  "type" : "object",
+  "properties" : {
+    "enabled" : {
+      "type" : "boolean",
+      "default" : false
+    },
+    "tx_fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "min_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "batch_size" : {
+      "type" : "integer",
+      "format" : "uint16",
+      "default" : 50
+    }
+  }
 };
             defs["cancel_offer_body"] = {
   "required" : [ "secure", "trade_id" ],
@@ -906,6 +945,12 @@
     }
   }
 };
+            defs["coin_record_order"] = {
+  "type" : "integer",
+  "description" : "The type of wallet:\n  * 1 confirmed_height\n  * 2 spent_height",
+  "format" : "uint8",
+  "enum" : [ 1, 2 ]
+};
             defs["coin_search_options"] = {
   "type" : "object",
   "properties" : {
@@ -937,6 +982,12 @@
       "example" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
     }
   }
+};
+            defs["coin_type"] = {
+  "type" : "integer",
+  "description" : "The type of coin:\n  * 0 NORMAL\n  * 1 CLAWBACK",
+  "format" : "uint8",
+  "enum" : [ 0, 1 ]
 };
             defs["connection_info"] = {
   "type" : "object",
@@ -1418,7 +1469,7 @@
     },
     "fee" : {
       "type" : "integer",
-      "format" : "unint64",
+      "format" : "uint64",
       "default" : 0
     }
   }
@@ -1479,7 +1530,7 @@
     },
     "amount" : {
       "type" : "integer",
-      "format" : "unint64"
+      "format" : "uint64"
     },
     "urls" : {
       "type" : "array",
@@ -1490,7 +1541,7 @@
     },
     "fee" : {
       "type" : "integer",
-      "format" : "unint64",
+      "format" : "uint64",
       "default" : 0
     }
   }
@@ -1615,6 +1666,12 @@
     }
   }
 };
+            defs["filter_mode"] = {
+  "type" : "integer",
+  "description" : "The type of filter:\n  * 1 include\n  * 2 exclude",
+  "format" : "uint8",
+  "enum" : [ 1, 2 ]
+};
             defs["get_all_offers_body"] = {
   "type" : "object",
   "properties" : {
@@ -1643,6 +1700,63 @@
     },
     "file_contents" : {
       "type" : "boolean"
+    }
+  }
+};
+            defs["get_coin_records_body"] = {
+  "type" : "object",
+  "properties" : {
+    "offset" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "default" : 0
+    },
+    "limit" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "wallet_type" : {
+      "$ref" : "#/components/schemas/wallet_type"
+    },
+    "coin_type" : {
+      "$ref" : "#/components/schemas/coin_type"
+    },
+    "coin_id_filter" : {
+      "$ref" : "#/components/schemas/hash_filter"
+    },
+    "puzzle_hash_filter" : {
+      "$ref" : "#/components/schemas/hash_filter"
+    },
+    "parent_coin_id_filter" : {
+      "$ref" : "#/components/schemas/hash_filter"
+    },
+    "amount_filter" : {
+      "$ref" : "#/components/schemas/amount_filter"
+    },
+    "amount_range" : {
+      "$ref" : "#/components/schemas/uint64_range"
+    },
+    "confirmed_range" : {
+      "$ref" : "#/components/schemas/uint32_range"
+    },
+    "spent_range" : {
+      "$ref" : "#/components/schemas/uint32_range"
+    },
+    "order" : {
+      "$ref" : "#/components/schemas/coin_record_order"
+    },
+    "reverse" : {
+      "type" : "boolean",
+      "default" : false
+    },
+    "include_total_count" : {
+      "type" : "boolean",
+      "description" : "Include the total number of entries for the query without applying offset/limit",
+      "default" : false
     }
   }
 };
@@ -1772,6 +1886,18 @@
     }
   }
 };
+            defs["get_transaction_count_body"] = {
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "type_filter" : {
+      "$ref" : "#/components/schemas/transaction_type_filter"
+    }
+  }
+};
             defs["get_transaction_memo_body"] = {
   "required" : [ "transaction_id" ],
   "type" : "object",
@@ -1805,6 +1931,25 @@
     },
     "reverse" : {
       "type" : "boolean"
+    },
+    "type_filter" : {
+      "$ref" : "#/components/schemas/transaction_type_filter"
+    },
+    "confirmed" : {
+      "type" : "boolean"
+    }
+  }
+};
+            defs["get_wallet_balances_body"] = {
+  "required" : [ "wallet_ids" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
     }
   }
 };
@@ -1817,6 +1962,21 @@
     "include_data" : {
       "type" : "boolean",
       "default" : true
+    }
+  }
+};
+            defs["hash_filter"] = {
+  "type" : "object",
+  "properties" : {
+    "values" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "mode" : {
+      "$ref" : "#/components/schemas/filter_mode"
     }
   }
 };
@@ -2700,12 +2860,27 @@
 };
             defs["inline_response_200_51"] = {
   "allOf" : [ {
-    "$ref" : "#/components/schemas/farmer_rewards"
+    "type" : "object",
+    "properties" : {
+      "wallet_balances" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/wallet_balance"
+        }
+      }
+    }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
             defs["inline_response_200_52"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/farmer_rewards"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_53"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2732,7 +2907,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_53"] = {
+            defs["inline_response_200_54"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2751,7 +2926,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_54"] = {
+            defs["inline_response_200_55"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2767,7 +2942,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_55"] = {
+            defs["inline_response_200_56"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2784,14 +2959,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_56"] = {
+            defs["inline_response_200_57"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_57"] = {
+            defs["inline_response_200_58"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2804,7 +2979,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_58"] = {
+            defs["inline_response_200_59"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2828,7 +3003,22 @@
     }
   } ]
 };
-            defs["inline_response_200_59"] = {
+            defs["inline_response_200_6"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "history" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_60"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -2856,27 +3046,12 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_6"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "history" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/singleton_record"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_60"] = {
+            defs["inline_response_200_61"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_60_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_61_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -2884,7 +3059,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_60_private_key"] = {
+            defs["inline_response_200_61_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -2894,7 +3069,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_61"] = {
+            defs["inline_response_200_62"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2916,7 +3091,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_62"] = {
+            defs["inline_response_200_63"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2934,7 +3109,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_63"] = {
+            defs["inline_response_200_64"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2947,14 +3122,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_64"] = {
+            defs["inline_response_200_65"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "notifications" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_64_notifications"
+          "$ref" : "#/components/schemas/inline_response_200_65_notifications"
         }
       }
     }
@@ -2962,7 +3137,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_64_notifications"] = {
+            defs["inline_response_200_65_notifications"] = {
   "type" : "object",
   "properties" : {
     "id" : {
@@ -2984,7 +3159,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_65"] = {
+            defs["inline_response_200_66"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2996,7 +3171,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_66"] = {
+            defs["inline_response_200_67"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3017,7 +3192,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_67"] = {
+            defs["inline_response_200_68"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3042,7 +3217,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_68"] = {
+            defs["inline_response_200_69"] = {
   "type" : "object",
   "properties" : {
     "coin_records" : {
@@ -3055,14 +3230,6 @@
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
-};
-            defs["inline_response_200_69"] = {
-  "type" : "object",
-  "properties" : {
-    "isValid" : {
-      "type" : "boolean"
-    }
-  }
 };
             defs["inline_response_200_7"] = {
   "allOf" : [ {
@@ -3083,6 +3250,33 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "coin_records" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/coin_record"
+        }
+      },
+      "total_count" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_71"] = {
+  "type" : "object",
+  "properties" : {
+    "isValid" : {
+      "type" : "boolean"
+    }
+  }
+};
+            defs["inline_response_200_72"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "fingerprint" : {
         "type" : "integer",
         "format" : "int32"
@@ -3098,7 +3292,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_71"] = {
+            defs["inline_response_200_73"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -3210,7 +3404,7 @@
     "description" : "Response when a new nft wallet is created."
   } ]
 };
-            defs["inline_response_200_72"] = {
+            defs["inline_response_200_74"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3254,13 +3448,17 @@
           "type" : "string",
           "format" : "hex"
         }
+      },
+      "did_id" : {
+        "type" : "string",
+        "format" : "hex"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_73"] = {
+            defs["inline_response_200_75"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3273,7 +3471,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_74"] = {
+            defs["inline_response_200_76"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3293,7 +3491,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_75"] = {
+            defs["inline_response_200_77"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3306,7 +3504,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_76"] = {
+            defs["inline_response_200_78"] = {
   "allOf" : [ {
     "type" : "object",
     "additionalProperties" : {
@@ -3322,7 +3520,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_77"] = {
+            defs["inline_response_200_79"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3347,6 +3545,105 @@
         "type" : "array",
         "items" : {
           "$ref" : "#/components/schemas/transaction_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_80"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/auto_claim_settings"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_81"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "transaction_ids" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "format" : "hex"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_82"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "vc_record" : {
+        "$ref" : "#/components/schemas/vc_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_83"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "vc_record" : {
+        "$ref" : "#/components/schemas/vc_record"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_84"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "vc_records" : {
+        "type" : "array",
+        "items" : {
+          "allOf" : [ {
+            "type" : "object",
+            "properties" : {
+              "coin_id" : {
+                "type" : "string",
+                "format" : "hex"
+              }
+            }
+          }, {
+            "$ref" : "#/components/schemas/vc_record"
+          } ]
+        }
+      },
+      "proofs" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_85"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "proofs" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
         }
       }
     }
@@ -3721,7 +4018,7 @@
     },
     "target_list" : {
       "type" : "array",
-      "description" : "a list of targets for transfering minted NFTs (aka airdrop)",
+      "description" : "a list of targets for transferring minted NFTs (aka airdrop)",
       "items" : {
         "type" : "string",
         "format" : "hex"
@@ -4036,9 +4333,9 @@
   "enum" : [ 1, 2, 3, 4, 5, 6 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
-            defs["OneOfinline_response_200_58"] = {};
             defs["OneOfinline_response_200_59"] = {};
-            defs["OneOfinline_response_200_71"] = {};
+            defs["OneOfinline_response_200_60"] = {};
+            defs["OneOfinline_response_200_73"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -4494,6 +4791,29 @@
     }
   }
 };
+            defs["spend_clawback_coins_body"] = {
+  "required" : [ "coin_ids" ],
+  "type" : "object",
+  "properties" : {
+    "coin_ids" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "batch_size" : {
+      "type" : "integer",
+      "format" : "uint16",
+      "default" : 50
+    }
+  }
+};
             defs["take_offer_body"] = {
   "required" : [ "offer" ],
   "type" : "object",
@@ -4784,6 +5104,235 @@
   "format" : "uint8",
   "enum" : [ 0, 1, 2, 3, 4, 5 ]
 };
+            defs["transaction_type_filter"] = {
+  "type" : "object",
+  "properties" : {
+    "values" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint8"
+      }
+    },
+    "mode" : {
+      "$ref" : "#/components/schemas/filter_mode"
+    }
+  }
+};
+            defs["uint32_range"] = {
+  "type" : "object",
+  "properties" : {
+    "start" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "default" : 0
+    },
+    "stop" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["uint64_range"] = {
+  "type" : "object",
+  "properties" : {
+    "start" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "stop" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["vc_add_proofs_body"] = {
+  "required" : [ "proofs" ],
+  "type" : "object",
+  "properties" : {
+    "proofs" : {
+      "$ref" : "#/components/schemas/vc_proofs"
+    }
+  }
+};
+            defs["vc_get_body"] = {
+  "required" : [ "vc_id" ],
+  "type" : "object",
+  "properties" : {
+    "vc_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["vc_get_list_body"] = {
+  "type" : "object",
+  "properties" : {
+    "start" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "end" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["vc_get_proofs_for_root_body"] = {
+  "required" : [ "root" ],
+  "type" : "object",
+  "properties" : {
+    "root" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
+            defs["vc_lineage_proof"] = {
+  "type" : "object",
+  "properties" : {
+    "parent_name" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "0xc2347b264b412bde5893f4e1369adab3a6c61496845c10f8ec98bc35f9e1429f"
+    },
+    "inner_puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "0x60f66f9824d5f96d4025b70b4f7ac3def458cae742fbd2d70343eeeaa5a59c58"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "example" : 1
+    },
+    "parent_proof_hash" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "0x60f66f9824d5f96d4025b70b4f7ac3def458cae742fbd2d70343eeeaa5a59c58"
+    }
+  },
+  "description" : "The covenant layer for exigent metadata layers requires to be passed the previous parent's metadata too"
+};
+            defs["vc_mint_body"] = {
+  "required" : [ "did_id" ],
+  "type" : "object",
+  "properties" : {
+    "did_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "target_address" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["vc_proofs"] = {
+  "type" : "object",
+  "properties" : {
+    "key_value_pairs" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "string"
+      }
+    }
+  }
+};
+            defs["vc_record"] = {
+  "type" : "object",
+  "properties" : {
+    "vc" : {
+      "$ref" : "#/components/schemas/verified_credential"
+    },
+    "confirmed_at_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["vc_revoke_body"] = {
+  "required" : [ "vc_parent_id" ],
+  "type" : "object",
+  "properties" : {
+    "vc_parent_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  }
+};
+            defs["vc_spend_body"] = {
+  "required" : [ "vc_id" ],
+  "type" : "object",
+  "properties" : {
+    "vc_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "new_proof_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "provider_inner_puzhash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "reuse_puzhash" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  }
+};
+            defs["verified_credential"] = {
+  "type" : "object",
+  "properties" : {
+    "coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "singleton_lineage_proof" : {
+      "$ref" : "#/components/schemas/lineage_proof"
+    },
+    "eml_lineage_proof" : {
+      "$ref" : "#/components/schemas/vc_lineage_proof"
+    },
+    "launcher_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inner_puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "proof_provider" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "proof_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  },
+  "description" : "This class serves as the main driver for the entire VC puzzle stack. Given the information below, it can sync and spend VerifiedCredentials in any specified manner. Trying to sync from a spend that this class did not create will likely result in an error."
+};
             defs["verify_signature_body"] = {
   "required" : [ "message", "pubkey", "signature" ],
   "properties" : {
@@ -4890,9 +5439,9 @@
 };
             defs["wallet_type"] = {
   "type" : "integer",
-  "description" : "The type of wallet:\n  * 0 STANDARD_WALLET\n  * 1 RATE_LIMITED\n  * 2 ATOMIC_SWAP\n  * 3 AUTHORIZED_PAYEE\n  * 4 MULTI_SIG\n  * 5 CUSTODY\n  * 6 CAT\n  * 7 RECOVERABLE\n  * 8 DISTRIBUTED_ID\n  * 9 POOLING_WALLET\n  * 10 NFT",
+  "description" : "The type of wallet:\n  * 0 STANDARD_WALLET\n  * 2 ATOMIC_SWAP\n  * 3 AUTHORIZED_PAYEE\n  * 4 MULTI_SIG\n  * 5 CUSTODY\n  * 6 CAT\n  * 7 RECOVERABLE\n  * 8 DISTRIBUTED_ID\n  * 9 POOLING_WALLET\n  * 10 NFT\n  * 11 DATA_LAYER\n  * 12 DATA_LAYER_OFFER\n  * 13 VC",
   "format" : "uint8",
-  "enum" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+  "enum" : [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
 };
   </script>
 
@@ -4964,6 +5513,9 @@
                   <li class="nav-header nav-item" data-group="Coins">
                     <a class="nav-link" href="#api-Coins">Coins</a>
                   </li>
+                    <li class="nav-item" data-group="Coins" data-name="getCoinRecords">
+                      <a class="nav-link link-secondary" href="#api-Coins-getCoinRecords">getCoinRecords</a>
+                    </li>
                     <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByNames">
                       <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByNames">getCoinRecordsByNames</a>
                     </li>
@@ -5195,6 +5747,30 @@
                     <li class="nav-item" data-group="Shared" data-name="stopNode">
                       <a class="nav-link link-secondary" href="#api-Shared-stopNode">stopNode</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="VerifiedCredential">
+                    <a class="nav-link" href="#api-VerifiedCredential">VerifiedCredential</a>
+                  </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcAddProofs">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcAddProofs">vcAddProofs</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcGet">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcGet">vcGet</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcGetList">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcGetList">vcGetList</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcGetProofsForRoot">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcGetProofsForRoot">vcGetProofsForRoot</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcMint">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcMint">vcMint</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcRevoke">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcRevoke">vcRevoke</a>
+                    </li>
+                    <li class="nav-item" data-group="VerifiedCredential" data-name="vcSpend">
+                      <a class="nav-link link-secondary" href="#api-VerifiedCredential-vcSpend">vcSpend</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="Wallet">
                     <a class="nav-link" href="#api-Wallet">Wallet</a>
                   </li>
@@ -5206,6 +5782,9 @@
                     </li>
                     <li class="nav-item" data-group="Wallet" data-name="extendDerivationIndex">
                       <a class="nav-link link-secondary" href="#api-Wallet-extendDerivationIndex">extendDerivationIndex</a>
+                    </li>
+                    <li class="nav-item" data-group="Wallet" data-name="getAutoClaim">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getAutoClaim">getAutoClaim</a>
                     </li>
                     <li class="nav-item" data-group="Wallet" data-name="getCurrentDerivationIndex">
                       <a class="nav-link link-secondary" href="#api-Wallet-getCurrentDerivationIndex">getCurrentDerivationIndex</a>
@@ -5234,11 +5813,20 @@
                     <li class="nav-item" data-group="Wallet" data-name="getWalletBalance">
                       <a class="nav-link link-secondary" href="#api-Wallet-getWalletBalance">getWalletBalance</a>
                     </li>
+                    <li class="nav-item" data-group="Wallet" data-name="getWalletBalances">
+                      <a class="nav-link link-secondary" href="#api-Wallet-getWalletBalances">getWalletBalances</a>
+                    </li>
                     <li class="nav-item" data-group="Wallet" data-name="sendTransaction">
                       <a class="nav-link link-secondary" href="#api-Wallet-sendTransaction">sendTransaction</a>
                     </li>
                     <li class="nav-item" data-group="Wallet" data-name="sendTransactionMulti">
                       <a class="nav-link link-secondary" href="#api-Wallet-sendTransactionMulti">sendTransactionMulti</a>
+                    </li>
+                    <li class="nav-item" data-group="Wallet" data-name="setAutoClaim">
+                      <a class="nav-link link-secondary" href="#api-Wallet-setAutoClaim">setAutoClaim</a>
+                    </li>
+                    <li class="nav-item" data-group="Wallet" data-name="spendClawbackCoins">
+                      <a class="nav-link link-secondary" href="#api-Wallet-spendClawbackCoins">spendClawbackCoins</a>
                     </li>
                   <li class="nav-header nav-item" data-group="WalletManagement">
                     <a class="nav-link" href="#api-WalletManagement">WalletManagement</a>
@@ -5286,7 +5874,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.8.0</div>
+              <div class="app-desc">Version: 1.8.2</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -7376,6 +7964,128 @@ The wallet uses port 9256 by default.</div>
                   </section>
                 <section id="api-Coins">
                   <h1>Coins</h1>
+                    <div id="api-Coins-getCoinRecords">
+                      <article id="api-Coins-getCoinRecords-0" data-group="User" data-name="getCoinRecords" data-version="0">
+                        <div class="pull-left">
+                          <h1>getCoinRecords</h1>
+                          <p>Retrieves the coins that match given filter criteria.</p>
+                        </div>
+                        <p class="marked">Retrieves the coins that match given filter criteria</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_coin_records</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Coins-getCoinRecords-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_coin_records" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The coin names.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_coin_records_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getCoinRecords_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getCoinRecords_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getCoinRecords-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getCoinRecords-200-schema">
+                                  <div id='responses-getCoinRecords-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_70"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getCoinRecords-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getCoinRecords-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getCoinRecords-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Coins-getCoinRecordsByNames">
                       <article id="api-Coins-getCoinRecordsByNames-0" data-group="User" data-name="getCoinRecordsByNames" data-version="0">
                         <div class="pull-left">
@@ -7467,7 +8177,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_68"
+        "$ref" : "#/components/schemas/inline_response_200_69"
       }
     }
   }
@@ -7841,7 +8551,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_73"
+        "$ref" : "#/components/schemas/inline_response_200_75"
       }
     }
   }
@@ -8134,9 +8844,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-DIDWallet-didGetInfo-0" data-group="User" data-name="didGetInfo" data-version="0">
                         <div class="pull-left">
                           <h1>didGetInfo</h1>
-                          <p>Retreives information about a DID.</p>
+                          <p>Retrieves information about a DID.</p>
                         </div>
-                        <p class="marked">Retreives information about a DID</p>            
+                        <p class="marked">Retrieves information about a DID</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/did_get_info</span></code></pre>
                         
@@ -8220,7 +8930,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_72"
+        "$ref" : "#/components/schemas/inline_response_200_74"
       }
     }
   }
@@ -11172,7 +11882,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_60"
+        "$ref" : "#/components/schemas/inline_response_200_61"
       }
     }
   }
@@ -11301,7 +12011,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_61"
+        "$ref" : "#/components/schemas/inline_response_200_62"
       }
     }
   }
@@ -11674,7 +12384,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_57"
+        "$ref" : "#/components/schemas/inline_response_200_58"
       }
     }
   }
@@ -11803,7 +12513,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_59"
+        "$ref" : "#/components/schemas/inline_response_200_60"
       }
     }
   }
@@ -11925,7 +12635,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_58"
+        "$ref" : "#/components/schemas/inline_response_200_59"
       }
     }
   }
@@ -12054,7 +12764,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_57"
+        "$ref" : "#/components/schemas/inline_response_200_58"
       }
     }
   }
@@ -12176,7 +12886,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_69"
+        "$ref" : "#/components/schemas/inline_response_200_71"
       }
     }
   }
@@ -12578,9 +13288,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-NFTWallet-nftCountNfts-0" data-group="User" data-name="nftCountNfts" data-version="0">
                         <div class="pull-left">
                           <h1>nftCountNfts</h1>
-                          <p>Retreives the number of NFTs in a wallet.</p>
+                          <p>Retrieves the number of NFTs in a wallet.</p>
                         </div>
-                        <p class="marked">Retreives the number of NFTs in a wallet</p>            
+                        <p class="marked">Retrieves the number of NFTs in a wallet</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/nft_count_nfts</span></code></pre>
                         
@@ -12672,7 +13382,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_77"
+        "$ref" : "#/components/schemas/inline_response_200_79"
       }
     }
   }
@@ -13649,7 +14359,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_74"
+        "$ref" : "#/components/schemas/inline_response_200_76"
       }
     }
   }
@@ -14012,7 +14722,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_74"
+        "$ref" : "#/components/schemas/inline_response_200_76"
       }
     }
   }
@@ -14293,9 +15003,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-Notifications-getNotifications-0" data-group="User" data-name="getNotifications" data-version="0">
                         <div class="pull-left">
                           <h1>getNotifications</h1>
-                          <p>Retreives notifications.</p>
+                          <p>Retrieves notifications.</p>
                         </div>
-                        <p class="marked">Retreives notifications.</p>            
+                        <p class="marked">Retrieves notifications.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_notifications</span></code></pre>
                         
@@ -14380,7 +15090,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_64"
+        "$ref" : "#/components/schemas/inline_response_200_65"
       }
     }
   }
@@ -14502,7 +15212,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_65"
+        "$ref" : "#/components/schemas/inline_response_200_66"
       }
     }
   }
@@ -14624,7 +15334,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_66"
+        "$ref" : "#/components/schemas/inline_response_200_67"
       }
     }
   }
@@ -14746,7 +15456,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_67"
+        "$ref" : "#/components/schemas/inline_response_200_68"
       }
     }
   }
@@ -16008,6 +16718,856 @@ The wallet uses port 9256 by default.</div>
                         </article>
                       </div>
                   </section>
+                <section id="api-VerifiedCredential">
+                  <h1>VerifiedCredential</h1>
+                    <div id="api-VerifiedCredential-vcAddProofs">
+                      <article id="api-VerifiedCredential-vcAddProofs-0" data-group="User" data-name="vcAddProofs" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcAddProofs</h1>
+                          <p>Add a set of proofs to the DB that can be used when spending a VC. VCs are near useless until their proofs have been added.</p>
+                        </div>
+                        <p class="marked">Add a set of proofs to the DB that can be used when spending a VC</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_add_proofs</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcAddProofs-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_add_proofs" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_add_proofs_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcAddProofs_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcAddProofs_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcAddProofs-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcAddProofs-200-schema">
+                                  <div id='responses-vcAddProofs-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcAddProofs-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcAddProofs-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcAddProofs-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcGet">
+                      <article id="api-VerifiedCredential-vcGet-0" data-group="User" data-name="vcGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcGet</h1>
+                          <p>Given a launcher ID get the verified credential.</p>
+                        </div>
+                        <p class="marked">Given a launcher ID get the verified credential</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_get</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_get" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_get_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcGet_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcGet_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcGet-200-schema">
+                                  <div id='responses-vcGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_83"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcGetList">
+                      <article id="api-VerifiedCredential-vcGetList-0" data-group="User" data-name="vcGetList" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcGetList</h1>
+                          <p>Get a list of verified credentials in the specified range and any &#x27;proofs&#x27; associated with the roots contained within.</p>
+                        </div>
+                        <p class="marked">Get a list of verified credentials</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_get_list</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcGetList-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_get_list" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_get_list_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcGetList_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcGetList_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcGetList-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcGetList-200-schema">
+                                  <div id='responses-vcGetList-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_84"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcGetList-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcGetList-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcGetList-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcGetProofsForRoot">
+                      <article id="api-VerifiedCredential-vcGetProofsForRoot-0" data-group="User" data-name="vcGetProofsForRoot" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcGetProofsForRoot</h1>
+                          <p>Given a specified vc root, get any proofs associated with that root.</p>
+                        </div>
+                        <p class="marked">Given a specified vc root, get any proofs associated with that root</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_get_proofs_for_root</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcGetProofsForRoot-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_get_proofs_for_root" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_get_proofs_for_root_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcGetProofsForRoot_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcGetProofsForRoot_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcGetProofsForRoot-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcGetProofsForRoot-200-schema">
+                                  <div id='responses-vcGetProofsForRoot-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_85"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcGetProofsForRoot-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcGetProofsForRoot-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcGetProofsForRoot-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcMint">
+                      <article id="api-VerifiedCredential-vcMint-0" data-group="User" data-name="vcMint" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcMint</h1>
+                          <p>Mint a verified credential using the assigned DID.</p>
+                        </div>
+                        <p class="marked">Mint a verified credential using the assigned DID</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_mint</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcMint-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_mint" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_mint_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcMint_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcMint_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcMint-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcMint-200-schema">
+                                  <div id='responses-vcMint-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_82"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcMint-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcMint-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcMint-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcRevoke">
+                      <article id="api-VerifiedCredential-vcRevoke-0" data-group="User" data-name="vcRevoke" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcRevoke</h1>
+                          <p>Revoke an on chain VC provided the correct DID is available.</p>
+                        </div>
+                        <p class="marked">Revoke an on chain VC provided the correct DID is available</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_revoke</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcRevoke-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_revoke" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_revoke_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcRevoke_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcRevoke_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcRevoke-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcRevoke-200-schema">
+                                  <div id='responses-vcRevoke-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcRevoke-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcRevoke-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcRevoke-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-VerifiedCredential-vcSpend">
+                      <article id="api-VerifiedCredential-vcSpend-0" data-group="User" data-name="vcSpend" data-version="0">
+                        <div class="pull-left">
+                          <h1>vcSpend</h1>
+                          <p>Spend a verified credential.</p>
+                        </div>
+                        <p class="marked">Spend a verified credential</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/vc_spend</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-VerifiedCredential-vcSpend-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/vc_spend" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/vc_spend_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_vcSpend_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_vcSpend_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-vcSpend-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-vcSpend-200-schema">
+                                  <div id='responses-vcSpend-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-vcSpend-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-vcSpend-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-vcSpend-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
                 <section id="api-Wallet">
                   <h1>Wallet</h1>
                     <div id="api-Wallet-createSignedTransaction">
@@ -16381,6 +17941,128 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-Wallet-getAutoClaim">
+                      <article id="api-Wallet-getAutoClaim-0" data-group="User" data-name="getAutoClaim" data-version="0">
+                        <div class="pull-left">
+                          <h1>getAutoClaim</h1>
+                          <p>Get auto claim merkle coins config</p>
+                        </div>
+                        <p class="marked">Get auto claim merkle coins config</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_auto_claim</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-getAutoClaim-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_auto_claim" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getAutoClaim_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getAutoClaim_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAutoClaim-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAutoClaim-200-schema">
+                                  <div id='responses-getAutoClaim-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_80"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAutoClaim-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAutoClaim-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAutoClaim-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Wallet-getCurrentDerivationIndex">
                       <article id="api-Wallet-getCurrentDerivationIndex-0" data-group="User" data-name="getCurrentDerivationIndex" data-version="0">
                         <div class="pull-left">
@@ -16594,7 +18276,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_51"
+        "$ref" : "#/components/schemas/inline_response_200_52"
       }
     }
   }
@@ -16715,7 +18397,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_55"
+        "$ref" : "#/components/schemas/inline_response_200_56"
       }
     }
   }
@@ -16836,7 +18518,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_52"
+        "$ref" : "#/components/schemas/inline_response_200_53"
       }
     }
   }
@@ -17033,18 +18715,10 @@ The wallet uses port 9256 by default.</div>
                                 <script>
                                 $(document).ready(function() {
                                   var schemaWrapper = {
-  "description" : "Request body with the Id of a wallet",
   "content" : {
     "application/json" : {
       "schema" : {
-        "required" : [ "wallet_id" ],
-        "type" : "object",
-        "properties" : {
-          "wallet_id" : {
-            "type" : "integer",
-            "format" : "uint32"
-          }
-        }
+        "$ref" : "#/components/schemas/get_transaction_count_body"
       }
     }
   },
@@ -17094,7 +18768,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_54"
+        "$ref" : "#/components/schemas/inline_response_200_55"
       }
     }
   }
@@ -17129,9 +18803,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-Wallet-getTransactionMemo-0" data-group="User" data-name="getTransactionMemo" data-version="0">
                         <div class="pull-left">
                           <h1>getTransactionMemo</h1>
-                          <p>Retreives the memo from a transaction.</p>
+                          <p>Retrieves the memo from a transaction.</p>
                         </div>
-                        <p class="marked">Retreives the memo from a transaction</p>            
+                        <p class="marked">Retrieves the memo from a transaction</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_transaction_memo</span></code></pre>
                         
@@ -17215,7 +18889,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_76"
+        "$ref" : "#/components/schemas/inline_response_200_78"
       }
     }
   }
@@ -17250,9 +18924,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-Wallet-getTransactions-0" data-group="User" data-name="getTransactions" data-version="0">
                         <div class="pull-left">
                           <h1>getTransactions</h1>
-                          <p>Retrieves a list of trnsactions from a wallet.</p>
+                          <p>Retrieves a list of transactions from a wallet.</p>
                         </div>
-                        <p class="marked">Retrieves a list of trnsactions from a wallet.</p>            
+                        <p class="marked">Retrieves a list of transactions from a wallet.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_transactions</span></code></pre>
                         
@@ -17336,7 +19010,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_53"
+        "$ref" : "#/components/schemas/inline_response_200_54"
       }
     }
   }
@@ -17491,6 +19165,127 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getWalletBalance-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Wallet-getWalletBalances">
+                      <article id="api-Wallet-getWalletBalances-0" data-group="User" data-name="getWalletBalances" data-version="0">
+                        <div class="pull-left">
+                          <h1>getWalletBalances</h1>
+                          <p>Retrieves the balance of a specific list of wallets.</p>
+                        </div>
+                        <p class="marked">Retrieves the balance of a specific list of wallets (in units of mojos).</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_wallet_balances</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-getWalletBalances-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_wallet_balances" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_wallet_balances_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getWalletBalances_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getWalletBalances_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getWalletBalances-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getWalletBalances-200-schema">
+                                  <div id='responses-getWalletBalances-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_51"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getWalletBalances-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getWalletBalances-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getWalletBalances-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -17738,6 +19533,248 @@ The wallet uses port 9256 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-Wallet-setAutoClaim">
+                      <article id="api-Wallet-setAutoClaim-0" data-group="User" data-name="setAutoClaim" data-version="0">
+                        <div class="pull-left">
+                          <h1>setAutoClaim</h1>
+                          <p>Set auto claim merkle coins config</p>
+                        </div>
+                        <p class="marked">Set auto claim merkle coins config</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_auto_claim</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-setAutoClaim-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/set_auto_claim" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/auto_claim_settings"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_setAutoClaim_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_setAutoClaim_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-setAutoClaim-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-setAutoClaim-200-schema">
+                                  <div id='responses-setAutoClaim-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_80"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-setAutoClaim-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-setAutoClaim-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-setAutoClaim-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Wallet-spendClawbackCoins">
+                      <article id="api-Wallet-spendClawbackCoins-0" data-group="User" data-name="spendClawbackCoins" data-version="0">
+                        <div class="pull-left">
+                          <h1>spendClawbackCoins</h1>
+                          <p>Spend clawback coins that were sent (to claw them back) or received (to claim them).</p>
+                        </div>
+                        <p class="marked">Spend clawback coins that were sent or received</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/spend_clawback_coins</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Wallet-spendClawbackCoins-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/spend_clawback_coins" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/spend_clawback_coins_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_spendClawbackCoins_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_spendClawbackCoins_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-spendClawbackCoins-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-spendClawbackCoins-200-schema">
+                                  <div id='responses-spendClawbackCoins-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_81"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-spendClawbackCoins-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-spendClawbackCoins-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-spendClawbackCoins-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                   </section>
                 <section id="api-WalletManagement">
                   <h1>WalletManagement</h1>
@@ -17832,7 +19869,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_71"
+        "$ref" : "#/components/schemas/inline_response_200_73"
       }
     }
   }
@@ -17954,7 +19991,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_70"
+        "$ref" : "#/components/schemas/inline_response_200_72"
       }
     }
   }
@@ -18079,7 +20116,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_63"
+        "$ref" : "#/components/schemas/inline_response_200_64"
       }
     }
   }
@@ -18201,7 +20238,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_62"
+        "$ref" : "#/components/schemas/inline_response_200_63"
       }
     }
   }
@@ -18236,9 +20273,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-WalletNode-getTimestampForHeight-0" data-group="User" data-name="getTimestampForHeight" data-version="0">
                         <div class="pull-left">
                           <h1>getTimestampForHeight</h1>
-                          <p>Retreive the timestamp for a given block height.</p>
+                          <p>Retrieve the timestamp for a given block height.</p>
                         </div>
-                        <p class="marked">Retreive the timestamp for a given block height</p>            
+                        <p class="marked">Retrieve the timestamp for a given block height</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_timestamp_for_height</span></code></pre>
                         
@@ -18322,7 +20359,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_75"
+        "$ref" : "#/components/schemas/inline_response_200_77"
       }
     }
   }
@@ -18687,7 +20724,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_56"
+        "$ref" : "#/components/schemas/inline_response_200_57"
       }
     }
   }

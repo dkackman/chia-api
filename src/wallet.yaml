@@ -4508,7 +4508,7 @@ paths:
         - Verified Credential
       description: Given a launcher ID get the verified credential
       summary: Given a launcher ID get the verified credential.
-      operationId: vc_mint
+      operationId: vc_get
       requestBody:
         required: true
         content:
