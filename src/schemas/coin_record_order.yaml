@@ -1,0 +1,10 @@
+coin_record_order:
+  type: integer
+  format: uint8
+  enum:
+    - 1 # confirmed_height = 1
+    - 2 # spent_height = 2
+  description: >-
+    The type of wallet:
+      * 1 confirmed_height
+      * 2 spent_height

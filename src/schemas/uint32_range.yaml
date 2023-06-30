@@ -1,0 +1,10 @@
+uint32_range:
+  type: object
+  properties:
+    start:
+      type: integer
+      format: uint32
+      default: 0
+    stop:
+      type: integer
+      format: uint32

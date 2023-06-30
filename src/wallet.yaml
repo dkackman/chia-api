@@ -75,12 +75,16 @@ components:
                     format: hex
               - $ref: "#/components/schemas/apiResponse"
   schemas:
+    amount_filter:
+      $ref: "./schemas/amount_filter.yaml#/amount_filter"
     amount_with_puzzlehash:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
     auto_claim_settings:
       $ref: "./schemas/auto_claim_settings.yaml#/auto_claim_settings"
     coin_announcement:
       $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
+    coin_record_order:
+      $ref: "./schemas/coin_record_order.yaml#/coin_record_order"
     coin_search_options:
       type: object
       properties:
@@ -92,6 +96,8 @@ components:
           format: uint32
         include_spent_coins:
           type: boolean
+    coin_type:
+      $ref: "./schemas/coin_type.yaml#/coin_type"
     connection_info:
       $ref: "./schemas/connection_info.yaml#/connection_info"
     puzzle_announcement:
@@ -104,6 +110,8 @@ components:
       $ref: "./schemas/coin_record.yaml#/coin_record"
     farmer_rewards:
       $ref: "./schemas/farmer_rewards.yaml#/farmer_rewards"
+    hash_filter:
+      $ref: "./schemas/hash_filter.yaml#/hash_filter"
     lineage_proof:
       $ref: "./schemas/lineage_proof.yaml#/lineage_proof"
     mirror:
@@ -136,6 +144,10 @@ components:
       $ref: "./schemas/transaction_type.yaml#/transaction_type"
     transaction_type_filter:
       $ref: "./schemas/transaction_type_filter.yaml#/transaction_type_filter"
+    uint32_range:
+      $ref: "./schemas/uint32_range.yaml#/uint32_range"
+    uint64_range:
+      $ref: "./schemas/uint64_range.yaml#/uint64_range"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     wallet_info:
@@ -3645,6 +3657,75 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/coin_records"
+  /get_coin_records:
+    post:
+      tags:
+        - Coins
+      description: Retrieves the coins that match given filter criteria
+      summary: Retrieves the coins that match given filter criteria.
+      operationId: get_coin_records
+      requestBody:
+        required: true
+        description: The coin names.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offset:
+                  type: integer
+                  format: uint32
+                  default: 0
+                limit:
+                  type: integer
+                  format: uint32
+                wallet_id:
+                  type: integer
+                  format: uint32
+                wallet_type:
+                  $ref: "#/components/schemas/wallet_type"
+                coin_type:
+                  $ref: "#/components/schemas/coin_type"
+                coin_id_filter:
+                  $ref: "#/components/schemas/hash_filter"
+                puzzle_hash_filter:
+                  $ref: "#/components/schemas/hash_filter"
+                parent_coin_id_filter:
+                  $ref: "#/components/schemas/hash_filter"
+                amount_filter:
+                  $ref: "#/components/schemas/amount_filter"
+                amount_range:
+                  $ref: "#/components/schemas/uint64_range"
+                confirmed_range:
+                  $ref: "#/components/schemas/uint32_range"
+                spent_range:
+                  $ref: "#/components/schemas/uint32_range"
+                order:
+                  $ref: "#/components/schemas/coin_record_order"
+                reverse:
+                  type: boolean
+                  default: false
+                include_total_count:
+                  type: boolean
+                  description: Include the total number of entries for the query without applying offset/limit
+                  default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      coin_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/coin_record"
+                      total_count:
+                        type: integer
+                        format: uint32
+                  - $ref: "#/components/schemas/apiResponse"
   /verify_signature:
     post:
       tags:

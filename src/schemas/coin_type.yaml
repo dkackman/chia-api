@@ -1,0 +1,10 @@
+coin_type:
+  type: integer
+  format: uint8
+  enum:
+    - 0 # NORMAL = 0
+    - 1 # CLAWBACK = 1
+  description: >-
+    The type of coin:
+      * 0 NORMAL
+      * 1 CLAWBACK

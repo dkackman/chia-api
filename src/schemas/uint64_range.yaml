@@ -1,0 +1,10 @@
+uint64_range:
+  type: object
+  properties:
+    start:
+      type: integer
+      format: uint64
+      default: 0
+    stop:
+      type: integer
+      format: uint64

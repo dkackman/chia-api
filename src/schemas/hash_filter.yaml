@@ -1,0 +1,10 @@
+hash_filter:
+  type: object
+  properties:
+    values:
+      type: array
+      items:
+        type: string
+        format: hex
+    mode:
+      $ref: "./filter_mode.yaml#/filter_mode"
