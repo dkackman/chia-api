@@ -1,0 +1,18 @@
+auto_claim_settings:
+  type: object
+  properties:
+    enabled:
+      type: boolean
+      default: false
+    tx_fee:
+      type: integer
+      format: uint64
+      default: 0
+    min_amount:
+      type: integer
+      format: uint64
+      default: 0
+    batch_size:
+      type: integer
+      format: uint16
+      default: 50

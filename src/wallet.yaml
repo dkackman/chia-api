@@ -77,6 +77,8 @@ components:
   schemas:
     amount_with_puzzlehash:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
+    auto_claim_settings:
+      $ref: "./schemas/auto_claim_settings.yaml#/auto_claim_settings"
     coin_announcement:
       $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
     coin_search_options:
@@ -155,7 +157,7 @@ tags:
   - name: Pool Wallet
     description: Pool wallet api.
   - name: Notifications
-    description: Notifcaiton api.
+    description: Notification api.
   - name: Wallet
     description: Methods for shared wallet operations.
   - name: Wallet Management
@@ -4126,8 +4128,8 @@ paths:
     post:
       tags:
         - Wallet Node
-      description: Retreive the timestamp for a given block height
-      summary: Retreive the timestamp for a given block height.
+      description: Retrieve the timestamp for a given block height
+      summary: Retrieve the timestamp for a given block height.
       operationId: get_timestamp_for_height
       requestBody:
         required: true
@@ -4232,6 +4234,46 @@ paths:
                       count:
                         type: integer
                         format: int32
+                  - $ref: "#/components/schemas/apiResponse"
+  /set_auto_claim:
+    post:
+      tags:
+        - Wallet
+      description: Set auto claim merkle coins config
+      summary: Set auto claim merkle coins config
+      operationId: set_auto_claim
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/auto_claim_settings"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/auto_claim_settings"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_auto_claim:
+    post:
+      tags:
+        - Wallet
+      description: Get auto claim merkle coins config
+      summary: Get auto claim merkle coins config
+      operationId: get_auto_claim
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/auto_claim_settings"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
