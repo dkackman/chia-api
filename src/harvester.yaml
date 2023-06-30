@@ -195,8 +195,8 @@ paths:
     post:
       tags:
         - Harvester
-      summary: Removes a plot directory from the harveser configuration.
-      description: Removes a plot directory from the harveser configuration.
+      summary: Removes a plot directory from the harvester configuration.
+      description: Removes a plot directory from the harvester configuration.
       operationId: remove_plot_directory
       requestBody:
         description: The directory name to remove

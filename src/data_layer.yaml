@@ -431,7 +431,7 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      anscestors:
+                      ancestors:
                         type: array
                         items:
                           $ref: "#/components/schemas/internal_node"

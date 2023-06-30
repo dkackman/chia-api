@@ -59,7 +59,7 @@ components:
           # Keep track of harvester plot identifier (str), target sp index, and PoSpace for each challenge
           # self.proofs_of_space: Dict[bytes32, List[Tuple[str, ProofOfSpace]]] = {}
           type: array
-          # tuple is better supported in opanapi 3.1.0
+          # tuple is better supported in openapi 3.1.0
           # https://stackoverflow.com/questions/57464633/how-to-define-a-json-array-with-concrete-item-definition-for-every-index-i-e-a
           items:
             oneOf:
@@ -386,7 +386,7 @@ paths:
       tags:
         - Farmer
       summary: Get a paginated list of duplicate plots.
-      description: Get a paginated list of dupliacte plots.
+      description: Get a paginated list of duplicate plots.
       operationId: get_harvester_plots_duplicates
       requestBody:
         description: Search filter parameters

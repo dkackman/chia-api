@@ -86,7 +86,7 @@ tags:
   - name: Key Ring
     description: Methods for managing keys and the keyring.
   - name: Plotter
-    description: Methods for creating plos and managing plotters.
+    description: Methods for creating plots and managing plotters.
 paths:
   /register_service:
     post:
@@ -206,8 +206,8 @@ paths:
     post:
       tags:
         - Daemon
-      summary: Indicator if the genesis block is intialized.
-      description: Indicator if the genesis block is intialized.
+      summary: Indicator if the genesis block is initialized.
+      description: Indicator if the genesis block is initialized.
       operationId: get_status
       requestBody:
         $ref: "#/components/requestBodies/empty"

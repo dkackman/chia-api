@@ -217,7 +217,7 @@ paths:
                 - after
               properties:
                 after:
-                  description: The unix timestamp to seach for peer connections after
+                  description: The unix timestamp to search for peer connections after
                   type: integer
                   format: timestamp
                 offset:
