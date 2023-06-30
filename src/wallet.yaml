@@ -4646,6 +4646,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/apiResponse"
+  /vc_get_proofs_for_root:
+    post:
+      tags:
+        - Verified Credential
+      description: Given a specified vc root, get any proofs associated with that root
+      summary: Given a specified vc root, get any proofs associated with that root.
+      operationId: vc_get_proofs_for_root
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - root
+              properties:
+                root:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      proofs:
+                        type: object
+                        additionalProperties:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
