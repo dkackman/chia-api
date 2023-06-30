@@ -4679,6 +4679,46 @@ paths:
                         additionalProperties:
                           type: string
                   - $ref: "#/components/schemas/apiResponse"
+  /vc_revoke:
+    post:
+      tags:
+        - Verified Credential
+      description: Revoke an on chain VC provided the correct DID is available
+      summary: Revoke an on chain VC provided the correct DID is available.
+      operationId: vc_revoke
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vc_parent_id
+              properties:
+                vc_parent_id:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                reuse_puzhash:
+                  type: boolean
+                  default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
