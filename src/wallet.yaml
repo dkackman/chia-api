@@ -4498,6 +4498,76 @@ paths:
                         items:
                           $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
+  /vc_get:
+    post:
+      tags:
+        - Verified Credential
+      description: Given a launcher ID get the verified credential
+      summary: Given a launcher ID get the verified credential.
+      operationId: vc_mint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vc_id
+              properties:
+                vc_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      vc_record:
+                        $ref: "#/components/schemas/vc_record"
+                  - $ref: "#/components/schemas/apiResponse"
+  /vc_get_list:
+    post:
+      tags:
+        - Verified Credential
+      description: Get a list of verified credentials
+      summary: Get a list of verified credentials in the specified range and any 'proofs' associated with the roots contained within.
+      operationId: vc_get_list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vc_id
+              properties:
+                start:
+                  type: integer
+                  format: uint32
+                end:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      vc_records:
+                        type: object
+                        additionalProperties:
+                          $ref: "#/components/schemas/vc_record"
+                      proofs:
+                        type: object
+                        additionalProperties: true
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net

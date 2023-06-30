@@ -2,7 +2,7 @@ vc_record:
   type: object
   properties:
     vc:
-      $ref: ./vc_record.yaml#/vc_record
+      $ref: ./verified_credential.yaml#/verified_credential
     confirmed_at_height:
       type: integer
       format: uint32
