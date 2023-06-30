@@ -4324,6 +4324,50 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/auto_claim_settings"
                   - $ref: "#/components/schemas/apiResponse"
+  /spend_clawback_coins:
+    post:
+      tags:
+        - Wallet
+      description: Spend clawback coins that were sent or received
+      summary: Spend clawback coins that were sent (to claw them back) or received (to claim them).
+      operationId: spend_clawback_coins
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_ids
+              properties:
+                coin_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                batch_size:
+                  type: integer
+                  format: uint16
+                  default: 50
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transaction_ids:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
