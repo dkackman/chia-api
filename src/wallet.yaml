@@ -134,6 +134,8 @@ components:
       $ref: "./schemas/transaction_record.yaml#/transaction_record"
     transaction_type:
       $ref: "./schemas/transaction_type.yaml#/transaction_type"
+    transaction_type_filter:
+      $ref: "./schemas/transaction_type_filter.yaml#/transaction_type_filter"
     wallet_balance:
       $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
     wallet_info:
@@ -576,7 +578,7 @@ paths:
                   format: bytes32
                 fee:
                   type: integer
-                  format: unint64
+                  format: uint64
                   default: 0
       responses:
         "200":
@@ -783,7 +785,7 @@ paths:
                   format: uint16
                   default: 0
                 target_list:
-                  description: a list of targets for transfering minted NFTs (aka airdrop)
+                  description: a list of targets for transferring minted NFTs (aka airdrop)
                   type: array
                   items:
                     type: string
@@ -2991,8 +2993,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Retrieves a list of trnsactions from a wallet.
-      description: Retrieves a list of trnsactions from a wallet.
+      summary: Retrieves a list of transactions from a wallet.
+      description: Retrieves a list of transactions from a wallet.
       operationId: get_transactions
       requestBody:
         required: true
@@ -3018,6 +3020,8 @@ paths:
                   type: string
                 reverse:
                   type: boolean
+                type_filter:
+                  $ref: "#/components/schemas/transaction_type_filter"
       responses:
         "200":
           description: OK

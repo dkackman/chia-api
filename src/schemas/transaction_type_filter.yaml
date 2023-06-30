@@ -1,0 +1,10 @@
+transaction_type_filter:
+  type: object
+  properties:
+    values:
+      type: array
+      items:
+        type: integer
+        format: uint8
+    mode:
+      $ref: "./filter_mode.yaml#/filter_mode"

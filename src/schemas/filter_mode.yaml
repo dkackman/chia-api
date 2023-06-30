@@ -1,0 +1,10 @@
+filter_mode:
+  type: integer
+  format: uint8
+  enum:
+    - 1 # include
+    - 2 # exclude
+  description: >-
+    The type of filter:
+      * 1 include
+      * 2 exclude

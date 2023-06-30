@@ -1,7 +1,9 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "cSpell.words": [
+        "ipaddress",
         "merkle",
-        "mojos"
+        "mojos",
+        "openapi"
     ]
 }
