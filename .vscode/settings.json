@@ -2,6 +2,7 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "cSpell.words": [
         "ipaddress",
+        "keychain",
         "merkle",
         "mojos",
         "openapi"

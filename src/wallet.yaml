@@ -3047,7 +3047,17 @@ paths:
       description: Retrieves the number of transactions for a wallet.
       operationId: get_transaction_count
       requestBody:
-        $ref: "#/components/requestBodies/wallet_id"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                type_filter:
+                  $ref: "#/components/schemas/transaction_type_filter"
       responses:
         "200":
           description: OK
@@ -3399,8 +3409,8 @@ paths:
     post:
       tags:
         - Notifications
-      description: Retreives notifications.
-      summary: Retreives notifications.
+      description: Retrieves notifications.
+      summary: Retrieves notifications.
       operationId: get_notifications
       requestBody:
         required: true
@@ -3957,8 +3967,8 @@ paths:
     post:
       tags:
         - DID Wallet
-      description: Retreives information about a DID
-      summary: Retreives information about a DID.
+      description: Retrieves information about a DID
+      summary: Retrieves information about a DID.
       operationId: did_get_info
       requestBody:
         required: true
@@ -4219,8 +4229,8 @@ paths:
     post:
       tags:
         - Wallet
-      description: Retreives the memo from a transaction
-      summary: Retreives the memo from a transaction.
+      description: Retrieves the memo from a transaction
+      summary: Retrieves the memo from a transaction.
       operationId: get_transaction_memo
       requestBody:
         required: true
@@ -4253,8 +4263,8 @@ paths:
     post:
       tags:
         - NFT Wallet
-      description: Retreives the number of NFTs in a wallet
-      summary: Retreives the number of NFTs in a wallet.
+      description: Retrieves the number of NFTs in a wallet
+      summary: Retrieves the number of NFTs in a wallet.
       operationId: nft_count_nfts
       requestBody:
         $ref: "#/components/requestBodies/wallet_id"
