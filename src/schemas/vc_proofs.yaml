@@ -1,0 +1,7 @@
+vc_proofs:
+  type: object
+  properties:
+    key_value_pairs:
+      type: object
+      additionalProperties:
+        type: string

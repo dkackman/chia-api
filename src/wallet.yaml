@@ -148,6 +148,8 @@ components:
       $ref: "./schemas/uint32_range.yaml#/uint32_range"
     uint64_range:
       $ref: "./schemas/uint64_range.yaml#/uint64_range"
+    vc_proofs:
+      $ref: "./schemas/vc_proofs.yaml#/vc_proofs"
     vc_record:
       $ref: "./schemas/vc_record.yaml#/vc_record"
     wallet_balance:
@@ -4570,7 +4572,8 @@ paths:
                             - $ref: "#/components/schemas/vc_record"
                       proofs:
                         type: object
-                        additionalProperties: true
+                        additionalProperties:
+                          type: string
                   - $ref: "#/components/schemas/apiResponse"
   /vc_spend:
     post:
@@ -4617,6 +4620,32 @@ paths:
                         items:
                           $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
+  /vc_add_proofs:
+    post:
+      tags:
+        - Verified Credential
+      description: Add a set of proofs to the DB that can be used when spending a VC
+      summary: >-
+        Add a set of proofs to the DB that can be used when spending a VC. VCs are near useless until their proofs have been added.
+      operationId: vc_add_proofs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - proofs
+              properties:
+                proofs:
+                  $ref: "#/components/schemas/vc_proofs"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
