@@ -3,7 +3,6 @@ wallet_type:
   format: uint8
   enum:
     - 0 # STANDARD_WALLET = 0
-    - 1 # RATE_LIMITED = 1
     - 2 # ATOMIC_SWAP = 2
     - 3 # AUTHORIZED_PAYEE = 3
     - 4 # MULTI_SIG = 4
@@ -13,10 +12,12 @@ wallet_type:
     - 8 # DISTRIBUTED_ID = 8
     - 9 # POOLING_WALLET = 9
     - 10 # NFT = 10
+    - 11 # DATA_LAYER = 11
+    - 12 # DATA_LAYER_OFFER = 12
+    - 13 # VC = 13
   description: >-
     The type of wallet:
       * 0 STANDARD_WALLET
-      * 1 RATE_LIMITED
       * 2 ATOMIC_SWAP
       * 3 AUTHORIZED_PAYEE
       * 4 MULTI_SIG
@@ -26,3 +27,6 @@ wallet_type:
       * 8 DISTRIBUTED_ID
       * 9 POOLING_WALLET
       * 10 NFT
+      * 11 DATA_LAYER
+      * 12 DATA_LAYER_OFFER
+      * 13 VC
