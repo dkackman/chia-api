@@ -157,7 +157,7 @@ components:
     wallet_type:
       $ref: "./schemas/wallet_type.yaml#/wallet_type"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"  
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
@@ -4561,9 +4561,15 @@ paths:
                   - type: object
                     properties:
                       vc_records:
-                        type: object
-                        additionalProperties:
-                          $ref: "#/components/schemas/vc_record"
+                        type: array
+                        items:
+                          allOf:
+                            - type: object
+                              properties:
+                                coin_id:
+                                  type: string
+                                  format: hex
+                            - $ref: "#/components/schemas/vc_record"     
                       proofs:
                         type: object
                         additionalProperties: true
