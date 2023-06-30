@@ -157,7 +157,7 @@ components:
     wallet_type:
       $ref: "./schemas/wallet_type.yaml#/wallet_type"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"  
+      $ref: "./schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
       $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
@@ -4516,7 +4516,7 @@ paths:
               properties:
                 vc_id:
                   type: string
-                  format: hex
+                  format: bytes32
       responses:
         "200":
           description: OK
@@ -4542,8 +4542,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - vc_id
               properties:
                 start:
                   type: integer
@@ -4569,10 +4567,55 @@ paths:
                                 coin_id:
                                   type: string
                                   format: hex
-                            - $ref: "#/components/schemas/vc_record"     
+                            - $ref: "#/components/schemas/vc_record"
                       proofs:
                         type: object
                         additionalProperties: true
+                  - $ref: "#/components/schemas/apiResponse"
+  /vc_spend:
+    post:
+      tags:
+        - Verified Credential
+      description: Spend a verified credential
+      summary: Spend a verified credential.
+      operationId: vc_spend
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vc_id
+              properties:
+                vc_id:
+                  type: string
+                  format: bytes32
+                new_proof_hash:
+                  type: string
+                  format: bytes32
+                provider_inner_puzhash:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                reuse_puzhash:
+                  type: boolean
+                  default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
