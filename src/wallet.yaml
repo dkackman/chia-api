@@ -4024,6 +4024,9 @@ paths:
                         items:
                           type: string
                           format: hex
+                      did_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /did_find_lost_did:
     post:
