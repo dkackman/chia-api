@@ -348,8 +348,8 @@ paths:
     post:
       tags:
         - Data Layer Wallet
-      summary: Stop the node.
-      description: Stop the node.
+      summary: Update a data layer root.
+      description: Update a data layer root.
       operationId: dl_update_root
       requestBody:
         required: true
@@ -387,8 +387,8 @@ paths:
     post:
       tags:
         - Data Layer Wallet
-      summary: Stop the node.
-      description: Stop the node.
+      summary: Update multiple data layers.
+      description: Update multiple data layers.
       operationId: dl_update_multiple
       requestBody:
         required: true
