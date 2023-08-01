@@ -706,6 +706,55 @@ paths:
                         items:
                           $ref: "#/components/schemas/key_data"
                   - $ref: "#/components/schemas/apiResponse"
+  /set_label:
+    post:
+      tags:
+        - Key Ring
+      summary: Assigns the given label to the first key with the given fingerprint.
+      description: Assigns the given label to the first key with the given fingerprint.
+      operationId: set_label
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+                - label
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+                label:
+                  type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
+  /delete_label:
+    post:
+      tags:
+        - Key Ring
+      summary: Removes the label assigned to the key with the given fingerprint.
+      description: Removes the label assigned to the key with the given fingerprint.
+      operationId: delete_label
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
