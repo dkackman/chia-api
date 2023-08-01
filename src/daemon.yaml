@@ -657,6 +657,7 @@ paths:
                   format: uint32
                 include_secrets:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -666,6 +667,44 @@ paths:
                 type: object
                 allOf:
                   - $ref: "#/components/schemas/key_data"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_keys:
+    post:
+      tags:
+        - Key Ring
+      summary: Returns the KeyData of all keys which can be retrieved.
+      description: Returns the KeyData of all keys which can be retrieved.
+      operationId: get_keys
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+                include_secrets:
+                  type: boolean
+                  default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - type: object
+                    properties:
+                      keys:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/key_data"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
