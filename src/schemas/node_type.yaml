@@ -7,6 +7,7 @@ node_type:
     - 4 #TIMELORD
     - 5 #INTRODUCER
     - 6 #WALLET
+    - 7 #DATA_LAYER
   description: >-
     The type of node:
       * 1 FULL_NODE
@@ -15,3 +16,4 @@ node_type:
       * 4 TIMELORD
       * 5 INTRODUCER
       * 6 WALLET
+      * 7 DATA_LAYER

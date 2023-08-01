@@ -1,8 +1,5 @@
 puzzle_announcement:
   type: object
-  required:
-    - coin_id
-    - message
   properties:
     puzzle_hash:
       type: string

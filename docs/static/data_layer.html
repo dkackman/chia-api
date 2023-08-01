@@ -1462,9 +1462,7 @@
   "type" : "object",
   "properties" : {
     "other_hash_side" : {
-      "type" : "string",
-      "format" : "bytes32",
-      "example" : "left"
+      "$ref" : "#/components/schemas/side"
     },
     "other_hash" : {
       "type" : "string",
@@ -1472,12 +1470,9 @@
       "example" : "cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5"
     },
     "combined_hash" : {
-      "type" : "array",
+      "type" : "string",
       "format" : "bytes32",
-      "example" : "0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902",
-      "items" : {
-        "$ref" : "#/components/schemas/key_value"
-      }
+      "example" : "0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902"
     }
   }
 };
@@ -1527,7 +1522,6 @@
       "example" : [ "http://www.example.com:8575", "http://www.example2.com:8575" ],
       "items" : {
         "type" : "string",
-        "format" : "bytes32",
         "example" : "http://www.example.com:8575"
       }
     },
@@ -1539,8 +1533,8 @@
 };
             defs["node_type"] = {
   "type" : "integer",
-  "description" : "The type of node:\n  * 1 FULL_NODE\n  * 2 HARVESTER\n  * 3 FARMER\n  * 4 TIMELORD\n  * 5 INTRODUCER\n  * 6 WALLET",
-  "enum" : [ 1, 2, 3, 4, 5, 6 ]
+  "description" : "The type of node:\n  * 1 FULL_NODE\n  * 2 HARVESTER\n  * 3 FARMER\n  * 4 TIMELORD\n  * 5 INTRODUCER\n  * 6 WALLET\n  * 7 DATA_LAYER",
+  "enum" : [ 1, 2, 3, 4, 5, 6, 7 ]
 };
             defs["offer"] = {
   "type" : "object",
@@ -1596,28 +1590,21 @@
             defs["plugin_status"] = {
   "type" : "object",
   "properties" : {
-    "plugin_status" : {
-      "$ref" : "#/components/schemas/plugin_status_plugin_status"
-    }
-  }
-};
-            defs["plugin_status_plugin_status"] = {
-  "type" : "object",
-  "properties" : {
     "uploaders" : {
       "type" : "object",
       "additionalProperties" : {
-        "type" : "string"
+        "type" : "object",
+        "additionalProperties" : true
       }
     },
     "downloaders" : {
       "type" : "object",
       "additionalProperties" : {
-        "type" : "string"
+        "type" : "object",
+        "additionalProperties" : true
       }
     }
-  },
-  "example" : null
+  }
 };
             defs["proof"] = {
   "type" : "object",
@@ -1670,6 +1657,12 @@
       "format" : "bytes32"
     }
   }
+};
+            defs["side"] = {
+  "type" : "integer",
+  "description" : "The side:\n  * 0 LEFT\n  * 1 RIGHT",
+  "format" : "uint8",
+  "enum" : [ 0, 1 ]
 };
             defs["spend_bundle"] = {
   "type" : "object",

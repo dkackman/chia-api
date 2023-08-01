@@ -5,6 +5,6 @@ coin_record_order:
     - 1 # confirmed_height = 1
     - 2 # spent_height = 2
   description: >-
-    The type of wallet:
+    The sort by item:
       * 1 confirmed_height
       * 2 spent_height

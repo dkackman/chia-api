@@ -21,7 +21,6 @@ mirror:
       items:
         type: string
         example: http://www.example.com:8575
-        format: bytes32
     ours:
       type: boolean
       example: true

@@ -1,14 +1,15 @@
 plugin_status:
   type: object
   properties:
-    plugin_status:
+    uploaders:
       type: object
-      properties:
-        uploaders:
-          type: object
-          additionalProperties:
-            type: string
-        downloaders:
-          type: object
-          additionalProperties:
-            type: string
+      # a dictionary of dictionaries
+      # uploaders: Dict[str, Dict[str, Any]] in the python
+      additionalProperties:
+        type: object
+        additionalProperties: true
+    downloaders:
+      type: object
+      additionalProperties:
+        type: object
+        additionalProperties: true

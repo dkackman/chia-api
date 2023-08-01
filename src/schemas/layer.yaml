@@ -2,9 +2,7 @@ layer:
   type: object
   properties:
     other_hash_side:
-      type: string
-      example: left
-      format: bytes32
+      $ref: ./side.yaml#/side
     other_hash:
       type: string
       example: cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5
@@ -13,5 +11,3 @@ layer:
       type: string
       example: 0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902
       format: bytes32
-      items:
-        $ref: ./key_value.yaml#/key_value

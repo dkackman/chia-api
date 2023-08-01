@@ -1,0 +1,10 @@
+side:
+  type: integer
+  format: uint8
+  enum:
+    - 0 # LEFT
+    - 1 # RIGHT
+  description: >-
+    The side:
+      * 0 LEFT
+      * 1 RIGHT
