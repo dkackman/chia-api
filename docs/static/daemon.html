@@ -680,6 +680,16 @@
     }
   }
 };
+            defs["delete_label_body"] = {
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
             defs["error_details"] = {
   "type" : "object",
   "properties" : {
@@ -698,6 +708,20 @@
   },
   "example" : null
 };
+            defs["get_key_body"] = {
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "include_secrets" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  }
+};
             defs["get_key_for_fingerprint_body"] = {
   "required" : [ "fingerprint" ],
   "type" : "object",
@@ -705,6 +729,20 @@
     "fingerprint" : {
       "type" : "integer",
       "format" : "uint32"
+    }
+  }
+};
+            defs["get_keys_body"] = {
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "include_secrets" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -740,6 +778,30 @@
   "type" : "object",
   "allOf" : [ {
     "$ref" : "#/components/schemas/private_key"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_11"] = {
+  "type" : "object",
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/key_data"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_12"] = {
+  "type" : "object",
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "keys" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/key_data"
+        }
+      }
+    }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -844,6 +906,48 @@
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
   "default" : 32,
   "enum" : [ 25, 32, 33, 34, 35 ]
+};
+            defs["key_data"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "example" : 2473794447
+    },
+    "public_key" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "0665913196501420c0fe2de6b5ce7b25f749d52dcbf997b069bb2ea8438c6c3c"
+    },
+    "label" : {
+      "type" : "string"
+    },
+    "secrets" : {
+      "$ref" : "#/components/schemas/key_data_secrets"
+    }
+  }
+};
+            defs["key_data_secrets"] = {
+  "type" : "object",
+  "properties" : {
+    "mnemonic" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "bytes" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "label" : {
+      "type" : "string"
+    },
+    "private_key" : {
+      "$ref" : "#/components/schemas/private_key_1"
+    }
+  }
 };
             defs["keyring_status"] = {
   "type" : "object",
@@ -1056,6 +1160,40 @@
     }
   }
 };
+            defs["private_key_1"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "example" : 2473794447
+    },
+    "sk" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "0665913196501420c0fe2de6b5ce7b25f749d52dcbf997b069bb2ea8438c6c3c"
+    },
+    "pk" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "b73cf2471b10a7ba839616aff0ab1cb319d9d3a77ee26ff88ec1c8e645468eb0b7653518b85e5dd0df7cf50d8612b978"
+    },
+    "farmer_pk" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "8c65856685323f149a651e6cbe068ece36f87a84efa16246b0eef65ac586a30fb678878bd4364d52c432fbb77838cbf6"
+    },
+    "pool_pk" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "845ff087376ffecf83950485d63ffed1cc73f36daf018deb4fbd2f05e7198b07521486274d82ecc4f5a2eaae63dfd0a7"
+    },
+    "seed" : {
+      "type" : "string",
+      "example" : "arrest legend bounce attend rebel blade palace bean dry shell nice bubble coil cook token nerve visa december hero garment grid attend nerve certain"
+    }
+  }
+};
             defs["queued_plot_info"] = {
   "type" : "object",
   "properties" : {
@@ -1118,6 +1256,19 @@
     "save_passphrase" : {
       "type" : "boolean",
       "default" : false
+    }
+  }
+};
+            defs["set_label_body"] = {
+  "required" : [ "fingerprint", "label" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "label" : {
+      "type" : "string"
     }
   }
 };
@@ -1201,14 +1352,23 @@
                     <li class="nav-item" data-group="KeyRing" data-name="deleteKeyByFingerprint">
                       <a class="nav-link link-secondary" href="#api-KeyRing-deleteKeyByFingerprint">deleteKeyByFingerprint</a>
                     </li>
+                    <li class="nav-item" data-group="KeyRing" data-name="deleteLabel">
+                      <a class="nav-link link-secondary" href="#api-KeyRing-deleteLabel">deleteLabel</a>
+                    </li>
                     <li class="nav-item" data-group="KeyRing" data-name="getAllPrivateKeys">
                       <a class="nav-link link-secondary" href="#api-KeyRing-getAllPrivateKeys">getAllPrivateKeys</a>
                     </li>
                     <li class="nav-item" data-group="KeyRing" data-name="getFirstPrivateKey">
                       <a class="nav-link link-secondary" href="#api-KeyRing-getFirstPrivateKey">getFirstPrivateKey</a>
                     </li>
+                    <li class="nav-item" data-group="KeyRing" data-name="getKey">
+                      <a class="nav-link link-secondary" href="#api-KeyRing-getKey">getKey</a>
+                    </li>
                     <li class="nav-item" data-group="KeyRing" data-name="getKeyForFingerprint">
                       <a class="nav-link link-secondary" href="#api-KeyRing-getKeyForFingerprint">getKeyForFingerprint</a>
+                    </li>
+                    <li class="nav-item" data-group="KeyRing" data-name="getKeys">
+                      <a class="nav-link link-secondary" href="#api-KeyRing-getKeys">getKeys</a>
                     </li>
                     <li class="nav-item" data-group="KeyRing" data-name="isKeyringLocked">
                       <a class="nav-link link-secondary" href="#api-KeyRing-isKeyringLocked">isKeyringLocked</a>
@@ -1224,6 +1384,9 @@
                     </li>
                     <li class="nav-item" data-group="KeyRing" data-name="setKeyringPassphrase">
                       <a class="nav-link link-secondary" href="#api-KeyRing-setKeyringPassphrase">setKeyringPassphrase</a>
+                    </li>
+                    <li class="nav-item" data-group="KeyRing" data-name="setLabel">
+                      <a class="nav-link link-secondary" href="#api-KeyRing-setLabel">setLabel</a>
                     </li>
                     <li class="nav-item" data-group="KeyRing" data-name="unlockKeyring">
                       <a class="nav-link link-secondary" href="#api-KeyRing-unlockKeyring">unlockKeyring</a>
@@ -2720,6 +2883,125 @@ The daemon uses port 55400 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-KeyRing-deleteLabel">
+                      <article id="api-KeyRing-deleteLabel-0" data-group="User" data-name="deleteLabel" data-version="0">
+                        <div class="pull-left">
+                          <h1>deleteLabel</h1>
+                          <p>Removes the label assigned to the key with the given fingerprint.</p>
+                        </div>
+                        <p class="marked">Removes the label assigned to the key with the given fingerprint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/delete_label</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The fingerprint",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/delete_label_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_deleteLabel_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_deleteLabel_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-deleteLabel-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-deleteLabel-200-schema">
+                                  <div id='responses-deleteLabel-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-deleteLabel-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-deleteLabel-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-deleteLabel-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-KeyRing-getAllPrivateKeys">
                       <article id="api-KeyRing-getAllPrivateKeys-0" data-group="User" data-name="getAllPrivateKeys" data-version="0">
                         <div class="pull-left">
@@ -2958,6 +3240,125 @@ The daemon uses port 55400 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-KeyRing-getKey">
+                      <article id="api-KeyRing-getKey-0" data-group="User" data-name="getKey" data-version="0">
+                        <div class="pull-left">
+                          <h1>getKey</h1>
+                          <p>Locates and returns KeyData matching the provided fingerprint.</p>
+                        </div>
+                        <p class="marked">Locates and returns KeyData matching the provided fingerprint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/get_key</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The fingerprint",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_key_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getKey_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getKey_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getKey-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getKey-200-schema">
+                                  <div id='responses-getKey-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_11"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getKey-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getKey-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getKey-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-KeyRing-getKeyForFingerprint">
                       <article id="api-KeyRing-getKeyForFingerprint-0" data-group="User" data-name="getKeyForFingerprint" data-version="0">
                         <div class="pull-left">
@@ -3072,6 +3473,125 @@ The daemon uses port 55400 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getKeyForFingerprint-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-KeyRing-getKeys">
+                      <article id="api-KeyRing-getKeys-0" data-group="User" data-name="getKeys" data-version="0">
+                        <div class="pull-left">
+                          <h1>getKeys</h1>
+                          <p>Returns the KeyData of all keys which can be retrieved.</p>
+                        </div>
+                        <p class="marked">Returns the KeyData of all keys which can be retrieved.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/get_keys</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The fingerprint",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_keys_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getKeys_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getKeys_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getKeys-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getKeys-200-schema">
+                                  <div id='responses-getKeys-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_12"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getKeys-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getKeys-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getKeys-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -3667,6 +4187,125 @@ The daemon uses port 55400 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-setKeyringPassphrase-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-KeyRing-setLabel">
+                      <article id="api-KeyRing-setLabel-0" data-group="User" data-name="setLabel" data-version="0">
+                        <div class="pull-left">
+                          <h1>setLabel</h1>
+                          <p>Assigns the given label to the first key with the given fingerprint.</p>
+                        </div>
+                        <p class="marked">Assigns the given label to the first key with the given fingerprint.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/set_label</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "The fingerprint",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/set_label_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_setLabel_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_setLabel_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-setLabel-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-setLabel-200-schema">
+                                  <div id='responses-setLabel-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-setLabel-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-setLabel-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-setLabel-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
