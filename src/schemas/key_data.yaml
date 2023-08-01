@@ -1,0 +1,15 @@
+key_data:
+  type: object
+  properties:
+    fingerprint:
+      type: integer
+      example: 2473794447
+      format: uint32
+    public_key:
+      type: string
+      example: 0665913196501420c0fe2de6b5ce7b25f749d52dcbf997b069bb2ea8438c6c3c
+      format: hex
+    label:
+      type: string
+    secrets:
+      $ref: "./key_data_secrets.yaml#/key_data_secrets"

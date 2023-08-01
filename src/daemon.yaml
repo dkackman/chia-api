@@ -34,6 +34,8 @@ components:
   schemas:
     k_size:
       $ref: "./schemas/k_size.yaml#/k_size"
+    key_data:
+      $ref: "./schemas/key_data.yaml#/key_data"
     plotter_config:
       $ref: "./schemas/plotter_config.yaml#/plotter_config"
     plotter_info:
@@ -632,6 +634,38 @@ paths:
                 type: object
                 allOf:
                   - $ref: "#/components/schemas/private_key"
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_key:
+    post:
+      tags:
+        - Key Ring
+      summary: Locates and returns KeyData matching the provided fingerprint.
+      description: Locates and returns KeyData matching the provided fingerprint.
+      operationId: get_key
+      requestBody:
+        description: The fingerprint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+                include_secrets:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: "#/components/schemas/key_data"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
