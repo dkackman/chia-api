@@ -848,6 +848,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -936,6 +937,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1024,6 +1026,7 @@ paths:
                   type: string
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1185,6 +1188,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1219,16 +1223,23 @@ paths:
                   items:
                     type: object
                     properties:
+                      asset:
+                        type: string
+                        format: hex
                       royalty_address:
                         type: string
                         format: hex
                       royalty_percentage:
                         type: integer
+                        format: uint16
                 fungible_assets:
                   type: array
                   items:
                     type: object
                     properties:
+                      asset:
+                        type: string
+                        format: hex
                       amount:
                         type: integer
                         format: uint64
@@ -1239,19 +1250,21 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - type: array
-                    items:
-                      type: object
-                      properties:
-                        asset:
-                          type: string
-                          format: hex
-                        address:
-                          type: string
-                          format: hex
-                        wallet_id:
-                          type: integer
-                          format: uint64
+                  - type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          asset:
+                            type: string
+                            format: hex
+                          address:
+                            type: string
+                            format: hex
+                          amount:
+                            type: integer
+                            format: uint64
                   - $ref: "#/components/schemas/apiResponse"
 
   /nft_get_info:
@@ -1281,6 +1294,7 @@ paths:
                   default: false
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1338,6 +1352,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1409,6 +1424,7 @@ paths:
                   default: true
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1701,6 +1717,7 @@ paths:
                   format: uint64
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           $ref: "#/components/responses/empty"
@@ -1792,6 +1809,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -1870,6 +1888,7 @@ paths:
                     type: object
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -2296,6 +2315,7 @@ paths:
                     type: object
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -2427,6 +2447,7 @@ paths:
                     format: hex
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -2814,6 +2835,7 @@ paths:
                     format: hex
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -4187,6 +4209,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK
@@ -4245,6 +4268,7 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
+                  default: false
       responses:
         "200":
           description: OK

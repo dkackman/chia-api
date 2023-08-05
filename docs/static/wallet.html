@@ -855,7 +855,8 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1228,7 +1229,8 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1407,7 +1409,8 @@
       "default" : true
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1431,7 +1434,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1455,7 +1459,8 @@
       "format" : "uint64"
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -2160,21 +2165,24 @@
 };
             defs["inline_response_200_18"] = {
   "allOf" : [ {
-    "type" : "array",
-    "items" : {
-      "type" : "object",
-      "properties" : {
-        "asset" : {
-          "type" : "string",
-          "format" : "hex"
-        },
-        "address" : {
-          "type" : "string",
-          "format" : "hex"
-        },
-        "wallet_id" : {
-          "type" : "integer",
-          "format" : "uint64"
+    "type" : "object",
+    "additionalProperties" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "asset" : {
+            "type" : "string",
+            "format" : "hex"
+          },
+          "address" : {
+            "type" : "string",
+            "format" : "hex"
+          },
+          "amount" : {
+            "type" : "integer",
+            "format" : "uint64"
+          }
         }
       }
     }
@@ -3771,7 +3779,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -3795,6 +3804,10 @@
             defs["nft_calculate_royalties_fungible_assets"] = {
   "type" : "object",
   "properties" : {
+    "asset" : {
+      "type" : "string",
+      "format" : "hex"
+    },
     "amount" : {
       "type" : "integer",
       "format" : "uint64"
@@ -3805,12 +3818,17 @@
             defs["nft_calculate_royalties_royalty_assets"] = {
   "type" : "object",
   "properties" : {
+    "asset" : {
+      "type" : "string",
+      "format" : "hex"
+    },
     "royalty_address" : {
       "type" : "string",
       "format" : "hex"
     },
     "royalty_percentage" : {
-      "type" : "integer"
+      "type" : "integer",
+      "format" : "uint16"
     }
   },
   "example" : null
@@ -3841,7 +3859,8 @@
       "default" : false
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4069,7 +4088,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4196,7 +4216,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4221,7 +4242,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4252,7 +4274,8 @@
       "type" : "string"
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4294,7 +4317,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4320,7 +4344,8 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4655,7 +4680,8 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -4840,7 +4866,8 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean"
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
