@@ -387,8 +387,8 @@ paths:
     post:
       tags:
         - Data Layer Wallet
-      summary: Update multiple data layers.
-      description: Update multiple data layers.
+      summary: Update multiple singletons with new merkle roots.
+      description: Update multiple singletons with new merkle roots.
       operationId: dl_update_multiple
       requestBody:
         required: true
@@ -815,14 +815,13 @@ paths:
                 mint_total:
                   description: The total number of NFTs being minted
                   type: integer
-                xch_coin_list:
+                xch_coins:
                   description:
                     For use with bulk minting to provide the coin used for funding the minting spend.
                     This coin can be one that will be created in the future
                   type: array
                   items:
-                    type: string
-                    format: hex
+                    $ref: "#/components/schemas/coin"
                 xch_change_target:
                   description:
                     For use with bulk minting, so we can specify the puzzle hash that the change
@@ -835,9 +834,8 @@ paths:
                 new_p2_puzhash:
                   type: string
                   format: hex
-                did_coin_dict:
-                  type: object
-                  additionalProperties: true
+                did_coin:
+                  $ref: "#/components/schemas/coin"
                 did_lineage_parent_hex:
                   type: string
                   format: hex

@@ -4032,12 +4032,11 @@
       "type" : "integer",
       "description" : "The total number of NFTs being minted"
     },
-    "xch_coin_list" : {
+    "xch_coins" : {
       "type" : "array",
       "description" : "For use with bulk minting to provide the coin used for funding the minting spend. This coin can be one that will be created in the future",
       "items" : {
-        "type" : "string",
-        "format" : "hex"
+        "$ref" : "#/components/schemas/coin"
       }
     },
     "xch_change_target" : {
@@ -4053,9 +4052,8 @@
       "type" : "string",
       "format" : "hex"
     },
-    "did_coin_dict" : {
-      "type" : "object",
-      "additionalProperties" : true
+    "did_coin" : {
+      "$ref" : "#/components/schemas/coin"
     },
     "did_lineage_parent_hex" : {
       "type" : "string",
@@ -11548,9 +11546,9 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-DataLayerWallet-dlUpdateMultiple-0" data-group="User" data-name="dlUpdateMultiple" data-version="0">
                         <div class="pull-left">
                           <h1>dlUpdateMultiple</h1>
-                          <p>Update multiple data layers.</p>
+                          <p>Update multiple singletons with new merkle roots.</p>
                         </div>
-                        <p class="marked">Update multiple data layers.</p>            
+                        <p class="marked">Update multiple singletons with new merkle roots.</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_update_multiple</span></code></pre>
                         
