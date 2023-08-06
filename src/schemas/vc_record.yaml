@@ -6,3 +6,6 @@ vc_record:
     confirmed_at_height:
       type: integer
       format: uint32
+    coin_id:
+      type: string
+      format: hex

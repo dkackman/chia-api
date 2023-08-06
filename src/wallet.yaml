@@ -79,8 +79,6 @@ components:
       $ref: "./schemas/amount_filter.yaml#/amount_filter"
     amount_with_puzzlehash:
       $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
-    auto_claim_settings:
-      $ref: "./schemas/auto_claim_settings.yaml#/auto_claim_settings"
     coin_announcement:
       $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
     coin_record_order:
@@ -846,7 +844,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -935,7 +932,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1024,7 +1020,6 @@ paths:
                   type: string
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1186,7 +1181,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1292,7 +1286,6 @@ paths:
                   default: false
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1350,7 +1343,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1422,7 +1414,6 @@ paths:
                   default: true
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1715,7 +1706,6 @@ paths:
                   format: uint64
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           $ref: "#/components/responses/empty"
@@ -1807,7 +1797,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -1886,7 +1875,6 @@ paths:
                     type: object
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -2284,7 +2272,6 @@ paths:
                     type: object
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -2416,7 +2403,6 @@ paths:
                     format: hex
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -2828,7 +2814,6 @@ paths:
                     format: hex
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -4224,7 +4209,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -4283,7 +4267,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -4425,7 +4408,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/auto_claim_settings"
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  default: false
+                tx_fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                min_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                batch_size:
+                  type: integer
+                  format: uint16
+                  default: 50
       responses:
         "200":
           description: OK
@@ -4433,7 +4432,23 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/auto_claim_settings"
+                  - type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        default: false
+                      tx_fee:
+                        type: integer
+                        format: uint64
+                        default: 0
+                      min_amount:
+                        type: integer
+                        format: uint64
+                        default: 0
+                      batch_size:
+                        type: integer
+                        format: uint16
+                        default: 50
                   - $ref: "#/components/schemas/apiResponse"
   /get_auto_claim:
     post:
@@ -4451,7 +4466,23 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/auto_claim_settings"
+                  - type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        default: false
+                      tx_fee:
+                        type: integer
+                        format: uint64
+                        default: 0
+                      min_amount:
+                        type: integer
+                        format: uint64
+                        default: 0
+                      batch_size:
+                        type: integer
+                        format: uint16
+                        default: 50
                   - $ref: "#/components/schemas/apiResponse"
   /spend_clawback_coins:
     post:
@@ -4602,13 +4633,7 @@ paths:
                       vc_records:
                         type: array
                         items:
-                          allOf:
-                            - type: object
-                              properties:
-                                coin_id:
-                                  type: string
-                                  format: hex
-                            - $ref: "#/components/schemas/vc_record"
+                          $ref: "#/components/schemas/vc_record"
                       proofs:
                         type: object
                         additionalProperties:
@@ -4633,6 +4658,9 @@ paths:
                 vc_id:
                   type: string
                   format: bytes32
+                new_puzhash:
+                  type: string
+                  format: bytes32
                 new_proof_hash:
                   type: string
                   format: bytes32
@@ -4644,7 +4672,6 @@ paths:
                   format: uint64
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK
@@ -4743,7 +4770,6 @@ paths:
                   default: 0
                 reuse_puzhash:
                   type: boolean
-                  default: false
       responses:
         "200":
           description: OK

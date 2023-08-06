@@ -688,30 +688,6 @@
   },
   "description" : "Success indicator and optional error message included in all responses"
 };
-            defs["auto_claim_settings"] = {
-  "type" : "object",
-  "properties" : {
-    "enabled" : {
-      "type" : "boolean",
-      "default" : false
-    },
-    "tx_fee" : {
-      "type" : "integer",
-      "format" : "uint64",
-      "default" : 0
-    },
-    "min_amount" : {
-      "type" : "integer",
-      "format" : "uint64",
-      "default" : 0
-    },
-    "batch_size" : {
-      "type" : "integer",
-      "format" : "uint16",
-      "default" : 50
-    }
-  }
-};
             defs["cancel_offer_body"] = {
   "required" : [ "secure", "trade_id" ],
   "type" : "object",
@@ -855,8 +831,7 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -1229,8 +1204,7 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -1435,8 +1409,7 @@
       "default" : true
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -1460,8 +1433,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -1485,8 +1457,7 @@
       "format" : "uint64"
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -3558,7 +3529,28 @@
 };
             defs["inline_response_200_80"] = {
   "allOf" : [ {
-    "$ref" : "#/components/schemas/auto_claim_settings"
+    "type" : "object",
+    "properties" : {
+      "enabled" : {
+        "type" : "boolean",
+        "default" : false
+      },
+      "tx_fee" : {
+        "type" : "integer",
+        "format" : "uint64",
+        "default" : 0
+      },
+      "min_amount" : {
+        "type" : "integer",
+        "format" : "uint64",
+        "default" : 0
+      },
+      "batch_size" : {
+        "type" : "integer",
+        "format" : "uint16",
+        "default" : 50
+      }
+    }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -3616,17 +3608,7 @@
       "vc_records" : {
         "type" : "array",
         "items" : {
-          "allOf" : [ {
-            "type" : "object",
-            "properties" : {
-              "coin_id" : {
-                "type" : "string",
-                "format" : "hex"
-              }
-            }
-          }, {
-            "$ref" : "#/components/schemas/vc_record"
-          } ]
+          "$ref" : "#/components/schemas/vc_record"
         }
       },
       "proofs" : {
@@ -3775,8 +3757,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -3855,8 +3836,7 @@
       "default" : false
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4084,8 +4064,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4212,8 +4191,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4238,8 +4216,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4270,8 +4247,7 @@
       "type" : "string"
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4313,8 +4289,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4340,8 +4315,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4676,8 +4650,7 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -4717,6 +4690,30 @@
       "items" : {
         "$ref" : "#/components/schemas/puzzle_announcement"
       }
+    }
+  }
+};
+            defs["set_auto_claim_body"] = {
+  "type" : "object",
+  "properties" : {
+    "enabled" : {
+      "type" : "boolean",
+      "default" : false
+    },
+    "tx_fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "min_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "batch_size" : {
+      "type" : "integer",
+      "format" : "uint16",
+      "default" : 50
     }
   }
 };
@@ -4887,8 +4884,7 @@
       }
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -5263,6 +5259,10 @@
     "confirmed_at_height" : {
       "type" : "integer",
       "format" : "uint32"
+    },
+    "coin_id" : {
+      "type" : "string",
+      "format" : "hex"
     }
   }
 };
@@ -5280,8 +5280,7 @@
       "default" : 0
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -5290,6 +5289,10 @@
   "type" : "object",
   "properties" : {
     "vc_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "new_puzhash" : {
       "type" : "string",
       "format" : "bytes32"
     },
@@ -5306,8 +5309,7 @@
       "format" : "uint64"
     },
     "reuse_puzhash" : {
-      "type" : "boolean",
-      "default" : false
+      "type" : "boolean"
     }
   }
 };
@@ -19582,7 +19584,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/auto_claim_settings"
+        "$ref" : "#/components/schemas/set_auto_claim_body"
       }
     }
   },
