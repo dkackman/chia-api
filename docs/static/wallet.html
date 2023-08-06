@@ -1235,39 +1235,65 @@
   }
 };
             defs["create_signed_transaction_body"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/transaction_input"
-  }, {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer"
-      },
-      "min_coin_amount" : {
-        "type" : "integer",
-        "format" : "uint64",
-        "default" : 0
-      },
-      "max_coin_amount" : {
-        "type" : "integer",
-        "format" : "uint64",
-        "default" : 0
-      },
-      "excluded_coins" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/coin"
-        }
-      },
-      "excluded_coin_amounts" : {
-        "type" : "array",
-        "items" : {
-          "type" : "integer",
-          "format" : "uint64"
-        }
+  "required" : [ "additions" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer"
+    },
+    "additions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/amount_with_puzzlehash"
       }
+    },
+    "coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "coin_announcements" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin_announcement"
+      }
+    },
+    "puzzle_announcements" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/puzzle_announcement"
+      }
+    },
+    "min_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "max_coin_amount" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "exclude_coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "exclude_coin_amounts" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
     }
-  } ]
+  }
 };
             defs["delete_notifications_body"] = {
   "type" : "object",
@@ -1920,6 +1946,10 @@
     "wallet_id" : {
       "type" : "integer",
       "format" : "uint32"
+    },
+    "to_address" : {
+      "type" : "string",
+      "format" : "hex"
     },
     "start" : {
       "type" : "integer",
@@ -2616,88 +2646,48 @@
 };
             defs["inline_response_200_40"] = {
   "allOf" : [ {
-    "oneOf" : [ {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "offered" : {
-          "type" : "array",
-          "items" : {
-            "type" : "object",
-            "properties" : {
-              "launcher_id" : {
-                "type" : "string",
-                "format" : "hex"
-              },
-              "new_root" : {
-                "type" : "string",
-                "format" : "hex"
-              },
-              "dependencies" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "object",
-                  "properties" : {
-                    "launcher_id" : {
-                      "type" : "string",
-                      "format" : "hex"
-                    },
-                    "values_to_prove" : {
-                      "type" : "array",
-                      "items" : {
-                        "type" : "string",
-                        "format" : "hex"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+    "type" : "object",
+    "properties" : {
+      "id" : {
+        "type" : "string"
+      },
+      "summary" : {
+        "$ref" : "#/components/schemas/inline_response_200_40_summary"
       }
-    }, {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
-        },
-        "summary" : {
-          "properties" : {
-            "offered" : {
-              "type" : "object",
-              "additionalProperties" : {
-                "type" : "integer",
-                "format" : "uint64"
-              }
-            },
-            "requested" : {
-              "type" : "object",
-              "additionalProperties" : {
-                "type" : "integer",
-                "format" : "uint64"
-              }
-            },
-            "fees" : {
-              "type" : "integer",
-              "format" : "uint64"
-            },
-            "infos" : {
-              "type" : "object",
-              "additionalProperties" : {
-                "type" : "object",
-                "additionalProperties" : true
-              }
-            }
-          }
-        }
-      }
-    } ]
+    }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["inline_response_200_40_summary"] = {
+  "properties" : {
+    "offered" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    },
+    "requested" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    },
+    "fees" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "infos" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "type" : "object",
+        "additionalProperties" : true
+      }
+    }
+  },
+  "example" : null
 };
             defs["inline_response_200_41"] = {
   "allOf" : [ {
@@ -2827,6 +2817,12 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "signed_txs" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      },
       "signed_tx" : {
         "$ref" : "#/components/schemas/transaction_record"
       }
@@ -4686,18 +4682,43 @@
   }
 };
             defs["send_transaction_multi_body"] = {
-  "allOf" : [ {
-    "required" : [ "wallet_id" ],
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "additions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/amount_with_puzzlehash"
+      }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    },
+    "coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "coin_announcements" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin_announcement"
+      }
+    },
+    "puzzle_announcements" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/puzzle_announcement"
       }
     }
-  }, {
-    "$ref" : "#/components/schemas/transaction_input"
-  } ]
+  }
 };
             defs["set_wallet_resync_on_startup_body"] = {
   "type" : "object",
@@ -4851,12 +4872,12 @@
     },
     "min_coin_amount" : {
       "type" : "integer",
-      "format" : "uint128",
+      "format" : "uint64",
       "default" : 0
     },
     "max_coin_amount" : {
       "type" : "integer",
-      "format" : "uint128",
+      "format" : "uint64",
       "default" : 0
     },
     "solver" : {
@@ -4966,41 +4987,6 @@
   "type" : "integer",
   "description" : "The status of a trade: * 0 PENDING_ACCEPT * 1 PENDING_CONFIRM * 2 PENDING_CANCEL * 3 CANCELLED * 4 CONFIRMED * 5 FAILED",
   "enum" : [ 0, 1, 2, 3, 4, 5 ]
-};
-            defs["transaction_input"] = {
-  "required" : [ "additions" ],
-  "type" : "object",
-  "properties" : {
-    "additions" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/amount_with_puzzlehash"
-      }
-    },
-    "fee" : {
-      "type" : "integer",
-      "format" : "uint64",
-      "default" : 0
-    },
-    "coins" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/coin"
-      }
-    },
-    "coin_announcements" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/coin_announcement"
-      }
-    },
-    "puzzle_announcements" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/puzzle_announcement"
-      }
-    }
-  }
 };
             defs["transaction_record"] = {
   "type" : "object",

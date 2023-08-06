@@ -136,8 +136,6 @@ components:
       $ref: "./schemas/token.yaml#/token"
     trade_record:
       $ref: "./schemas/trade_record.yaml#/trade_record"
-    transaction_input:
-      $ref: "./schemas/transaction_input.yaml#/transaction_input"
     transaction_record:
       $ref: "./schemas/transaction_record.yaml#/transaction_record"
     transaction_type:
@@ -1876,11 +1874,11 @@ paths:
                   default: 0
                 min_coin_amount:
                   type: integer
-                  format: uint128
+                  format: uint64
                   default: 0
                 max_coin_amount:
                   type: integer
-                  format: uint128
+                  format: uint64
                   default: 0
                 solver:
                   type: object
@@ -2216,59 +2214,30 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - oneOf:
-                      - type: object
+                  - type: object
+                    properties:
+                      id:
+                        type: string
+                      summary:
                         properties:
-                          id:
-                            type: string
                           offered:
-                            type: array
-                            items:
+                            type: object
+                            additionalProperties:
+                              type: integer
+                              format: uint64
+                          requested:
+                            type: object
+                            additionalProperties:
+                              type: integer
+                              format: uint64
+                          fees:
+                            type: integer
+                            format: uint64
+                          infos:
+                            type: object
+                            additionalProperties:
                               type: object
-                              properties:
-                                launcher_id:
-                                  type: string
-                                  format: hex
-                                new_root:
-                                  type: string
-                                  format: hex
-                                dependencies:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      launcher_id:
-                                        type: string
-                                        format: hex
-                                      values_to_prove:
-                                        type: array
-                                        items:
-                                          type: string
-                                          format: hex
-                      - type: object
-                        properties:
-                          id:
-                            type: string
-                          summary:
-                            properties:
-                              offered:
-                                type: object
-                                additionalProperties:
-                                  type: integer
-                                  format: uint64
-                              requested:
-                                type: object
-                                additionalProperties:
-                                  type: integer
-                                  format: uint64
-                              fees:
-                                type: integer
-                                format: uint64
-                              infos:
-                                type: object
-                                additionalProperties:
-                                  type: object
-                                  additionalProperties: true
+                              additionalProperties: true
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
@@ -2746,29 +2715,49 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - $ref: "#/components/schemas/transaction_input"
-                - type: object
-                  properties:
-                    wallet_id:
-                      type: integer
-                    min_coin_amount:
-                      type: integer
-                      format: uint64
-                      default: 0
-                    max_coin_amount:
-                      type: integer
-                      format: uint64
-                      default: 0
-                    excluded_coins:
-                      type: array
-                      items:
-                        $ref: "#/components/schemas/coin"
-                    excluded_coin_amounts:
-                      type: array
-                      items:
-                        type: integer
-                        format: uint64
+              type: object
+              required:
+                - additions
+              properties:
+                wallet_id:
+                  type: integer
+                additions:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/amount_with_puzzlehash"
+                coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
+                coin_announcements:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin_announcement"
+                puzzle_announcements:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/puzzle_announcement"
+                min_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                max_coin_amount:
+                  type: integer
+                  format: uint64
+                  default: 0
+                exclude_coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
+                exclude_coin_amounts:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
       responses:
         "200":
           description: OK
@@ -2778,6 +2767,10 @@ paths:
                 allOf:
                   - type: object
                     properties:
+                      signed_txs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                       signed_tx:
                         $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
@@ -2851,15 +2844,34 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-                - type: object
-                  required:
-                    - wallet_id
-                  properties:
-                    wallet_id:
-                      type: integer
-                      format: uint32
-                - $ref: "#/components/schemas/transaction_input"
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                additions:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/amount_with_puzzlehash"
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
+                coin_announcements:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin_announcement"
+                puzzle_announcements:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/puzzle_announcement"
+
       responses:
         "200":
           $ref: "#/components/responses/transaction_record_response"
@@ -3046,6 +3058,9 @@ paths:
                 wallet_id:
                   type: integer
                   format: uint32
+                to_address:
+                  type: string
+                  format: hex
                 start:
                   type: integer
                   format: uint32
