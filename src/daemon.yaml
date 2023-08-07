@@ -25,27 +25,27 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
     service:
-      $ref: "./requestBodies/service.yaml#/service"
+      $ref: "requestBodies/service.yaml#/service"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
   schemas:
     k_size:
-      $ref: "./schemas/k_size.yaml#/k_size"
+      $ref: "schemas/k_size.yaml#/k_size"
     key_data:
-      $ref: "./schemas/key_data.yaml#/key_data"
+      $ref: "schemas/key_data.yaml#/key_data"
     plotter_config:
-      $ref: "./schemas/plotter_config.yaml#/plotter_config"
+      $ref: "schemas/plotter_config.yaml#/plotter_config"
     plotter_info:
-      $ref: "./schemas/plotter_info.yaml#/plotter_info"
+      $ref: "schemas/plotter_info.yaml#/plotter_info"
     queued_plot_info:
-      $ref: "./schemas/queued_plot_info.yaml#/queued_plot_info"
+      $ref: "schemas/queued_plot_info.yaml#/queued_plot_info"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
     error_details:
-      $ref: "./schemas/error_details.yaml#/error_details"
+      $ref: "schemas/error_details.yaml#/error_details"
     keyring_status:
       type: object
       properties:
@@ -81,7 +81,7 @@ components:
           type: string
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Daemon
     description: The daemon interface is exposed on port 55400 by default and uses WebSockets only. It can be used to interact with other service endpoints.
