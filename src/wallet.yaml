@@ -25,16 +25,16 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
     fingerprint:
-      $ref: "./requestBodies/fingerprint.yaml#/fingerprint"
+      $ref: "requestBodies/fingerprint.yaml#/fingerprint"
     wallet_id:
-      $ref: "./requestBodies/wallet_id.yaml#/wallet_id"
+      $ref: "requestBodies/wallet_id.yaml#/wallet_id"
     transaction_id:
-      $ref: "./requestBodies/transaction_id.yaml#/transaction_id"
+      $ref: "requestBodies/transaction_id.yaml#/transaction_id"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
     coin_records:
       description: OK
       content:
@@ -76,13 +76,13 @@ components:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
     amount_filter:
-      $ref: "./schemas/amount_filter.yaml#/amount_filter"
+      $ref: "schemas/amount_filter.yaml#/amount_filter"
     amount_with_puzzlehash:
-      $ref: "./schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
+      $ref: "schemas/amount_with_puzzlehash.yaml#/amount_with_puzzlehash"
     coin_announcement:
-      $ref: "./schemas/coin_announcement.yaml#/coin_announcement"
+      $ref: "schemas/coin_announcement.yaml#/coin_announcement"
     coin_record_order:
-      $ref: "./schemas/coin_record_order.yaml#/coin_record_order"
+      $ref: "schemas/coin_record_order.yaml#/coin_record_order"
     coin_search_options:
       type: object
       properties:
@@ -95,70 +95,70 @@ components:
         include_spent_coins:
           type: boolean
     coin_type:
-      $ref: "./schemas/coin_type.yaml#/coin_type"
+      $ref: "schemas/coin_type.yaml#/coin_type"
     connection_info:
-      $ref: "./schemas/connection_info.yaml#/connection_info"
+      $ref: "schemas/connection_info.yaml#/connection_info"
     puzzle_announcement:
-      $ref: "./schemas/puzzle_announcement.yaml#/puzzle_announcement"
+      $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
     cat_info:
-      $ref: "./schemas/cat_info.yaml#/cat_info"
+      $ref: "schemas/cat_info.yaml#/cat_info"
     coin:
-      $ref: "./schemas/coin.yaml#/coin"
+      $ref: "schemas/coin.yaml#/coin"
     coin_record:
-      $ref: "./schemas/coin_record.yaml#/coin_record"
+      $ref: "schemas/coin_record.yaml#/coin_record"
     farmer_rewards:
-      $ref: "./schemas/farmer_rewards.yaml#/farmer_rewards"
+      $ref: "schemas/farmer_rewards.yaml#/farmer_rewards"
     hash_filter:
-      $ref: "./schemas/hash_filter.yaml#/hash_filter"
+      $ref: "schemas/hash_filter.yaml#/hash_filter"
     lineage_proof:
-      $ref: "./schemas/lineage_proof.yaml#/lineage_proof"
+      $ref: "schemas/lineage_proof.yaml#/lineage_proof"
     mirror:
-      $ref: "./schemas/mirror.yaml#/mirror"
+      $ref: "schemas/mirror.yaml#/mirror"
     mnemonic:
-      $ref: "./schemas/mnemonic.yaml#/mnemonic"
+      $ref: "schemas/mnemonic.yaml#/mnemonic"
     network_info:
-      $ref: "./schemas/network_info.yaml#/network_info"
+      $ref: "schemas/network_info.yaml#/network_info"
     nft_info:
-      $ref: "./schemas/nft_info.yaml#/nft_info"
+      $ref: "schemas/nft_info.yaml#/nft_info"
     pool_state:
-      $ref: "./schemas/pool_state.yaml#/pool_state"
+      $ref: "schemas/pool_state.yaml#/pool_state"
     pool_wallet_info:
-      $ref: "./schemas/pool_wallet_info.yaml#/pool_wallet_info"
+      $ref: "schemas/pool_wallet_info.yaml#/pool_wallet_info"
     private_key:
-      $ref: "./schemas/private_key.yaml#/private_key"
+      $ref: "schemas/private_key.yaml#/private_key"
     singleton_record:
-      $ref: "./schemas/singleton_record.yaml#/singleton_record"
+      $ref: "schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
-      $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
+      $ref: "schemas/spend_bundle.yaml#/spend_bundle"
     token:
-      $ref: "./schemas/token.yaml#/token"
+      $ref: "schemas/token.yaml#/token"
     trade_record:
-      $ref: "./schemas/trade_record.yaml#/trade_record"
+      $ref: "schemas/trade_record.yaml#/trade_record"
     transaction_record:
-      $ref: "./schemas/transaction_record.yaml#/transaction_record"
+      $ref: "schemas/transaction_record.yaml#/transaction_record"
     transaction_type:
-      $ref: "./schemas/transaction_type.yaml#/transaction_type"
+      $ref: "schemas/transaction_type.yaml#/transaction_type"
     transaction_type_filter:
-      $ref: "./schemas/transaction_type_filter.yaml#/transaction_type_filter"
+      $ref: "schemas/transaction_type_filter.yaml#/transaction_type_filter"
     uint32_range:
-      $ref: "./schemas/uint32_range.yaml#/uint32_range"
+      $ref: "schemas/uint32_range.yaml#/uint32_range"
     uint64_range:
-      $ref: "./schemas/uint64_range.yaml#/uint64_range"
+      $ref: "schemas/uint64_range.yaml#/uint64_range"
     vc_proofs:
-      $ref: "./schemas/vc_proofs.yaml#/vc_proofs"
+      $ref: "schemas/vc_proofs.yaml#/vc_proofs"
     vc_record:
-      $ref: "./schemas/vc_record.yaml#/vc_record"
+      $ref: "schemas/vc_record.yaml#/vc_record"
     wallet_balance:
-      $ref: "./schemas/wallet_balance.yaml#/wallet_balance"
+      $ref: "schemas/wallet_balance.yaml#/wallet_balance"
     wallet_info:
-      $ref: "./schemas/wallet_info.yaml#/wallet_info"
+      $ref: "schemas/wallet_info.yaml#/wallet_info"
     wallet_type:
-      $ref: "./schemas/wallet_type.yaml#/wallet_type"
+      $ref: "schemas/wallet_type.yaml#/wallet_type"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Shared
     description: Methods shared by all services.
