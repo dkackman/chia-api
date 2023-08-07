@@ -25,22 +25,22 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
   schemas:
     connection_info:
-      $ref: "./schemas/connection_info.yaml#/connection_info"
+      $ref: "schemas/connection_info.yaml#/connection_info"
     k_size:
-      $ref: "./schemas/k_size.yaml#/k_size"
+      $ref: "schemas/k_size.yaml#/k_size"
     plot_info:
-      $ref: "./schemas/plot_info.yaml#/plot_info"
+      $ref: "schemas/plot_info.yaml#/plot_info"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Shared
     description: Methods shared by all services.
