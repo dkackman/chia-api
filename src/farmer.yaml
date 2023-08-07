@@ -25,29 +25,29 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
   schemas:
     connection_info:
-      $ref: "./schemas/connection_info.yaml#/connection_info"
+      $ref: "schemas/connection_info.yaml#/connection_info"
     harvester_info:
-      $ref: "./schemas/harvester_info.yaml#/harvester_info"
+      $ref: "schemas/harvester_info.yaml#/harvester_info"
     harvester_summary:
-      $ref: "./schemas/harvester_summary.yaml#/harvester_summary"
+      $ref: "schemas/harvester_summary.yaml#/harvester_summary"
     paginated_plot_request:
-      $ref: "./schemas/paginated_plot_request.yaml#/paginated_plot_request"
+      $ref: "schemas/paginated_plot_request.yaml#/paginated_plot_request"
     pool_state_info:
-      $ref: "./schemas/pool_state_info.yaml#/pool_state_info"
+      $ref: "schemas/pool_state_info.yaml#/pool_state_info"
     plot_info_request_data:
-      $ref: "./schemas/plot_info_request_data.yaml#/plot_info_request_data"
+      $ref: "schemas/plot_info_request_data.yaml#/plot_info_request_data"
     plot_path_request_data:
-      $ref: "./schemas/plot_path_request_data.yaml#/plot_path_request_data"
+      $ref: "schemas/plot_path_request_data.yaml#/plot_path_request_data"
     proof_of_space:
-      $ref: "./schemas/proof_of_space.yaml#/proof_of_space"
+      $ref: "schemas/proof_of_space.yaml#/proof_of_space"
     farmer_signage_point:
-      $ref: "./schemas/farmer_signage_point.yaml#/farmer_signage_point"
+      $ref: "schemas/farmer_signage_point.yaml#/farmer_signage_point"
     signage_point_bundle:
       type: object
       properties:
@@ -68,10 +68,10 @@ components:
             minItems: 2
             maxItems: 2
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Shared
     description: Methods shared by all services.

@@ -25,32 +25,32 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
   schemas:
     connection_info:
-      $ref: "./schemas/connection_info.yaml#/connection_info"
+      $ref: "schemas/connection_info.yaml#/connection_info"
     internal_node:
-      $ref: "./schemas/internal_node.yaml#/internal_node"
+      $ref: "schemas/internal_node.yaml#/internal_node"
     mirror:
-      $ref: "./schemas/mirror.yaml#/mirror"
+      $ref: "schemas/mirror.yaml#/mirror"
     offer:
-      $ref: "./schemas/offer.yaml#/offer"
+      $ref: "schemas/offer.yaml#/offer"
     offer_store:
-      $ref: "./schemas/offer_store.yaml#/offer_store"
+      $ref: "schemas/offer_store.yaml#/offer_store"
     plugin_status:
-      $ref: "./schemas/plugin_status.yaml#/plugin_status"
+      $ref: "schemas/plugin_status.yaml#/plugin_status"
     terminal_node:
-      $ref: "./schemas/terminal_node.yaml#/terminal_node"
+      $ref: "schemas/terminal_node.yaml#/terminal_node"
     transaction_record:
-      $ref: "./schemas/transaction_record.yaml#/transaction_record"
+      $ref: "schemas/transaction_record.yaml#/transaction_record"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Shared
     description: Methods shared by all services.

@@ -25,7 +25,7 @@ security:
 components:
   requestBodies:
     empty:
-      $ref: "./requestBodies/empty.yaml#/empty"
+      $ref: "requestBodies/empty.yaml#/empty"
     header_hash:
       required: true
       description: the block's header_hash
@@ -58,7 +58,7 @@ components:
                 format: uint32
   responses:
     empty:
-      $ref: "./responses/empty.yaml#/empty"
+      $ref: "responses/empty.yaml#/empty"
     coin_records:
       description: OK
       content:
@@ -74,15 +74,15 @@ components:
               - $ref: "#/components/schemas/apiResponse"
   schemas:
     proof_of_space:
-      $ref: "./schemas/proof_of_space.yaml#/proof_of_space"
+      $ref: "schemas/proof_of_space.yaml#/proof_of_space"
     blockchain_state:
-      $ref: "./schemas/blockchain_state.yaml#/blockchain_state"
+      $ref: "schemas/blockchain_state.yaml#/blockchain_state"
     block_record:
-      $ref: "./schemas/block_record.yaml#/block_record"
+      $ref: "schemas/block_record.yaml#/block_record"
     coin:
-      $ref: "./schemas/coin.yaml#/coin"
+      $ref: "schemas/coin.yaml#/coin"
     coin_record:
-      $ref: "./schemas/coin_record.yaml#/coin_record"
+      $ref: "schemas/coin_record.yaml#/coin_record"
     coin_search_options:
       type: object
       properties:
@@ -95,38 +95,38 @@ components:
         include_spent_coins:
           type: boolean
     coin_spend:
-      $ref: "./schemas/coin_spend.yaml#/coin_spend"
+      $ref: "schemas/coin_spend.yaml#/coin_spend"
     connection_info:
-      $ref: "./schemas/connection_info.yaml#/connection_info"
+      $ref: "schemas/connection_info.yaml#/connection_info"
     foliage:
-      $ref: "./schemas/foliage.yaml#/foliage"
+      $ref: "schemas/foliage.yaml#/foliage"
     foliage_transaction_block:
-      $ref: "./schemas/foliage_transaction_block.yaml#/foliage_transaction_block"
+      $ref: "schemas/foliage_transaction_block.yaml#/foliage_transaction_block"
     full_block:
-      $ref: "./schemas/full_block.yaml#/full_block"
+      $ref: "schemas/full_block.yaml#/full_block"
     end_of_sub_slot_bundle:
-      $ref: "./schemas/end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle"
+      $ref: "schemas/end_of_sub_slot_bundle.yaml#/end_of_sub_slot_bundle"
     mempool_item:
-      $ref: "./schemas/mempool_item.yaml#/mempool_item"
+      $ref: "schemas/mempool_item.yaml#/mempool_item"
     network_info:
-      $ref: "./schemas/network_info.yaml#/network_info"
+      $ref: "schemas/network_info.yaml#/network_info"
     node_type:
-      $ref: "./schemas/node_type.yaml#/node_type"
+      $ref: "schemas/node_type.yaml#/node_type"
     signage_point:
-      $ref: "./schemas/signage_point.yaml#/signage_point"
+      $ref: "schemas/signage_point.yaml#/signage_point"
     spend_bundle:
-      $ref: "./schemas/spend_bundle.yaml#/spend_bundle"
+      $ref: "schemas/spend_bundle.yaml#/spend_bundle"
     unfinished_header_block:
-      $ref: "./schemas/unfinished_header_block.yaml#/unfinished_header_block"
+      $ref: "schemas/unfinished_header_block.yaml#/unfinished_header_block"
     apiResponse:
-      $ref: "./schemas/apiResponse.yaml#/apiResponse"
+      $ref: "schemas/apiResponse.yaml#/apiResponse"
     vdf_info:
-      $ref: "./schemas/vdf_info.yaml#/vdf_info"
+      $ref: "schemas/vdf_info.yaml#/vdf_info"
     vdf_proof:
-      $ref: "./schemas/vdf_proof.yaml#/vdf_proof"
+      $ref: "schemas/vdf_proof.yaml#/vdf_proof"
   securitySchemes:
     bearerAuth:
-      $ref: "./securitySchemes/bearerAuth.yaml#/bearerAuth"
+      $ref: "securitySchemes/bearerAuth.yaml#/bearerAuth"
 tags:
   - name: Blocks
     description: Methods for managing blocks.
