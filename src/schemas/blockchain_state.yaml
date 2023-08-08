@@ -15,10 +15,10 @@ blockchain_state:
     mempool_size:
       type: integer
       example: 0
-      format: int32
+      format: uint32
     mempool_cost:
       type: integer
-      format: int32
+      format: uint32
     mempool_fees:
       type: integer
       format: uint64
@@ -30,10 +30,10 @@ blockchain_state:
           format: double
     mempool_max_total_cost:
       type: integer
-      format: int32
+      format: uint32
     block_max_cost:
       type: integer
-      format: int32
+      format: uint32
     peak:
       $ref: ./block_record.yaml#/block_record
       nullable: true

@@ -40,4 +40,4 @@ wallet_balance:
     fingerprint:
       type: integer
       example: 128964
-      format: int32
+      format: uint32
