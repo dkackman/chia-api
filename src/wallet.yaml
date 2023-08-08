@@ -3828,7 +3828,7 @@ paths:
                     properties:
                       fingerprint:
                         type: integer
-                        format: int32
+                        format: uint32
                       wallets:
                         type: array
                         items:
