@@ -1012,12 +1012,21 @@ paths:
               type: object
               required:
                 - wallet_id
+                - did_id
+                - nft_coin_id
               properties:
                 wallet_id:
                   type: integer
                   format: uint32
                 did_id:
                   type: string
+                nft_coin_id:
+                  type: string
+                  format: hex
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
                 reuse_puzhash:
                   type: boolean
       responses:
