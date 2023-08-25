@@ -377,37 +377,6 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
-  /migrate_keyring:
-    post:
-      tags:
-        - Key Ring
-      summary: Migrate from key phrase to key ring.
-      description: Migrate from key phrase to key ring.
-      operationId: migrate_keyring
-      requestBody:
-        description: The migration options
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - passphrase
-                - passphrase_hint
-              properties:
-                passphrase:
-                  type: string
-                passphrase_hint:
-                  type: string
-                save_passphrase:
-                  type: boolean
-                  default: false
-                cleanup_legacy_keyring:
-                  type: boolean
-                  default: false
-      responses:
-        "200":
-          $ref: "#/components/responses/empty"
   /set_keyring_passphrase:
     post:
       tags:
@@ -492,6 +461,11 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
                   - $ref: "#/components/schemas/error_details"
+                  - type: object
+                    properties:
+                      fingerprint:
+                        type: integer
+                        format: uint32
   /check_keys:
     post:
       tags:

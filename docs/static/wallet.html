@@ -3254,7 +3254,7 @@
     "properties" : {
       "fingerprint" : {
         "type" : "integer",
-        "format" : "int32"
+        "format" : "uint32"
       },
       "wallets" : {
         "type" : "array",
@@ -4236,7 +4236,7 @@
   "example" : null
 };
             defs["nft_set_nft_did_body"] = {
-  "required" : [ "wallet_id" ],
+  "required" : [ "did_id", "nft_coin_id", "wallet_id" ],
   "type" : "object",
   "properties" : {
     "wallet_id" : {
@@ -4245,6 +4245,15 @@
     },
     "did_id" : {
       "type" : "string"
+    },
+    "nft_coin_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
     },
     "reuse_puzhash" : {
       "type" : "boolean"
@@ -5420,7 +5429,7 @@
     },
     "fingerprint" : {
       "type" : "integer",
-      "format" : "int32",
+      "format" : "uint32",
       "example" : 128964
     }
   }
