@@ -745,6 +745,16 @@
   },
   "example" : null
 };
+            defs["clear_pending_roots_body"] = {
+  "required" : [ "store_id" ],
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
             defs["close_connection_body"] = {
   "required" : [ "node_id" ],
   "type" : "object",
@@ -1276,6 +1286,13 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_20"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/root"
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["inline_response_200_3"] = {
   "allOf" : [ {
     "type" : "object",
@@ -1385,7 +1402,7 @@
     },
     "generation" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "uint32"
     },
     "target_root_hash" : {
       "type" : "string",
@@ -1658,6 +1675,26 @@
     }
   }
 };
+            defs["root"] = {
+  "type" : "object",
+  "properties" : {
+    "tree_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "node_hash" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "generation" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "status" : {
+      "$ref" : "#/components/schemas/status"
+    }
+  }
+};
             defs["side"] = {
   "type" : "integer",
   "description" : "The side:\n  * 0 LEFT\n  * 1 RIGHT",
@@ -1687,6 +1724,11 @@
       }
     }
   }
+};
+            defs["status"] = {
+  "type" : "integer",
+  "description" : "The status:\n  * 1 PENDING\n  * 2 COMMITTED",
+  "enum" : [ 1, 2 ]
 };
             defs["store_proofs"] = {
   "type" : "object",
@@ -2033,6 +2075,9 @@
                     <li class="nav-item" data-group="Subscriptions" data-name="checkPlugins">
                       <a class="nav-link link-secondary" href="#api-Subscriptions-checkPlugins">checkPlugins</a>
                     </li>
+                    <li class="nav-item" data-group="Subscriptions" data-name="clearPendingRoots">
+                      <a class="nav-link link-secondary" href="#api-Subscriptions-clearPendingRoots">clearPendingRoots</a>
+                    </li>
                     <li class="nav-item" data-group="Subscriptions" data-name="removeSubscriptions">
                       <a class="nav-link link-secondary" href="#api-Subscriptions-removeSubscriptions">removeSubscriptions</a>
                     </li>
@@ -2058,7 +2103,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.8.2</div>
+              <div class="app-desc">Version: 2.0.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The data layer uses port 8561 by default.</div>
@@ -5712,6 +5757,127 @@ The data layer uses port 8561 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-checkPlugins-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Subscriptions-clearPendingRoots">
+                      <article id="api-Subscriptions-clearPendingRoots-0" data-group="User" data-name="clearPendingRoots" data-version="0">
+                        <div class="pull-left">
+                          <h1>clearPendingRoots</h1>
+                          <p>Clears pending roots.</p>
+                        </div>
+                        <p class="marked">Clears pending roots.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/clear_pending_roots</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Subscriptions-clearPendingRoots-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.crt \
+--key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8561/clear_pending_roots" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/clear_pending_roots_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_clearPendingRoots_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_clearPendingRoots_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-clearPendingRoots-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-clearPendingRoots-200-schema">
+                                  <div id='responses-clearPendingRoots-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_20"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-clearPendingRoots-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-clearPendingRoots-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-clearPendingRoots-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

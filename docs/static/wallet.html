@@ -816,14 +816,14 @@
       "format" : "uint128",
       "default" : 0
     },
-    "exclude_coin_amounts" : {
+    "excluded_coin_amounts" : {
       "type" : "array",
       "items" : {
         "type" : "integer",
         "format" : "uint64"
       }
     },
-    "exclude_coin_ids" : {
+    "excluded_coin_ids" : {
       "type" : "array",
       "items" : {
         "type" : "string",
@@ -1249,13 +1249,13 @@
       "format" : "uint64",
       "default" : 0
     },
-    "exclude_coins" : {
+    "excluded_coins" : {
       "type" : "array",
       "items" : {
         "$ref" : "#/components/schemas/coin"
       }
     },
-    "exclude_coin_amounts" : {
+    "excluded_coin_amounts" : {
       "type" : "array",
       "items" : {
         "type" : "integer",
@@ -1662,6 +1662,16 @@
       "example" : 0
     },
     "last_height_farmed" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "example" : 0
+    },
+    "blocks_won" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "example" : 0
+    },
+    "last_time_farmed" : {
       "type" : "integer",
       "format" : "uint64",
       "example" : 0
@@ -4576,7 +4586,7 @@
       "format" : "uint64",
       "default" : 0
     },
-    "exclude_coin_amounts" : {
+    "excluded_coin_amounts" : {
       "type" : "array",
       "items" : {
         "type" : "integer",
@@ -4644,14 +4654,14 @@
       "format" : "uint64",
       "default" : 0
     },
-    "exclude_coin_amounts" : {
+    "excluded_coin_amounts" : {
       "type" : "array",
       "items" : {
         "type" : "integer",
         "format" : "uint64"
       }
     },
-    "exclude_coin_ids" : {
+    "excluded_coin_ids" : {
       "type" : "array",
       "items" : {
         "type" : "string",
@@ -5894,7 +5904,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.8.2</div>
+              <div class="app-desc">Version: 2.0.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>

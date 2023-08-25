@@ -734,6 +734,40 @@
     }
   }
 };
+            defs["harvester_config"] = {
+  "type" : "object",
+  "properties" : {
+    "use_gpu_harvesting" : {
+      "type" : "boolean"
+    },
+    "gpu_index" : {
+      "type" : "integer",
+      "format" : "int"
+    },
+    "enforce_gpu_index" : {
+      "type" : "boolean"
+    },
+    "disable_cpu_affinity" : {
+      "type" : "boolean"
+    },
+    "parallel_decompressor_count" : {
+      "type" : "integer",
+      "format" : "int"
+    },
+    "decompressor_thread_count" : {
+      "type" : "integer",
+      "format" : "int"
+    },
+    "recursive_plot_scan" : {
+      "type" : "boolean"
+    },
+    "refresh_parameter_interval_seconds" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  },
+  "description" : "Harvester configuration"
+};
             defs["inline_response_200"] = {
   "allOf" : [ {
     "type" : "object",
@@ -802,6 +836,13 @@
         }
       }
     }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_4"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/harvester_config"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
@@ -895,6 +936,9 @@
                     <li class="nav-item" data-group="Harvester" data-name="deletePlot">
                       <a class="nav-link link-secondary" href="#api-Harvester-deletePlot">deletePlot</a>
                     </li>
+                    <li class="nav-item" data-group="Harvester" data-name="getHarvesterConfig">
+                      <a class="nav-link link-secondary" href="#api-Harvester-getHarvesterConfig">getHarvesterConfig</a>
+                    </li>
                     <li class="nav-item" data-group="Harvester" data-name="getPlotDirectories">
                       <a class="nav-link link-secondary" href="#api-Harvester-getPlotDirectories">getPlotDirectories</a>
                     </li>
@@ -906,6 +950,9 @@
                     </li>
                     <li class="nav-item" data-group="Harvester" data-name="removePlotDirectory">
                       <a class="nav-link link-secondary" href="#api-Harvester-removePlotDirectory">removePlotDirectory</a>
+                    </li>
+                    <li class="nav-item" data-group="Harvester" data-name="setHarvesterConfig">
+                      <a class="nav-link link-secondary" href="#api-Harvester-setHarvesterConfig">setHarvesterConfig</a>
                     </li>
                   <li class="nav-header nav-item" data-group="Shared">
                     <a class="nav-link" href="#api-Shared">Shared</a>
@@ -941,7 +988,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 1.8.2</div>
+              <div class="app-desc">Version: 2.0.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The harvester uses port 8560 by default.</div>
@@ -1192,6 +1239,128 @@ The harvester uses port 8560 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-deletePlot-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Harvester-getHarvesterConfig">
+                      <article id="api-Harvester-getHarvesterConfig-0" data-group="User" data-name="getHarvesterConfig" data-version="0">
+                        <div class="pull-left">
+                          <h1>getHarvesterConfig</h1>
+                          <p>Gets harvester configuration.</p>
+                        </div>
+                        <p class="marked">Gets harvester configuration.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_harvester_config</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Harvester-getHarvesterConfig-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt \
+--key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/get_harvester_config" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getHarvesterConfig_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getHarvesterConfig_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getHarvesterConfig-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getHarvesterConfig-200-schema">
+                                  <div id='responses-getHarvesterConfig-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_4"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getHarvesterConfig-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getHarvesterConfig-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getHarvesterConfig-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -1680,6 +1849,128 @@ The harvester uses port 8560 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-removePlotDirectory-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Harvester-setHarvesterConfig">
+                      <article id="api-Harvester-setHarvesterConfig-0" data-group="User" data-name="setHarvesterConfig" data-version="0">
+                        <div class="pull-left">
+                          <h1>setHarvesterConfig</h1>
+                          <p>Sets harvester configuration.</p>
+                        </div>
+                        <p class="marked">Sets harvester configuration.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_harvester_config</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Harvester-setHarvesterConfig-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt \
+--key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8560/set_harvester_config" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Config details",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/harvester_config"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_setHarvesterConfig_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_setHarvesterConfig_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-setHarvesterConfig-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-setHarvesterConfig-200-schema">
+                                  <div id='responses-setHarvesterConfig-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-setHarvesterConfig-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-setHarvesterConfig-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-setHarvesterConfig-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
