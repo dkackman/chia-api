@@ -2044,7 +2044,7 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
-                exclude_coin_amounts:
+                excluded_coin_amounts:
                   type: array
                   items:
                     type: integer
@@ -2400,12 +2400,12 @@ paths:
                   type: integer
                   format: uint128
                   default: 0
-                exclude_coin_amounts:
+                excluded_coin_amounts:
                   type: array
                   items:
                     type: integer
                     format: uint64
-                exclude_coin_ids:
+                excluded_coin_ids:
                   type: array
                   items:
                     type: string
@@ -2740,11 +2740,11 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
-                exclude_coins:
+                excluded_coins:
                   type: array
                   items:
                     $ref: "#/components/schemas/coin"
-                exclude_coin_amounts:
+                excluded_coin_amounts:
                   type: array
                   items:
                     type: integer
@@ -2811,12 +2811,12 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
-                exclude_coin_amounts:
+                excluded_coin_amounts:
                   type: array
                   items:
                     type: integer
                     format: uint64
-                exclude_coin_ids:
+                excluded_coin_ids:
                   type: array
                   items:
                     type: string
