@@ -20,4 +20,8 @@ farmer_rewards:
     last_height_farmed:
       type: integer
       example: 0
-      format: uint64
+      format: uint32
+    blocks_won:
+      type: integer
+      example: 0
+      format: uint32
