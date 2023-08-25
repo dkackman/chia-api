@@ -1,0 +1,24 @@
+harvester_config:
+  type: object
+  description: Harvester configuration
+  properties:
+    use_gpu_harvesting:
+      type: boolean
+    gpu_index:
+      type: integer
+      format: int
+    enforce_gpu_index:
+      type: boolean
+    disable_cpu_affinity:
+      type: boolean
+    parallel_decompressor_count:
+      type: integer
+      format: int
+    decompressor_thread_count:
+      type: integer
+      format: int
+    recursive_plot_scan:
+      type: boolean
+    refresh_parameter_interval_seconds:
+      type: integer
+      format: uint32
