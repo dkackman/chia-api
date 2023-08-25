@@ -951,8 +951,8 @@
                     <li class="nav-item" data-group="Harvester" data-name="removePlotDirectory">
                       <a class="nav-link link-secondary" href="#api-Harvester-removePlotDirectory">removePlotDirectory</a>
                     </li>
-                    <li class="nav-item" data-group="Harvester" data-name="setHarvesterConfig">
-                      <a class="nav-link link-secondary" href="#api-Harvester-setHarvesterConfig">setHarvesterConfig</a>
+                    <li class="nav-item" data-group="Harvester" data-name="updateHarvesterConfig">
+                      <a class="nav-link link-secondary" href="#api-Harvester-updateHarvesterConfig">updateHarvesterConfig</a>
                     </li>
                   <li class="nav-header nav-item" data-group="Shared">
                     <a class="nav-link" href="#api-Shared">Shared</a>
@@ -1854,25 +1854,25 @@ The harvester uses port 8560 by default.</div>
 
                         </article>
                       </div>
-                    <div id="api-Harvester-setHarvesterConfig">
-                      <article id="api-Harvester-setHarvesterConfig-0" data-group="User" data-name="setHarvesterConfig" data-version="0">
+                    <div id="api-Harvester-updateHarvesterConfig">
+                      <article id="api-Harvester-updateHarvesterConfig-0" data-group="User" data-name="updateHarvesterConfig" data-version="0">
                         <div class="pull-left">
-                          <h1>setHarvesterConfig</h1>
-                          <p>Sets harvester configuration.</p>
+                          <h1>updateHarvesterConfig</h1>
+                          <p>Updates the harvester configuration.</p>
                         </div>
-                        <p class="marked">Sets harvester configuration.</p>            
+                        <p class="marked">Updates the harvester configuration.</p>            
                         <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/set_harvester_config</span></code></pre>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/update_harvester_config</span></code></pre>
                         
                         <h3>Usage</h3>
                         <div class="tab-content">
-                          <div class="tab-pane active" id="examples-Harvester-setHarvesterConfig-0-curl">
+                          <div class="tab-pane active" id="examples-Harvester-updateHarvesterConfig-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
 --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt \
 --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8560/set_harvester_config" \
+"https://localhost:8560/update_harvester_config" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -1913,12 +1913,12 @@ The harvester uses port 8560 by default.</div>
                                   }
                                 
                                   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_setHarvesterConfig_body');
+                                  var result = $('#d2e199_updateHarvesterConfig_body');
                                   result.empty();
                                   result.append(view.render());
                                 });
                                 </script>
-                                <div id="d2e199_setHarvesterConfig_body"></div>
+                                <div id="d2e199_updateHarvesterConfig_body"></div>
                                 </td>
                                 </tr>
                             </table>
@@ -1930,14 +1930,14 @@ The harvester uses port 8560 by default.</div>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-setHarvesterConfig-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-updateHarvesterConfig-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-setHarvesterConfig-200-schema">
-                                  <div id='responses-setHarvesterConfig-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-updateHarvesterConfig-200-schema">
+                                  <div id='responses-updateHarvesterConfig-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1963,14 +1963,14 @@ The harvester uses port 8560 by default.</div>
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-setHarvesterConfig-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-setHarvesterConfig-200-schema-200');
+                                        $('#responses-updateHarvesterConfig-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-updateHarvesterConfig-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-setHarvesterConfig-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-updateHarvesterConfig-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

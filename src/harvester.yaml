@@ -323,13 +323,13 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/harvester_config"
                   - $ref: "#/components/schemas/apiResponse"
-  /set_harvester_config:
+  /update_harvester_config:
     post:
       tags:
         - Harvester
-      summary: Sets harvester configuration.
-      description: Sets harvester configuration.
-      operationId: set_harvester_config
+      summary: Updates the harvester configuration.
+      description: Updates the harvester configuration.
+      operationId: update_harvester_config
       requestBody:
         description: Config details
         required: true
