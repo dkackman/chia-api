@@ -45,6 +45,10 @@ blockchain_state:
       type: integer
       example: 136314880
       format: uint64
+    average_block_time:
+      type: integer
+      example: 2
+      format: uint32
     sync:
       type: object
       properties:
