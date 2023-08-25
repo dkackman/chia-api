@@ -25,3 +25,7 @@ farmer_rewards:
       type: integer
       example: 0
       format: uint32
+    last_time_farmed:
+      type: integer
+      example: 0
+      format: uint64
