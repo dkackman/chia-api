@@ -1,0 +1,14 @@
+root:
+  type: object
+  properties:
+    tree_id:
+      type: string
+      format: hex
+    node_hash:
+      type: string
+      format: hex
+    generation:
+      type: integer
+      format: uint32
+    status:
+      $ref: "./status.yaml#/status"

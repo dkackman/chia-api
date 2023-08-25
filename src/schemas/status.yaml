@@ -1,0 +1,10 @@
+status:
+  type: integer
+  enum:
+    - 1 #PENDING
+    - 2 #COMMITTED
+
+  description: >-
+    The status:
+      * 1 PENDING
+      * 2 COMMITTED

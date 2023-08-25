@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The data layer uses port 8561 by default.
-  version: 1.8.2
+  version: 2.0.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -42,6 +42,8 @@ components:
       $ref: "schemas/offer_store.yaml#/offer_store"
     plugin_status:
       $ref: "schemas/plugin_status.yaml#/plugin_status"
+    root:
+      $ref: "schemas/root.yaml#/root"
     terminal_node:
       $ref: "schemas/terminal_node.yaml#/terminal_node"
     transaction_record:
@@ -472,7 +474,7 @@ paths:
                             format: bytes32
                           generation:
                             type: integer
-                            format: int32
+                            format: uint32
                           target_root_hash:
                             type: string
                             format: bytes32
@@ -1155,6 +1157,34 @@ paths:
               schema:
                 allOf:
                   - $ref: "#/components/schemas/plugin_status"
+                  - $ref: "#/components/schemas/apiResponse"
+  /clear_pending_roots:
+    post:
+      tags:
+        - Subscriptions
+      summary: Clears pending roots.
+      description: Clears pending roots.
+      operationId: clear_pending_roots
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - store_id
+              properties:
+                store_id:
+                  type: string
+                  format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/root"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
