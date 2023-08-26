@@ -746,6 +746,42 @@
     }
   }
 };
+            defs["get_keys_for_plotting_body"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprints" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }
+};
+            defs["get_wallet_addresses_body"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprints" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    },
+    "index" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "count" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "non_observer_derivation" : {
+      "type" : "boolean",
+      "default" : false
+    }
+  }
+};
             defs["inline_response_200"] = {
   "allOf" : [ {
     "type" : "object",
@@ -820,6 +856,72 @@
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["inline_response_200_14"] = {
+  "type" : "object",
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "running_services" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_15"] = {
+  "type" : "object",
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_addresses" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_16"] = {
+  "type" : "object",
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "keys" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "$ref" : "#/components/schemas/inline_response_200_16_keys"
+        },
+        "description" : "The keys are uint32 - the fingerprint"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_16_keys"] = {
+  "type" : "object",
+  "properties" : {
+    "pool_public_key" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "farmer_public_key" : {
+      "type" : "string",
+      "format" : "hex"
+    }
+  },
+  "example" : null
 };
             defs["inline_response_200_2"] = {
   "allOf" : [ {
@@ -919,8 +1021,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+  "enum" : [ 25, 32, 33, 34, 35 ],
+  "default" : 32
 };
             defs["key_data"] = {
   "type" : "object",
@@ -1319,6 +1421,9 @@
                     <li class="nav-item" data-group="Daemon" data-name="getVersion">
                       <a class="nav-link link-secondary" href="#api-Daemon-getVersion">getVersion</a>
                     </li>
+                    <li class="nav-item" data-group="Daemon" data-name="getWalletAddresses">
+                      <a class="nav-link link-secondary" href="#api-Daemon-getWalletAddresses">getWalletAddresses</a>
+                    </li>
                     <li class="nav-item" data-group="Daemon" data-name="isRunning">
                       <a class="nav-link link-secondary" href="#api-Daemon-isRunning">isRunning</a>
                     </li>
@@ -1327,6 +1432,9 @@
                     </li>
                     <li class="nav-item" data-group="Daemon" data-name="registerService">
                       <a class="nav-link link-secondary" href="#api-Daemon-registerService">registerService</a>
+                    </li>
+                    <li class="nav-item" data-group="Daemon" data-name="runningServices">
+                      <a class="nav-link link-secondary" href="#api-Daemon-runningServices">runningServices</a>
                     </li>
                     <li class="nav-item" data-group="Daemon" data-name="startService">
                       <a class="nav-link link-secondary" href="#api-Daemon-startService">startService</a>
@@ -1391,6 +1499,9 @@
                   <li class="nav-header nav-item" data-group="Plotter">
                     <a class="nav-link" href="#api-Plotter">Plotter</a>
                   </li>
+                    <li class="nav-item" data-group="Plotter" data-name="getKeysForPlotting">
+                      <a class="nav-link link-secondary" href="#api-Plotter-getKeysForPlotting">getKeysForPlotting</a>
+                    </li>
                     <li class="nav-item" data-group="Plotter" data-name="getPlotters">
                       <a class="nav-link link-secondary" href="#api-Plotter-getPlotters">getPlotters</a>
                     </li>
@@ -1779,6 +1890,125 @@ The daemon uses port 55400 by default.</div>
 
                         </article>
                       </div>
+                    <div id="api-Daemon-getWalletAddresses">
+                      <article id="api-Daemon-getWalletAddresses-0" data-group="User" data-name="getWalletAddresses" data-version="0">
+                        <div class="pull-left">
+                          <h1>getWalletAddresses</h1>
+                          <p>Returns the list of addresses.</p>
+                        </div>
+                        <p class="marked">Returns the list of addresses.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/get_wallet_addresses</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Input parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_wallet_addresses_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getWalletAddresses_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getWalletAddresses_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getWalletAddresses-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getWalletAddresses-200-schema">
+                                  <div id='responses-getWalletAddresses-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_15"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getWalletAddresses-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getWalletAddresses-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getWalletAddresses-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Daemon-isRunning">
                       <article id="api-Daemon-isRunning-0" data-group="User" data-name="isRunning" data-version="0">
                         <div class="pull-left">
@@ -2143,6 +2373,125 @@ The daemon uses port 55400 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-registerService-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Daemon-runningServices">
+                      <article id="api-Daemon-runningServices-0" data-group="User" data-name="runningServices" data-version="0">
+                        <div class="pull-left">
+                          <h1>runningServices</h1>
+                          <p>Returns the list of running services.</p>
+                        </div>
+                        <p class="marked">Returns the list of running services.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/running_services</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_runningServices_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_runningServices_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-runningServices-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-runningServices-200-schema">
+                                  <div id='responses-runningServices-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_14"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-runningServices-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-runningServices-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-runningServices-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -4427,6 +4776,125 @@ The daemon uses port 55400 by default.</div>
                   </section>
                 <section id="api-Plotter">
                   <h1>Plotter</h1>
+                    <div id="api-Plotter-getKeysForPlotting">
+                      <article id="api-Plotter-getKeysForPlotting-0" data-group="User" data-name="getKeysForPlotting" data-version="0">
+                        <div class="pull-left">
+                          <h1>getKeysForPlotting</h1>
+                          <p>Returns a list of keys.</p>
+                        </div>
+                        <p class="marked">Returns the list of keys used for plotting.</p>            
+                        <p class="http-method" data-type="websocket">websocket</p>
+                        <p>RPC payload</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code>{
+  'ack': False, 
+  'command': '<span class="rpc_command_name">/get_keys_for_plotting</span>', 
+  'data': {}, 
+  'destination': 'daemon', 
+  'origin': 'client_app_id', 
+  'request_id': 'unique message correlation id'
+}</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Input parameters",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_keys_for_plotting_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getKeysForPlotting_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getKeysForPlotting_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getKeysForPlotting-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getKeysForPlotting-200-schema">
+                                  <div id='responses-getKeysForPlotting-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_16"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getKeysForPlotting-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getKeysForPlotting-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getKeysForPlotting-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                     <div id="api-Plotter-getPlotters">
                       <article id="api-Plotter-getPlotters-0" data-group="User" data-name="getPlotters" data-version="0">
                         <div class="pull-left">

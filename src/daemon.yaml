@@ -753,6 +753,93 @@ paths:
                         items:
                           type: string
                   - $ref: "#/components/schemas/apiResponse"
+  /get_wallet_addresses:
+    post:
+      tags:
+        - Daemon
+      summary: Returns the list of addresses.
+      description: Returns the list of addresses.
+      operationId: get_wallet_addresses
+      requestBody:
+        description: Input parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fingerprints:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint32
+                index:
+                  type: integer
+                  format: uint32
+                count:
+                  type: integer
+                  format: uint32
+                non_observer_derivation:
+                  type: boolean
+                  default: false
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - type: object
+                    properties:
+                      wallet_addresses:
+                        additionalProperties:
+                          type: array
+                          items:
+                            type: string
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_keys_for_plotting:
+    post:
+      tags:
+        - Plotter
+      summary: Returns a list of keys.
+      description: Returns the list of keys used for plotting.
+      operationId: get_keys_for_plotting
+      requestBody:
+        description: Input parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fingerprints:
+                  type: array
+                  items:
+                    type: integer
+                    format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - type: object
+                    properties:
+                      keys:
+                        description: The keys are uint32 - the fingerprint
+                        additionalProperties:
+                          type: object
+                          properties:
+                            pool_public_key:
+                              type: string
+                              format: hex
+                            farmer_public_key:
+                              type: string
+                              format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
