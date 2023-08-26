@@ -729,6 +729,30 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /running_services:
+    post:
+      tags:
+        - Daemon
+      summary: Returns the list of running services.
+      description: Returns the list of running services.
+      operationId: running_services
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - type: object
+                    properties:
+                      running_services:
+                        type: array
+                        items:
+                          type: string
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
