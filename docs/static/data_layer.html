@@ -2106,7 +2106,7 @@
               <div class="app-desc">Version: 2.0.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
-The data layer uses port 8561 by default.</div>
+The data layer uses port 8562 by default.</div>
           </div>
         </div>
         <div id="sections">
@@ -2130,7 +2130,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/add_missing_files" \
+"https://localhost:8562/add_missing_files" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2251,7 +2251,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/batch_update" \
+"https://localhost:8562/batch_update" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2372,7 +2372,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/create_data_store" \
+"https://localhost:8562/create_data_store" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2493,7 +2493,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/delete_key" \
+"https://localhost:8562/delete_key" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2614,7 +2614,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_ancestors" \
+"https://localhost:8562/get_ancestors" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2735,7 +2735,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_keys" \
+"https://localhost:8562/get_keys" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2856,7 +2856,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_keys_values" \
+"https://localhost:8562/get_keys_values" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -2977,7 +2977,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_kv_diff" \
+"https://localhost:8562/get_kv_diff" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3098,7 +3098,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_local_root" \
+"https://localhost:8562/get_local_root" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3219,7 +3219,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_owned_stores" \
+"https://localhost:8562/get_owned_stores" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3341,7 +3341,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_root" \
+"https://localhost:8562/get_root" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3462,7 +3462,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_root_history" \
+"https://localhost:8562/get_root_history" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3583,7 +3583,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_roots" \
+"https://localhost:8562/get_roots" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3704,7 +3704,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_sync_status" \
+"https://localhost:8562/get_sync_status" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3825,7 +3825,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_value" \
+"https://localhost:8562/get_value" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -3946,7 +3946,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/insert" \
+"https://localhost:8562/insert" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4070,7 +4070,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/add_mirror" \
+"https://localhost:8562/add_mirror" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4191,7 +4191,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/delete_mirror" \
+"https://localhost:8562/delete_mirror" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4312,7 +4312,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_mirrors" \
+"https://localhost:8562/get_mirrors" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4436,7 +4436,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/cancel_offer" \
+"https://localhost:8562/cancel_offer" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4557,7 +4557,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/make_offer" \
+"https://localhost:8562/make_offer" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4678,7 +4678,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/take_offer" \
+"https://localhost:8562/take_offer" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4799,7 +4799,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/verify_offer" \
+"https://localhost:8562/verify_offer" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -4923,7 +4923,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/close_connection" \
+"https://localhost:8562/close_connection" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5045,7 +5045,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_connections" \
+"https://localhost:8562/get_connections" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5167,7 +5167,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/get_routes" \
+"https://localhost:8562/get_routes" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5289,7 +5289,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/healthz" \
+"https://localhost:8562/healthz" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5411,7 +5411,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/open_connection" \
+"https://localhost:8562/open_connection" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5533,7 +5533,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/stop_node" \
+"https://localhost:8562/stop_node" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5658,7 +5658,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/check_plugins" \
+"https://localhost:8562/check_plugins" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5780,7 +5780,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/clear_pending_roots" \
+"https://localhost:8562/clear_pending_roots" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -5901,7 +5901,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/remove_subscriptions" \
+"https://localhost:8562/remove_subscriptions" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -6022,7 +6022,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/subscribe" \
+"https://localhost:8562/subscribe" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -6143,7 +6143,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/subscriptions" \
+"https://localhost:8562/subscriptions" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
@@ -6265,7 +6265,7 @@ The data layer uses port 8561 by default.</div>
 --key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
-"https://localhost:8561/unsubscribe" \
+"https://localhost:8562/unsubscribe" \
 -d "{}"</code></pre>
                           <h2>Parameters</h2>
 
