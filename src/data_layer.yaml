@@ -1186,6 +1186,28 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/root"
                   - $ref: "#/components/schemas/apiResponse"
+  /wallet_log_in:
+    post:
+      tags:
+        - Data Layer
+      summary: Logs into the wallet.
+      description: Logs into the wallet.
+      operationId: wallet_log_in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fingerprint
+              properties:
+                fingerprint:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          $ref: "#/components/responses/empty"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
