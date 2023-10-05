@@ -1028,6 +1028,39 @@ paths:
                         type: integer
                         format: in32
                   - $ref: "#/components/schemas/apiResponse"
+  /get_mempool_items_by_coin_name:
+    post:
+      tags:
+        - Mempool
+      description: Gets items in the mempool by a coin name.
+      summary: Gets items in the mempool by a coin name.
+      operationId: get_mempool_items_by_coin_name
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - coin_name
+              properties:
+                coin_name:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      mempool_items:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/mempool_item"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
