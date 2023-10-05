@@ -725,6 +725,9 @@ paths:
                 id:
                   type: string
                   format: bytes32
+                retain:
+                  type: boolean
+                  default: false
       responses:
         "200":
           $ref: "#/components/responses/empty"
