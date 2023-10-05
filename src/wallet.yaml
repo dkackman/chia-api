@@ -4793,6 +4793,46 @@ paths:
                         items:
                           $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
+  /crcat_approve_pending:
+    post:
+      tags:
+        - CR-CATs
+      description: Moving any "pending approval" CR-CATs into the spendable balance of the wallet.
+      summary: Moving any "pending approval" CR-CATs into the spendable balance of the wallet.
+      operationId: crcat_approve_pending
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                min_amount_to_claim:
+                  type: integer
+                  format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
