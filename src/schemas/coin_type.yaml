@@ -4,7 +4,11 @@ coin_type:
   enum:
     - 0 # NORMAL = 0
     - 1 # CLAWBACK = 1
+    - 2 # CRCAT_PENDING = 2
+    - 3 # CRCAT = 3-
   description: >-
     The type of coin:
       * 0 NORMAL
       * 1 CLAWBACK
+      * 2 CRCAT_PENDING
+      * 3 CRCAT
