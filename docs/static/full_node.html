@@ -1419,6 +1419,16 @@
     }
   }
 };
+            defs["get_mempool_items_by_coin_name_body"] = {
+  "required" : [ "coin_name" ],
+  "type" : "object",
+  "properties" : {
+    "coin_name" : {
+      "type" : "string",
+      "format" : "hex"
+    }
+  }
+};
             defs["get_network_space_body"] = {
   "required" : [ "newer_block_header_hash", "older_block_header_hash" ],
   "type" : "object",
@@ -1739,6 +1749,21 @@
       "node_time_utc" : {
         "type" : "integer",
         "format" : "in32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_22"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "mempool_items" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/mempool_item"
+        }
       }
     }
   }, {
@@ -2427,6 +2452,9 @@
                     <li class="nav-item" data-group="Mempool" data-name="getMempoolItemByTxId">
                       <a class="nav-link link-secondary" href="#api-Mempool-getMempoolItemByTxId">getMempoolItemByTxId</a>
                     </li>
+                    <li class="nav-item" data-group="Mempool" data-name="getMempoolItemsByCoinName">
+                      <a class="nav-link link-secondary" href="#api-Mempool-getMempoolItemsByCoinName">getMempoolItemsByCoinName</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="Shared">
                     <a class="nav-link" href="#api-Shared">Shared</a>
                   </li>
@@ -2461,7 +2489,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.0.0</div>
+              <div class="app-desc">Version: 2.1.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The full node uses port 8555 by default.</div>
@@ -5566,6 +5594,127 @@ The full node uses port 8555 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getMempoolItemByTxId-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Mempool-getMempoolItemsByCoinName">
+                      <article id="api-Mempool-getMempoolItemsByCoinName-0" data-group="User" data-name="getMempoolItemsByCoinName" data-version="0">
+                        <div class="pull-left">
+                          <h1>getMempoolItemsByCoinName</h1>
+                          <p>Gets items in the mempool by a coin name.</p>
+                        </div>
+                        <p class="marked">Gets items in the mempool by a coin name.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_mempool_items_by_coin_name</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Mempool-getMempoolItemsByCoinName-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_mempool_items_by_coin_name" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/get_mempool_items_by_coin_name_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getMempoolItemsByCoinName_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getMempoolItemsByCoinName_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getMempoolItemsByCoinName-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getMempoolItemsByCoinName-200-schema">
+                                  <div id='responses-getMempoolItemsByCoinName-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_22"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getMempoolItemsByCoinName-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getMempoolItemsByCoinName-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getMempoolItemsByCoinName-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

@@ -1940,6 +1940,10 @@
     "id" : {
       "type" : "string",
       "format" : "bytes32"
+    },
+    "retain" : {
+      "type" : "boolean",
+      "default" : false
     }
   }
 };
@@ -1954,6 +1958,16 @@
       "type" : "integer",
       "format" : "uint64",
       "default" : 0
+    }
+  }
+};
+            defs["wallet_log_in_body"] = {
+  "required" : [ "fingerprint" ],
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "integer",
+      "format" : "uint32"
     }
   }
 };
@@ -2020,6 +2034,9 @@
                     </li>
                     <li class="nav-item" data-group="DataLayer" data-name="insert">
                       <a class="nav-link link-secondary" href="#api-DataLayer-insert">insert</a>
+                    </li>
+                    <li class="nav-item" data-group="DataLayer" data-name="walletLogIn">
+                      <a class="nav-link link-secondary" href="#api-DataLayer-walletLogIn">walletLogIn</a>
                     </li>
                   <li class="nav-header nav-item" data-group="Mirrors">
                     <a class="nav-link" href="#api-Mirrors">Mirrors</a>
@@ -2103,7 +2120,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.0.0</div>
+              <div class="app-desc">Version: 2.1.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The data layer uses port 8562 by default.</div>
@@ -4044,6 +4061,127 @@ The data layer uses port 8562 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-insert-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DataLayer-walletLogIn">
+                      <article id="api-DataLayer-walletLogIn-0" data-group="User" data-name="walletLogIn" data-version="0">
+                        <div class="pull-left">
+                          <h1>walletLogIn</h1>
+                          <p>Logs into the wallet.</p>
+                        </div>
+                        <p class="marked">Logs into the wallet.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/wallet_log_in</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayer-walletLogIn-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.crt \
+--key ~/.chia/mainnet/config/ssl/data_layer/private_data_layer.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8562/wallet_log_in" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/wallet_log_in_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_walletLogIn_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_walletLogIn_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK response without return values </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-walletLogIn-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-walletLogIn-200-schema">
+                                  <div id='responses-walletLogIn-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK response without return values",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apiResponse"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-walletLogIn-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-walletLogIn-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-walletLogIn-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

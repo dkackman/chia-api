@@ -961,9 +961,9 @@
 };
             defs["coin_type"] = {
   "type" : "integer",
-  "description" : "The type of coin:\n  * 0 NORMAL\n  * 1 CLAWBACK",
+  "description" : "The type of coin:\n  * 0 NORMAL\n  * 1 CLAWBACK\n  * 2 CRCAT_PENDING\n  * 3 CRCAT",
   "format" : "uint8",
-  "enum" : [ 0, 1 ]
+  "enum" : [ 0, 1, 2, 3 ]
 };
             defs["connection_info"] = {
   "type" : "object",
@@ -1022,6 +1022,25 @@
     }
   },
   "description" : "Chia's representation of a connection from node to node."
+};
+            defs["crcat_approve_pending_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "min_amount_to_claim" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
 };
             defs["create_new_dl_body"] = {
   "required" : [ "root" ],
@@ -5469,9 +5488,9 @@
 };
             defs["wallet_type"] = {
   "type" : "integer",
-  "description" : "The type of wallet:\n  * 0 STANDARD_WALLET\n  * 2 ATOMIC_SWAP\n  * 3 AUTHORIZED_PAYEE\n  * 4 MULTI_SIG\n  * 5 CUSTODY\n  * 6 CAT\n  * 7 RECOVERABLE\n  * 8 DISTRIBUTED_ID\n  * 9 POOLING_WALLET\n  * 10 NFT\n  * 11 DATA_LAYER\n  * 12 DATA_LAYER_OFFER\n  * 13 VC",
+  "description" : "The type of wallet:\n  * 0 STANDARD_WALLET\n  * 2 ATOMIC_SWAP\n  * 3 AUTHORIZED_PAYEE\n  * 4 MULTI_SIG\n  * 5 CUSTODY\n  * 6 CAT\n  * 7 RECOVERABLE\n  * 8 DISTRIBUTED_ID\n  * 9 POOLING_WALLET\n  * 10 NFT\n  * 11 DATA_LAYER\n  * 12 DATA_LAYER_OFFER\n  * 13 VC\n  * 57 CRCAT",
   "format" : "uint8",
-  "enum" : [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+  "enum" : [ 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 57 ]
 };
   </script>
 
@@ -5539,6 +5558,12 @@
                     </li>
                     <li class="nav-item" data-group="CATWallet" data-name="takeOffer">
                       <a class="nav-link link-secondary" href="#api-CATWallet-takeOffer">takeOffer</a>
+                    </li>
+                  <li class="nav-header nav-item" data-group="CRCATs">
+                    <a class="nav-link" href="#api-CRCATs">CRCATs</a>
+                  </li>
+                    <li class="nav-item" data-group="CRCATs" data-name="crcatApprovePending">
+                      <a class="nav-link link-secondary" href="#api-CRCATs-crcatApprovePending">crcatApprovePending</a>
                     </li>
                   <li class="nav-header nav-item" data-group="Coins">
                     <a class="nav-link" href="#api-Coins">Coins</a>
@@ -5904,7 +5929,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.0.0</div>
+              <div class="app-desc">Version: 2.1.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -7986,6 +8011,130 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-takeOffer-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-CRCATs">
+                  <h1>CRCATs</h1>
+                    <div id="api-CRCATs-crcatApprovePending">
+                      <article id="api-CRCATs-crcatApprovePending-0" data-group="User" data-name="crcatApprovePending" data-version="0">
+                        <div class="pull-left">
+                          <h1>crcatApprovePending</h1>
+                          <p>Moving any &quot;pending approval&quot; CR-CATs into the spendable balance of the wallet.</p>
+                        </div>
+                        <p class="marked">Moving any &quot;pending approval&quot; CR-CATs into the spendable balance of the wallet.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/crcat_approve_pending</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-CRCATs-crcatApprovePending-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/crcat_approve_pending" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/crcat_approve_pending_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_crcatApprovePending_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_crcatApprovePending_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-crcatApprovePending-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-crcatApprovePending-200-schema">
+                                  <div id='responses-crcatApprovePending-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-crcatApprovePending-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-crcatApprovePending-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-crcatApprovePending-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
