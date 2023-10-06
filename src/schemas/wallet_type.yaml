@@ -15,6 +15,7 @@ wallet_type:
     - 11 # DATA_LAYER = 11
     - 12 # DATA_LAYER_OFFER = 12
     - 13 # VC = 13
+    - 57 # CRCAT = 57
   description: >-
     The type of wallet:
       * 0 STANDARD_WALLET
@@ -30,3 +31,4 @@ wallet_type:
       * 11 DATA_LAYER
       * 12 DATA_LAYER_OFFER
       * 13 VC
+      * 57 CRCAT
