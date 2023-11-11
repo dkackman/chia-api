@@ -986,13 +986,13 @@ paths:
                         type: array
                         items:
                           type: integer
+                          format: uint64
                       target_times:
                         type: array
                         items:
                           type: integer
                       current_fee_rate:
-                        type: integer
-                        format: uint64
+                        type: number
                       mempool_size:
                         type: integer
                         format: uint64
@@ -1009,7 +1009,7 @@ paths:
                         type: boolean
                       peak_height:
                         type: integer
-                        format: uint64
+                        format: uint32
                       last_peak_timestamp:
                         type: integer
                         format: uint64
@@ -1026,7 +1026,7 @@ paths:
                         format: uint32
                       node_time_utc:
                         type: integer
-                        format: in32
+                        format: uint64
                   - $ref: "#/components/schemas/apiResponse"
   /get_mempool_items_by_coin_name:
     post:
