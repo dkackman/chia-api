@@ -98,6 +98,8 @@ components:
       $ref: "schemas/coin_type.yaml#/coin_type"
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
+    dao_info:
+      $ref: "schemas/dao_info.yaml#/dao_info"
     dao_rules:
       $ref: "schemas/dao_rules.yaml#/dao_rules"
     cat_info:
@@ -5278,6 +5280,76 @@ paths:
                       transaction_id:
                         type: string
                         format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /dao_adjust_filter_level:
+    post:
+      tags:
+        - DAO Wallet
+      description: Adjusts the DAO filter level
+      summary: Adjusts the DAO filter level.
+      operationId: dao_adjust_filter_level
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - filter_level
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                filter_level:
+                  type: integer
+                  format: uint64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      dao_info:
+                        $ref: "#/components/schemas/dao_info"
+                  - $ref: "#/components/schemas/apiResponse"
+  /dao_add_funds_to_treasury:
+    post:
+      tags:
+        - DAO Wallet
+      description: Adds funds to a DAO's treasury
+      summary: Adds funds to a DAO's treasury.
+      operationId: dao_add_funds_to_treasury
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - filter_level
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                filter_level:
+                  type: integer
+                  format: uint64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      dao_info:
+                        $ref: "#/components/schemas/dao_info"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

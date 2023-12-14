@@ -1,0 +1,38 @@
+dao_info:
+  type: object
+  properties:
+    treasury_id:
+      type: string
+      format: hex
+    cat_wallet_id:
+      type: integer
+      format: uint32
+    dao_cat_wallet_id:
+      type: integer
+      format: uint32
+    proposals_list:
+      type: array
+      items:
+        $ref: "./proposal_info.yaml#/proposal_info"
+    parent_info:
+      type: array
+      items:
+        type: object
+        additionalProperties:
+          $ref: "./lineage_proof.yaml#/lineage_proof"
+    current_treasury_coin:
+      $ref: "./coin.yaml#/coin"
+    singleton_block_height:
+      type: integer
+      format: uint32
+    filter_below_vote_amount:
+      type: integer
+      format: uint64
+    assets:
+      type: array
+      items:
+        type: string
+        format: hex
+    current_height:
+      type: integer
+      format: uint64
