@@ -5086,9 +5086,9 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      tx_id:
+                      tx:
                         $ref: "#/components/schemas/transaction_record"
-                      transaction_id:
+                      tx_id:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
@@ -5232,9 +5232,9 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      tx_id:
+                      tx:
                         $ref: "#/components/schemas/transaction_record"
-                      transaction_id:
+                      tx_id:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
@@ -5275,9 +5275,9 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      tx_id:
+                      tx:
                         $ref: "#/components/schemas/transaction_record"
-                      transaction_id:
+                      tx_id:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
@@ -5331,14 +5331,22 @@ paths:
               type: object
               required:
                 - wallet_id
-                - filter_level
+                - funding_wallet_id
+                - amount
               properties:
                 wallet_id:
                   type: integer
                   format: uint32
-                filter_level:
+                funding_wallet_id:
+                  type: integer
+                  format: uint32
+                amount:
                   type: integer
                   format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
       responses:
         "200":
           description: OK
@@ -5348,8 +5356,11 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      dao_info:
-                        $ref: "#/components/schemas/dao_info"
+                      tx:
+                        $ref: "#/components/schemas/transaction_record"
+                      tx_id:
+                        type: string
+                        format: hex
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
