@@ -9825,11 +9825,11 @@ The wallet uses port 9256 by default.</div>
                       <article id="api-DAOWallet-daoGetProposalState-0" data-group="User" data-name="daoGetProposalState" data-version="0">
                         <div class="pull-left">
                           <h1>daoGetProposalState</h1>
-                          <p>Use this to figure out whether a proposal has passed or failed and whether it can be closed Given a proposal_id: - if required yes votes are recorded then proposal passed. - if timelock and attendance are met then proposal can close Returns a dict of passed and closable bools, and the remaining votes/blocks needed
-Note that a proposal can be in a passed and closable state now, but become failed if a large number of &#x27;no&#x27; votes are received before the soft close is reached.
-</p>
+                          <p>Retrieves the state of a DAO proposal</p>
                         </div>
-                        <p class="marked">Retrieves the state of a DAO proposal</p>            
+                        <p class="marked">Use this to figure out whether a proposal has passed or failed and whether it can be closed Given a proposal_id: - if required yes votes are recorded then proposal passed. - if timelock and attendance are met then proposal can close Returns a dict of passed and closable bools, and the remaining votes/blocks needed
+Note that a proposal can be in a passed and closable state now, but become failed if a large number of &#x27;no&#x27; votes are received before the soft close is reached.
+</p>            
                         <p class="http-method" data-type="post">post</p>
                         <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_proposal_state</span></code></pre>
                         
