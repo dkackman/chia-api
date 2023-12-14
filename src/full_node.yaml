@@ -1061,6 +1061,45 @@ paths:
                         items:
                           $ref: "#/components/schemas/mempool_item"
                   - $ref: "#/components/schemas/apiResponse"
+  /get_block_spends_with_conditions:
+    post:
+      tags:
+        - Blocks
+      description: Retrieves the spends in the given block, including its conditions.
+      summary: Retrieves the spends in the given block, including its conditions.
+      operationId: get_block_spends_with_conditions
+      requestBody:
+        $ref: "#/components/requestBodies/header_hash"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      block_spends_with_conditions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            coin_spend:
+                              $ref: "#/components/schemas/coin_spend"
+                            conditions:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  opcode:
+                                    type: integer
+                                    format: uint8
+                                  vars:
+                                    type: array
+                                    items:
+                                      type: string
+                                      format: bytes
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
