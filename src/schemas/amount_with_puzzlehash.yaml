@@ -17,3 +17,7 @@ amount_with_puzzlehash:
       example: []
       items:
         type: string
+    asset_id:
+      type: string
+      example: "0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588"
+      format: hex

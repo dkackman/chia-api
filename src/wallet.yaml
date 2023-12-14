@@ -4926,7 +4926,85 @@ paths:
                         type: integer
                         format: uint64
                   - $ref: "#/components/schemas/apiResponse"
-
+  /dao_create_proposal:
+    post:
+      tags:
+        - DAO Wallet
+      description: Creates a DAO proposal
+      summary: Creates a DAO proposal.
+      operationId: dao_create_proposal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_type
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                proposal_type:
+                  type: string
+                  enum:
+                    - spend
+                    - update
+                    - mint
+              oneOf:
+                - type: object
+                  description: Used for 'spend' proposals
+                  properties:
+                    additions:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/amount_with_puzzlehash"
+                    amount:
+                      type: integer
+                      format: uint64
+                    inner_address:
+                      type: string
+                      format: hex
+                    asset_id:
+                      type: string
+                      format: hex
+                - type: object
+                  description: Used for 'update' proposals
+                  properties:
+                    new_dao_rules:
+                      $ref: "#/components/schemas/dao_rules"
+                - type: object
+                  description: Used for 'mint' proposals
+                  properties:
+                    additions:
+                      type: array
+                      items:
+                        $ref: "#/components/schemas/amount_with_puzzlehash"
+                    amount:
+                      type: integer
+                      format: uint64
+                    cat_target_address:
+                      type: string
+                      format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      proposal_id:
+                        type: string
+                        format: hex
+                      tx_id:
+                        type: string
+                        format: hex
+                      tx:
+                        $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
