@@ -5090,6 +5090,41 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_get_treasury_balance:
+    post:
+      tags:
+        - DAO Wallet
+      description: Retrieves the balance of a DAO's treasury
+      summary: Retrieves the balance of a DAO's treasury.
+      operationId: dao_get_treasury_balance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      balances:
+                        type: array
+                        items:
+                          type: integer
+                          format: uint128
+                  - $ref: "#/components/schemas/apiResponse"
+
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
