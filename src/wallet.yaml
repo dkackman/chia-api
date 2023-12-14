@@ -5362,6 +5362,50 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_send_to_lockup:
+    post:
+      tags:
+        - DAO Wallet
+      description: Sends the DAO to lockup
+      summary: Sends the DAO to lockup.
+      operationId: dao_send_to_lockup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - amount
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                amount:
+                  type: integer
+                  format: uint64
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      txs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      tx_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
