@@ -5406,6 +5406,65 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_get_proposal_state:
+    post:
+      tags:
+        - DAO Wallet
+      description: Retrieves the state of a DAO proposal
+      summary: >
+        Use this to figure out whether a proposal has passed or failed and whether it can be closed
+        Given a proposal_id:
+        - if required yes votes are recorded then proposal passed.
+        - if timelock and attendance are met then proposal can close
+        Returns a dict of passed and closable bools, and the remaining votes/blocks needed
+
+        Note that a proposal can be in a passed and closable state now, but become failed if a large number of
+        'no' votes are received before the soft close is reached.
+      operationId: dao_get_proposal_state
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                proposal_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      state:
+                        type: object
+                        properties:
+                          total_votes_needed:
+                            type: integer
+                            format: int32
+                          yes_votes_needed:
+                            type: integer
+                            format: int32
+                          blocks_needed:
+                            type: integer
+                            format: int32
+                          passed:
+                            type: boolean
+                          closable:
+                            type: boolean
+                          closed:
+                            type: boolean
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
