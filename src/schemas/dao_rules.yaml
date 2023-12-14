@@ -1,0 +1,24 @@
+dao_rules:
+  type: object
+  properties:
+    proposal_timelock:
+      type: integer
+      format: uint64
+    soft_close_length:
+      type: integer
+      format: uint64
+    attendance_required:
+      type: integer
+      format: uint64
+    pass_percentage:
+      type: integer
+      format: uint64
+    self_destruct_length:
+      type: integer
+      format: uint64
+    oracle_spend_delay:
+      type: integer
+      format: uint64
+    proposal_minimum_amount:
+      type: integer
+      format: uint64

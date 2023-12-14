@@ -98,6 +98,8 @@ components:
       $ref: "schemas/coin_type.yaml#/coin_type"
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
+    dao_rules:
+      $ref: "schemas/dao_rules.yaml#/dao_rules"
     puzzle_announcement:
       $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
     cat_info:
@@ -3868,6 +3870,7 @@ paths:
                     - did_wallet
                     - pool_wallet
                     - nft_wallet
+                    - dso_wallet
                 name:
                   type: string
                   description: User supplied name for the wallet. Will default if not provided.
@@ -3882,7 +3885,7 @@ paths:
                   description: The transaction fee amount in mojo.
               oneOf:
                 - type: object
-                  description: Details needed to create a cat_wallet.
+                  description: Details needed to create a cat_wallet
                   properties:
                     mode:
                       type: string
@@ -3957,6 +3960,36 @@ paths:
                       format: hex
                     name:
                       type: string
+                - type: object
+                  description: Details needed to create a dao_wallet
+                  properties:
+                    mode:
+                      type: string
+                      enum:
+                        - new
+                        - existing
+                    dao_rules:
+                      $ref: "#/components/schemas/dao_rules"
+                      description: Only used when 'mode' is 'new'
+                    amount_of_cats:
+                      type: integer
+                      format: uint64
+                      description: Only used when 'mode' is 'new'
+                    filter_amount:
+                      type: integer
+                      format: uint64
+                    fee:
+                      type: integer
+                      format: uint64
+                      description: Only used when 'mode' is 'new'
+                    fee_for_cat:
+                      type: integer
+                      format: uint64
+                      description: Only used when 'mode' is 'new'
+                    treasury_id:
+                      type: string
+                      format: hex
+                      description: Only used when 'mode' is 'existing'
       responses:
         "200":
           description: OK
@@ -4036,6 +4069,23 @@ paths:
                       type:
                         $ref: "#/components/schemas/wallet_type"
                       wallet_id:
+                        type: integer
+                        format: uint32
+                  - type: object
+                    description: Response when a dao wallet is created.
+                    properties:
+                      type:
+                        $ref: "#/components/schemas/wallet_type"
+                      wallet_id:
+                        type: integer
+                        format: uint32
+                      treasury_id:
+                        type: string
+                        format: hex
+                      cat_wallet_id:
+                        type: integer
+                        format: uint32
+                      dao_cat_wallet_id:
                         type: integer
                         format: uint32
                 allOf:
@@ -4833,6 +4883,46 @@ paths:
                         items:
                           $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_get_proposals:
+    post:
+      tags:
+        - DAO Wallet
+      description: Revoke an on chain VC provided the correct DID is available
+      summary: Revoke an on chain VC provided the correct DID is available.
+      operationId: dao_get_proposals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vc_parent_id
+              properties:
+                vc_parent_id:
+                  type: string
+                  format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+                reuse_puzhash:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
+
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
