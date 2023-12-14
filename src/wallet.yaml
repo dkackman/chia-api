@@ -5041,6 +5041,55 @@ paths:
                         type: string
                         additionalProperties: true
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_vote_on_proposal:
+    post:
+      tags:
+        - DAO Wallet
+      description: Vote on a DAO proposal
+      summary: Vote on a DAO proposal.
+      operationId: dao_vote_on_proposal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+                - vote_amount
+                - is_yes_vote
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                proposal_id:
+                  type: string
+                  format: hex
+                vote_amount:
+                  type: integer
+                  format: uint64
+                is_yes_vote:
+                  type: boolean
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        $ref: "#/components/schemas/transaction_record"
+                      transaction_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
