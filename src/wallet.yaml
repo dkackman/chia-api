@@ -5124,7 +5124,40 @@ paths:
                           type: integer
                           format: uint128
                   - $ref: "#/components/schemas/apiResponse"
-
+  /dao_get_treasury_id:
+    post:
+      tags:
+        - DAO Wallet
+      description: Retrieves the treasury id of a DAO wallet
+      summary: Retrieves the treasury id of a DAO wallet.
+      operationId: dao_get_treasury_id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      treasury_id:
+                        type: array
+                        items:
+                          type: string
+                          format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
