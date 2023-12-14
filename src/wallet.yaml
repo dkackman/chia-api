@@ -5005,6 +5005,42 @@ paths:
                       tx:
                         $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_parse_proposal:
+    post:
+      tags:
+        - DAO Wallet
+      description: Parses a DAO proposal
+      summary: Parses a DAO proposal.
+      operationId: dao_parse_proposal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                proposal_id:
+                  type: string
+                  format: hex
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      proposal_dictionary:
+                        type: string
+                        additionalProperties: true
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
