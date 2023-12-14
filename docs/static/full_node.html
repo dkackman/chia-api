@@ -1691,7 +1691,8 @@
       "estimates" : {
         "type" : "array",
         "items" : {
-          "type" : "integer"
+          "type" : "integer",
+          "format" : "uint64"
         }
       },
       "target_times" : {
@@ -1701,8 +1702,7 @@
         }
       },
       "current_fee_rate" : {
-        "type" : "integer",
-        "format" : "uint64"
+        "type" : "number"
       },
       "mempool_size" : {
         "type" : "integer",
@@ -1725,7 +1725,7 @@
       },
       "peak_height" : {
         "type" : "integer",
-        "format" : "uint64"
+        "format" : "uint32"
       },
       "last_peak_timestamp" : {
         "type" : "integer",
@@ -1748,7 +1748,7 @@
       },
       "node_time_utc" : {
         "type" : "integer",
-        "format" : "in32"
+        "format" : "uint64"
       }
     }
   }, {
@@ -1769,6 +1769,53 @@
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["inline_response_200_23"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "block_spends_with_conditions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/inline_response_200_23_block_spends_with_conditions"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_23_block_spends_with_conditions"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_spend" : {
+      "$ref" : "#/components/schemas/coin_spend"
+    },
+    "conditions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/inline_response_200_23_conditions"
+      }
+    }
+  },
+  "example" : null
+};
+            defs["inline_response_200_23_conditions"] = {
+  "type" : "object",
+  "properties" : {
+    "opcode" : {
+      "type" : "integer",
+      "format" : "uint8"
+    },
+    "vars" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "bytes"
+      }
+    }
+  },
+  "example" : null
 };
             defs["inline_response_200_2_metrics"] = {
   "type" : "object",
@@ -1893,8 +1940,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+  "enum" : [ 25, 32, 33, 34, 35 ],
+  "default" : 32
 };
             defs["mempool_item"] = {
   "type" : "object",
@@ -2386,6 +2433,9 @@
                     <li class="nav-item" data-group="Blocks" data-name="getBlockSpends">
                       <a class="nav-link link-secondary" href="#api-Blocks-getBlockSpends">getBlockSpends</a>
                     </li>
+                    <li class="nav-item" data-group="Blocks" data-name="getBlockSpendsWithConditions">
+                      <a class="nav-link link-secondary" href="#api-Blocks-getBlockSpendsWithConditions">getBlockSpendsWithConditions</a>
+                    </li>
                     <li class="nav-item" data-group="Blocks" data-name="getBlocks">
                       <a class="nav-link link-secondary" href="#api-Blocks-getBlocks">getBlocks</a>
                     </li>
@@ -2489,7 +2539,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.1.0</div>
+              <div class="app-desc">Version: 2.1.2</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The full node uses port 8555 by default.</div>
@@ -3386,6 +3436,135 @@ The full node uses port 8555 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getBlockSpends-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Blocks-getBlockSpendsWithConditions">
+                      <article id="api-Blocks-getBlockSpendsWithConditions-0" data-group="User" data-name="getBlockSpendsWithConditions" data-version="0">
+                        <div class="pull-left">
+                          <h1>getBlockSpendsWithConditions</h1>
+                          <p>Retrieves the spends in the given block, including its conditions.</p>
+                        </div>
+                        <p class="marked">Retrieves the spends in the given block, including its conditions.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_block_spends_with_conditions</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Blocks-getBlockSpendsWithConditions-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_block_spends_with_conditions" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "the block's header_hash",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "required" : [ "header_hash" ],
+        "type" : "object",
+        "properties" : {
+          "header_hash" : {
+            "type" : "string",
+            "format" : "hex"
+          }
+        }
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getBlockSpendsWithConditions_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getBlockSpendsWithConditions_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getBlockSpendsWithConditions-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getBlockSpendsWithConditions-200-schema">
+                                  <div id='responses-getBlockSpendsWithConditions-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_23"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getBlockSpendsWithConditions-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getBlockSpendsWithConditions-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getBlockSpendsWithConditions-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

@@ -669,6 +669,11 @@
       "items" : {
         "type" : "string"
       }
+    },
+    "asset_id" : {
+      "type" : "string",
+      "format" : "hex",
+      "example" : "0x8f3dff600992a0b77aefbe8eb81dd4f233b9126f3b67557594b5a927d6e6d588"
     }
   }
 };
@@ -1064,7 +1069,7 @@
     "wallet_type" : {
       "type" : "string",
       "description" : "The type of wallet to create.",
-      "enum" : [ "cat_wallet", "did_wallet", "pool_wallet", "nft_wallet" ]
+      "enum" : [ "cat_wallet", "did_wallet", "pool_wallet", "nft_wallet", "dso_wallet" ]
     },
     "name" : {
       "type" : "string",
@@ -1094,7 +1099,7 @@
         "description" : "Only used when `mode` is 'existing'"
       }
     },
-    "description" : "Details needed to create a cat_wallet."
+    "description" : "Details needed to create a cat_wallet"
   }, {
     "required" : [ "did_type" ],
     "type" : "object",
@@ -1179,6 +1184,42 @@
       }
     },
     "description" : "Details needed to create an NFT wallet."
+  }, {
+    "type" : "object",
+    "properties" : {
+      "mode" : {
+        "type" : "string",
+        "enum" : [ "new", "existing" ]
+      },
+      "dao_rules" : {
+        "$ref" : "#/components/schemas/dao_rules"
+      },
+      "amount_of_cats" : {
+        "type" : "integer",
+        "description" : "Only used when 'mode' is 'new'",
+        "format" : "uint64"
+      },
+      "filter_amount" : {
+        "type" : "integer",
+        "format" : "uint64"
+      },
+      "fee" : {
+        "type" : "integer",
+        "description" : "Only used when 'mode' is 'new'",
+        "format" : "uint64"
+      },
+      "fee_for_cat" : {
+        "type" : "integer",
+        "description" : "Only used when 'mode' is 'new'",
+        "format" : "uint64"
+      },
+      "treasury_id" : {
+        "type" : "string",
+        "description" : "Only used when 'mode' is 'existing'",
+        "format" : "hex"
+      }
+    },
+    "description" : "Details needed to create a dao_wallet"
   } ]
 };
             defs["create_offer_for_ids_body"] = {
@@ -1280,6 +1321,373 @@
         "type" : "integer",
         "format" : "uint64"
       }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_add_funds_to_treasury_body"] = {
+  "required" : [ "amount", "funding_wallet_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "funding_wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_adjust_filter_level_body"] = {
+  "required" : [ "filter_level", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "filter_level" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["dao_close_proposal_body"] = {
+  "required" : [ "proposal_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposal_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "genesis_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "self_destruct" : {
+      "type" : "string"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_create_proposal_body"] = {
+  "required" : [ "proposal_type", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposal_type" : {
+      "type" : "string",
+      "enum" : [ "spend", "update", "mint" ]
+    }
+  },
+  "oneOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "additions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/amount_with_puzzlehash"
+        }
+      },
+      "amount" : {
+        "type" : "integer",
+        "format" : "uint64"
+      },
+      "inner_address" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "asset_id" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "description" : "Used for 'spend' proposals"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "new_dao_rules" : {
+        "$ref" : "#/components/schemas/dao_rules"
+      }
+    },
+    "description" : "Used for 'update' proposals"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "additions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/amount_with_puzzlehash"
+        }
+      },
+      "amount" : {
+        "type" : "integer",
+        "format" : "uint64"
+      },
+      "cat_target_address" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "description" : "Used for 'mint' proposals"
+  } ]
+};
+            defs["dao_exit_lockup_body"] = {
+  "required" : [ "proposal_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "coins" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_free_coins_from_finished_proposals_body"] = {
+  "required" : [ "proposal_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_get_proposal_state_body"] = {
+  "required" : [ "proposal_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposal_id" : {
+      "type" : "string",
+      "format" : "hex"
+    }
+  }
+};
+            defs["dao_get_proposals_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "include_closed" : {
+      "type" : "boolean"
+    }
+  }
+};
+            defs["dao_get_rules_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["dao_get_treasury_balance_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["dao_get_treasury_id_body"] = {
+  "required" : [ "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
+            defs["dao_info"] = {
+  "type" : "object",
+  "properties" : {
+    "treasury_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "cat_wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "dao_cat_wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposals_list" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/proposal_info"
+      }
+    },
+    "parent_info" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "$ref" : "#/components/schemas/lineage_proof"
+        }
+      }
+    },
+    "current_treasury_coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "singleton_block_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "filter_below_vote_amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "assets" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "current_height" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["dao_parse_proposal_body"] = {
+  "required" : [ "proposal_id", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposal_id" : {
+      "type" : "string",
+      "format" : "hex"
+    }
+  }
+};
+            defs["dao_rules"] = {
+  "type" : "object",
+  "properties" : {
+    "proposal_timelock" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "soft_close_length" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "attendance_required" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "pass_percentage" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "self_destruct_length" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "oracle_spend_delay" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "proposal_minimum_amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    }
+  }
+};
+            defs["dao_send_to_lockup_body"] = {
+  "required" : [ "amount", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
+    }
+  }
+};
+            defs["dao_vote_on_proposal_body"] = {
+  "required" : [ "is_yes_vote", "proposal_id", "vote_amount", "wallet_id" ],
+  "type" : "object",
+  "properties" : {
+    "wallet_id" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "proposal_id" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "vote_amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "is_yes_vote" : {
+      "type" : "boolean"
     },
     "fee" : {
       "type" : "integer",
@@ -3406,6 +3814,30 @@
       }
     },
     "description" : "Response when a new nft wallet is created."
+  }, {
+    "type" : "object",
+    "properties" : {
+      "type" : {
+        "$ref" : "#/components/schemas/wallet_type"
+      },
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "treasury_id" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "cat_wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "dao_cat_wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    },
+    "description" : "Response when a dao wallet is created."
   } ]
 };
             defs["inline_response_200_74"] = {
@@ -3666,6 +4098,78 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_86"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "proposals" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/proposal_info"
+        }
+      },
+      "proposal_timelock" : {
+        "type" : "integer",
+        "format" : "uint64"
+      },
+      "soft_close_length" : {
+        "type" : "integer",
+        "format" : "uint64"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_87"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "proposal_id" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "tx_id" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "tx" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_88"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "proposal_dictionary" : {
+        "type" : "object",
+        "additionalProperties" : true
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_89"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "tx" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      },
+      "tx_id" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["inline_response_200_9"] = {
   "allOf" : [ {
     "type" : "object",
@@ -3680,6 +4184,120 @@
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
+};
+            defs["inline_response_200_90"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "balances" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer",
+          "format" : "uint128"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_91"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "treasury_id" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "format" : "hex"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_92"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "rules" : {
+        "$ref" : "#/components/schemas/dao_rules"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_93"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "dao_info" : {
+        "$ref" : "#/components/schemas/dao_info"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_94"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "txs" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      },
+      "tx_id" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_95"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "state" : {
+        "$ref" : "#/components/schemas/inline_response_200_95_state"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_95_state"] = {
+  "type" : "object",
+  "properties" : {
+    "total_votes_needed" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "yes_votes_needed" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "blocks_needed" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "passed" : {
+      "type" : "boolean"
+    },
+    "closable" : {
+      "type" : "boolean"
+    },
+    "closed" : {
+      "type" : "boolean"
+    }
+  },
+  "example" : null
 };
             defs["lineage_proof"] = {
   "type" : "object",
@@ -4363,6 +4981,7 @@
   "enum" : [ 1, 2, 3, 4, 5, 6, 7 ]
 };
             defs["OneOfcreate_new_wallet_body"] = {};
+            defs["OneOfdao_create_proposal_body"] = {};
             defs["OneOfinline_response_200_59"] = {};
             defs["OneOfinline_response_200_60"] = {};
             defs["OneOfinline_response_200_73"] = {};
@@ -4482,6 +5101,47 @@
     "seed" : {
       "type" : "string",
       "example" : "arrest legend bounce attend rebel blade palace bean dry shell nice bubble coil cook token nerve visa december hero garment grid attend nerve certain"
+    }
+  }
+};
+            defs["proposal_info"] = {
+  "type" : "object",
+  "properties" : {
+    "proposal_id" : {
+      "type" : "string",
+      "description" : "this is launcher_id",
+      "format" : "bytes32",
+      "example" : "14d1c3042ef38d76796146e6248e02b73db7a0eeefb740fa2e8439dad15bca27"
+    },
+    "inner_puzzle" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "14d1c3042ef38d76796146e6248e02b73db7a0eeefb740fa2e8439dad15bca27"
+    },
+    "amount_voted" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "yes_votes" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "current_coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "timer_coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "singleton_block_height" : {
+      "type" : "integer",
+      "description" : "Block height that current proposal singleton coin was created in",
+      "format" : "uint32"
+    },
+    "passed" : {
+      "type" : "boolean"
+    },
+    "closed" : {
+      "type" : "boolean"
     }
   }
 };
@@ -5574,6 +6234,51 @@
                     <li class="nav-item" data-group="Coins" data-name="getCoinRecordsByNames">
                       <a class="nav-link link-secondary" href="#api-Coins-getCoinRecordsByNames">getCoinRecordsByNames</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="DAOWallet">
+                    <a class="nav-link" href="#api-DAOWallet">DAOWallet</a>
+                  </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoAddFundsToTreasury">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoAddFundsToTreasury">daoAddFundsToTreasury</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoAdjustFilterLevel">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoAdjustFilterLevel">daoAdjustFilterLevel</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoCloseProposal">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoCloseProposal">daoCloseProposal</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoCreateProposal">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoCreateProposal">daoCreateProposal</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoExitLockup">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoExitLockup">daoExitLockup</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoFreeCoinsFromFinishedProposals">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoFreeCoinsFromFinishedProposals">daoFreeCoinsFromFinishedProposals</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoGetProposalState">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoGetProposalState">daoGetProposalState</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoGetProposals">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoGetProposals">daoGetProposals</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoGetRules">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoGetRules">daoGetRules</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoGetTreasuryBalance">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoGetTreasuryBalance">daoGetTreasuryBalance</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoGetTreasuryId">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoGetTreasuryId">daoGetTreasuryId</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoParseProposal">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoParseProposal">daoParseProposal</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoSendToLockup">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoSendToLockup">daoSendToLockup</a>
+                    </li>
+                    <li class="nav-item" data-group="DAOWallet" data-name="daoVoteOnProposal">
+                      <a class="nav-link link-secondary" href="#api-DAOWallet-daoVoteOnProposal">daoVoteOnProposal</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="DIDWallet">
                     <a class="nav-link" href="#api-DIDWallet">DIDWallet</a>
                   </li>
@@ -5929,7 +6634,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.1.0</div>
+              <div class="app-desc">Version: 2.1.2</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -8382,6 +9087,1705 @@ The wallet uses port 9256 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getCoinRecordsByNames-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-DAOWallet">
+                  <h1>DAOWallet</h1>
+                    <div id="api-DAOWallet-daoAddFundsToTreasury">
+                      <article id="api-DAOWallet-daoAddFundsToTreasury-0" data-group="User" data-name="daoAddFundsToTreasury" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoAddFundsToTreasury</h1>
+                          <p>Adds funds to a DAO&#x27;s treasury.</p>
+                        </div>
+                        <p class="marked">Adds funds to a DAO&#x27;s treasury</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_add_funds_to_treasury</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoAddFundsToTreasury-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_add_funds_to_treasury" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_add_funds_to_treasury_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoAddFundsToTreasury_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoAddFundsToTreasury_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoAddFundsToTreasury-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoAddFundsToTreasury-200-schema">
+                                  <div id='responses-daoAddFundsToTreasury-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_89"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoAddFundsToTreasury-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoAddFundsToTreasury-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoAddFundsToTreasury-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoAdjustFilterLevel">
+                      <article id="api-DAOWallet-daoAdjustFilterLevel-0" data-group="User" data-name="daoAdjustFilterLevel" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoAdjustFilterLevel</h1>
+                          <p>Adjusts the DAO filter level.</p>
+                        </div>
+                        <p class="marked">Adjusts the DAO filter level</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_adjust_filter_level</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoAdjustFilterLevel-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_adjust_filter_level" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_adjust_filter_level_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoAdjustFilterLevel_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoAdjustFilterLevel_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoAdjustFilterLevel-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoAdjustFilterLevel-200-schema">
+                                  <div id='responses-daoAdjustFilterLevel-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_93"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoAdjustFilterLevel-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoAdjustFilterLevel-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoAdjustFilterLevel-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoCloseProposal">
+                      <article id="api-DAOWallet-daoCloseProposal-0" data-group="User" data-name="daoCloseProposal" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoCloseProposal</h1>
+                          <p>Closes a DAO proposal.</p>
+                        </div>
+                        <p class="marked">Closes a DAO proposal</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_close_proposal</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoCloseProposal-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_close_proposal" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_close_proposal_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoCloseProposal_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoCloseProposal_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoCloseProposal-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoCloseProposal-200-schema">
+                                  <div id='responses-daoCloseProposal-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_89"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoCloseProposal-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoCloseProposal-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoCloseProposal-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoCreateProposal">
+                      <article id="api-DAOWallet-daoCreateProposal-0" data-group="User" data-name="daoCreateProposal" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoCreateProposal</h1>
+                          <p>Creates a DAO proposal.</p>
+                        </div>
+                        <p class="marked">Creates a DAO proposal</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_create_proposal</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoCreateProposal-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_create_proposal" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_create_proposal_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoCreateProposal_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoCreateProposal_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoCreateProposal-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoCreateProposal-200-schema">
+                                  <div id='responses-daoCreateProposal-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_87"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoCreateProposal-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoCreateProposal-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoCreateProposal-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoExitLockup">
+                      <article id="api-DAOWallet-daoExitLockup-0" data-group="User" data-name="daoExitLockup" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoExitLockup</h1>
+                          <p>Exits the DAO lockup period.</p>
+                        </div>
+                        <p class="marked">Exits the DAO lockup period</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_exit_lockup</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoExitLockup-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_exit_lockup" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_exit_lockup_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoExitLockup_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoExitLockup_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoExitLockup-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoExitLockup-200-schema">
+                                  <div id='responses-daoExitLockup-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_89"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoExitLockup-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoExitLockup-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoExitLockup-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoFreeCoinsFromFinishedProposals">
+                      <article id="api-DAOWallet-daoFreeCoinsFromFinishedProposals-0" data-group="User" data-name="daoFreeCoinsFromFinishedProposals" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoFreeCoinsFromFinishedProposals</h1>
+                          <p>Frees coins from proposals that are finished.</p>
+                        </div>
+                        <p class="marked">Frees coins from proposals that are finished</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_free_coins_from_finished_proposals</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoFreeCoinsFromFinishedProposals-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_free_coins_from_finished_proposals" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_free_coins_from_finished_proposals_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoFreeCoinsFromFinishedProposals_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoFreeCoinsFromFinishedProposals_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoFreeCoinsFromFinishedProposals-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoFreeCoinsFromFinishedProposals-200-schema">
+                                  <div id='responses-daoFreeCoinsFromFinishedProposals-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_94"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoFreeCoinsFromFinishedProposals-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoFreeCoinsFromFinishedProposals-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoFreeCoinsFromFinishedProposals-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoGetProposalState">
+                      <article id="api-DAOWallet-daoGetProposalState-0" data-group="User" data-name="daoGetProposalState" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoGetProposalState</h1>
+                          <p>Use this to figure out whether a proposal has passed or failed and whether it can be closed Given a proposal_id: - if required yes votes are recorded then proposal passed. - if timelock and attendance are met then proposal can close Returns a dict of passed and closable bools, and the remaining votes/blocks needed
+Note that a proposal can be in a passed and closable state now, but become failed if a large number of &#x27;no&#x27; votes are received before the soft close is reached.
+</p>
+                        </div>
+                        <p class="marked">Retrieves the state of a DAO proposal</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_proposal_state</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoGetProposalState-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_get_proposal_state" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_get_proposal_state_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoGetProposalState_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoGetProposalState_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoGetProposalState-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoGetProposalState-200-schema">
+                                  <div id='responses-daoGetProposalState-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_95"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoGetProposalState-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoGetProposalState-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoGetProposalState-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoGetProposals">
+                      <article id="api-DAOWallet-daoGetProposals-0" data-group="User" data-name="daoGetProposals" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoGetProposals</h1>
+                          <p>Get all proposals for a given dao wallet.</p>
+                        </div>
+                        <p class="marked">Get all proposals for a given dao wallet</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_proposals</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoGetProposals-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_get_proposals" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_get_proposals_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoGetProposals_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoGetProposals_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoGetProposals-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoGetProposals-200-schema">
+                                  <div id='responses-daoGetProposals-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_86"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoGetProposals-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoGetProposals-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoGetProposals-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoGetRules">
+                      <article id="api-DAOWallet-daoGetRules-0" data-group="User" data-name="daoGetRules" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoGetRules</h1>
+                          <p>Retrieves the rules of a DAO wallet.</p>
+                        </div>
+                        <p class="marked">Retrieves the rules of a DAO wallet</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_rules</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoGetRules-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_get_rules" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_get_rules_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoGetRules_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoGetRules_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoGetRules-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoGetRules-200-schema">
+                                  <div id='responses-daoGetRules-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_92"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoGetRules-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoGetRules-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoGetRules-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoGetTreasuryBalance">
+                      <article id="api-DAOWallet-daoGetTreasuryBalance-0" data-group="User" data-name="daoGetTreasuryBalance" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoGetTreasuryBalance</h1>
+                          <p>Retrieves the balance of a DAO&#x27;s treasury.</p>
+                        </div>
+                        <p class="marked">Retrieves the balance of a DAO&#x27;s treasury</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_treasury_balance</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoGetTreasuryBalance-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_get_treasury_balance" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_get_treasury_balance_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoGetTreasuryBalance_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoGetTreasuryBalance_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoGetTreasuryBalance-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoGetTreasuryBalance-200-schema">
+                                  <div id='responses-daoGetTreasuryBalance-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_90"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoGetTreasuryBalance-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoGetTreasuryBalance-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoGetTreasuryBalance-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoGetTreasuryId">
+                      <article id="api-DAOWallet-daoGetTreasuryId-0" data-group="User" data-name="daoGetTreasuryId" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoGetTreasuryId</h1>
+                          <p>Retrieves the treasury id of a DAO wallet.</p>
+                        </div>
+                        <p class="marked">Retrieves the treasury id of a DAO wallet</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_get_treasury_id</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoGetTreasuryId-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_get_treasury_id" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_get_treasury_id_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoGetTreasuryId_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoGetTreasuryId_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoGetTreasuryId-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoGetTreasuryId-200-schema">
+                                  <div id='responses-daoGetTreasuryId-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_91"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoGetTreasuryId-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoGetTreasuryId-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoGetTreasuryId-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoParseProposal">
+                      <article id="api-DAOWallet-daoParseProposal-0" data-group="User" data-name="daoParseProposal" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoParseProposal</h1>
+                          <p>Parses a DAO proposal.</p>
+                        </div>
+                        <p class="marked">Parses a DAO proposal</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_parse_proposal</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoParseProposal-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_parse_proposal" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_parse_proposal_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoParseProposal_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoParseProposal_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoParseProposal-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoParseProposal-200-schema">
+                                  <div id='responses-daoParseProposal-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_88"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoParseProposal-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoParseProposal-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoParseProposal-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoSendToLockup">
+                      <article id="api-DAOWallet-daoSendToLockup-0" data-group="User" data-name="daoSendToLockup" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoSendToLockup</h1>
+                          <p>Sends the DAO to lockup.</p>
+                        </div>
+                        <p class="marked">Sends the DAO to lockup</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_send_to_lockup</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoSendToLockup-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_send_to_lockup" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_send_to_lockup_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoSendToLockup_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoSendToLockup_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoSendToLockup-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoSendToLockup-200-schema">
+                                  <div id='responses-daoSendToLockup-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_94"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoSendToLockup-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoSendToLockup-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoSendToLockup-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-DAOWallet-daoVoteOnProposal">
+                      <article id="api-DAOWallet-daoVoteOnProposal-0" data-group="User" data-name="daoVoteOnProposal" data-version="0">
+                        <div class="pull-left">
+                          <h1>daoVoteOnProposal</h1>
+                          <p>Vote on a DAO proposal.</p>
+                        </div>
+                        <p class="marked">Vote on a DAO proposal</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dao_vote_on_proposal</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DAOWallet-daoVoteOnProposal-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dao_vote_on_proposal" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dao_vote_on_proposal_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_daoVoteOnProposal_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_daoVoteOnProposal_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-daoVoteOnProposal-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-daoVoteOnProposal-200-schema">
+                                  <div id='responses-daoVoteOnProposal-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_89"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-daoVoteOnProposal-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-daoVoteOnProposal-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-daoVoteOnProposal-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
