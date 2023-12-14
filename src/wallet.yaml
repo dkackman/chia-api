@@ -5189,6 +5189,53 @@ paths:
                       rules:
                         $ref: "#/components/schemas/dao_rules"
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_close_proposal:
+    post:
+      tags:
+        - DAO Wallet
+      description: Closes a DAO proposal
+      summary: Closes a DAO proposal.
+      operationId: dao_close_proposal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                proposal_id:
+                  type: string
+                  format: hex
+                genesis_id:
+                  type: string
+                  format: hex
+                self_destruct:
+                  type: string
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        $ref: "#/components/schemas/transaction_record"
+                      transaction_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
