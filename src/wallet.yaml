@@ -5410,8 +5410,8 @@ paths:
     post:
       tags:
         - DAO Wallet
-      description: Retrieves the state of a DAO proposal
-      summary: >
+      summary: Retrieves the state of a DAO proposal
+      description: >
         Use this to figure out whether a proposal has passed or failed and whether it can be closed
         Given a proposal_id:
         - if required yes votes are recorded then proposal passed.
