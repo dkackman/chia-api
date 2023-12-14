@@ -5236,6 +5236,49 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_exit_lockup:
+    post:
+      tags:
+        - DAO Wallet
+      description: Exits the DAO lockup period
+      summary: Exits the DAO lockup period.
+      operationId: dao_exit_lockup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                coins:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/coin"
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      tx_id:
+                        $ref: "#/components/schemas/transaction_record"
+                      transaction_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
