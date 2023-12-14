@@ -5158,6 +5158,37 @@ paths:
                           type: string
                           format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_get_rules:
+    post:
+      tags:
+        - DAO Wallet
+      description: Retrieves the rules of a DAO wallet
+      summary: Retrieves the rules of a DAO wallet.
+      operationId: dao_get_rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      rules:
+                        $ref: "#/components/schemas/dao_rules"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
