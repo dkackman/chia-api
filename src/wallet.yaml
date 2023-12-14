@@ -5465,6 +5465,47 @@ paths:
                           closed:
                             type: boolean
                   - $ref: "#/components/schemas/apiResponse"
+  /dao_free_coins_from_finished_proposals:
+    post:
+      tags:
+        - DAO Wallet
+      description: Frees coins from proposals that are finished
+      summary: Frees coins from proposals that are finished.
+      operationId: dao_free_coins_from_finished_proposals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - wallet_id
+                - proposal_id
+              properties:
+                wallet_id:
+                  type: integer
+                  format: uint32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      txs:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      tx_id:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
