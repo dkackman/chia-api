@@ -1,0 +1,31 @@
+proposal_info:
+  type: object
+  properties:
+    proposal_id:
+      type: string
+      example: 14d1c3042ef38d76796146e6248e02b73db7a0eeefb740fa2e8439dad15bca27
+      format: bytes32
+      description: this is launcher_id
+    inner_puzzle:
+      type: string
+      example: 14d1c3042ef38d76796146e6248e02b73db7a0eeefb740fa2e8439dad15bca27
+      format: bytes32
+    amount_voted:
+      type: integer
+      format: uint64
+    yes_votes:
+      type: integer
+      format: uint64
+    current_coin:
+      $ref: ./coin.yaml#/coin
+    timer_coin:
+      $ref: ./coin.yaml#/coin
+      description: if this is None then the proposal has finished
+    singleton_block_height:
+      type: integer
+      format: uint32
+      description: Block height that current proposal singleton coin was created in
+    passed:
+      type: boolean
+    closed:
+      type: boolean

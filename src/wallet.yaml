@@ -100,8 +100,6 @@ components:
       $ref: "schemas/connection_info.yaml#/connection_info"
     dao_rules:
       $ref: "schemas/dao_rules.yaml#/dao_rules"
-    puzzle_announcement:
-      $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
     cat_info:
       $ref: "schemas/cat_info.yaml#/cat_info"
     coin:
@@ -128,6 +126,10 @@ components:
       $ref: "schemas/pool_wallet_info.yaml#/pool_wallet_info"
     private_key:
       $ref: "schemas/private_key.yaml#/private_key"
+    proposal_info:
+      $ref: "schemas/proposal_info.yaml#/proposal_info"
+    puzzle_announcement:
+      $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
     singleton_record:
       $ref: "schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
@@ -4887,8 +4889,8 @@ paths:
     post:
       tags:
         - DAO Wallet
-      description: Revoke an on chain VC provided the correct DID is available
-      summary: Revoke an on chain VC provided the correct DID is available.
+      description: Get all proposals for a given dao wallet
+      summary: Get all proposals for a given dao wallet.
       operationId: dao_get_proposals
       requestBody:
         required: true
@@ -4897,16 +4899,12 @@ paths:
             schema:
               type: object
               required:
-                - vc_parent_id
+                - wallet_id
               properties:
-                vc_parent_id:
-                  type: string
-                  format: bytes32
-                fee:
+                wallet_id:
                   type: integer
-                  format: uint64
-                  default: 0
-                reuse_puzhash:
+                  format: uint32
+                include_closed:
                   type: boolean
       responses:
         "200":
@@ -4917,10 +4915,16 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      transactions:
+                      proposals:
                         type: array
                         items:
-                          $ref: "#/components/schemas/transaction_record"
+                          $ref: "#/components/schemas/proposal_info"
+                      proposal_timelock:
+                        type: integer
+                        format: uint64
+                      soft_close_length:
+                        type: integer
+                        format: uint64
                   - $ref: "#/components/schemas/apiResponse"
 
 externalDocs:
