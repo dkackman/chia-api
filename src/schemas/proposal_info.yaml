@@ -18,6 +18,9 @@ proposal_info:
       format: uint64
     current_coin:
       $ref: ./coin.yaml#/coin
+    current_innerpuz:
+      type: string
+      format: hex
     timer_coin:
       $ref: ./coin.yaml#/coin
       description: if this is None then the proposal has finished
