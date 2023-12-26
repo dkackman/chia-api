@@ -89,3 +89,5 @@ transaction_record:
             items:
               type: string
               format: hex
+    valid_times:
+      $ref: ./condition_valid_times.yaml#/condition_valid_times

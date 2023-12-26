@@ -5410,7 +5410,6 @@ paths:
     post:
       tags:
         - DAO Wallet
-      summary: Retrieves the state of a DAO proposal
       description: >
         Use this to figure out whether a proposal has passed or failed and whether it can be closed
         Given a proposal_id:
@@ -5420,6 +5419,7 @@ paths:
 
         Note that a proposal can be in a passed and closable state now, but become failed if a large number of
         'no' votes are received before the soft close is reached.
+      summary: Retrieves the state of a DAO proposal
       operationId: dao_get_proposal_state
       requestBody:
         required: true

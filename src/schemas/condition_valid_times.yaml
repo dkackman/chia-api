@@ -1,0 +1,27 @@
+condition_valid_times:
+  type: object
+  properties:
+    min_secs_since_created:
+      type: integer
+      format: uint64
+    min_time:
+      type: integer
+      format: uint64
+    min_blocks_since_created:
+      type: integer
+      format: unit32
+    min_height:
+      type: integer
+      format: unit32
+    max_secs_after_created:
+      type: integer
+      format: uint64
+    max_time:
+      type: integer
+      format: uint64
+    max_blocks_after_created:
+      type: integer
+      format: unit32
+    max_height:
+      type: integer
+      format: unit32
