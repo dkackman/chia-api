@@ -8,12 +8,4 @@ dl_proof:
       type: string
       format: bytes32
     store_proofs:
-      type: object
-      properties:
-        store_id:
-          type: string
-          format: bytes32
-        proofs:
-          type: array
-          items:
-            $ref: "./hash_only_proof.yaml#/hash_only_proof"
+      $ref: "./store_proofs.yaml#/store_proofs"

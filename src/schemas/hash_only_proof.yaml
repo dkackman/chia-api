@@ -13,14 +13,4 @@ hash_only_proof:
     layers:
       type: array
       items:
-        type: object
-        properties:
-          other_hash_side:
-            type: integer
-            format: uint8
-          other_hash:
-            type: string
-            format: bytes32
-          combined_hash:
-            type: string
-            format: bytes32
+        $ref: "./layer.yaml#/layer"
