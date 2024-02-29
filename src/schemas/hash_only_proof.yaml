@@ -1,0 +1,26 @@
+hash_only_proof:
+  type: object
+  properties:
+    key_clvm_hash:
+      type: string
+      format: bytes32
+    value_clvm_hash:
+      type: string
+      format: bytes32
+    node_hash:
+      type: string
+      format: bytes32
+    layers:
+      type: array
+      items:
+        type: object
+        properties:
+          other_hash_side:
+            type: integer
+            format: uint8
+          other_hash:
+            type: string
+            format: bytes32
+          combined_hash:
+            type: string
+            format: bytes32

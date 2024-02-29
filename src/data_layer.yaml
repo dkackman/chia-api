@@ -32,6 +32,8 @@ components:
   schemas:
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
+    hash_only_proof:
+      $ref: "schemas/hash_only_proof.yaml#/hash_only_proof"
     internal_node:
       $ref: "schemas/internal_node.yaml#/internal_node"
     mirror:
@@ -1211,6 +1213,59 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /get_proof:
+    post:
+      tags:
+        - Data Layer
+      summary: Retrieves a proof.
+      description: Retrieves a proof.
+      operationId: get_proof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - store_id
+              properties:
+                store_id:
+                  type: string
+                  format: bytes32
+                keys:
+                  type: array
+                  items:
+                    type: string
+                    format: bytes32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      proof:
+                        type: object
+                        properties:
+                          coin_id:
+                            type: string
+                            format: bytes32
+                          inner_puzzle_hash:
+                            type: string
+                            format: bytes32
+                          store_proofs:
+                            type: object
+                            properties:
+                              store_id:
+                                type: string
+                                format: bytes32
+                              proofs:
+                                type: array
+                                items:
+                                  $ref: "#/components/schemas/hash_only_proof"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
