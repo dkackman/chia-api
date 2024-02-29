@@ -970,6 +970,43 @@
   "format" : "uint8",
   "enum" : [ 0, 1, 2, 3 ]
 };
+            defs["condition_valid_times"] = {
+  "type" : "object",
+  "properties" : {
+    "min_secs_since_created" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "min_time" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "min_blocks_since_created" : {
+      "type" : "integer",
+      "format" : "unit32"
+    },
+    "min_height" : {
+      "type" : "integer",
+      "format" : "unit32"
+    },
+    "max_secs_after_created" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "max_time" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "max_blocks_after_created" : {
+      "type" : "integer",
+      "format" : "unit32"
+    },
+    "max_height" : {
+      "type" : "integer",
+      "format" : "unit32"
+    }
+  }
+};
             defs["connection_info"] = {
   "type" : "object",
   "properties" : {
@@ -1975,6 +2012,38 @@
     }
   }
 };
+            defs["dl_proof"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inner_puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "store_proofs" : {
+      "$ref" : "#/components/schemas/dl_proof_store_proofs"
+    }
+  }
+};
+            defs["dl_proof_store_proofs"] = {
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "proofs" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/hash_only_proof"
+      }
+    }
+  },
+  "example" : null
+};
             defs["dl_singletons_by_root_body"] = {
   "required" : [ "launcher_id", "root" ],
   "type" : "object",
@@ -2239,10 +2308,12 @@
       }
     },
     "start" : {
-      "type" : "integer"
+      "type" : "integer",
+      "format" : "uint32"
     },
     "end" : {
-      "type" : "integer"
+      "type" : "integer",
+      "format" : "uint32"
     }
   }
 };
@@ -2422,6 +2493,47 @@
       "$ref" : "#/components/schemas/filter_mode"
     }
   }
+};
+            defs["hash_only_proof"] = {
+  "type" : "object",
+  "properties" : {
+    "key_clvm_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "value_clvm_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "node_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "layers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/hash_only_proof_layers"
+      }
+    }
+  }
+};
+            defs["hash_only_proof_layers"] = {
+  "type" : "object",
+  "properties" : {
+    "other_hash_side" : {
+      "type" : "integer",
+      "format" : "uint8"
+    },
+    "other_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "combined_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  },
+  "example" : null
 };
             defs["inline_response_200"] = {
   "allOf" : [ {
@@ -3092,6 +3204,20 @@
       "additionalProperties" : {
         "type" : "object",
         "additionalProperties" : true
+      }
+    },
+    "additions" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    },
+    "removals" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "hex"
       }
     }
   },
@@ -4299,6 +4425,51 @@
   },
   "example" : null
 };
+            defs["inline_response_200_96"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "current_root" : {
+        "type" : "boolean"
+      },
+      "verified_clvm_hashes" : {
+        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_96_verified_clvm_hashes"] = {
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "inclusions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes_inclusions"
+      }
+    }
+  },
+  "example" : null
+};
+            defs["inline_response_200_96_verified_clvm_hashes_inclusions"] = {
+  "type" : "object",
+  "properties" : {
+    "key_clvm_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    },
+    "value_clvm_hash" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  },
+  "example" : null
+};
             defs["lineage_proof"] = {
   "type" : "object",
   "properties" : {
@@ -5129,6 +5300,10 @@
     "current_coin" : {
       "$ref" : "#/components/schemas/coin"
     },
+    "current_innerpuz" : {
+      "type" : "string",
+      "format" : "hex"
+    },
     "timer_coin" : {
       "$ref" : "#/components/schemas/coin"
     },
@@ -5797,6 +5972,9 @@
           }
         } ]
       }
+    },
+    "valid_times" : {
+      "$ref" : "#/components/schemas/condition_valid_times"
     }
   },
   "description" : "Used for storing transaction data and status in wallets."
@@ -6333,6 +6511,12 @@
                     <li class="nav-item" data-group="DIDWallet" data-name="didUpdateRecoveryIds">
                       <a class="nav-link link-secondary" href="#api-DIDWallet-didUpdateRecoveryIds">didUpdateRecoveryIds</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="DataLayer">
+                    <a class="nav-link" href="#api-DataLayer">DataLayer</a>
+                  </li>
+                    <li class="nav-item" data-group="DataLayer" data-name="dlVerifyProof">
+                      <a class="nav-link link-secondary" href="#api-DataLayer-dlVerifyProof">dlVerifyProof</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="DataLayerWallet">
                     <a class="nav-link" href="#api-DataLayerWallet">DataLayerWallet</a>
                   </li>
@@ -6634,7 +6818,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.1.2</div>
+              <div class="app-desc">Version: 2.2.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -12910,6 +13094,130 @@ Note that a proposal can be in a passed and closable state now, but become faile
                                     </script>
                                   </div>
                                   <input id='responses-didUpdateRecoveryIds-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-DataLayer">
+                  <h1>DataLayer</h1>
+                    <div id="api-DataLayer-dlVerifyProof">
+                      <article id="api-DataLayer-dlVerifyProof-0" data-group="User" data-name="dlVerifyProof" data-version="0">
+                        <div class="pull-left">
+                          <h1>dlVerifyProof</h1>
+                          <p>Verifies a proof.</p>
+                        </div>
+                        <p class="marked">Verify a proof of inclusion for a DL singleton.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/dl_verify_proof</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-DataLayer-dlVerifyProof-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/dl_verify_proof" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/dl_proof"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_dlVerifyProof_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_dlVerifyProof_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-dlVerifyProof-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-dlVerifyProof-200-schema">
+                                  <div id='responses-dlVerifyProof-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_96"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-dlVerifyProof-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-dlVerifyProof-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-dlVerifyProof-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 

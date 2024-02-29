@@ -1817,6 +1817,19 @@
   },
   "example" : null
 };
+            defs["inline_response_200_24"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "additional_data" : {
+        "type" : "string",
+        "format" : "hex"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["inline_response_200_2_metrics"] = {
   "type" : "object",
   "properties" : {
@@ -1940,8 +1953,8 @@
             defs["k_size"] = {
   "type" : "integer",
   "description" : "Defines the size of a plot. 25 is used for testing only. https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes",
-  "default" : 32,
-  "enum" : [ 25, 32, 33, 34, 35 ]
+  "enum" : [ 25, 32, 33, 34, 35 ],
+  "default" : 32
 };
             defs["mempool_item"] = {
   "type" : "object",
@@ -2484,6 +2497,9 @@
                     <li class="nav-item" data-group="FullNode" data-name="fullNodeGetNetworkInfo">
                       <a class="nav-link link-secondary" href="#api-FullNode-fullNodeGetNetworkInfo">fullNodeGetNetworkInfo</a>
                     </li>
+                    <li class="nav-item" data-group="FullNode" data-name="getAggsigAdditionalData">
+                      <a class="nav-link link-secondary" href="#api-FullNode-getAggsigAdditionalData">getAggsigAdditionalData</a>
+                    </li>
                     <li class="nav-item" data-group="FullNode" data-name="getBlockchainState">
                       <a class="nav-link link-secondary" href="#api-FullNode-getBlockchainState">getBlockchainState</a>
                     </li>
@@ -2539,7 +2555,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.1.2</div>
+              <div class="app-desc">Version: 2.2.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The full node uses port 8555 by default.</div>
@@ -5160,6 +5176,128 @@ The full node uses port 8555 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-fullNodeGetNetworkInfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-FullNode-getAggsigAdditionalData">
+                      <article id="api-FullNode-getAggsigAdditionalData-0" data-group="User" data-name="getAggsigAdditionalData" data-version="0">
+                        <div class="pull-left">
+                          <h1>getAggsigAdditionalData</h1>
+                          <p>Retrieves aggregated signature additional data.</p>
+                        </div>
+                        <p class="marked">Retrieves aggregated signature additional data.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_aggsig_additional_data</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-FullNode-getAggsigAdditionalData-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt \
+--key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8555/get_aggsig_additional_data" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getAggsigAdditionalData_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getAggsigAdditionalData_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getAggsigAdditionalData-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getAggsigAdditionalData-200-schema">
+                                  <div id='responses-getAggsigAdditionalData-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_24"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getAggsigAdditionalData-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getAggsigAdditionalData-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getAggsigAdditionalData-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
