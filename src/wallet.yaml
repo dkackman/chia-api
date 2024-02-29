@@ -2243,6 +2243,16 @@ paths:
                             additionalProperties:
                               type: object
                               additionalProperties: true
+                          additions:
+                            type: array
+                            items:
+                              type: string
+                              format: hex
+                          removals:
+                            type: array
+                            items:
+                              type: string
+                              format: hex
                   - $ref: "#/components/schemas/apiResponse"
   /create_offer_for_ids:
     post:
@@ -3483,8 +3493,10 @@ paths:
                     type: string
                 start:
                   type: integer
+                  format: uint32
                 end:
                   type: integer
+                  format: uint32
       responses:
         "200":
           description: OK
