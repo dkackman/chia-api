@@ -1,0 +1,19 @@
+dl_proof:
+  type: object
+  properties:
+    coin_id:
+      type: string
+      format: bytes32
+    inner_puzzle_hash:
+      type: string
+      format: bytes32
+    store_proofs:
+      type: object
+      properties:
+        store_id:
+          type: string
+          format: bytes32
+        proofs:
+          type: array
+          items:
+            $ref: "./hash_only_proof.yaml#/hash_only_proof"

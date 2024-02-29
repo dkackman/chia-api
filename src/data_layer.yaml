@@ -32,6 +32,8 @@ components:
   schemas:
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
+    dl_proof:
+      $ref: "schemas/dl_proof.yaml#/dl_proof"
     hash_only_proof:
       $ref: "schemas/hash_only_proof.yaml#/hash_only_proof"
     internal_node:
@@ -1247,24 +1249,49 @@ paths:
                   - type: object
                     properties:
                       proof:
+                        $ref: "#/components/schemas/dl_proof"
+                  - $ref: "#/components/schemas/apiResponse"
+  /verify_proof:
+    post:
+      tags:
+        - Data Layer
+      summary: Verifies a proof.
+      description: Verifies a proof.
+      operationId: verify_proof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/dl_proof"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      current_root:
+                        type: boolean
+                      verified_clvm_hashes:
                         type: object
                         properties:
-                          coin_id:
+                          store_id:
                             type: string
                             format: bytes32
-                          inner_puzzle_hash:
-                            type: string
-                            format: bytes32
-                          store_proofs:
-                            type: object
-                            properties:
-                              store_id:
-                                type: string
-                                format: bytes32
-                              proofs:
-                                type: array
-                                items:
-                                  $ref: "#/components/schemas/hash_only_proof"
+                          inclusions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                key_clvm_hash:
+                                  type: string
+                                  format: bytes32
+                                value_clvm_hash:
+                                  type: string
+                                  format: bytes32
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
