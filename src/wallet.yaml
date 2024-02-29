@@ -102,6 +102,8 @@ components:
       $ref: "schemas/dao_info.yaml#/dao_info"
     dao_rules:
       $ref: "schemas/dao_rules.yaml#/dao_rules"
+    dl_proof:
+      $ref: "schemas/dl_proof.yaml#/dl_proof"
     cat_info:
       $ref: "schemas/cat_info.yaml#/cat_info"
     coin:
@@ -5505,6 +5507,48 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                  - $ref: "#/components/schemas/apiResponse"
+  /dl_verify_proof:
+    post:
+      tags:
+        - Data Layer
+      summary: Verifies a proof.
+      description: Verify a proof of inclusion for a DL singleton.
+      operationId: dl_verify_proof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/dl_proof"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      current_root:
+                        type: boolean
+                      verified_clvm_hashes:
+                        type: object
+                        properties:
+                          store_id:
+                            type: string
+                            format: bytes32
+                          inclusions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                key_clvm_hash:
+                                  type: string
+                                  format: bytes32
+                                value_clvm_hash:
+                                  type: string
+                                  format: bytes32
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

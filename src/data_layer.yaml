@@ -34,8 +34,6 @@ components:
       $ref: "schemas/connection_info.yaml#/connection_info"
     dl_proof:
       $ref: "schemas/dl_proof.yaml#/dl_proof"
-    hash_only_proof:
-      $ref: "schemas/hash_only_proof.yaml#/hash_only_proof"
     internal_node:
       $ref: "schemas/internal_node.yaml#/internal_node"
     mirror:
