@@ -1100,6 +1100,28 @@ paths:
                                       type: string
                                       format: bytes
                   - $ref: "#/components/schemas/apiResponse"
+  /get_aggsig_additional_data:
+    post:
+      tags:
+        - Full Node
+      description: Retrieves aggregated signature additional data.
+      summary: Retrieves aggregated signature additional data.
+      operationId: get_aggsig_additional_data
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      additional_data:
+                        type: string
+                        format: hex
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
