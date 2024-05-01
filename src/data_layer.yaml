@@ -276,6 +276,9 @@ paths:
                   type: integer
                   format: uint64
                   default: 0
+                submit_on_chain:
+                  type: boolean
+                  default: true
       responses:
         "200":
           description: OK
@@ -351,6 +354,12 @@ paths:
                 root_hash:
                   type: string
                   format: bytes32
+                page:
+                  type: integer
+                  format: int32
+                max_page_size:
+                  type: integer
+                  format: int32
       responses:
         "200":
           description: OK
@@ -365,6 +374,15 @@ paths:
                         items:
                           type: string
                           format: bytes32
+                      root_hash:
+                        type: string
+                        format: bytes32
+                      total_pages:
+                        type: integer
+                        format: int32
+                      total_bytes:
+                        type: integer
+                        format: int32
                   - $ref: "#/components/schemas/apiResponse"
   /get_keys_values:
     post:
@@ -389,6 +407,12 @@ paths:
                 root_hash:
                   type: string
                   format: bytes32
+                page:
+                  type: integer
+                  format: int32
+                max_page_size:
+                  type: integer
+                  format: int32
       responses:
         "200":
           description: OK
@@ -402,6 +426,15 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/terminal_node"
+                      root_hash:
+                        type: string
+                        format: bytes32
+                      total_pages:
+                        type: integer
+                        format: int32
+                      total_bytes:
+                        type: integer
+                        format: int32
                   - $ref: "#/components/schemas/apiResponse"
   /get_ancestors:
     post:
