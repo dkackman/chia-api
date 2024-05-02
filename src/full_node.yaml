@@ -579,7 +579,7 @@ paths:
   /get_network_info:
     post:
       tags:
-        - Full Node
+        - Shared
       description: Retrieves some information about the current network.
       summary: Retrieves some information about the current network.
       operationId: full_node_get_network_info

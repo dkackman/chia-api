@@ -3180,7 +3180,7 @@ paths:
   /get_network_info:
     post:
       tags:
-        - Wallet Node
+        - Shared
       summary: Retrieves some information about the current network.
       description: Retrieves some information about the current network.
       operationId: wallet_get_network_info

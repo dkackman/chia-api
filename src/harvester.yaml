@@ -36,6 +36,8 @@ components:
       $ref: "schemas/harvester_config.yaml#/harvester_config"
     k_size:
       $ref: "schemas/k_size.yaml#/k_size"
+    network_info:
+      $ref: "schemas/network_info.yaml#/network_info"
     plot_info:
       $ref: "schemas/plot_info.yaml#/plot_info"
     apiResponse:
@@ -340,6 +342,24 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/empty"
+  /get_network_info:
+    post:
+      tags:
+        - Shared
+      description: Retrieves some information about the current network.
+      summary: Retrieves some information about the current network.
+      operationId: full_node_get_network_info
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/network_info"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net

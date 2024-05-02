@@ -32,6 +32,8 @@ components:
   schemas:
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
+    network_info:
+      $ref: "schemas/network_info.yaml#/network_info"
     apiResponse:
       $ref: "schemas/apiResponse.yaml#/apiResponse"
   securitySchemes:
@@ -244,6 +246,24 @@ paths:
                           format: ipaddress
                       total:
                         type: integer
+                  - $ref: "#/components/schemas/apiResponse"
+  /get_network_info:
+    post:
+      tags:
+        - Shared
+      description: Retrieves some information about the current network.
+      summary: Retrieves some information about the current network.
+      operationId: full_node_get_network_info
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
