@@ -2024,25 +2024,9 @@
       "format" : "bytes32"
     },
     "store_proofs" : {
-      "$ref" : "#/components/schemas/dl_proof_store_proofs"
+      "$ref" : "#/components/schemas/store_proofs"
     }
   }
-};
-            defs["dl_proof_store_proofs"] = {
-  "type" : "object",
-  "properties" : {
-    "store_id" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "proofs" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/hash_only_proof"
-      }
-    }
-  },
-  "example" : null
 };
             defs["dl_singletons_by_root_body"] = {
   "required" : [ "launcher_id", "root" ],
@@ -2494,47 +2478,6 @@
     }
   }
 };
-            defs["hash_only_proof"] = {
-  "type" : "object",
-  "properties" : {
-    "key_clvm_hash" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "value_clvm_hash" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "node_hash" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "layers" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/hash_only_proof_layers"
-      }
-    }
-  }
-};
-            defs["hash_only_proof_layers"] = {
-  "type" : "object",
-  "properties" : {
-    "other_hash_side" : {
-      "type" : "integer",
-      "format" : "uint8"
-    },
-    "other_hash" : {
-      "type" : "string",
-      "format" : "bytes32"
-    },
-    "combined_hash" : {
-      "type" : "string",
-      "format" : "bytes32"
-    }
-  },
-  "example" : null
-};
             defs["inline_response_200"] = {
   "allOf" : [ {
     "type" : "object",
@@ -2595,6 +2538,12 @@
           "type" : "string",
           "format" : "hex"
         }
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2615,6 +2564,12 @@
       "nft_id" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2650,6 +2605,12 @@
       },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2793,6 +2754,12 @@
       "transaction_id" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2858,6 +2825,12 @@
       "attest_data" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2912,6 +2885,12 @@
     "properties" : {
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -2980,6 +2959,12 @@
     "properties" : {
       "tx_record" : {
         "$ref" : "#/components/schemas/transaction_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3014,6 +2999,12 @@
       },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   } ]
@@ -3043,6 +3034,12 @@
     "properties" : {
       "trade_record" : {
         "$ref" : "#/components/schemas/trade_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3158,6 +3155,12 @@
         "items" : {
           "$ref" : "#/components/schemas/transaction_record"
         }
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3232,6 +3235,12 @@
       },
       "trade_record" : {
         "$ref" : "#/components/schemas/trade_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3295,6 +3304,12 @@
       "total_fee" : {
         "type" : "integer",
         "format" : "uint64"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3308,8 +3323,17 @@
       "transaction" : {
         "$ref" : "#/components/schemas/transaction_record"
       },
+      "fee_transaction" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      },
       "state" : {
         "$ref" : "#/components/schemas/pool_wallet_info"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3359,6 +3383,12 @@
       },
       "signed_tx" : {
         "$ref" : "#/components/schemas/transaction_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -3847,6 +3877,12 @@
       "wallet_id" : {
         "type" : "integer",
         "format" : "uint32"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     },
     "description" : "Response when a CAT wallet is created."
@@ -3925,6 +3961,12 @@
       "p2_singleton_puzzle_hash" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     },
     "description" : "Response when a new pool wallet is created."
@@ -3961,12 +4003,30 @@
       "dao_cat_wallet_id" : {
         "type" : "integer",
         "format" : "uint32"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     },
     "description" : "Response when a dao wallet is created."
   } ]
 };
             defs["inline_response_200_74"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "spend_bundle" : {
+        "$ref" : "#/components/schemas/spend_bundle"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_75"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4020,7 +4080,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_75"] = {
+            defs["inline_response_200_76"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4033,7 +4093,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_76"] = {
+            defs["inline_response_200_77"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4047,13 +4107,19 @@
       },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_77"] = {
+            defs["inline_response_200_78"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4066,7 +4132,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_78"] = {
+            defs["inline_response_200_79"] = {
   "allOf" : [ {
     "type" : "object",
     "additionalProperties" : {
@@ -4076,23 +4142,6 @@
         "items" : {
           "type" : "string"
         }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_79"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "int32"
-      },
-      "count" : {
-        "type" : "integer",
-        "format" : "int32"
       }
     }
   }, {
@@ -4115,6 +4164,23 @@
   } ]
 };
             defs["inline_response_200_80"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "int32"
+      },
+      "count" : {
+        "type" : "integer",
+        "format" : "int32"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_81"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4142,7 +4208,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_81"] = {
+            defs["inline_response_200_82"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4152,18 +4218,6 @@
           "type" : "string",
           "format" : "hex"
         }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_82"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "vc_record" : {
-        "$ref" : "#/components/schemas/vc_record"
       },
       "transactions" : {
         "type" : "array",
@@ -4182,6 +4236,12 @@
     "properties" : {
       "vc_record" : {
         "$ref" : "#/components/schemas/vc_record"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -4189,6 +4249,18 @@
   } ]
 };
             defs["inline_response_200_84"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "vc_record" : {
+        "$ref" : "#/components/schemas/vc_record"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_85"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4209,7 +4281,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_85"] = {
+            defs["inline_response_200_86"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4224,7 +4296,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_86"] = {
+            defs["inline_response_200_87"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4247,7 +4319,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_87"] = {
+            defs["inline_response_200_88"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4261,19 +4333,12 @@
       },
       "tx" : {
         "$ref" : "#/components/schemas/transaction_record"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_88"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "proposal_dictionary" : {
-        "type" : "object",
-        "additionalProperties" : true
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
@@ -4284,12 +4349,9 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "tx" : {
-        "$ref" : "#/components/schemas/transaction_record"
-      },
-      "tx_id" : {
-        "type" : "string",
-        "format" : "hex"
+      "proposal_dictionary" : {
+        "type" : "object",
+        "additionalProperties" : true
       }
     }
   }, {
@@ -4315,6 +4377,28 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
+      "tx" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      },
+      "tx_id" : {
+        "type" : "string",
+        "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_91"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
       "balances" : {
         "type" : "array",
         "items" : {
@@ -4327,7 +4411,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_91"] = {
+            defs["inline_response_200_92"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4343,7 +4427,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_92"] = {
+            defs["inline_response_200_93"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4355,7 +4439,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_93"] = {
+            defs["inline_response_200_94"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4367,7 +4451,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_94"] = {
+            defs["inline_response_200_95"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4380,25 +4464,31 @@
       "tx_id" : {
         "type" : "string",
         "format" : "hex"
+      },
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_95"] = {
+            defs["inline_response_200_96"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "state" : {
-        "$ref" : "#/components/schemas/inline_response_200_95_state"
+        "$ref" : "#/components/schemas/inline_response_200_96_state"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_95_state"] = {
+            defs["inline_response_200_96_state"] = {
   "type" : "object",
   "properties" : {
     "total_votes_needed" : {
@@ -4425,7 +4515,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_96"] = {
+            defs["inline_response_200_97"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4433,14 +4523,14 @@
         "type" : "boolean"
       },
       "verified_clvm_hashes" : {
-        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes"
+        "$ref" : "#/components/schemas/inline_response_200_97_verified_clvm_hashes"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_96_verified_clvm_hashes"] = {
+            defs["inline_response_200_97_verified_clvm_hashes"] = {
   "type" : "object",
   "properties" : {
     "store_id" : {
@@ -4450,13 +4540,13 @@
     "inclusions" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes_inclusions"
+        "$ref" : "#/components/schemas/inline_response_200_97_verified_clvm_hashes_inclusions"
       }
     }
   },
   "example" : null
 };
-            defs["inline_response_200_96_verified_clvm_hashes_inclusions"] = {
+            defs["inline_response_200_97_verified_clvm_hashes_inclusions"] = {
   "type" : "object",
   "properties" : {
     "key_clvm_hash" : {
@@ -4469,6 +4559,24 @@
     }
   },
   "example" : null
+};
+            defs["layer"] = {
+  "type" : "object",
+  "properties" : {
+    "other_hash_side" : {
+      "$ref" : "#/components/schemas/side"
+    },
+    "other_hash" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5"
+    },
+    "combined_hash" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902"
+    }
+  }
 };
             defs["lineage_proof"] = {
   "type" : "object",
@@ -5275,6 +5383,41 @@
     }
   }
 };
+            defs["proof"] = {
+  "type" : "object",
+  "properties" : {
+    "key" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "9999"
+    },
+    "value" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "abc123"
+    },
+    "node_hash" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "b87c24e0521f559236a2e06d6e1bb196c138c1c9bfcadad3b25708e7eab97ca7"
+    },
+    "layers" : {
+      "type" : "array",
+      "example" : [ {
+        "combined_hash" : "0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902",
+        "other_hash" : "cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5",
+        "other_hash_side" : "left"
+      }, {
+        "combined_hash" : "568ca0020114772138db61001c63ac8574a7c8c76c051dd2d3e28964496aa88c",
+        "other_hash" : "919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11",
+        "other_hash_side" : "left"
+      } ],
+      "items" : {
+        "$ref" : "#/components/schemas/layer"
+      }
+    }
+  }
+};
             defs["proposal_info"] = {
   "type" : "object",
   "properties" : {
@@ -5599,6 +5742,12 @@
     }
   }
 };
+            defs["side"] = {
+  "type" : "integer",
+  "description" : "The side:\n  * 0 LEFT\n  * 1 RIGHT",
+  "format" : "uint8",
+  "enum" : [ 0, 1 ]
+};
             defs["sign_message_by_address_body"] = {
   "required" : [ "address", "message" ],
   "type" : "object",
@@ -5724,6 +5873,36 @@
       "type" : "integer",
       "format" : "uint16",
       "default" : 50
+    }
+  }
+};
+            defs["store_proofs"] = {
+  "type" : "object",
+  "properties" : {
+    "store_id" : {
+      "type" : "string",
+      "format" : "bytes32",
+      "example" : "14d1c3042ef38d76796146e6248e02b73db7a0eeefb740fa2e8439dad15bca27"
+    },
+    "proofs" : {
+      "type" : "array",
+      "example" : [ {
+        "key" : "9999",
+        "layers" : [ {
+          "combined_hash" : "0a3024099e40c27cfe294ce91bdabf727887fecd406d7208c53297f79d4e8902",
+          "other_hash" : "cd4046b6c3b03e20afd506b50e552f1b698283d72566732134437fcb364c47a5",
+          "other_hash_side" : "left"
+        }, {
+          "combined_hash" : "568ca0020114772138db61001c63ac8574a7c8c76c051dd2d3e28964496aa88c",
+          "other_hash" : "919735911d7f9ca0de316878ddb92e7772c9f39bf9d37e9d84ccab39f5d49a11",
+          "other_hash_side" : "left"
+        } ],
+        "node_hash" : "b87c24e0521f559236a2e06d6e1bb196c138c1c9bfcadad3b25708e7eab97ca7",
+        "value" : "abc123"
+      } ],
+      "items" : {
+        "$ref" : "#/components/schemas/proof"
+      }
     }
   }
 };
@@ -6691,6 +6870,9 @@
                     <li class="nav-item" data-group="Shared" data-name="stopNode">
                       <a class="nav-link link-secondary" href="#api-Shared-stopNode">stopNode</a>
                     </li>
+                    <li class="nav-item" data-group="Shared" data-name="walletGetNetworkInfo">
+                      <a class="nav-link link-secondary" href="#api-Shared-walletGetNetworkInfo">walletGetNetworkInfo</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="VerifiedCredential">
                     <a class="nav-link" href="#api-VerifiedCredential">VerifiedCredential</a>
                   </li>
@@ -6799,9 +6981,6 @@
                     <li class="nav-item" data-group="WalletNode" data-name="setWalletResyncOnStartup">
                       <a class="nav-link link-secondary" href="#api-WalletNode-setWalletResyncOnStartup">setWalletResyncOnStartup</a>
                     </li>
-                    <li class="nav-item" data-group="WalletNode" data-name="walletGetNetworkInfo">
-                      <a class="nav-link link-secondary" href="#api-WalletNode-walletGetNetworkInfo">walletGetNetworkInfo</a>
-                    </li>
                     <li class="nav-item" data-group="WalletNode" data-name="walletPushTx">
                       <a class="nav-link link-secondary" href="#api-WalletNode-walletPushTx">walletPushTx</a>
                     </li>
@@ -6818,7 +6997,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.2.0</div>
+              <div class="app-desc">Version: 2.3.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -7019,7 +7198,7 @@ The wallet uses port 9256 by default.</div>
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
+                            <h3> Status: 200 - OK </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
@@ -7034,11 +7213,11 @@ The wallet uses port 9256 by default.</div>
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "OK response without return values",
+  "description" : "OK",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
@@ -9369,7 +9548,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_89"
+        "$ref" : "#/components/schemas/inline_response_200_90"
       }
     }
   }
@@ -9490,7 +9669,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_93"
+        "$ref" : "#/components/schemas/inline_response_200_94"
       }
     }
   }
@@ -9611,7 +9790,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_89"
+        "$ref" : "#/components/schemas/inline_response_200_90"
       }
     }
   }
@@ -9732,7 +9911,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_87"
+        "$ref" : "#/components/schemas/inline_response_200_88"
       }
     }
   }
@@ -9853,7 +10032,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_89"
+        "$ref" : "#/components/schemas/inline_response_200_90"
       }
     }
   }
@@ -9974,7 +10153,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_94"
+        "$ref" : "#/components/schemas/inline_response_200_95"
       }
     }
   }
@@ -10097,7 +10276,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_95"
+        "$ref" : "#/components/schemas/inline_response_200_96"
       }
     }
   }
@@ -10218,7 +10397,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_86"
+        "$ref" : "#/components/schemas/inline_response_200_87"
       }
     }
   }
@@ -10339,7 +10518,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_92"
+        "$ref" : "#/components/schemas/inline_response_200_93"
       }
     }
   }
@@ -10460,7 +10639,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_90"
+        "$ref" : "#/components/schemas/inline_response_200_91"
       }
     }
   }
@@ -10581,7 +10760,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_91"
+        "$ref" : "#/components/schemas/inline_response_200_92"
       }
     }
   }
@@ -10702,7 +10881,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_88"
+        "$ref" : "#/components/schemas/inline_response_200_89"
       }
     }
   }
@@ -10823,7 +11002,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_94"
+        "$ref" : "#/components/schemas/inline_response_200_95"
       }
     }
   }
@@ -10944,7 +11123,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_89"
+        "$ref" : "#/components/schemas/inline_response_200_90"
       }
     }
   }
@@ -11318,7 +11497,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_75"
+        "$ref" : "#/components/schemas/inline_response_200_76"
       }
     }
   }
@@ -11697,7 +11876,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_74"
+        "$ref" : "#/components/schemas/inline_response_200_75"
       }
     }
   }
@@ -12463,7 +12642,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_26"
+        "$ref" : "#/components/schemas/inline_response_200_74"
       }
     }
   }
@@ -13049,7 +13228,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
+                            <h3> Status: 200 - OK </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
@@ -13064,11 +13243,11 @@ Note that a proposal can be in a passed and closable state now, but become faile
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "OK response without return values",
+  "description" : "OK",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
@@ -13192,7 +13371,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_96"
+        "$ref" : "#/components/schemas/inline_response_200_97"
       }
     }
   }
@@ -16273,7 +16452,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_79"
+        "$ref" : "#/components/schemas/inline_response_200_80"
       }
     }
   }
@@ -17250,7 +17429,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_76"
+        "$ref" : "#/components/schemas/inline_response_200_77"
       }
     }
   }
@@ -17613,7 +17792,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_76"
+        "$ref" : "#/components/schemas/inline_response_200_77"
       }
     }
   }
@@ -19608,6 +19787,128 @@ Note that a proposal can be in a passed and closable state now, but become faile
 
                         </article>
                       </div>
+                    <div id="api-Shared-walletGetNetworkInfo">
+                      <article id="api-Shared-walletGetNetworkInfo-0" data-group="User" data-name="walletGetNetworkInfo" data-version="0">
+                        <div class="pull-left">
+                          <h1>walletGetNetworkInfo</h1>
+                          <p>Retrieves some information about the current network.</p>
+                        </div>
+                        <p class="marked">Retrieves some information about the current network.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_network_info</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-walletGetNetworkInfo-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/get_network_info" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_walletGetNetworkInfo_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_walletGetNetworkInfo_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-walletGetNetworkInfo-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-walletGetNetworkInfo-200-schema">
+                                  <div id='responses-walletGetNetworkInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_57"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-walletGetNetworkInfo-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-walletGetNetworkInfo-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-walletGetNetworkInfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
                   </section>
                 <section id="api-VerifiedCredential">
                   <h1>VerifiedCredential</h1>
@@ -19822,7 +20123,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_83"
+        "$ref" : "#/components/schemas/inline_response_200_84"
       }
     }
   }
@@ -19943,7 +20244,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_84"
+        "$ref" : "#/components/schemas/inline_response_200_85"
       }
     }
   }
@@ -20064,7 +20365,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_85"
+        "$ref" : "#/components/schemas/inline_response_200_86"
       }
     }
   }
@@ -20185,7 +20486,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_82"
+        "$ref" : "#/components/schemas/inline_response_200_83"
       }
     }
   }
@@ -20923,7 +21224,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_80"
+        "$ref" : "#/components/schemas/inline_response_200_81"
       }
     }
   }
@@ -21780,7 +22081,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_78"
+        "$ref" : "#/components/schemas/inline_response_200_79"
       }
     }
   }
@@ -22514,7 +22815,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_80"
+        "$ref" : "#/components/schemas/inline_response_200_81"
       }
     }
   }
@@ -22635,7 +22936,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_81"
+        "$ref" : "#/components/schemas/inline_response_200_82"
       }
     }
   }
@@ -23250,7 +23551,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_77"
+        "$ref" : "#/components/schemas/inline_response_200_78"
       }
     }
   }
@@ -23519,128 +23820,6 @@ Note that a proposal can be in a passed and closable state now, but become faile
                                     </script>
                                   </div>
                                   <input id='responses-setWalletResyncOnStartup-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-
-                        </article>
-                      </div>
-                    <div id="api-WalletNode-walletGetNetworkInfo">
-                      <article id="api-WalletNode-walletGetNetworkInfo-0" data-group="User" data-name="walletGetNetworkInfo" data-version="0">
-                        <div class="pull-left">
-                          <h1>walletGetNetworkInfo</h1>
-                          <p>Retrieves some information about the current network.</p>
-                        </div>
-                        <p class="marked">Retrieves some information about the current network.</p>            
-                        <p class="http-method" data-type="post">post</p>
-                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_network_info</span></code></pre>
-                        
-                        <h3>Usage</h3>
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="examples-WalletNode-walletGetNetworkInfo-0-curl">
-                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
---cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
---key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
-"https://localhost:9256/get_network_info" \
--d "{}"</code></pre>
-                          <h2>Parameters</h2>
-
-
-
-                            <div class="methodsubtabletitle">Body parameters</div>
-                            <table id="methodsubtable">
-                              <tr>
-                                <th width="150px">Name</th>
-                                <th>Description</th>
-                              </tr>
-                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
-                                <td>
-                                
-                                
-                                <script>
-                                $(document).ready(function() {
-                                  var schemaWrapper = {
-  "description" : "Empty request body",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "type" : "object"
-      }
-    }
-  },
-  "required" : true
-};
-                                  var schema = schemaWrapper.content["application/json"].schema;
-                                  if (schema.$ref != null) {
-                                    schema = defsParser.$refs.get(schema.$ref);
-                                  } else {
-                                    schemaWrapper.components = {};
-                                    schemaWrapper.components.schemas = Object.assign({}, defs);
-                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                      console.log(err);
-                                    });
-                                  }
-                                
-                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_walletGetNetworkInfo_body');
-                                  result.empty();
-                                  result.append(view.render());
-                                });
-                                </script>
-                                <div id="d2e199_walletGetNetworkInfo_body"></div>
-                                </td>
-                                </tr>
-                            </table>
-
-
-
-                          <h2>Responses</h2>
-                            <h3> Status: 200 - OK </h3>
-
-                            <ul class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-walletGetNetworkInfo-200-schema">Schema</a>
-                                </li>
-
-                            </ul>
-
-                            <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-walletGetNetworkInfo-200-schema">
-                                  <div id='responses-walletGetNetworkInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "OK",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_57"
-      }
-    }
-  }
-};
-                                        var schema = schemaWrapper.content["application/json"].schema;
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else {
-                                          schemaWrapper.components = {};
-                                          schemaWrapper.components.schemas = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        //console.log(JSON.stringify(schema));
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-walletGetNetworkInfo-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-walletGetNetworkInfo-200-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-walletGetNetworkInfo-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
