@@ -3301,6 +3301,9 @@
       "transaction" : {
         "$ref" : "#/components/schemas/transaction_record"
       },
+      "fee_transaction" : {
+        "$ref" : "#/components/schemas/transaction_record"
+      },
       "total_fee" : {
         "type" : "integer",
         "format" : "uint64"
@@ -7077,7 +7080,7 @@ The wallet uses port 9256 by default.</div>
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - OK response without return values </h3>
+                            <h3> Status: 200 - OK </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
@@ -7092,11 +7095,11 @@ The wallet uses port 9256 by default.</div>
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "OK response without return values",
+  "description" : "OK",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/apiResponse"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
