@@ -939,6 +939,12 @@ paths:
                 hash_2:
                   type: string
                   format: bytes32
+                page:
+                  type: integer
+                  format: int32
+                max_page_size:
+                  type: integer
+                  format: int32
       responses:
         "200":
           description: OK
@@ -961,6 +967,12 @@ paths:
                             value:
                               type: string
                               format: bytes32
+                      total_pages:
+                        type: integer
+                        format: int32
+                      total_bytes:
+                        type: integer
+                        format: int32
                   - $ref: "#/components/schemas/apiResponse"
   /get_root_history:
     post:
@@ -1338,7 +1350,7 @@ paths:
             schema:
               type: object
               required:
-                - id
+                - store_id
               properties:
                 store_id:
                   type: string
