@@ -2044,7 +2044,18 @@ paths:
                   type: boolean
       responses:
         "200":
-          $ref: "#/components/responses/empty"
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
   /cancel_offers:
     post:
       tags:
@@ -2638,6 +2649,8 @@ paths:
                     properties:
                       transaction:
                         $ref: "#/components/schemas/transaction_record"
+                      fee_transaction:
+                        $ref: "#/components/schemas/transaction_record"
                       total_fee:
                         type: integer
                         format: uint64
@@ -2678,6 +2691,8 @@ paths:
                   - type: object
                     properties:
                       transaction:
+                        $ref: "#/components/schemas/transaction_record"
+                      fee_transaction:
                         $ref: "#/components/schemas/transaction_record"
                       total_fee:
                         type: integer
