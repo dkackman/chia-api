@@ -73,6 +73,10 @@ components:
                   transaction_id:
                     type: string
                     format: hex
+                  transactions:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/transaction_record"
               - $ref: "#/components/schemas/apiResponse"
   schemas:
     amount_filter:
@@ -386,6 +390,10 @@ paths:
                     properties:
                       tx_record:
                         $ref: "#/components/schemas/transaction_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dl_update_multiple:
     post:
@@ -428,6 +436,10 @@ paths:
                   - type: object
                     properties:
                       tx_records:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                      transactions:
                         type: array
                         items:
                           $ref: "#/components/schemas/transaction_record"
@@ -868,6 +880,10 @@ paths:
                         items:
                           type: string
                           format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /nft_mint_nft:
     post:
@@ -957,6 +973,10 @@ paths:
                       nft_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /nft_get_nfts:
     post:
@@ -1051,6 +1071,10 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /nft_get_by_did:
     post:
@@ -1212,6 +1236,10 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /nft_calculate_royalties:
     post:
@@ -1374,6 +1402,10 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /did_create_backup_file:
     post:
@@ -1445,6 +1477,10 @@ paths:
                       transaction_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_information_needed_for_recovery:
     post:
@@ -1538,6 +1574,10 @@ paths:
                       attest_data:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_pubkey:
     post:
@@ -1636,6 +1676,10 @@ paths:
                     properties:
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /did_get_recovery_list:
     post:
@@ -1725,7 +1769,18 @@ paths:
                   type: boolean
       responses:
         "200":
-          $ref: "#/components/responses/empty"
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
   /did_set_wallet_name:
     post:
       tags:
@@ -1829,6 +1884,10 @@ paths:
                         format: uint32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
   /did_get_metadata:
     post:
       tags:
@@ -1903,6 +1962,10 @@ paths:
                     properties:
                       trade_record:
                         $ref: "#/components/schemas/trade_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_offers_count:
     post:
@@ -2016,7 +2079,18 @@ paths:
                   default: "xch"
       responses:
         "200":
-          $ref: "#/components/responses/empty"
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
+                  - $ref: "#/components/schemas/apiResponse"
   /select_coins:
     post:
       tags:
@@ -2312,6 +2386,10 @@ paths:
                         type: string
                       trade_record:
                         $ref: "#/components/schemas/trade_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /cat_asset_id_to_name:
     post:
@@ -2563,6 +2641,10 @@ paths:
                       total_fee:
                         type: integer
                         format: uint64
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /pw_self_pool:
     post:
@@ -2600,6 +2682,10 @@ paths:
                       total_fee:
                         type: integer
                         format: uint64
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /pw_absorb_rewards:
     post:
@@ -2634,8 +2720,14 @@ paths:
                     properties:
                       transaction:
                         $ref: "#/components/schemas/transaction_record"
+                      fee_transaction:
+                        $ref: "#/components/schemas/transaction_record"
                       state:
                         $ref: "#/components/schemas/pool_wallet_info"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /pw_status:
     post:
@@ -2786,6 +2878,10 @@ paths:
                           $ref: "#/components/schemas/transaction_record"
                       signed_tx:
                         $ref: "#/components/schemas/transaction_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /send_transaction:
     post:
@@ -4026,6 +4122,10 @@ paths:
                       wallet_id:
                         type: integer
                         format: uint32
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - type: object
                     description: Response when a new DID wallet is created.
                     properties:
@@ -4081,6 +4181,10 @@ paths:
                       p2_singleton_puzzle_hash:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - type: object
                     description: Response when a new nft wallet is created.
                     properties:
@@ -4106,6 +4210,10 @@ paths:
                       dao_cat_wallet_id:
                         type: integer
                         format: uint32
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                 allOf:
                   - $ref: "#/components/schemas/apiResponse"
   /did_message_spend:
@@ -4303,6 +4411,10 @@ paths:
                         format: int32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /nft_transfer_bulk:
     post:
@@ -4361,6 +4473,10 @@ paths:
                         format: int32
                       spend_bundle:
                         $ref: "#/components/schemas/spend_bundle"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /get_timestamp_for_height:
     post:
@@ -4604,6 +4720,10 @@ paths:
                         items:
                           type: string
                           format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /vc_mint:
     post:
@@ -5020,6 +5140,10 @@ paths:
                         format: hex
                       tx:
                         $ref: "#/components/schemas/transaction_record"
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_parse_proposal:
     post:
@@ -5105,6 +5229,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_get_treasury_balance:
     post:
@@ -5251,6 +5379,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_exit_lockup:
     post:
@@ -5294,6 +5426,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_adjust_filter_level:
     post:
@@ -5375,6 +5511,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_send_to_lockup:
     post:
@@ -5419,6 +5559,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dao_get_proposal_state:
     post:
@@ -5519,6 +5663,10 @@ paths:
                       tx_id:
                         type: string
                         format: hex
+                      transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/transaction_record"
                   - $ref: "#/components/schemas/apiResponse"
   /dl_verify_proof:
     post:

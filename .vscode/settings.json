@@ -1,14 +1,15 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "cSpell.words": [
-        "clawback",
-        "clvm",
-        "ipaddress",
-        "keychain",
-        "merkle",
-        "mojos",
-        "openapi",
-        "puzhash",
-        "puzzlehash"
-    ]
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "cSpell.words": [
+    "clawback",
+    "clvm",
+    "ipaddress",
+    "keychain",
+    "merkle",
+    "mojos",
+    "openapi",
+    "pubkey",
+    "puzhash",
+    "puzzlehash"
+  ]
 }
