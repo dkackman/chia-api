@@ -13,7 +13,7 @@ mempool_item:
       type: integer
       example: 10940866
       format: uint64
-    spend_budndle_name:
+    spend_bundle_name:
       type: string
     additions:
       type: array
@@ -33,7 +33,8 @@ mempool_item:
         $ref: ./coin.yaml#/coin
     program:
       type: string
-      example: "0xff01ffffffa00252418f0ad7a0009dc055a48a2aaff897f4ea6289b57f1ed9c0d8c\
+      example:
+        "0xff01ffffffa00252418f0ad7a0009dc055a48a2aaff897f4ea6289b57f1ed9c0d8c\
         7a5b5e6a8ffff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05\
         ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808\
         080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff\
