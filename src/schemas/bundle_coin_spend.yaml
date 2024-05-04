@@ -1,0 +1,18 @@
+bundle_coin_spend:
+  type: object
+  properties:
+    coin_spend:
+      $ref: ./coin_spend.yaml#/coin_spend
+    eligible_for_dedup:
+      type: boolean
+    eligible_for_fast_forward:
+      type: boolean
+    additions:
+      type: array
+      items:
+        $ref: ./coin.yaml#/coin
+    cost:
+      type: integer
+      format: uint64
+      nullable: true
+      default: null

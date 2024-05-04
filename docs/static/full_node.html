@@ -890,6 +890,31 @@
   },
   "example" : null
 };
+            defs["bundle_coin_spend"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_spend" : {
+      "$ref" : "#/components/schemas/coin_spend"
+    },
+    "eligible_for_dedup" : {
+      "type" : "boolean"
+    },
+    "eligible_for_fast_forward" : {
+      "type" : "boolean"
+    },
+    "additions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/coin"
+      }
+    },
+    "cost" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "nullable" : true
+    }
+  }
+};
             defs["challenge_chain_sub_slot"] = {
   "type" : "object",
   "properties" : {
@@ -1010,37 +1035,6 @@
     "solution" : {
       "type" : "string",
       "example" : "0xff80ffff01ffff33ffa03fa549a708302b401c45cf387f8f03b4f76b7c9eabf567bea974f61dedf721e0ff840098968080ffff33ffa055b9fe4c9ce0cef8ad574bf5a9158dc0db7848b96be1a98ab2806d8f0a376a08ff860197738845808080ff8080"
-    }
-  }
-};
-            defs["condition"] = {
-  "type" : "object",
-  "properties" : {
-    "condition_opcode" : {
-      "type" : "string"
-    },
-    "args" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/components/schemas/condition_with_args"
-      }
-    }
-  }
-};
-            defs["condition_with_args"] = {
-  "type" : "object",
-  "properties" : {
-    "opcode" : {
-      "type" : "string",
-      "example" : "CREATE_COIN"
-    },
-    "vars" : {
-      "type" : "array",
-      "example" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ],
-      "items" : {
-        "type" : "string",
-        "example" : "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d"
-      }
     }
   }
 };
@@ -1975,7 +1969,7 @@
       "format" : "uint64",
       "example" : 10940866
     },
-    "spend_budndle_name" : {
+    "spend_bundle_name" : {
       "type" : "string"
     },
     "additions" : {
@@ -2000,9 +1994,26 @@
         "$ref" : "#/components/schemas/coin"
       }
     },
-    "program" : {
-      "type" : "string",
-      "example" : "0xff01ffffffa00252418f0ad7a0009dc055a48a2aaff897f4ea6289b57f1ed9c0d8c7a5b5e6a8ffff02ffff01ff02ffff01ff02ffff03ff0bffff01ff02ffff03ffff09ff05ffff1dff0bffff1effff0bff0bffff02ff06ffff04ff02ffff04ff17ff8080808080808080ffff01ff02ff17ff2f80ffff01ff088080ff0180ffff01ff04ffff04ff04ffff04ff05ffff04ffff02ff06ffff04ff02ffff04ff17ff80808080ff80808080ffff02ff17ff2f808080ff0180ffff04ffff01ff32ff02ffff03ffff07ff0580ffff01ff0bffff0102ffff02ff06ffff04ff02ffff04ff09ff80808080ffff02ff06ffff04ff02ffff04ff0dff8080808080ffff01ff0bffff0101ff058080ff0180ff018080ffff04ffff01b0b44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124ff018080ff8500ed4e7564ffff80ffff01ffff33ffa057b09fa466e876fed06a697b0b82e237ad81424fa809df8c7f41fbcfcc7fcc25ff8400bffc7b80ffff33ffa03be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033dff8500ec8e78e980ffff3cffa029505509405ab0d47b986bb2456c288dc272b7fecad9a54943db25c26dc03de48080ff8080808080"
+    "assert_height" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "nullable" : true
+    },
+    "assert_before_height" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "nullable" : true
+    },
+    "assert_before_seconds" : {
+      "type" : "integer",
+      "format" : "uint32",
+      "nullable" : true
+    },
+    "bundle_coin_spends" : {
+      "type" : "object",
+      "additionalProperties" : {
+        "$ref" : "#/components/schemas/bundle_coin_spend"
+      }
     }
   }
 };
@@ -2026,32 +2037,6 @@
   "description" : "The type of node:\n  * 1 FULL_NODE\n  * 2 HARVESTER\n  * 3 FARMER\n  * 4 TIMELORD\n  * 5 INTRODUCER\n  * 6 WALLET\n  * 7 DATA_LAYER",
   "enum" : [ 1, 2, 3, 4, 5, 6, 7 ]
 };
-            defs["npc"] = {
-  "type" : "object",
-  "properties" : {
-    "coin_name" : {
-      "type" : "string",
-      "example" : "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278"
-    },
-    "puzzle_hash" : {
-      "type" : "string",
-      "example" : "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
-    },
-    "conditions" : {
-      "type" : "array",
-      "example" : [ [ "0x33", [ {
-        "opcode" : "CREATE_COIN",
-        "vars" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ]
-      } ] ], [ "0x32", [ {
-        "opcode" : "AGG_SIG_ME",
-        "vars" : [ "0xb44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124", "0xcae8db944550d51ef9eb4bdc297ac7a2ddb759f2e202c13df629abb41cc69290" ]
-      } ] ] ],
-      "items" : {
-        "$ref" : "#/components/schemas/condition"
-      }
-    }
-  }
-};
             defs["npc_result"] = {
   "type" : "object",
   "properties" : {
@@ -2060,27 +2045,8 @@
       "format" : "uint16",
       "nullable" : true
     },
-    "npc_list" : {
-      "type" : "array",
-      "example" : [ {
-        "coin_name" : "0xbf71e1d17630e3793321944b5825b5b573ac28c03113498baae997e0781f0278",
-        "conditions" : [ [ "0x33", [ {
-          "opcode" : "CREATE_COIN",
-          "vars" : [ "0x3be9de8637a998987687d6e3f1df95b6bcde6a2cbc7ed96b40fbc9d76bb5033d", "0x00ec8e78e9", "0x" ]
-        } ] ], [ "0x32", [ {
-          "opcode" : "AGG_SIG_ME",
-          "vars" : [ "0xb44f24f7dae4af24334870c3f291c8a8e4d370fb935f0c30b6d1fee734c229d351fed2a5a87c059049d205a8ec3c8124", "0xcae8db944550d51ef9eb4bdc297ac7a2ddb759f2e202c13df629abb41cc69290" ]
-        } ] ] ],
-        "puzzle_hash" : "0xdd259fada9e1fbfb1499df0755462222f31ec512404842b5c7dac26b9a5cb29a"
-      } ],
-      "items" : {
-        "$ref" : "#/components/schemas/npc"
-      }
-    },
-    "clvm_cost" : {
-      "type" : "integer",
-      "format" : "uint64",
-      "example" : 416866
+    "conds" : {
+      "$ref" : "#/components/schemas/spend_bundle_conditions"
     }
   }
 };
@@ -2278,6 +2244,45 @@
     }
   }
 };
+            defs["spend"] = {
+  "type" : "object",
+  "properties" : {
+    "coin_id" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "puzzle_hash" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "height_relative" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "before_seconds_relative" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "birth_height" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "birth_seconds" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "create_coin" : {
+      "type" : "array"
+    },
+    "agg_sig_me" : {
+      "type" : "array"
+    },
+    "flags" : {
+      "type" : "integer",
+      "format" : "uint32"
+    }
+  }
+};
             defs["spend_bundle"] = {
   "type" : "object",
   "properties" : {
@@ -2299,6 +2304,52 @@
       "items" : {
         "$ref" : "#/components/schemas/coin_spend"
       }
+    }
+  }
+};
+            defs["spend_bundle_conditions"] = {
+  "type" : "object",
+  "properties" : {
+    "spends" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/spend"
+      }
+    },
+    "reserve_fee" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "height_absolute" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "seconds_absolute" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "before_height_absolute" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "before_seconds_absolute" : {
+      "type" : "integer",
+      "format" : "uint32"
+    },
+    "agg_sig_unsafe" : {
+      "type" : "array"
+    },
+    "cost" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "removal_amount" : {
+      "type" : "integer",
+      "format" : "uint64"
+    },
+    "addition_amount" : {
+      "type" : "integer",
+      "format" : "uint64"
     }
   }
 };

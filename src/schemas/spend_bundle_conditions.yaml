@@ -1,0 +1,38 @@
+spend_bundle_conditions:
+  type: object
+  properties:
+    spends:
+      type: array
+      items:
+        $ref: ./spend.yaml#/spend
+    reserve_fee:
+      type: integer
+      format: uint64
+    height_absolute:
+      type: integer
+      format: uint32
+    seconds_absolute:
+      type: integer
+      format: uint32
+    before_height_absolute:
+      type: integer
+      format: uint32
+    before_seconds_absolute:
+      type: integer
+      format: uint32
+    agg_sig_unsafe:
+      type: array
+      items:
+        - type: string
+          format: bytes
+        - type: string
+          format: bytes
+    cost:
+      type: integer
+      format: uint64
+    removal_amount:
+      type: integer
+      format: uint64
+    addition_amount:
+      type: integer
+      format: uint64
