@@ -4,7 +4,7 @@
 
 An unoffical [OpenAPI](https://www.openapis.org/) description of [chia](https://github.com/Chia-Network/chia-blockchain) RPC interfaces.
 
-View current spec based on chia 1.7.0:
+View current spec based on chia 2.3.0:
 
 - [In the swagger UI](https://dkackman.github.io/chia-api/?urls.primaryName=Full%20Node)
 - [As a redoc generated site](https://dkackman.github.io/chia-api/redoc/)
