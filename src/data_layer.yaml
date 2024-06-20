@@ -30,6 +30,18 @@ components:
     empty:
       $ref: "responses/empty.yaml#/empty"
   schemas:
+    change:
+      type: object
+      properties:
+        reference_node_hash: 
+          type: string
+          format: bytes32
+        side: 
+          type: integer
+          format: uint8
+        value: 
+          type: string
+          format: bytes32       
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
     dl_proof:
@@ -272,8 +284,7 @@ paths:
                 changelist:
                   type: array
                   items:
-                    type: object
-                    additionalProperties: {}
+                    $ref: "#/components/schemas/change"  
                 fee:
                   type: integer
                   format: uint64
@@ -1380,7 +1391,7 @@ paths:
         - Shared
       description: Retrieves some information about the current network.
       summary: Retrieves some information about the current network.
-      operationId: full_node_get_network_info
+      operationId: get_network_info
       requestBody:
         $ref: "#/components/requestBodies/empty"
       responses:
@@ -1392,6 +1403,53 @@ paths:
                 allOf:
                   - $ref: "#/components/schemas/network_info"
                   - $ref: "#/components/schemas/apiResponse"
+  /multistore_batch_update:
+    post:
+      tags:
+        - Shared
+      description: Retrieves some information about the current network.
+      summary: Retrieves some information about the current network.
+      operationId: multistore_batch_update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - store_updates
+              properties:
+                store_updates:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - store_id
+                      - changelist
+                    properties:
+                      store_id:
+                        type: string
+                        format: bytes32
+                      changelist:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/change"                       
+                submit_on_chain:
+                  type: boolean
+                  default: true
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0      
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/network_info"
+                  - $ref: "#/components/schemas/apiResponse"                  
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
