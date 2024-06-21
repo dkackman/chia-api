@@ -693,6 +693,24 @@
   },
   "description" : "Success indicator and optional error message included in all responses"
 };
+            defs["apply_signatures_body"] = {
+  "required" : [ "signing_responses", "spends" ],
+  "type" : "object",
+  "properties" : {
+    "spends" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/spend"
+      }
+    },
+    "signing_responses" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signing_response"
+      }
+    }
+  }
+};
             defs["cancel_offer_body"] = {
   "required" : [ "secure", "trade_id" ],
   "type" : "object",
@@ -2071,6 +2089,11 @@
       "items" : {
         "$ref" : "#/components/schemas/dl_update_multiple_updates"
       }
+    },
+    "fee" : {
+      "type" : "integer",
+      "format" : "uint64",
+      "default" : 0
     }
   }
 };
@@ -2163,6 +2186,18 @@
   "description" : "The type of filter:\n  * 1 include\n  * 2 exclude",
   "format" : "uint8",
   "enum" : [ 1, 2 ]
+};
+            defs["gather_signing_info_body"] = {
+  "required" : [ "spends" ],
+  "type" : "object",
+  "properties" : {
+    "spends" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/spend"
+      }
+    }
+  }
 };
             defs["get_all_offers_body"] = {
   "type" : "object",
@@ -2514,21 +2549,6 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "routes" : {
-        "type" : "array",
-        "items" : {
-          "type" : "string"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_11"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
       },
@@ -2550,7 +2570,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_12"] = {
+            defs["inline_response_200_11"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2576,7 +2596,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_13"] = {
+            defs["inline_response_200_12"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2595,7 +2615,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_14"] = {
+            defs["inline_response_200_13"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2617,7 +2637,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_15"] = {
+            defs["inline_response_200_14"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2630,7 +2650,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_16"] = {
+            defs["inline_response_200_15"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2642,14 +2662,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17"] = {
+            defs["inline_response_200_16"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "nft_wallets" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_17_nft_wallets"
+          "$ref" : "#/components/schemas/inline_response_200_16_nft_wallets"
         }
       }
     }
@@ -2657,7 +2677,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_17_nft_wallets"] = {
+            defs["inline_response_200_16_nft_wallets"] = {
   "type" : "object",
   "properties" : {
     "wallet_id" : {
@@ -2674,7 +2694,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_18"] = {
+            defs["inline_response_200_17"] = {
   "allOf" : [ {
     "type" : "object",
     "additionalProperties" : {
@@ -2701,12 +2721,28 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_19"] = {
+            defs["inline_response_200_18"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "nft_info" : {
         "$ref" : "#/components/schemas/nft_info"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_19"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      },
+      "backup_data" : {
+        "type" : "string"
       }
     }
   }, {
@@ -2732,22 +2768,6 @@
   "allOf" : [ {
     "type" : "object",
     "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
-      "backup_data" : {
-        "type" : "string"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_21"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
       "transaction" : {
         "$ref" : "#/components/schemas/transaction_record"
       },
@@ -2766,7 +2786,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_22"] = {
+            defs["inline_response_200_21"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2797,7 +2817,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_23"] = {
+            defs["inline_response_200_22"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2837,7 +2857,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_24"] = {
+            defs["inline_response_200_23"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2850,7 +2870,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_25"] = {
+            defs["inline_response_200_24"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2879,7 +2899,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_26"] = {
+            defs["inline_response_200_25"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2897,7 +2917,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_27"] = {
+            defs["inline_response_200_26"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2921,7 +2941,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_28"] = {
+            defs["inline_response_200_27"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -2940,6 +2960,19 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_28"] = {
+  "allOf" : [ {
+    "$ref" : "#/components/schemas/apiResponse"
+  }, {
+    "type" : "object",
+    "properties" : {
+      "wallet_id" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  } ]
+};
             defs["inline_response_200_29"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
@@ -2949,6 +2982,9 @@
       "wallet_id" : {
         "type" : "integer",
         "format" : "uint32"
+      },
+      "name" : {
+        "type" : "string"
       }
     }
   } ]
@@ -2981,22 +3017,6 @@
         "type" : "integer",
         "format" : "uint32"
       },
-      "name" : {
-        "type" : "string"
-      }
-    }
-  } ]
-};
-            defs["inline_response_200_31"] = {
-  "allOf" : [ {
-    "$ref" : "#/components/schemas/apiResponse"
-  }, {
-    "type" : "object",
-    "properties" : {
-      "wallet_id" : {
-        "type" : "integer",
-        "format" : "uint32"
-      },
       "spend_bundle" : {
         "$ref" : "#/components/schemas/spend_bundle"
       },
@@ -3009,7 +3029,7 @@
     }
   } ]
 };
-            defs["inline_response_200_32"] = {
+            defs["inline_response_200_31"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   }, {
@@ -3028,7 +3048,7 @@
     }
   } ]
 };
-            defs["inline_response_200_33"] = {
+            defs["inline_response_200_32"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3040,13 +3060,22 @@
         "items" : {
           "$ref" : "#/components/schemas/transaction_record"
         }
+      },
+      "offer" : {
+        "type" : "string"
+      },
+      "signing_responses" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/signing_response"
+        }
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_34"] = {
+            defs["inline_response_200_33"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3064,7 +3093,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_35"] = {
+            defs["inline_response_200_34"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3080,7 +3109,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_36"] = {
+            defs["inline_response_200_35"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3095,7 +3124,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_37"] = {
+            defs["inline_response_200_36"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3110,7 +3139,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_38"] = {
+            defs["inline_response_200_37"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3131,7 +3160,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_39"] = {
+            defs["inline_response_200_38"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3146,28 +3175,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_4"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "tx_records" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      },
-      "transactions" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_40"] = {
+            defs["inline_response_200_39"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3175,14 +3183,14 @@
         "type" : "string"
       },
       "summary" : {
-        "$ref" : "#/components/schemas/inline_response_200_40_summary"
+        "$ref" : "#/components/schemas/inline_response_200_39_summary"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_40_summary"] = {
+            defs["inline_response_200_39_summary"] = {
   "properties" : {
     "offered" : {
       "type" : "object",
@@ -3226,7 +3234,22 @@
   },
   "example" : null
 };
-            defs["inline_response_200_41"] = {
+            defs["inline_response_200_4"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/transaction_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_40"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3247,7 +3270,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_42"] = {
+            defs["inline_response_200_41"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3263,7 +3286,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_43"] = {
+            defs["inline_response_200_42"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3279,7 +3302,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_44"] = {
+            defs["inline_response_200_43"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3294,7 +3317,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_45"] = {
+            defs["inline_response_200_44"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3319,7 +3342,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_46"] = {
+            defs["inline_response_200_45"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3343,7 +3366,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_47"] = {
+            defs["inline_response_200_46"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3361,7 +3384,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_48"] = {
+            defs["inline_response_200_47"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3374,7 +3397,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_49"] = {
+            defs["inline_response_200_48"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3392,6 +3415,19 @@
         "items" : {
           "$ref" : "#/components/schemas/transaction_record"
         }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_49"] = {
+  "allOf" : [ {
+    "required" : [ "wallet_balance" ],
+    "type" : "object",
+    "properties" : {
+      "wallet_balance" : {
+        "$ref" : "#/components/schemas/wallet_balance"
       }
     }
   }, {
@@ -3418,19 +3454,6 @@
 };
             defs["inline_response_200_50"] = {
   "allOf" : [ {
-    "required" : [ "wallet_balance" ],
-    "type" : "object",
-    "properties" : {
-      "wallet_balance" : {
-        "$ref" : "#/components/schemas/wallet_balance"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_51"] = {
-  "allOf" : [ {
     "type" : "object",
     "properties" : {
       "wallet_balances" : {
@@ -3444,14 +3467,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_52"] = {
+            defs["inline_response_200_51"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/farmer_rewards"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_53"] = {
+            defs["inline_response_200_52"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3478,7 +3501,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_54"] = {
+            defs["inline_response_200_53"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3497,7 +3520,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_55"] = {
+            defs["inline_response_200_54"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3513,7 +3536,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_56"] = {
+            defs["inline_response_200_55"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3530,14 +3553,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_57"] = {
+            defs["inline_response_200_56"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/network_info"
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_58"] = {
+            defs["inline_response_200_57"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3550,7 +3573,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_59"] = {
+            defs["inline_response_200_58"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -3574,22 +3597,7 @@
     }
   } ]
 };
-            defs["inline_response_200_6"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "history" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/singleton_record"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_60"] = {
+            defs["inline_response_200_59"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -3617,12 +3625,27 @@
     "description" : "Return type if the private key is not found."
   } ]
 };
-            defs["inline_response_200_61"] = {
+            defs["inline_response_200_6"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "history" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/singleton_record"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_60"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "private_key" : {
-        "$ref" : "#/components/schemas/inline_response_200_61_private_key"
+        "$ref" : "#/components/schemas/inline_response_200_60_private_key"
       }
     },
     "description" : "The fingerprint of the new key."
@@ -3630,7 +3653,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_61_private_key"] = {
+            defs["inline_response_200_60_private_key"] = {
   "type" : "object",
   "properties" : {
     "fingerprint" : {
@@ -3640,7 +3663,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_62"] = {
+            defs["inline_response_200_61"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3662,7 +3685,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_63"] = {
+            defs["inline_response_200_62"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3680,7 +3703,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_64"] = {
+            defs["inline_response_200_63"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3693,14 +3716,14 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_65"] = {
+            defs["inline_response_200_64"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "notifications" : {
         "type" : "array",
         "items" : {
-          "$ref" : "#/components/schemas/inline_response_200_65_notifications"
+          "$ref" : "#/components/schemas/inline_response_200_64_notifications"
         }
       }
     }
@@ -3708,7 +3731,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_65_notifications"] = {
+            defs["inline_response_200_64_notifications"] = {
   "type" : "object",
   "properties" : {
     "id" : {
@@ -3730,7 +3753,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_66"] = {
+            defs["inline_response_200_65"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3742,7 +3765,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_67"] = {
+            defs["inline_response_200_66"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3763,7 +3786,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_68"] = {
+            defs["inline_response_200_67"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3788,7 +3811,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_69"] = {
+            defs["inline_response_200_68"] = {
   "type" : "object",
   "properties" : {
     "coin_records" : {
@@ -3799,6 +3822,25 @@
     }
   },
   "allOf" : [ {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_69"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "coin_records" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/coin_record"
+        }
+      },
+      "total_count" : {
+        "type" : "integer",
+        "format" : "uint32"
+      }
+    }
+  }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
@@ -3818,25 +3860,6 @@
   } ]
 };
             defs["inline_response_200_70"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "coin_records" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/coin_record"
-        }
-      },
-      "total_count" : {
-        "type" : "integer",
-        "format" : "uint32"
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_71"] = {
   "type" : "object",
   "properties" : {
     "isValid" : {
@@ -3844,7 +3867,7 @@
     }
   }
 };
-            defs["inline_response_200_72"] = {
+            defs["inline_response_200_71"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -3863,7 +3886,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_73"] = {
+            defs["inline_response_200_72"] = {
   "allOf" : [ {
     "$ref" : "#/components/schemas/apiResponse"
   } ],
@@ -4017,7 +4040,7 @@
     "description" : "Response when a dao wallet is created."
   } ]
 };
-            defs["inline_response_200_74"] = {
+            defs["inline_response_200_73"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4029,7 +4052,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_75"] = {
+            defs["inline_response_200_74"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4083,7 +4106,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_76"] = {
+            defs["inline_response_200_75"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4096,7 +4119,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_77"] = {
+            defs["inline_response_200_76"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4122,7 +4145,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_78"] = {
+            defs["inline_response_200_77"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4135,7 +4158,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_79"] = {
+            defs["inline_response_200_78"] = {
   "allOf" : [ {
     "type" : "object",
     "additionalProperties" : {
@@ -4151,22 +4174,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_8"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "transactions" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/transaction_record"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_80"] = {
+            defs["inline_response_200_79"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4183,7 +4191,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_81"] = {
+            defs["inline_response_200_8"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "connections" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/connection_info"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_80"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4211,7 +4234,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_82"] = {
+            defs["inline_response_200_81"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4233,7 +4256,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_83"] = {
+            defs["inline_response_200_82"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4251,7 +4274,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_84"] = {
+            defs["inline_response_200_83"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4263,7 +4286,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_85"] = {
+            defs["inline_response_200_84"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4284,7 +4307,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_86"] = {
+            defs["inline_response_200_85"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4299,7 +4322,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_87"] = {
+            defs["inline_response_200_86"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4322,7 +4345,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_88"] = {
+            defs["inline_response_200_87"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4348,7 +4371,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_89"] = {
+            defs["inline_response_200_88"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4361,22 +4384,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_9"] = {
-  "allOf" : [ {
-    "type" : "object",
-    "properties" : {
-      "connections" : {
-        "type" : "array",
-        "items" : {
-          "$ref" : "#/components/schemas/connection_info"
-        }
-      }
-    }
-  }, {
-    "$ref" : "#/components/schemas/apiResponse"
-  } ]
-};
-            defs["inline_response_200_90"] = {
+            defs["inline_response_200_89"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4398,7 +4406,22 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_91"] = {
+            defs["inline_response_200_9"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "routes" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_90"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4414,7 +4437,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_92"] = {
+            defs["inline_response_200_91"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4430,7 +4453,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_93"] = {
+            defs["inline_response_200_92"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4442,7 +4465,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_94"] = {
+            defs["inline_response_200_93"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4454,7 +4477,7 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_95"] = {
+            defs["inline_response_200_94"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4479,19 +4502,19 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_96"] = {
+            defs["inline_response_200_95"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
       "state" : {
-        "$ref" : "#/components/schemas/inline_response_200_96_state"
+        "$ref" : "#/components/schemas/inline_response_200_95_state"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_96_state"] = {
+            defs["inline_response_200_95_state"] = {
   "type" : "object",
   "properties" : {
     "total_votes_needed" : {
@@ -4518,7 +4541,7 @@
   },
   "example" : null
 };
-            defs["inline_response_200_97"] = {
+            defs["inline_response_200_96"] = {
   "allOf" : [ {
     "type" : "object",
     "properties" : {
@@ -4526,14 +4549,14 @@
         "type" : "boolean"
       },
       "verified_clvm_hashes" : {
-        "$ref" : "#/components/schemas/inline_response_200_97_verified_clvm_hashes"
+        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes"
       }
     }
   }, {
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
-            defs["inline_response_200_97_verified_clvm_hashes"] = {
+            defs["inline_response_200_96_verified_clvm_hashes"] = {
   "type" : "object",
   "properties" : {
     "store_id" : {
@@ -4543,13 +4566,13 @@
     "inclusions" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/components/schemas/inline_response_200_97_verified_clvm_hashes_inclusions"
+        "$ref" : "#/components/schemas/inline_response_200_96_verified_clvm_hashes_inclusions"
       }
     }
   },
   "example" : null
 };
-            defs["inline_response_200_97_verified_clvm_hashes_inclusions"] = {
+            defs["inline_response_200_96_verified_clvm_hashes_inclusions"] = {
   "type" : "object",
   "properties" : {
     "key_clvm_hash" : {
@@ -4562,6 +4585,49 @@
     }
   },
   "example" : null
+};
+            defs["inline_response_200_97"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "signing_instructions" : {
+        "$ref" : "#/components/schemas/signing_instructions"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_98"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "signed_transactions" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/signed_transaction"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
+            defs["inline_response_200_99"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "mempool_ids" : {
+        "type" : "array",
+        "items" : {
+          "type" : "string",
+          "format" : "bytes32"
+        }
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
 };
             defs["layer"] = {
   "type" : "object",
@@ -4655,6 +4721,10 @@
     "network_prefix" : {
       "type" : "string",
       "example" : "xch"
+    },
+    "genesis_challenge" : {
+      "type" : "string",
+      "example" : "f4c0c9d5b3cd59d6f7c76ecd780e646a2c55064367d0ddbb42b2b6462a4674b2"
     }
   },
   "description" : "Basic information about the current network."
@@ -5264,9 +5334,9 @@
 };
             defs["OneOfcreate_new_wallet_body"] = {};
             defs["OneOfdao_create_proposal_body"] = {};
+            defs["OneOfinline_response_200_58"] = {};
             defs["OneOfinline_response_200_59"] = {};
-            defs["OneOfinline_response_200_60"] = {};
-            defs["OneOfinline_response_200_73"] = {};
+            defs["OneOfinline_response_200_72"] = {};
             defs["open_connection_body"] = {
   "required" : [ "ip", "port" ],
   "type" : "object",
@@ -5785,6 +5855,145 @@
     }
   }
 };
+            defs["signature"] = {
+  "type" : "object",
+  "properties" : {
+    "type" : {
+      "type" : "string"
+    },
+    "signature" : {
+      "type" : "string",
+      "format" : "bytes"
+    }
+  }
+};
+            defs["signed_transaction"] = {
+  "type" : "object",
+  "properties" : {
+    "transaction_info" : {
+      "$ref" : "#/components/schemas/signed_transaction_transaction_info"
+    }
+  }
+};
+            defs["signed_transaction_transaction_info"] = {
+  "type" : "object",
+  "properties" : {
+    "spends" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/spend"
+      }
+    },
+    "signatures" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signature"
+      }
+    }
+  },
+  "example" : null
+};
+            defs["signing_instructions"] = {
+  "type" : "object",
+  "properties" : {
+    "key_hints" : {
+      "$ref" : "#/components/schemas/signing_instructions_key_hints"
+    },
+    "target" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signing_instructions_target"
+      }
+    }
+  }
+};
+            defs["signing_instructions_key_hints"] = {
+  "type" : "object",
+  "properties" : {
+    "sum_hints" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signing_instructions_key_hints_sum_hints"
+      }
+    },
+    "path_hints" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signing_instructions_key_hints_path_hints"
+      }
+    }
+  },
+  "example" : null
+};
+            defs["signing_instructions_key_hints_path_hints"] = {
+  "type" : "object",
+  "properties" : {
+    "root_fingerprint" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "path" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "bytes"
+      }
+    }
+  },
+  "example" : null
+};
+            defs["signing_instructions_key_hints_sum_hints"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprints" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string",
+        "format" : "bytes"
+      }
+    },
+    "synthetic_offset" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "final_pubkey" : {
+      "type" : "string",
+      "format" : "bytes"
+    }
+  },
+  "example" : null
+};
+            defs["signing_instructions_target"] = {
+  "type" : "object",
+  "properties" : {
+    "fingerprint" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "message" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "hook" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  },
+  "example" : null
+};
+            defs["signing_response"] = {
+  "type" : "object",
+  "properties" : {
+    "signature" : {
+      "type" : "string",
+      "format" : "bytes"
+    },
+    "hook" : {
+      "type" : "string",
+      "format" : "bytes32"
+    }
+  }
+};
             defs["singleton_record"] = {
   "type" : "object",
   "properties" : {
@@ -5829,6 +6038,22 @@
       "type" : "integer",
       "format" : "uint64",
       "example" : 1669352585
+    }
+  }
+};
+            defs["spend"] = {
+  "type" : "object",
+  "properties" : {
+    "coin" : {
+      "$ref" : "#/components/schemas/coin"
+    },
+    "puzzle" : {
+      "type" : "string",
+      "format" : "hex"
+    },
+    "solution" : {
+      "type" : "string",
+      "format" : "hex"
     }
   }
 };
@@ -5905,6 +6130,18 @@
       } ],
       "items" : {
         "$ref" : "#/components/schemas/proof"
+      }
+    }
+  }
+};
+            defs["submit_transactions_body"] = {
+  "required" : [ "signed_transactions" ],
+  "type" : "object",
+  "properties" : {
+    "signed_transactions" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/signed_transaction"
       }
     }
   }
@@ -6876,6 +7113,18 @@
                     <li class="nav-item" data-group="Shared" data-name="walletGetNetworkInfo">
                       <a class="nav-link link-secondary" href="#api-Shared-walletGetNetworkInfo">walletGetNetworkInfo</a>
                     </li>
+                  <li class="nav-header nav-item" data-group="Signing">
+                    <a class="nav-link" href="#api-Signing">Signing</a>
+                  </li>
+                    <li class="nav-item" data-group="Signing" data-name="applySignatures">
+                      <a class="nav-link link-secondary" href="#api-Signing-applySignatures">applySignatures</a>
+                    </li>
+                    <li class="nav-item" data-group="Signing" data-name="gatherSigningInfo">
+                      <a class="nav-link link-secondary" href="#api-Signing-gatherSigningInfo">gatherSigningInfo</a>
+                    </li>
+                    <li class="nav-item" data-group="Signing" data-name="submitTransactions">
+                      <a class="nav-link link-secondary" href="#api-Signing-submitTransactions">submitTransactions</a>
+                    </li>
                   <li class="nav-header nav-item" data-group="VerifiedCredential">
                     <a class="nav-link" href="#api-VerifiedCredential">VerifiedCredential</a>
                   </li>
@@ -7000,7 +7249,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.3.0</div>
+              <div class="app-desc">Version: 2.4.0</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The wallet uses port 9256 by default.</div>
@@ -7099,7 +7348,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -7220,7 +7469,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -7341,7 +7590,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -7470,7 +7719,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_43"
+        "$ref" : "#/components/schemas/inline_response_200_42"
       }
     }
   }
@@ -7599,7 +7848,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_42"
+        "$ref" : "#/components/schemas/inline_response_200_41"
       }
     }
   }
@@ -7721,7 +7970,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_14"
       }
     }
   }
@@ -7843,7 +8092,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -7964,7 +8213,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_39"
+        "$ref" : "#/components/schemas/inline_response_200_38"
       }
     }
   }
@@ -8085,7 +8334,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_41"
+        "$ref" : "#/components/schemas/inline_response_200_40"
       }
     }
   }
@@ -8206,7 +8455,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_38"
+        "$ref" : "#/components/schemas/inline_response_200_37"
       }
     }
   }
@@ -8328,7 +8577,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_35"
+        "$ref" : "#/components/schemas/inline_response_200_34"
       }
     }
   }
@@ -8449,7 +8698,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_37"
+        "$ref" : "#/components/schemas/inline_response_200_36"
       }
     }
   }
@@ -8570,7 +8819,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_40"
+        "$ref" : "#/components/schemas/inline_response_200_39"
       }
     }
   }
@@ -8692,7 +8941,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_34"
+        "$ref" : "#/components/schemas/inline_response_200_33"
       }
     }
   }
@@ -8814,7 +9063,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_44"
+        "$ref" : "#/components/schemas/inline_response_200_43"
       }
     }
   }
@@ -8935,7 +9184,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_36"
+        "$ref" : "#/components/schemas/inline_response_200_35"
       }
     }
   }
@@ -9056,7 +9305,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_33"
+        "$ref" : "#/components/schemas/inline_response_200_32"
       }
     }
   }
@@ -9180,7 +9429,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -9305,7 +9554,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_70"
+        "$ref" : "#/components/schemas/inline_response_200_69"
       }
     }
   }
@@ -9427,7 +9676,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_69"
+        "$ref" : "#/components/schemas/inline_response_200_68"
       }
     }
   }
@@ -9551,7 +9800,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_90"
+        "$ref" : "#/components/schemas/inline_response_200_89"
       }
     }
   }
@@ -9672,7 +9921,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_94"
+        "$ref" : "#/components/schemas/inline_response_200_93"
       }
     }
   }
@@ -9793,7 +10042,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_90"
+        "$ref" : "#/components/schemas/inline_response_200_89"
       }
     }
   }
@@ -9914,7 +10163,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_88"
+        "$ref" : "#/components/schemas/inline_response_200_87"
       }
     }
   }
@@ -10035,7 +10284,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_90"
+        "$ref" : "#/components/schemas/inline_response_200_89"
       }
     }
   }
@@ -10156,7 +10405,7 @@ The wallet uses port 9256 by default.</div>
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_95"
+        "$ref" : "#/components/schemas/inline_response_200_94"
       }
     }
   }
@@ -10279,7 +10528,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_96"
+        "$ref" : "#/components/schemas/inline_response_200_95"
       }
     }
   }
@@ -10400,7 +10649,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_87"
+        "$ref" : "#/components/schemas/inline_response_200_86"
       }
     }
   }
@@ -10521,7 +10770,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_93"
+        "$ref" : "#/components/schemas/inline_response_200_92"
       }
     }
   }
@@ -10642,7 +10891,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_91"
+        "$ref" : "#/components/schemas/inline_response_200_90"
       }
     }
   }
@@ -10763,7 +11012,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_92"
+        "$ref" : "#/components/schemas/inline_response_200_91"
       }
     }
   }
@@ -10884,7 +11133,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_89"
+        "$ref" : "#/components/schemas/inline_response_200_88"
       }
     }
   }
@@ -11005,7 +11254,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_95"
+        "$ref" : "#/components/schemas/inline_response_200_94"
       }
     }
   }
@@ -11126,7 +11375,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_90"
+        "$ref" : "#/components/schemas/inline_response_200_89"
       }
     }
   }
@@ -11250,7 +11499,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_23"
+        "$ref" : "#/components/schemas/inline_response_200_22"
       }
     }
   }
@@ -11379,7 +11628,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_20"
+        "$ref" : "#/components/schemas/inline_response_200_19"
       }
     }
   }
@@ -11500,7 +11749,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_76"
+        "$ref" : "#/components/schemas/inline_response_200_75"
       }
     }
   }
@@ -11629,7 +11878,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_25"
+        "$ref" : "#/components/schemas/inline_response_200_24"
       }
     }
   }
@@ -11758,7 +12007,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_28"
+        "$ref" : "#/components/schemas/inline_response_200_27"
       }
     }
   }
@@ -11879,7 +12128,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_75"
+        "$ref" : "#/components/schemas/inline_response_200_74"
       }
     }
   }
@@ -12008,7 +12257,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_22"
+        "$ref" : "#/components/schemas/inline_response_200_21"
       }
     }
   }
@@ -12137,7 +12386,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_32"
+        "$ref" : "#/components/schemas/inline_response_200_31"
       }
     }
   }
@@ -12266,7 +12515,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_24"
+        "$ref" : "#/components/schemas/inline_response_200_23"
       }
     }
   }
@@ -12395,7 +12644,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_27"
+        "$ref" : "#/components/schemas/inline_response_200_26"
       }
     }
   }
@@ -12524,7 +12773,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_30"
+        "$ref" : "#/components/schemas/inline_response_200_29"
       }
     }
   }
@@ -12645,7 +12894,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_74"
+        "$ref" : "#/components/schemas/inline_response_200_73"
       }
     }
   }
@@ -12766,7 +13015,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_26"
+        "$ref" : "#/components/schemas/inline_response_200_25"
       }
     }
   }
@@ -12887,7 +13136,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_29"
+        "$ref" : "#/components/schemas/inline_response_200_28"
       }
     }
   }
@@ -13008,7 +13257,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -13129,7 +13378,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_31"
+        "$ref" : "#/components/schemas/inline_response_200_30"
       }
     }
   }
@@ -13250,7 +13499,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -13374,7 +13623,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_97"
+        "$ref" : "#/components/schemas/inline_response_200_96"
       }
     }
   }
@@ -13619,7 +13868,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -14103,7 +14352,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -14955,7 +15204,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_61"
+        "$ref" : "#/components/schemas/inline_response_200_60"
       }
     }
   }
@@ -15084,7 +15333,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_62"
+        "$ref" : "#/components/schemas/inline_response_200_61"
       }
     }
   }
@@ -15457,7 +15706,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_58"
+        "$ref" : "#/components/schemas/inline_response_200_57"
       }
     }
   }
@@ -15586,7 +15835,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_60"
+        "$ref" : "#/components/schemas/inline_response_200_59"
       }
     }
   }
@@ -15708,7 +15957,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_59"
+        "$ref" : "#/components/schemas/inline_response_200_58"
       }
     }
   }
@@ -15837,7 +16086,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_58"
+        "$ref" : "#/components/schemas/inline_response_200_57"
       }
     }
   }
@@ -15959,7 +16208,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_71"
+        "$ref" : "#/components/schemas/inline_response_200_70"
       }
     }
   }
@@ -16205,7 +16454,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -16326,7 +16575,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_18"
+        "$ref" : "#/components/schemas/inline_response_200_17"
       }
     }
   }
@@ -16455,7 +16704,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_80"
+        "$ref" : "#/components/schemas/inline_response_200_79"
       }
     }
   }
@@ -16576,7 +16825,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_15"
+        "$ref" : "#/components/schemas/inline_response_200_14"
       }
     }
   }
@@ -16697,7 +16946,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_19"
+        "$ref" : "#/components/schemas/inline_response_200_18"
       }
     }
   }
@@ -16818,7 +17067,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_13"
+        "$ref" : "#/components/schemas/inline_response_200_12"
       }
     }
   }
@@ -16947,7 +17196,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_16"
+        "$ref" : "#/components/schemas/inline_response_200_15"
       }
     }
   }
@@ -17069,7 +17318,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_17"
+        "$ref" : "#/components/schemas/inline_response_200_16"
       }
     }
   }
@@ -17190,7 +17439,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_11"
+        "$ref" : "#/components/schemas/inline_response_200_10"
       }
     }
   }
@@ -17311,7 +17560,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_12"
+        "$ref" : "#/components/schemas/inline_response_200_11"
       }
     }
   }
@@ -17432,7 +17681,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_77"
+        "$ref" : "#/components/schemas/inline_response_200_76"
       }
     }
   }
@@ -17553,7 +17802,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -17795,7 +18044,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_77"
+        "$ref" : "#/components/schemas/inline_response_200_76"
       }
     }
   }
@@ -17916,7 +18165,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_14"
+        "$ref" : "#/components/schemas/inline_response_200_13"
       }
     }
   }
@@ -18163,7 +18412,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_65"
+        "$ref" : "#/components/schemas/inline_response_200_64"
       }
     }
   }
@@ -18285,7 +18534,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_66"
+        "$ref" : "#/components/schemas/inline_response_200_65"
       }
     }
   }
@@ -18407,7 +18656,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_67"
+        "$ref" : "#/components/schemas/inline_response_200_66"
       }
     }
   }
@@ -18529,7 +18778,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_68"
+        "$ref" : "#/components/schemas/inline_response_200_67"
       }
     }
   }
@@ -18653,7 +18902,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_46"
+        "$ref" : "#/components/schemas/inline_response_200_45"
       }
     }
   }
@@ -18774,7 +19023,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -18895,7 +19144,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_45"
+        "$ref" : "#/components/schemas/inline_response_200_44"
       }
     }
   }
@@ -19024,7 +19273,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_47"
+        "$ref" : "#/components/schemas/inline_response_200_46"
       }
     }
   }
@@ -19271,7 +19520,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_9"
+        "$ref" : "#/components/schemas/inline_response_200_8"
       }
     }
   }
@@ -19393,7 +19642,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_10"
+        "$ref" : "#/components/schemas/inline_response_200_9"
       }
     }
   }
@@ -19881,7 +20130,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_57"
+        "$ref" : "#/components/schemas/inline_response_200_56"
       }
     }
   }
@@ -19907,6 +20156,372 @@ Note that a proposal can be in a passed and closable state now, but become faile
                                     </script>
                                   </div>
                                   <input id='responses-walletGetNetworkInfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                  </section>
+                <section id="api-Signing">
+                  <h1>Signing</h1>
+                    <div id="api-Signing-applySignatures">
+                      <article id="api-Signing-applySignatures-0" data-group="User" data-name="applySignatures" data-version="0">
+                        <div class="pull-left">
+                          <h1>applySignatures</h1>
+                          <p>Applies signatures to a list of spends.</p>
+                        </div>
+                        <p class="marked">Applies signatures to a list of spends.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/apply_signatures</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Signing-applySignatures-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/apply_signatures" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/apply_signatures_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_applySignatures_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_applySignatures_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-applySignatures-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-applySignatures-200-schema">
+                                  <div id='responses-applySignatures-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_98"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-applySignatures-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-applySignatures-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-applySignatures-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Signing-gatherSigningInfo">
+                      <article id="api-Signing-gatherSigningInfo-0" data-group="User" data-name="gatherSigningInfo" data-version="0">
+                        <div class="pull-left">
+                          <h1>gatherSigningInfo</h1>
+                          <p>Gathers information for signing.</p>
+                        </div>
+                        <p class="marked">Gathers information for signing.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/gather_signing_info</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Signing-gatherSigningInfo-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/gather_signing_info" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/gather_signing_info_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_gatherSigningInfo_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_gatherSigningInfo_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-gatherSigningInfo-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-gatherSigningInfo-200-schema">
+                                  <div id='responses-gatherSigningInfo-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_97"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-gatherSigningInfo-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-gatherSigningInfo-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-gatherSigningInfo-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Signing-submitTransactions">
+                      <article id="api-Signing-submitTransactions-0" data-group="User" data-name="submitTransactions" data-version="0">
+                        <div class="pull-left">
+                          <h1>submitTransactions</h1>
+                          <p>Submits a list of signed transactions.</p>
+                        </div>
+                        <p class="marked">Submits a list of signed transactions.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/submit_transactions</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Signing-submitTransactions-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/wallet/private_wallet.crt \
+--key ~/.chia/mainnet/config/ssl/wallet/private_wallet.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:9256/submit_transactions" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/submit_transactions_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_submitTransactions_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_submitTransactions_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-submitTransactions-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-submitTransactions-200-schema">
+                                  <div id='responses-submitTransactions-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_99"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-submitTransactions-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-submitTransactions-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-submitTransactions-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -20126,7 +20741,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_84"
+        "$ref" : "#/components/schemas/inline_response_200_83"
       }
     }
   }
@@ -20247,7 +20862,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_85"
+        "$ref" : "#/components/schemas/inline_response_200_84"
       }
     }
   }
@@ -20368,7 +20983,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_86"
+        "$ref" : "#/components/schemas/inline_response_200_85"
       }
     }
   }
@@ -20489,7 +21104,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_83"
+        "$ref" : "#/components/schemas/inline_response_200_82"
       }
     }
   }
@@ -20610,7 +21225,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -20731,7 +21346,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_8"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -20855,7 +21470,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_49"
+        "$ref" : "#/components/schemas/inline_response_200_48"
       }
     }
   }
@@ -21105,7 +21720,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -21227,7 +21842,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_81"
+        "$ref" : "#/components/schemas/inline_response_200_80"
       }
     }
   }
@@ -21349,7 +21964,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_48"
+        "$ref" : "#/components/schemas/inline_response_200_47"
       }
     }
   }
@@ -21471,7 +22086,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_52"
+        "$ref" : "#/components/schemas/inline_response_200_51"
       }
     }
   }
@@ -21592,7 +22207,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_56"
+        "$ref" : "#/components/schemas/inline_response_200_55"
       }
     }
   }
@@ -21713,7 +22328,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_53"
+        "$ref" : "#/components/schemas/inline_response_200_52"
       }
     }
   }
@@ -21842,7 +22457,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -21963,7 +22578,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_55"
+        "$ref" : "#/components/schemas/inline_response_200_54"
       }
     }
   }
@@ -22084,7 +22699,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_79"
+        "$ref" : "#/components/schemas/inline_response_200_78"
       }
     }
   }
@@ -22205,7 +22820,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_54"
+        "$ref" : "#/components/schemas/inline_response_200_53"
       }
     }
   }
@@ -22334,7 +22949,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_50"
+        "$ref" : "#/components/schemas/inline_response_200_49"
       }
     }
   }
@@ -22455,7 +23070,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_51"
+        "$ref" : "#/components/schemas/inline_response_200_50"
       }
     }
   }
@@ -22576,7 +23191,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -22697,7 +23312,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_21"
+        "$ref" : "#/components/schemas/inline_response_200_20"
       }
     }
   }
@@ -22818,7 +23433,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_81"
+        "$ref" : "#/components/schemas/inline_response_200_80"
       }
     }
   }
@@ -22939,7 +23554,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_82"
+        "$ref" : "#/components/schemas/inline_response_200_81"
       }
     }
   }
@@ -23064,7 +23679,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_73"
+        "$ref" : "#/components/schemas/inline_response_200_72"
       }
     }
   }
@@ -23186,7 +23801,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_72"
+        "$ref" : "#/components/schemas/inline_response_200_71"
       }
     }
   }
@@ -23311,7 +23926,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_64"
+        "$ref" : "#/components/schemas/inline_response_200_63"
       }
     }
   }
@@ -23433,7 +24048,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_63"
+        "$ref" : "#/components/schemas/inline_response_200_62"
       }
     }
   }
@@ -23554,7 +24169,7 @@ Note that a proposal can be in a passed and closable state now, but become faile
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_78"
+        "$ref" : "#/components/schemas/inline_response_200_77"
       }
     }
   }

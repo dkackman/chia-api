@@ -7,7 +7,7 @@ info:
     [using mutualTLS](https://github.com/dkackman/chia-api/wiki/Mutual-TLS).
 
     The data layer uses port 8562 by default.
-  version: 2.3.0
+  version: 2.4.0
   title: Chia RPC
   termsOfService: https://www.chia.net/assets/legal/Guidelines-for-Using-Chia-Network.pdf
   contact:
@@ -33,15 +33,15 @@ components:
     change:
       type: object
       properties:
-        reference_node_hash: 
+        reference_node_hash:
           type: string
           format: bytes32
-        side: 
+        side:
           type: integer
           format: uint8
-        value: 
+        value:
           type: string
-          format: bytes32       
+          format: bytes32
     connection_info:
       $ref: "schemas/connection_info.yaml#/connection_info"
     dl_proof:
@@ -284,7 +284,7 @@ paths:
                 changelist:
                   type: array
                   items:
-                    $ref: "#/components/schemas/change"  
+                    $ref: "#/components/schemas/change"
                 fee:
                   type: integer
                   format: uint64
@@ -1433,14 +1433,14 @@ paths:
                       changelist:
                         type: array
                         items:
-                          $ref: "#/components/schemas/change"                       
+                          $ref: "#/components/schemas/change"
                 submit_on_chain:
                   type: boolean
                   default: true
                 fee:
                   type: integer
                   format: uint64
-                  default: 0      
+                  default: 0
       responses:
         "200":
           $ref: "#/components/responses/empty"
@@ -1474,7 +1474,7 @@ paths:
                       tx_id:
                         type: string
                         format: bytes32
-                  - $ref: "#/components/schemas/apiResponse"          
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
