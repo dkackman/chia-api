@@ -138,6 +138,15 @@ components:
       $ref: "schemas/proposal_info.yaml#/proposal_info"
     puzzle_announcement:
       $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
+    signing_response:
+      type: object
+      properties:
+        signature: 
+          type: string
+          format: bytes
+        hook:
+          type: string
+          format: bytes32      
     singleton_record:
       $ref: "schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
@@ -1966,6 +1975,12 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/transaction_record"
+                      offer:
+                        type: string
+                      signing_responses:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/signing_response"
                   - $ref: "#/components/schemas/apiResponse"
   /get_offers_count:
     post:
