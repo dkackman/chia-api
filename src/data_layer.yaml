@@ -1406,9 +1406,9 @@ paths:
   /multistore_batch_update:
     post:
       tags:
-        - Shared
-      description: Retrieves some information about the current network.
-      summary: Retrieves some information about the current network.
+        - Data Layer
+      description: Applies a batch of updates, across 1:n stores.
+      summary: Applies a batch of updates, across 1:n stores.
       operationId: multistore_batch_update
       requestBody:
         required: true
@@ -1443,13 +1443,38 @@ paths:
                   default: 0      
       responses:
         "200":
+          $ref: "#/components/responses/empty"
+  /submit_all_pending_roots:
+    post:
+      tags:
+        - Data Layer
+      summary: Submits all pending roots.
+      description: Submits all pending roots.
+      operationId: submit_all_pending_roots
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0
+      responses:
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/network_info"
-                  - $ref: "#/components/schemas/apiResponse"                  
+                  - type: object
+                    properties:
+                      tx_id:
+                        type: string
+                        format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"          
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
