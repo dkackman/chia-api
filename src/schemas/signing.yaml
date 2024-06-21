@@ -1,12 +1,12 @@
 signing_response:
   type: object
   properties:
-    signature: 
+    signature:
       type: string
       format: bytes
     hook:
       type: string
-      format: bytes32    
+      format: bytes32
 
 signing_instructions:
   type: object
@@ -19,15 +19,15 @@ signing_instructions:
           items:
             type: object
             properties:
-              fingerprints: 
+              fingerprints:
                 type: array
                 items:
                   type: string
                   format: bytes
-              synthetic_offset: 
+              synthetic_offset:
                 type: string
                 format: bytes
-              final_pubkey: 
+              final_pubkey:
                 type: string
                 format: bytes
         path_hints:
@@ -35,25 +35,62 @@ signing_instructions:
           items:
             type: object
             properties:
-              root_fingerprint: 
+              root_fingerprint:
                 type: string
                 format: bytes
-              path: 
+              path:
                 type: array
                 items:
-                  type: int
-                  format: bytes               
+                  type: string
+                  format: bytes
     target:
       type: array
       items:
         type: object
         properties:
-          fingerprint: 
+          fingerprint:
             type: string
             format: bytes
-          message: 
+          message:
             type: string
             format: bytes
           hook:
             type: string
-            format: bytes32   
+            format: bytes32
+
+signature:
+  type: object
+  properties:
+    type:
+      type: string
+    signature:
+      type: string
+      format: bytes
+
+signed_transaction:
+  type: object
+  properties:
+    transaction_info:
+      type: object
+      properties:
+        spends:
+          type: array
+          items:
+            $ref: ./spend.yaml#/spend
+        signatures:
+          type: array
+          items:
+            $ref: ./signing.yaml#/signature
+
+unsigned_transaction:
+  type: object
+  properties:
+    transaction_info:
+      type: object
+      properties:
+        spends:
+          type: array
+          items:
+            $ref: ./spend.yaml#/spend
+        signing_instructions:
+          $ref: ./signing.yaml#/signing_instructions

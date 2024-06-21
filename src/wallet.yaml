@@ -141,7 +141,9 @@ components:
     signing_response:
       $ref: "schemas/signing.yaml#/signing_response"
     signing_instructions:
-      $ref: "schemas/signing.yaml#/signing_instructions"    
+      $ref: "schemas/signing.yaml#/signing_instructions"
+    signed_transaction:
+      $ref: "schemas/signing.yaml#/signed_transaction"
     singleton_record:
       $ref: "schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
@@ -162,6 +164,8 @@ components:
       $ref: "schemas/uint32_range.yaml#/uint32_range"
     uint64_range:
       $ref: "schemas/uint64_range.yaml#/uint64_range"
+    unsigned_transaction:
+      $ref: "schemas/signing.yaml#/unsigned_transaction"
     vc_proofs:
       $ref: "schemas/vc_proofs.yaml#/vc_proofs"
     vc_record:
@@ -435,7 +439,7 @@ paths:
                 fee:
                   type: integer
                   format: uint64
-                  default: 0                        
+                  default: 0
       responses:
         "200":
           description: OK
@@ -5768,6 +5772,45 @@ paths:
                     properties:
                       signing_instructions:
                         $ref: "#/components/schemas/signing_instructions"
+                  - $ref: "#/components/schemas/apiResponse"
+  /apply_signatures:
+    post:
+      tags:
+        - Signing
+      summary: Applies signatures to a list of spends.
+      description: Applies signatures to a list of spends.
+      operationId: apply_signatures
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spends
+                - signing_responses
+              properties:
+                spends:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/spend"
+                signing_responses:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/signing_response"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      signed_transactions:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/signed_transaction"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
