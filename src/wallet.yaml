@@ -435,6 +435,10 @@ paths:
                       launcher:
                         type: string
                         format: bytes32
+                fee:
+                  type: integer
+                  format: uint64
+                  default: 0                        
       responses:
         "200":
           description: OK
@@ -444,10 +448,6 @@ paths:
                 allOf:
                   - type: object
                     properties:
-                      tx_records:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/transaction_record"
                       transactions:
                         type: array
                         items:
