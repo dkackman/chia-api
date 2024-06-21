@@ -164,8 +164,6 @@ components:
       $ref: "schemas/uint32_range.yaml#/uint32_range"
     uint64_range:
       $ref: "schemas/uint64_range.yaml#/uint64_range"
-    unsigned_transaction:
-      $ref: "schemas/signing.yaml#/unsigned_transaction"
     vc_proofs:
       $ref: "schemas/vc_proofs.yaml#/vc_proofs"
     vc_record:
@@ -5811,6 +5809,41 @@ paths:
                         type: array
                         items:
                           $ref: "#/components/schemas/signed_transaction"
+                  - $ref: "#/components/schemas/apiResponse"
+  /submit_transactions:
+    post:
+      tags:
+        - Signing
+      summary: Submits a list of signed transactions.
+      description: Submits a list of signed transactions.
+      operationId: submit_transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signed_transactions
+              properties:
+                signed_transactions:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/signed_transaction"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      mempool_ids:
+                        type: array
+                        items:
+                          type: string
+                          format: bytes32
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
