@@ -11,3 +11,6 @@ network_info:
     network_prefix:
       type: string
       example: xch
+    genesis_challenge:
+      type: string
+      example: "f4c0c9d5b3cd59d6f7c76ecd780e646a2c55064367d0ddbb42b2b6462a4674b2"
