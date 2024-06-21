@@ -139,18 +139,15 @@ components:
     puzzle_announcement:
       $ref: "schemas/puzzle_announcement.yaml#/puzzle_announcement"
     signing_response:
-      type: object
-      properties:
-        signature: 
-          type: string
-          format: bytes
-        hook:
-          type: string
-          format: bytes32      
+      $ref: "schemas/signing.yaml#/signing_response"
+    signing_instructions:
+      $ref: "schemas/signing.yaml#/signing_instructions"    
     singleton_record:
       $ref: "schemas/singleton_record.yaml#/singleton_record"
     spend_bundle:
       $ref: "schemas/spend_bundle.yaml#/spend_bundle"
+    spend:
+      $ref: "schemas/spend.yaml#/spend"
     token:
       $ref: "schemas/token.yaml#/token"
     trade_record:
@@ -5739,6 +5736,38 @@ paths:
                                 value_clvm_hash:
                                   type: string
                                   format: bytes32
+                  - $ref: "#/components/schemas/apiResponse"
+  /gather_signing_info:
+    post:
+      tags:
+        - Signing
+      summary: Gathers information for signing.
+      description: Gathers information for signing.
+      operationId: gather_signing_info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spends
+              properties:
+                spends:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/spend"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      signing_instructions:
+                        $ref: "#/components/schemas/signing_instructions"
                   - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia

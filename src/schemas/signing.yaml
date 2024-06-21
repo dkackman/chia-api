@@ -1,0 +1,59 @@
+signing_response:
+  type: object
+  properties:
+    signature: 
+      type: string
+      format: bytes
+    hook:
+      type: string
+      format: bytes32    
+
+signing_instructions:
+  type: object
+  properties:
+    key_hints:
+      type: object
+      properties:
+        sum_hints:
+          type: array
+          items:
+            type: object
+            properties:
+              fingerprints: 
+                type: array
+                items:
+                  type: string
+                  format: bytes
+              synthetic_offset: 
+                type: string
+                format: bytes
+              final_pubkey: 
+                type: string
+                format: bytes
+        path_hints:
+          type: array
+          items:
+            type: object
+            properties:
+              root_fingerprint: 
+                type: string
+                format: bytes
+              path: 
+                type: array
+                items:
+                  type: int
+                  format: bytes               
+    target:
+      type: array
+      items:
+        type: object
+        properties:
+          fingerprint: 
+            type: string
+            format: bytes
+          message: 
+            type: string
+            format: bytes
+          hook:
+            type: string
+            format: bytes32   

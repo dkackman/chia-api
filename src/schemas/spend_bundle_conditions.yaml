@@ -4,7 +4,45 @@ spend_bundle_conditions:
     spends:
       type: array
       items:
-        $ref: ./spend.yaml#/spend
+        type: object
+        properties:
+          coin_id:
+            type: string
+            format: bytes
+          puzzle_hash:
+            type: string
+            format: bytes
+          height_relative:
+            type: integer
+            format: uint32
+          before_seconds_relative:
+            type: integer
+            format: uint32
+          birth_height:
+            type: integer
+            format: uint32
+          birth_seconds:
+            type: integer
+            format: uint32
+          create_coin:
+            type: array
+            items:
+              - type: string
+                format: bytes
+              - type: integer
+                format: uint64
+              - type: string
+                format: bytes
+          agg_sig_me:
+            type: array
+            items:
+              - type: string
+                format: bytes
+              - type: string
+                format: bytes
+          flags:
+            type: integer
+            format: uint32
     reserve_fee:
       type: integer
       format: uint64
