@@ -829,6 +829,18 @@
     "$ref" : "#/components/schemas/apiResponse"
   } ]
 };
+            defs["inline_response_200_5"] = {
+  "allOf" : [ {
+    "type" : "object",
+    "properties" : {
+      "version" : {
+        "type" : "string"
+      }
+    }
+  }, {
+    "$ref" : "#/components/schemas/apiResponse"
+  } ]
+};
             defs["network_info"] = {
   "required" : [ "network_name", "network_prefix" ],
   "type" : "object",
@@ -903,6 +915,9 @@
                     <li class="nav-item" data-group="Shared" data-name="getRoutes">
                       <a class="nav-link link-secondary" href="#api-Shared-getRoutes">getRoutes</a>
                     </li>
+                    <li class="nav-item" data-group="Shared" data-name="getVersion">
+                      <a class="nav-link link-secondary" href="#api-Shared-getVersion">getVersion</a>
+                    </li>
                     <li class="nav-item" data-group="Shared" data-name="healthz">
                       <a class="nav-link link-secondary" href="#api-Shared-healthz">healthz</a>
                     </li>
@@ -925,7 +940,7 @@
         <div id="header">
           <div id="api-_">
             <h2 id="welcome-to-apidoc">API Documentation</h2>
-              <div class="app-desc">Version: 2.4.0</div>
+              <div class="app-desc">Version: 2.4.3</div>
             <hr>
             <div>The Chia node and services come with a JSON RPC API server that allows you to access information and control the services.  These are accessible via HTTPS, WebSockets, or via client SDKs. The ports can be configured in <code>~/.chia/mainnet/config/config.yaml</code>.  The RPC ports should not be exposed to the internet. TLS certificates are used to secure the communication  <a href="https://github.com/dkackman/chia-api/wiki/Mutual-TLS">using mutualTLS</a>.
 The crawler uses port 8561 by default.</div>
@@ -1664,6 +1679,128 @@ The crawler uses port 8561 by default.</div>
                                     </script>
                                   </div>
                                   <input id='responses-getRoutes-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                    <div id="api-Shared-getVersion">
+                      <article id="api-Shared-getVersion-0" data-group="User" data-name="getVersion" data-version="0">
+                        <div class="pull-left">
+                          <h1>getVersion</h1>
+                          <p>Get the installed version of chia at the endpoint.</p>
+                        </div>
+                        <p class="marked">Get the installed version of chia at the endpoint.</p>            
+                        <p class="http-method" data-type="post">post</p>
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/get_version</span></code></pre>
+                        
+                        <h3>Usage</h3>
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Shared-getVersion-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST --insecure \
+--cert ~/.chia/mainnet/config/ssl/crawler/private_crawler.crt \
+--key ~/.chia/mainnet/config/ssl/crawler/private_crawler.key  \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+"https://localhost:8561/get_version" \
+-d "{}"</code></pre>
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "description" : "Empty request body",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_getVersion_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_getVersion_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - OK </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getVersion-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getVersion-200-schema">
+                                  <div id='responses-getVersion-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getVersion-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getVersion-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getVersion-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
