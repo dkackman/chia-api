@@ -5866,6 +5866,41 @@ paths:
                       version:
                         type: string
                   - $ref: "#/components/schemas/apiResponse"
+  /execute_signing_instructions:
+    post:
+      tags:
+        - Signing
+      summary: Executes signing instructions.
+      description: Executes signing instructions.
+      operationId: execute_signing_instructions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signing_instructions
+              properties:
+                partial_allowed:
+                  type: boolean
+                  default: false
+                signing_instructions:
+                  $ref: "#/components/schemas/signing_instructions"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      signing_responses:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/signing_response"
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
