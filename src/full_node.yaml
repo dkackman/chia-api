@@ -1122,6 +1122,27 @@ paths:
                         type: string
                         format: hex
                   - $ref: "#/components/schemas/apiResponse"
+  /get_version:
+    post:
+      tags:
+        - Shared
+      summary: Get the installed version of chia at the endpoint.
+      description: Get the installed version of chia at the endpoint.
+      operationId: get_version
+      requestBody:
+        $ref: "#/components/requestBodies/empty"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      version:
+                        type: string
+                  - $ref: "#/components/schemas/apiResponse"
 externalDocs:
   description: Find out more about chia
   url: https://chia.net
