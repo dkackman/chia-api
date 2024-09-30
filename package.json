@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/dkackman/chia-api#readme",
   "dependencies": {
-    "@redocly/cli": "^1.23.1",
+    "@redocly/cli": "^1.25.4",
     "redoc-cli": "^0.13.21"
   },
   "devDependencies": {
