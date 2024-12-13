@@ -1375,29 +1375,59 @@
 };
             defs["get_fee_estimate_body"] = {
   "type" : "object",
-  "properties" : {
-    "spend_bundle" : {
-      "$ref" : "#/components/schemas/spend_bundle"
-    },
-    "cost" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "target_times" : {
-      "type" : "array",
-      "items" : {
-        "type" : "integer"
+  "oneOf" : [ {
+    "required" : [ "spend_bundle", "target_times" ],
+    "properties" : {
+      "spend_bundle" : {
+        "$ref" : "#/components/schemas/spend_bundle"
+      },
+      "target_times" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      },
+      "spend_count" : {
+        "type" : "integer",
+        "default" : 1
       }
-    },
-    "spend_type" : {
-      "type" : "integer",
-      "format" : "uint64"
-    },
-    "spend_count" : {
-      "type" : "integer",
-      "default" : 1
     }
-  }
+  }, {
+    "required" : [ "cost", "target_times" ],
+    "properties" : {
+      "cost" : {
+        "type" : "integer",
+        "format" : "uint64"
+      },
+      "target_times" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      },
+      "spend_count" : {
+        "type" : "integer",
+        "default" : 1
+      }
+    }
+  }, {
+    "required" : [ "spend_type", "target_times" ],
+    "properties" : {
+      "spend_type" : {
+        "$ref" : "#/components/schemas/spend_type"
+      },
+      "target_times" : {
+        "type" : "array",
+        "items" : {
+          "type" : "integer"
+        }
+      },
+      "spend_count" : {
+        "type" : "integer",
+        "default" : 1
+      }
+    }
+  } ]
 };
             defs["get_mempool_item_by_tx_id_body"] = {
   "required" : [ "tx_id" ],
@@ -2066,6 +2096,7 @@
     }
   }
 };
+            defs["OneOfget_fee_estimate_body"] = {};
             defs["OneOfget_recent_signage_point_or_eos_body"] = {};
             defs["OneOfinline_response_200_10"] = {};
             defs["open_connection_body"] = {
@@ -2369,6 +2400,11 @@
     }
   },
   "example" : null
+};
+            defs["spend_type"] = {
+  "type" : "string",
+  "description" : "- send_xch_transaction: 9_401_710 - cat_spend: 36_382_111 - take_offer: 721_393_265 - cancel_offer: 212_443_993 - nft_set_nft_did: 115_540_006 - nft_transfer_nft: 74_385_541 - create_new_pool_wallet: 18_055_407 - pw_absorb_rewards: 82_668_466 - create_new_did_wallet: 57_360_396\n",
+  "enum" : [ "send_xch_transaction", "cat_spend", "take_offer", "cancel_offer", "nft_set_nft_did", "nft_transfer_nft", "create_new_pool_wallet", "pw_absorb_rewards", "create_new_did_wallet" ]
 };
             defs["sub_slot_proofs"] = {
   "type" : "object",
