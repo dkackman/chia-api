@@ -12,4 +12,4 @@ View current spec based on chia 2.5.0:
 
 ___
 
-_chia and its logo are the registered trademark or trademark of Chia Network, Inc. in the United States and worldwide._
+_chia and its logo are the registered trademark or trademark of [Chia Network, Inc](https://chia.net). in the United States and worldwide._
